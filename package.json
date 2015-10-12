@@ -1,0 +1,38 @@
+{
+  "name": "tidepool-data-model",
+  "version": "0.0.0",
+  "description": "Documentation and sample datum generators for Tidepool's data models.",
+  "homepage": "http://developer.tidepool.io/data-model/",
+  "main": "src/index.js",
+  "bin": {
+    "tidepool-sample": "bin/sampleDatumGenerator.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tidepool-org/data-model.git"
+  },
+  "keywords": [
+    "data model",
+    "diabetes",
+    "sample data",
+    "Tidepool"
+  ],
+  "author": "Jana Beck",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/tidepool-org/data-model/issues"
+  },
+  "homepage": "https://github.com/tidepool-org/data-model",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "chance": "^0.8.0",
+    "commander": "^2.8.1",
+    "copy-paste": "^1.1.3",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "node-uuid": "^1.4.3"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  }
+}
