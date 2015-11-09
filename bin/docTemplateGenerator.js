@@ -63,6 +63,20 @@ console.log();
 
 var commonFields = generators.common.generator(new Date().toISOString(), 'storage');
 
+var docPath = (type === 'common') ? commander.path + type + '.md' :
+  commander.path + 'types/' + type + '.md';
+
+var existing = '';
+try {
+  existing = fs.readFileSync(docPath, 'utf8');
+}
+catch(err) {
+  console.warn(err.message);
+  console.log();
+  console.log('Creating new document instead...');
+  console.log();
+}
+
 function formatHeader(format) {
   return util.format('### example (%s)\n', format.toLowerCase());
 }
@@ -85,19 +99,28 @@ function fieldSectionHeader(field) {
 
 function commonSectionForField(field) {
   var fieldSection = [fieldSectionHeader(field)];
-  fieldSection.push('\n[TODO]\n');
+  fieldSection.push('<!-- TODO -->');
+  fieldSection.push(util.format('<!-- end %s -->\n', field));
   return fieldSection;
 }
 
-function sectionForField(field) {
+function sectionForField(field, propType) {
   var fieldSection = [fieldSectionHeader(field)];
   if (commonFields[field] !== undefined) {
-    fieldSection.push('See [common fields](./common.md).\n');
+    fieldSection.push('See [common fields](../common.md).\n');
   }
   else {
-    fieldSection.push('[TODO]\n');
+    if (propType) {
+      fieldSection.push(propType + '\n');
+    }
+    fieldSection.push('<!-- TODO -->');
+    fieldSection.push(util.format('<!-- end %s -->\n', field));
   }
   return fieldSection;
+}
+
+function getFieldSectionRegExp(field) {
+  return '###\\s' + field + '\\s+?[\\w\\W\\s]+?<!--\\send\\s' + field + '\\s-->\\n';
 }
 
 if (type === 'common') {
@@ -106,20 +129,49 @@ if (type === 'common') {
   doc = doc.concat(Object.keys(commonFields).map(function(field) {
     return util.format('  - [%s](#%s)', field, field.toLowerCase());
   }));
-  doc.push('\n');
+  doc.push('\n**NB:** All fields are *required* unless otherwise noted.\n');
   doc = doc.concat(_.flatten(Object.keys(commonFields).map(function(field) {
+    var existingSection = existing.match(
+      new RegExp(getFieldSectionRegExp(field))
+    );
+    if (existingSection && (existing[0].search('TODO') === -1)) {
+      return existingSection[0];
+    }
     return commonSectionForField(field);
   })));
-  doc = doc.concat(['### example (all possible fields)\n\n' + exampleJSON(type, 'storage')]);
+  var exampleHeader = '### example (all possible fields)\n\n';
+  var existingExample = existing.match(
+    /###\s+example\s+\(all\spossible\sfields\)\s+?```json[\w\W\s]+?```\n/
+  );
+  if (existingExample) {
+    doc = doc.concat(existingExample[0]);
+  }
+  else {
+    doc = doc.concat([exampleHeader + exampleJSON(type, 'storage')]);
+  }
 }
 else {
   var doc = [util.format('## %s (%s)\n', generators[type].title, type)];
+  doc.push('**NB:** All fields are *required* unless otherwise noted.\n');
   doc = doc.concat(_.flatten(Object.keys(exampleObject(type, 'storage')).map(function(field) {
-    return sectionForField(field);
+    var existingSection = existing.match(
+      new RegExp(getFieldSectionRegExp(field))
+    );
+    if (existingSection && (existingSection[0].search('TODO') === -1)) {
+      return existingSection[0];
+    }
+    return sectionForField(field, generators[type].propTypes[field]);
   })));
   doc = doc.concat(['client', 'ingestion', 'storage'].map(function(format) {
-    return formatHeader(format) + '\n' + exampleJSON(type, format);
+    var header = formatHeader(format) + '\n';
+    var existingExample = existing.match(
+      new RegExp('###\\s+example\\s+\\(' + format + '\\)\\s+?```json[\\w\\W\\s]+?```\\n')
+    );
+    if (existingExample) {
+      return existingExample[0];
+    }
+    return header + exampleJSON(type, format);
   }));
 }
 
-fs.writeFileSync(commander.path + type + '.md', doc.join('\n'));
+fs.writeFileSync(docPath, doc.join('\n'));

@@ -18,6 +18,7 @@
 var _ = require('lodash');
 var Chance = require('chance');
 var chance = new Chance();
+var format = require('util').format;
 var moment = require('moment');
 var uuid = require('node-uuid');
 
@@ -46,12 +47,19 @@ module.generate = function(schema, utc, format) {
 
   function client(obj) {
     var excluded = _.filter(Object.keys(obj), function(key) {
-      return key.charAt(0) === '_';
+      return key.charAt(0) === '_' || key === 'createdTime';
     });
     return _.omit(obj, excluded);
   }
   function ingestion(obj) {
-    var excluded = ['_active', '_schemaVersion', '_version', 'id'];
+    var excluded = [
+      '_active',
+      '_groupId',
+      '_schemaVersion',
+      '_version',
+      'createdTime',
+      'id'
+    ];
     return _.omit(obj, excluded);
   }
   function storage(obj) {
@@ -60,7 +68,10 @@ module.generate = function(schema, utc, format) {
 
   var schemaObj = _.mapValues(schema, function(val) {
     if (typeof val === 'function') {
-      return val('mmol/L', true);
+      if (format === 'ingestion') {
+        return val('mg/dL', true);
+      }
+      return val('mmol/L', false);
     }
     else {
       return val;
@@ -76,6 +87,7 @@ module.generate = function(schema, utc, format) {
     _version: 0,
     clockDriftOffset: 0,
     conversionOffset: 0,
+    createdTime: new Date(Date.parse(utc) + 5000).toISOString(),
     deviceId: 'DevId0987654321',
     deviceTime: moment.utc(Date.parse(utc))
       .subtract(tzOffset, 'minutes').toISOString().slice(0, -5),
@@ -83,7 +95,7 @@ module.generate = function(schema, utc, format) {
     id: uuid.v4().replace(/-/g, ''),
     time: utc,
     timezoneOffset: -tzOffset,
-    units: 'mmol/L',
+    units: format === 'ingestion' ? 'mg/dL' : 'mmol/L',
     uploadId: 'SampleUploadId'
   };
 
@@ -100,6 +112,17 @@ module.generate = function(schema, utc, format) {
   }
 
   return _.assign({}, schemaObj, commonFields);
+};
+
+module.propTypes = {
+  bgValue: function() {
+    var ingestion = '[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.\n\n';
+    var storage = '[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.';
+    return ingestion + storage;
+  },
+  stringValue: function(str) {
+    return format('[ingestion, storage, client] The string `%s`.', str);
+  }
 };
 
 module.exports = module;

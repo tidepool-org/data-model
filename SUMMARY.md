@@ -2,4 +2,6 @@
 
 * [diabetes device data](device-data/README.md)
   * [common fields](device-data/common.md)
-  * [cbg](device-data/cbg.md)
+  * [units](device-data/units.md)
+  * [types](device-data/types/README.md)
+    * [cbg](device-data/types/cbg.md)

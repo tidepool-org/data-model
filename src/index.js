@@ -15,6 +15,18 @@
  * == BSD2 LICENSE ==
  */
 
+var basal = require('./device-data/basal');
+var bloodKetone = require('./device-data/bloodKetone');
+var bolus = require('./device-data/bolus');
+var cbg = require('./device-data/cbg');
+var cgmSettings = require('./device-data/cgmSettings');
+var deviceEvent = require('./device-data/deviceEvent');
+var pumpSettings = require('./device-data/pumpSettings');
+var smbg = require('./device-data/smbg');
+var upload = require('./device-data/upload');
+var urineKetone = require('./device-data/urineKetone');
+var wizard = require('./device-data/wizard');
+
 module.exports = {
   basal: {
     generator: require('./device-data/basal'),
@@ -50,7 +62,8 @@ module.exports = {
     type: 'bolus'
   },
   cbg: {
-    generator: require('./device-data/cbg'),
+    generator: cbg.generate,
+    propTypes: cbg.propTypes,
     title: 'Continuous Blood Glucose',
     type: 'cbg'
   },

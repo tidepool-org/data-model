@@ -17,12 +17,21 @@
 
 var common = require('./common');
 
+var propTypes = {
+  type: common.propTypes.stringValue('cbg'),
+  value: common.propTypes.bgValue()
+};
+
 var schema = {
   type: 'cbg',
   value: common.bgValue
 };
 
-module.exports = function(utc, format) {
+module.generate = function(utc, format) {
   var cbg = common.generate(schema, utc, format);
   return cbg;
 };
+
+module.propTypes = propTypes;
+
+module.exports = module;
