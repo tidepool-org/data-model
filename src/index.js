@@ -43,7 +43,8 @@ module.exports = {
     type: 'basal'
   },
   bloodKetone: {
-    generator: require('./device-data/bloodKetone'),
+    generator: bloodKetone.generate,
+    propTypes: bloodKetone.propTypes,
     title: 'Blood Ketones',
     type: 'bloodKetone'
   },
