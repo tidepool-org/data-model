@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>types | data-model</title>
+        <title>smbg | data-model</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.4.3">
@@ -29,10 +29,10 @@
         
     
     
-    <link rel="next" href="../../device-data/types/bloodKetone.html" />
+    <link rel="next" href="../../device-data/types/urineKetone.html" />
     
     
-    <link rel="prev" href="../../device-data/units.html" />
+    <link rel="prev" href="../../device-data/types/cbg.html" />
     
 
         
@@ -40,7 +40,7 @@
     <body>
         
         
-    <div class="book" data-level="1.3" data-basepath="../.." data-revision="Thu Dec 03 2015 00:49:35 GMT-0800 (PST)">
+    <div class="book" data-level="1.3.3" data-basepath="../.." data-revision="Thu Dec 03 2015 00:49:35 GMT-0800 (PST)">
     
 
 <div class="book-summary">
@@ -117,7 +117,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="device-data/types/index.html">
+        <li class="chapter " data-level="1.3" data-path="device-data/types/index.html">
             
                 
                     <a href="../../device-data/types/index.html">
@@ -163,7 +163,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="device-data/types/smbg.html">
+        <li class="chapter active" data-level="1.3.3" data-path="device-data/types/smbg.html">
             
                 
                     <a href="../../device-data/types/smbg.html">
@@ -309,13 +309,116 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="diabetes-data-types">Diabetes Data Types</h2>
-<ul>
-<li><a href="bloodKetone.html">blood ketones</a></li>
-<li><a href="cbg.html">continuous blood glucose (cbg)</a></li>
-<li><a href="smbg.html">self-monitored blood glucose (smbg)</a></li>
-<li><a href="urineKetone.html">urine ketones</a></li>
-</ul>
+                        <h2 id="self-monitored-blood-glucose-smbg">Self-Monitored Blood Glucose (smbg)</h2>
+<p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
+<h3 id="type">type</h3>
+<p>[ingestion, storage, client] The string <code>smbg</code>.</p>
+<p>This is the Tidepool data type for traditional fingerstick blood glucose meter data. <code>smbg</code> is an abbreviation of &apos;self-monitored blood glucose&apos; and contrasts with <code>cbg</code>, abbreviating &apos;continuous blood glucose&apos;. <a href="cbg.html"><code>cbg</code></a> is the Tidepool data type for continuous glucose monitor (CGM) sensor data.</p>
+<!-- end type -->
+<h3 id="subtype">subType</h3>
+<blockquote>
+<p>This field is <strong>optional</strong>.</p>
+</blockquote>
+<p>[ingestion, storage, client] String value encoding additional information about the source of the blood glucose value.</p>
+<p>Must be one of: <code>manual</code>, <code>linked</code>.</p>
+<p><code>subType</code> appears on blood glucose values that are <em>not</em> being read directly from a traditional fingerstick blood glucose meter, but rather from another data source such as an insulin pump.</p>
+<p>The value <code>manual</code> indicates that the blood glucose value was manually entered by a user (and is thus, of course, subject to human error).</p>
+<p>The value <code>linked</code> indicates that the blood glucose value was transferred from a blood glucose meter to the pump directly via some sort of data transfer or pairing mechanism. If the blood glucose meter in question is also supported by the Tidepool uploader, duplicate records may exist: both read directly from the meter and pulled in as <code>subType: &apos;linked&apos;</code> records from the insulin pump.</p>
+<!-- end subType -->
+<h3 id="units">units</h3>
+<p>[ingestion] One of two string values: <code>mg/dL</code> or <code>mmol/L</code>.</p>
+<p>[storage, client] The string <code>mmol/L</code>.</p>
+<p>See <a href="../units.html">units</a> for further explanation of blood glucose units.</p>
+<!-- TODO -->
+<!-- end units -->
+<h3 id="value">value</h3>
+<p>[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching <code>units</code> field.</p>
+<p>[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching <code>units</code> field.</p>
+<!-- TODO -->
+<!-- end value -->
+<h3 id="-active">_active</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="-groupid">_groupId</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="-schemaversion">_schemaVersion</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="-version">_version</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="clockdriftoffset">clockDriftOffset</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="conversionoffset">conversionOffset</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="createdtime">createdTime</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="deviceid">deviceId</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="devicetime">deviceTime</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="guid">guid</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="id">id</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="time">time</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="timezoneoffset">timezoneOffset</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="uploadid">uploadId</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<h3 id="example-client">example (client)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
+    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">19.927185287853465</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-03T00:26:47&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b2c1d8f7-e8e3-4fea-ab67-196c731bd225&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;822cb6b0ce704179993d26026393477c&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-03T08:26:47.894Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="example-ingestion">example (ingestion)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
+    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">330</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-03T00:26:47&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;5a4680c8-0ece-469b-ad8b-4d8bf1f36f4e&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-03T08:26:47.895Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="example-storage">example (storage)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
+    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">18.42848333027117</span>,
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2015-12-03T08:26:52.896Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-03T00:26:47&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;8f127839-7b54-4627-abe0-8c5b0aa0ff8e&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;fac22501d1f244d9b595b5cb36c0559f&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-03T08:26:47.896Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
 
                     
                     </section>
@@ -326,10 +429,10 @@
         </div>
 
         
-        <a href="../../device-data/units.html" class="navigation navigation-prev " aria-label="Previous page: units"><i class="fa fa-angle-left"></i></a>
+        <a href="../../device-data/types/cbg.html" class="navigation navigation-prev " aria-label="Previous page: cbg"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../device-data/types/bloodKetone.html" class="navigation navigation-next " aria-label="Next page: bloodKetone"><i class="fa fa-angle-right"></i></a>
+        <a href="../../device-data/types/urineKetone.html" class="navigation navigation-next " aria-label="Next page: urineKetone"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
