@@ -37,6 +37,10 @@ module.bgValue = function(units, ingestion) {
   }
 };
 
+module.bgUnits = function(units, ingestion) {
+  return ingestion ? units : 'mmol/L';
+}
+
 module.generate = function(schema, utc, format) {
   if (!schema) {
     console.error('Must provide a datatype schema as first param!');
@@ -95,7 +99,6 @@ module.generate = function(schema, utc, format) {
     id: uuid.v4().replace(/-/g, ''),
     time: utc,
     timezoneOffset: -tzOffset,
-    units: format === 'ingestion' ? 'mg/dL' : 'mmol/L',
     uploadId: 'SampleUploadId'
   };
 
@@ -115,13 +118,22 @@ module.generate = function(schema, utc, format) {
 };
 
 module.propTypes = {
+  bgUnits: function() {
+    var ingestion = '[ingestion] One of two string values: `mg/dL` or `mmol/L`.\n\n';
+    var elsewhere = '[storage, client] The string `mmol/L`.\n\n';
+    var units = 'See [units](../units.md) for further explanation of blood glucose units.';
+    return ingestion + elsewhere + units;
+  },
   bgValue: function() {
     var ingestion = '[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.\n\n';
-    var storage = '[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.';
-    return ingestion + storage;
+    var elsewhere = '[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.';
+    return ingestion + elsewhere;
   },
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);
+  },
+  oneOfStringOptions: function(desc, arr) {
+    return desc + '\n\n' + 'Must be one of: `' + arr.join('`, `') + '`.';
   }
 };
 

@@ -21,11 +21,13 @@ var common = require('./common');
 
 var propTypes = {
   type: common.propTypes.stringValue('bloodKetone'),
+  units: common.propTypes.stringValue('mmol/L'),
   value: '[ingestion, storage, client] Blood ketone value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.'
 };
 
 var schema = {
   type: 'bloodKetone',
+  units: 'mmol/L',
   value: function() {
     return chance.floating({min: 0, max: 5, fixed: 1});
   }

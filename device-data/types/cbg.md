@@ -10,13 +10,21 @@ This is the Tidepool data type for continuous glucose monitor (CGM) sensor data.
 
 <!-- end type -->
 
+### units
+
+[ingestion] One of two string values: `mg/dL` or `mmol/L`.
+
+[storage, client] The string `mmol/L`.
+
+See [units](../units.md) for further explanation of blood glucose units.
+
+<!-- end units -->
+
 ### value
 
 [ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.
 
 [storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.
-
-See [units](../units.md) for further explanation of blood glucose units.
 
 <!-- end value -->
 
@@ -69,10 +77,6 @@ See [common fields](../common.md).
 See [common fields](../common.md).
 
 ### timezoneOffset
-
-See [common fields](../common.md).
-
-### units
 
 See [common fields](../common.md).
 

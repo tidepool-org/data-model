@@ -118,7 +118,8 @@ module.exports = {
     type: 'upload'
   },
   urineKetone: {
-    generator: require('./device-data/urineKetone'),
+    generator: urineKetone.generate,
+    propTypes: urineKetone.propTypes,
     title: 'Urine Ketones',
     type: 'urineKetone'
   },

@@ -1,24 +1,20 @@
-## Blood Ketones (bloodKetone)
+## Urine Ketones (urineKetone)
 
 **NB:** All fields are *required* unless otherwise noted.
 
 ### type
 
-[ingestion, storage, client] The string `bloodKetone`.
+[ingestion, storage, client] The string `urineKetone`.
 
-Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool uses a separate data model for [urine ketones](urineKetone.md).
+Urine ketones represent ketone concentration values obtained by home testing with ketone reagent strips, usually reacting positively to quantities of acetoacetic acid (rather than beta-ketones) in the urine. These records differ significantly from [blood ketone](bloodKetone.md) records because the values obtained are qualitative, not quantitative.
 
 <!-- end type -->
 
-### units
-
-[ingestion, storage, client] The string `mmol/L`.
-
-<!-- end units -->
-
 ### value
 
-[ingestion, storage, client] Blood ketone value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.
+[ingestion, storage, client] String value representating a qualitative measurement of urine ketone concentration.
+
+Must be one of: `negative`, `trace`, `small`, `moderate`, `large`.
 
 <!-- end value -->
 
@@ -82,17 +78,16 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "bloodKetone",
-	"value": 3,
+	"type": "urineKetone",
+	"value": "small",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-11-25T19:20:27",
-	"guid": "13d95c21-d909-4f63-b594-7c6b8bb9be39",
-	"id": "c19df6b0d3ac4f5788eb462f457cde6b",
-	"time": "2015-11-26T03:20:27.739Z",
+	"deviceTime": "2015-12-02T23:57:15",
+	"guid": "46dea583-d3ae-4ad8-ade1-9eb2d35c23bc",
+	"id": "fd411030229545daab70cbbcc385d812",
+	"time": "2015-12-03T07:57:15.661Z",
 	"timezoneOffset": -480,
-	"units": "mmol/L",
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -101,16 +96,15 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "bloodKetone",
-	"value": 1.4,
+	"type": "urineKetone",
+	"value": "small",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-11-25T19:20:27",
-	"guid": "2a4d4c7e-548c-4f0c-bbf9-b6dc1b078c1e",
-	"time": "2015-11-26T03:20:27.740Z",
+	"deviceTime": "2015-12-02T23:57:15",
+	"guid": "41cc7c40-1da2-4dd8-9d41-17ec58600112",
+	"time": "2015-12-03T07:57:15.662Z",
 	"timezoneOffset": -480,
-	"units": "mg/dL",
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -119,22 +113,21 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "bloodKetone",
-	"value": 1.7,
+	"type": "urineKetone",
+	"value": "moderate",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-11-26T03:20:32.740Z",
+	"createdTime": "2015-12-03T07:57:20.662Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-11-25T19:20:27",
-	"guid": "f81688e4-9768-4a5e-a4e2-12ce838a322d",
-	"id": "b8ff67379ab0419baa9f73ae1966f729",
-	"time": "2015-11-26T03:20:27.740Z",
+	"deviceTime": "2015-12-02T23:57:15",
+	"guid": "aa9c27a0-d128-469c-99a6-6da54747f114",
+	"id": "d18971f4ee3e47fb9cfd6eef3bced880",
+	"time": "2015-12-03T07:57:15.662Z",
 	"timezoneOffset": -480,
-	"units": "mmol/L",
 	"uploadId": "SampleUploadId"
 }
 ```
