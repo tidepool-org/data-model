@@ -12,7 +12,7 @@ Urine ketones represent ketone concentration values obtained by home testing wit
 
 ### value
 
-[ingestion, storage, client] String value representating a qualitative measurement of urine ketone concentration.
+[ingestion, storage, client] String value representing a qualitative measurement of urine ketone concentration.
 
 Must be one of: `negative`, `trace`, `small`, `moderate`, `large`.
 

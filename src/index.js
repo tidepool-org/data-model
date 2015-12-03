@@ -101,7 +101,8 @@ module.exports = {
     type: 'pumpSettings'
   },
   smbg: {
-    generator: require('./device-data/smbg'),
+    generator: smbg.generate,
+    propTypes: smbg.propTypes,
     title: 'Self-Monitored Blood Glucose',
     subTypes: {
       key: 'subType',

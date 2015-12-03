@@ -6,7 +6,7 @@
 
 [ingestion, storage, client] The string `cbg`.
 
-This is the Tidepool data type for continuous glucose monitor (CGM) sensor data. `cbg` is an abbreviation of 'continuous blood glucose' and contrasts with `smbg`, abbreviating 'self-monitored blood glucose'. `smbg` is the Tidepool data type for traditional fingerstick blood glucose meter data.
+This is the Tidepool data type for continuous glucose monitor (CGM) sensor data. `cbg` is an abbreviation of 'continuous blood glucose' and contrasts with `smbg`, abbreviating 'self-monitored blood glucose'. [`smbg`](smbg.md) is the Tidepool data type for traditional fingerstick blood glucose meter data.
 
 <!-- end type -->
 

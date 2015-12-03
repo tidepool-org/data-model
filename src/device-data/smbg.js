@@ -15,28 +15,30 @@
  * == BSD2 LICENSE ==
  */
 
-var Chance = require('chance');
-var chance = new Chance();
 var common = require('./common');
 
-var values = ['negative', 'trace', 'small', 'moderate', 'large'];
+var subTypes = ['manual', 'linked'];
 
 var propTypes = {
-  type: common.propTypes.stringValue('urineKetone'),
-  value: common.propTypes.oneOfStringOptions(
-      '[ingestion, storage, client] String value representing a qualitative measurement of urine ketone concentration.',
-      values
-    )
+  type: common.propTypes.stringValue('smbg'),
+  subType: common.propTypes.OPTIONAL + common.propTypes.oneOfStringOptions(
+    '[ingestion, storage, client] String value encoding additional information about the source of the blood glucose value.',
+    subTypes
+  ),
+  units: common.propTypes.bgUnits(),
+  value: common.propTypes.bgValue()
 };
 
 var schema = {
-  type: 'urineKetone',
-  value: values
+  type: 'smbg',
+  subType: subTypes,
+  units: common.bgUnits,
+  value: common.bgValue
 };
 
 module.generate = function(utc, format) {
-  var uk = common.generate(schema, utc, format);
-  return uk;
+  var smbg = common.generate(schema, utc, format);
+  return smbg;
 };
 
 module.propTypes = propTypes;

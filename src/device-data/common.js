@@ -24,6 +24,10 @@ var uuid = require('node-uuid');
 
 var GLUCOSE_MM = 18.01559;
 
+module.bgUnits = function(units, ingestion) {
+  return ingestion ? units : 'mmol/L';
+};
+
 module.bgValue = function(units, ingestion) {
   var value = chance.natural({min: 20, max: 600});
   if (units === 'mg/dL') {
@@ -36,10 +40,6 @@ module.bgValue = function(units, ingestion) {
     return value/GLUCOSE_MM;
   }
 };
-
-module.bgUnits = function(units, ingestion) {
-  return ingestion ? units : 'mmol/L';
-}
 
 module.generate = function(schema, utc, format) {
   if (!schema) {
@@ -76,6 +76,9 @@ module.generate = function(schema, utc, format) {
         return val('mg/dL', true);
       }
       return val('mmol/L', false);
+    }
+    else if (Array.isArray(val)) {
+      return val[chance.integer({min: 0, max: val.length - 1})];
     }
     else {
       return val;
@@ -134,7 +137,8 @@ module.propTypes = {
   },
   oneOfStringOptions: function(desc, arr) {
     return desc + '\n\n' + 'Must be one of: `' + arr.join('`, `') + '`.';
-  }
+  },
+  OPTIONAL: '> This field is **optional**.\n\n'
 };
 
 module.exports = module;
