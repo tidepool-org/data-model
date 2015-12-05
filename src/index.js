@@ -15,6 +15,7 @@
  * == BSD2 LICENSE ==
  */
 
+var all = require('./platform/all');
 var basal = require('./device-data/basal');
 var bloodKetone = require('./device-data/bloodKetone');
 var bolus = require('./device-data/bolus');
@@ -31,6 +32,9 @@ var user = require('./platform/user');
 var wizard = require('./device-data/wizard');
 
 module.exports = {
+  all: {
+    generator: all.generate
+  },
   basal: {
     generator: require('./device-data/basal'),
     title: 'Basal Insulin',
