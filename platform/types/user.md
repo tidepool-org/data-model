@@ -18,11 +18,9 @@ String value: e-mail address used for logging in.
 
 ### termsAccepted
 
-> This field is **optional**.
-
 String value: an ISO 8601-formatted timestamp (with timezone offset) indicating when the user accepted the terms of use and privacy policy.
 
-This field will only appear after the user has accepted the terms of use and privacy policy, which currently occurs *after* the e-mail confirmation step in the sign-up process.
+This field will be an empty string until the user has accepted the terms of use and privacy policy, which currently occurs *after* the e-mail confirmation step in the sign-up process.
 
 <!-- end termsAccepted -->
 
