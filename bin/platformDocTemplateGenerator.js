@@ -75,7 +75,7 @@ catch(err) {
 }
 
 function formatHeader(format) {
-  return util.format('### example (%s)\n', format.toLowerCase());
+  return util.format('### example (%s)\n', format);
 }
 
 function exampleObject(type, opts) {
@@ -137,7 +137,7 @@ doc = doc.concat(_.flatten(fieldsToDocument.map(function(field) {
   }
   return sectionForField(field, generators[type].propTypes[field]);
 })));
-doc = doc.concat(['non-patient', 'patient'].map(function(format) {
+doc = doc.concat(['non-PWD', 'PWD'].map(function(format) {
   var header = formatHeader(format) + '\n';
   var existingExample = existing.match(
     new RegExp('###\\s+example\\s+\\(' + format + '\\)\\s+?```json[\\w\\W\\s]+?```\\n')
@@ -145,7 +145,7 @@ doc = doc.concat(['non-patient', 'patient'].map(function(format) {
   if (existingExample) {
     return existingExample[0];
   }
-  return header + exampleJSON(type, {subType: format});
+  return header + exampleJSON(type, {subType: (format === 'PWD') ? 'patient' : ''});
 }));
 
 fs.writeFileSync(docPath, doc.join('\n'));
