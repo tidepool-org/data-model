@@ -56,7 +56,7 @@ else {
 }
 
 console.log();
-console.log(chalk.bold.cyan('~#*~#* TIDEPOOL DATA MODEL DOC TEMPLATE GENERATOR *#~*#~'));
+console.log(chalk.bold.cyan('~#*~#* TIDEPOOL DEVICE DATA MODEL DOC TEMPLATE GENERATOR *#~*#~'));
 console.log();
 console.log(chalk.gray('Type:'), type);
 console.log();

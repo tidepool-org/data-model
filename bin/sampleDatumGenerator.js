@@ -69,7 +69,17 @@ if (commander.storage) {
   format = 'storage';
 }
 
-var result = generators[type].generator(commander.datetime, commander.format);
+var result;
+if (commander.subType) {
+  result = generators[type].generator({
+    format: commander.format,
+    subType: commander.subType,
+    timestamp: commander.datetime
+  });
+}
+else {
+  result = generators[type].generator(commander.datetime, commander.format);
+}
 
 console.log();
 console.log(chalk.bold.cyan('~#*~#* TIDEPOOL SAMPLE DATUM GENERATOR *#~*#~'));
