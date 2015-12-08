@@ -1,0 +1,3 @@
+This section documents the Tidepool platform core and derived data types as they are currently used in Tidepool's client applications [blip](https://github.com/tidepool-org/blip 'Tidepool on GitHub: blip') and the [Chrome device data uploader app](https://github.com/tidepool-org/chrome-uploader 'Tidepool on GitHub: chrome-uploader'). These data types mostly concern user data and metadata. All data read and stored by the Tidepool platform use the JSON data interchange format.
+
+It's best to start with the [core types](./types/README.md), then have a look at the [derived types](./derived/README.md).

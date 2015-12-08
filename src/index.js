@@ -15,19 +15,26 @@
  * == BSD2 LICENSE ==
  */
 
+var all = require('./platform/all');
 var basal = require('./device-data/basal');
 var bloodKetone = require('./device-data/bloodKetone');
 var bolus = require('./device-data/bolus');
 var cbg = require('./device-data/cbg');
 var cgmSettings = require('./device-data/cgmSettings');
 var deviceEvent = require('./device-data/deviceEvent');
+var memberships = require('./platform/memberships');
+var profile = require('./platform/profile');
 var pumpSettings = require('./device-data/pumpSettings');
 var smbg = require('./device-data/smbg');
 var upload = require('./device-data/upload');
 var urineKetone = require('./device-data/urineKetone');
+var user = require('./platform/user');
 var wizard = require('./device-data/wizard');
 
 module.exports = {
+  all: {
+    generator: all.generate
+  },
   basal: {
     generator: require('./device-data/basal'),
     title: 'Basal Insulin',
@@ -94,6 +101,17 @@ module.exports = {
     },
     type: 'deviceEvent'
   },
+  memberships: {
+    generator: memberships.generate,
+    title: 'Careteam Memberships',
+    type: 'memberships'
+  },
+  profile: {
+    generator: profile.generate,
+    propTypes: profile.propTypes,
+    title: 'User Profile',
+    type: 'profile'
+  },
   pumpSettings: {
     deviceSpecific: ['Animas', 'Medtronic', 'Insulet', 'Tandem'],
     generator: require('./device-data/pumpSettings'),
@@ -123,6 +141,12 @@ module.exports = {
     propTypes: urineKetone.propTypes,
     title: 'Urine Ketones',
     type: 'urineKetone'
+  },
+  user: {
+    generator: user.generate,
+    propTypes: user.propTypes,
+    title: 'Platform User',
+    type: 'user'
   },
   wizard: {
     generator: require('./device-data/wizard'),
