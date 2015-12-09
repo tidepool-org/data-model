@@ -33,10 +33,11 @@ var fs = require('fs');
 
 var generators = require('../src/');
 
-var type;
+var type, hasSubtypes = false;
 
 commander.usage('[options] <type>')
   .option('-p, --path <value>', 'path to docs directory', '../device-data/')
+  .option('--subtype, --subType <value>', 'subType for this datum', null)
   .parse(process.argv);
 
 if (_.isEmpty(commander.args)) {
@@ -47,9 +48,21 @@ if (_.isEmpty(commander.args)) {
 }
 else {
   type = commander.args[0];
+  subTypes = generators[type].subTypes;
+  hasSubtypes = Array.isArray(subTypes) && !_.isEmpty(subTypes);
   if (!generators[type] || typeof generators[type].generator !== 'function') {
     console.log();
     console.error(chalk.bold.red('Sorry, no generator defined yet for %s :('), type);
+    console.log();
+    process.exit();
+  }
+  if (!commander.subType && hasSubtypes) {
+    console.log();
+    console.error(
+      chalk.bold.red('Sorry, %s requires a subType from: %s :('),
+      type,
+      generators[type].subTypes.join(', ')
+    );
     console.log();
     process.exit();
   }
@@ -63,8 +76,37 @@ console.log();
 
 var commonFields = generators.common.generator(new Date().toISOString(), 'storage');
 
-var docPath = (type === 'common') ? commander.path + type + '.md' :
-  commander.path + 'types/' + type + '.md';
+function getDocPath(base) {
+  if (type === 'common') {
+    return base + type + '.md';
+  }
+  if (hasSubtypes) {
+    var indexDoc = [util.format('## %s\n', generators[type].title)];
+    generators[type].subTypes.map(function(subType) {
+      indexDoc.push(util.format('- [%s](./%s.md)', subType, subType))
+    });
+    try {
+      fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n'));
+    }
+    catch(e) {
+      if (e.message.search('ENOENT') !== -1) {
+        fs.mkdirSync(base + 'types/' + type);
+        fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n'));
+      }
+      else {
+        console.error(e);
+        process.exit();
+      }
+    }
+    
+    return base + 'types/' + type + '/' + commander.subType + '.md';
+  }
+  else {
+    return base + 'types/' + type + '.md';
+  }
+}
+
+var docPath = getDocPath(commander.path);
 
 var existing = '';
 try {
@@ -81,13 +123,21 @@ function formatHeader(format) {
   return util.format('### example (%s)\n', format.toLowerCase());
 }
 
-function exampleObject(type) {
+function exampleObject(type, format) {
+  format = format || 'storage';
+  if (hasSubtypes) {
+    return generators[type].generator({
+      format: format,
+      subType: commander.subType,
+      timestamp: new Date().toISOString()
+    });
+  }
   return generators[type].generator(new Date().toISOString(), 'storage');
 }
 
 function exampleJSON(type, format) {
   return '```json\n' + JSON.stringify(
-    generators[type].generator(new Date().toISOString(), format),
+    exampleObject(type),
     null,
     '\t'
   ) + '\n```\n';
@@ -107,7 +157,12 @@ function commonSectionForField(field) {
 function sectionForField(field, propType) {
   var fieldSection = [fieldSectionHeader(field)];
   if (commonFields[field] !== undefined) {
-    fieldSection.push('See [common fields](../common.md).\n');
+    if (hasSubtypes) {
+      fieldSection.push('See [common fields](../../common.md).\n');
+    }
+    else {
+      fieldSection.push('See [common fields](../common.md).\n');
+    }
   }
   else {
     if (propType) {
@@ -151,16 +206,32 @@ if (type === 'common') {
   }
 }
 else {
-  var doc = [util.format('## %s (%s)\n', generators[type].title, type)];
+  var doc;
+  if (hasSubtypes) {
+    doc = [util.format('## %s: `%s`\n', generators[type].subtitle, commander.subType)];
+  }
+  else {
+    doc = [util.format('## %s (%s)\n', generators[type].title, type)];
+  }
   doc.push('**NB:** All fields are *required* unless otherwise noted.\n');
-  doc = doc.concat(_.flatten(Object.keys(exampleObject(type, 'storage')).map(function(field) {
+  doc.push('\n> Jump to example JSON:\n');
+  ['client', 'ingestion', 'storage'].map(function(exampleType) {
+    doc.push(util.format('>  - [%s example](#example-%s)', exampleType, exampleType));
+  })
+  doc.push('\n');
+  var allFields = Object.keys(_.merge(
+    exampleObject(type, 'storage'),
+    exampleObject(type, 'ingestion')
+  ));
+  doc = doc.concat(_.flatten(allFields.map(function(field) {
     var existingSection = existing.match(
       new RegExp(getFieldSectionRegExp(field))
     );
     if (existingSection && (existingSection[0].search('TODO') === -1)) {
       return existingSection[0];
     }
-    return sectionForField(field, generators[type].propTypes[field]);
+    return hasSubtypes ? sectionForField(field, generators[type].propTypes[commander.subType][field]) :
+      sectionForField(field, generators[type].propTypes[field]);
   })));
   doc = doc.concat(['client', 'ingestion', 'storage'].map(function(format) {
     var header = formatHeader(format) + '\n';

@@ -41,6 +41,12 @@ module.bgValue = function(units, ingestion) {
   }
 };
 
+// generates a duration in increments from 30 mins. to 24 hours
+module.duration = function() {
+  var MS_IN_30_MINS = 1000 * 60 * 30;
+  return chance.natural({min: 0, max: 48}) * MS_IN_30_MINS;
+};
+
 module.generate = function(schema, utc, format) {
   if (!schema) {
     console.error('Must provide a datatype schema as first param!');
@@ -131,6 +137,9 @@ module.propTypes = {
     var ingestion = '[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.\n\n';
     var elsewhere = '[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.';
     return ingestion + elsewhere;
+  },
+  duration: function() {
+    return '[ingestion, storage, client] An integer value representing a duration of time in milliseconds.';
   },
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);

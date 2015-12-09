@@ -29,17 +29,11 @@ var wizard = require('./device-data/wizard');
 
 module.exports = {
   basal: {
-    generator: require('./device-data/basal'),
+    generator: basal.generate,
+    propTypes: basal.propTypes,
     title: 'Basal Insulin',
-    subTypes: {
-      key: 'deliveryType',
-      list: [
-        'injected',
-        'scheduled',
-        'temp',
-        'suspended'
-      ]
-    },
+    subtitle: 'Basal deliveryType',
+    subTypes: basal.deliveryTypes,
     type: 'basal'
   },
   bloodKetone: {

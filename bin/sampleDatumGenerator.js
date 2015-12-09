@@ -60,6 +60,18 @@ else {
     console.log();
     process.exit();
   }
+  if (!commander.subType &&
+    Array.isArray(generators[type].subTypes) &&
+    !_.isEmpty(generators[type].subTypes)) {
+    console.log();
+    console.error(
+      chalk.bold.red('Sorry, %s requires a subType from: %s :('),
+      type,
+      generators[type].subTypes.join(', ')
+    );
+    console.log();
+    process.exit();
+  }
 }
 
 if (commander.ingestion) {
@@ -69,7 +81,17 @@ if (commander.storage) {
   format = 'storage';
 }
 
-var result = generators[type].generator(commander.datetime, commander.format);
+var result;
+if (commander.subType) {
+  result = generators[type].generator({
+    format: commander.format,
+    subType: commander.subType,
+    timestamp: commander.datetime
+  });
+}
+else {
+  result = generators[type].generator(commander.datetime, commander.format);
+}
 
 console.log();
 console.log(chalk.bold.cyan('~#*~#* TIDEPOOL SAMPLE DATUM GENERATOR *#~*#~'));
