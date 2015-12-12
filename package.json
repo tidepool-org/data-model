@@ -4,6 +4,9 @@
   "description": "Documentation and sample datum generators for Tidepool's data models.",
   "homepage": "https://github.com/tidepool-org/data-model",
   "main": "src/index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/gitbook serve"
+  },
   "bin": {
     "tidepool-sample": "bin/sampleDatumGenerator.js"
   },
