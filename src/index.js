@@ -48,7 +48,6 @@ module.exports = {
     subTypes: {
       key: 'subType',
       list: [
-        'injected',
         'normal',
         'square',
         'dual/square'

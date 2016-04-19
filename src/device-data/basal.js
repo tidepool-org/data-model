@@ -26,8 +26,7 @@ var common = require('./common');
 var deliveryTypes = {
   scheduled: 'scheduled',
   temp: 'temp',
-  suspended: 'suspended',
-  injected: 'injected'
+  suspend: 'suspend'
 };
 var longActingInsulins = ['levemir', 'lantus'];
 var scheduleNames = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
@@ -54,21 +53,11 @@ var propTypes = {
     suppressed: common.propTypes.OPTIONAL + '[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.',
     previous: PREVIOUS
   },
-  suspended: {
+  suspend: {
     type: TYPE,
-    deliveryType: common.propTypes.stringValue(deliveryTypes.suspended),
+    deliveryType: common.propTypes.stringValue(deliveryTypes.suspend),
     duration: common.propTypes.duration(),
     suppressed: common.propTypes.OPTIONAL + '[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.',
-    previous: PREVIOUS
-  },
-  injected: {
-    type: TYPE,
-    deliveryType: common.propTypes.stringValue(deliveryTypes.injected),
-    duration: common.propTypes.duration(),
-    insulin: common.propTypes.oneOfStringOptions(
-      '[ingestion, storage, client] A string: the (standardized) name of the long-acting insulin.',
-      longActingInsulins
-    ),
     previous: PREVIOUS
   }
 };
@@ -98,17 +87,11 @@ var schemas = {
     rate: 0,
     suppressed: {},
   },
-  suspended: {
-    deliveryType: deliveryTypes.suspended,
+  suspend: {
+    deliveryType: deliveryTypes.suspend,
     duration: common.duration,
     previous: {},
     suppressed: {}
-  },
-  injected: {
-    deliveryType: deliveryTypes.injected,
-    duration: 864e5,
-    insulin: longActingInsulins,
-    previous: {}
   }
 };
 
@@ -135,7 +118,7 @@ module.generate = function(opts) {
   else {
     delete basal.previous;
   }
-  if (_.includes(['temp', 'suspended'], opts.subType)) {
+  if (_.includes(['temp', 'suspend'], opts.subType)) {
     var suppressed = common.generate(
       _.assign({}, schemas.base, schemas.scheduled),
       roundedTimestamp.toISOString()
