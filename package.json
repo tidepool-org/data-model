@@ -5,6 +5,8 @@
   "homepage": "https://github.com/tidepool-org/data-model",
   "main": "src/index.js",
   "scripts": {
+    "build-docs": "./update-gh-pages.sh",
+    "serve-docs": "./node_modules/.bin/gitbook serve",
     "start": "./node_modules/.bin/gitbook serve"
   },
   "bin": {
