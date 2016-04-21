@@ -76,6 +76,12 @@ console.log();
 
 var commonFields = generators.common.generator(new Date().toISOString(), 'storage');
 
+/**
+ * Description
+ * @method getDocPath
+ * @param {String} base path to base directory for generated Markdown docs
+ * @return constructed deep path to location in base for doc being generated or updated
+ */
 function getDocPath(base) {
   if (type === 'common') {
     return base + type + '.md';
@@ -119,10 +125,23 @@ catch(err) {
   console.log();
 }
 
+/**
+ * Description
+ * @method formatHeader
+ * @param {String} format one of { ingestion | storage | client }
+ * @return Markdown string for an example header
+ */
 function formatHeader(format) {
   return util.format('### example (%s)\n', format.toLowerCase());
 }
 
+/**
+ * Description
+ * @method exampleObject
+ * @param {String} type the data type
+ * @param {String} format one of { ingestion | storage | client }; OPTIONAL, defaults to `storage`
+ * @return sample datum, NOT YET stringified to JSON
+ */
 function exampleObject(type, format) {
   format = format || 'storage';
   if (hasSubtypes) {
@@ -135,6 +154,13 @@ function exampleObject(type, format) {
   return generators[type].generator(new Date().toISOString(), 'storage');
 }
 
+/**
+ * Description
+ * @method exampleJSON
+ * @param {String} type the data type
+ * @param {String} format one of { ingestion | storage | client }
+ * @return Markdown string for a JSON code block containing sample datum
+ */
 function exampleJSON(type, format) {
   return '```json\n' + JSON.stringify(
     exampleObject(type),
@@ -143,10 +169,22 @@ function exampleJSON(type, format) {
   ) + '\n```\n';
 }
 
+/**
+ * Description
+ * @method fieldSectionHeader
+ * @param {String} field the name of a field existing on a data type
+ * @return Markdown string for a section header for a field in a data type
+ */
 function fieldSectionHeader(field) {
   return util.format('### %s\n', field);
 }
 
+/**
+ * Description
+ * @method commonSectionForField
+ * @param {String} field the name of a common field
+ * @return Markdown string containing boilerplate section (header and contents) for a common field
+ */
 function commonSectionForField(field) {
   var fieldSection = [fieldSectionHeader(field)];
   fieldSection.push('<!-- TODO -->');
@@ -154,6 +192,13 @@ function commonSectionForField(field) {
   return fieldSection;
 }
 
+/**
+ * Description
+ * @method sectionForField
+ * @param {String} field the name of a field existing on a data type
+ * @param {String} propType Markdown string boilerplate describing the property type for the field
+ * @return Markdown string containing boilerplate section (header and contents) for a field in a data type or subType
+ */
 function sectionForField(field, propType) {
   var fieldSection = [fieldSectionHeader(field)];
   if (commonFields[field] !== undefined) {
@@ -174,6 +219,12 @@ function sectionForField(field, propType) {
   return fieldSection;
 }
 
+/**
+ * Description
+ * @method getFieldSectionRegExp
+ * @param {String} field the name of a field existing on a data type
+ * @return string for input to RegExp constructor to match a field on a data type's section header in existing input doc
+ */
 function getFieldSectionRegExp(field) {
   return '###\\s' + field + '\\s+?[\\w\\W\\s]+?<!--\\send\\s' + field + '\\s-->\\n';
 }
