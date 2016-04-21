@@ -1,5 +1,7 @@
 # data-model
 
+**This documentation is actively under construction and not yet endorsed by the Tidepool team!**
+
 Documentation for Tidepool's data models.
 
 > (This and all Markdown documents in [this repository](https://github.com/tidepool-org/data-model 'Tidepool on GitHub: data-model') are used to generate [the Tidepool data model documentation website](http://developer.tidepool.io/data-model/ 'Tidepool data model documentation') via [GitBook](https://github.com/GitbookIO/gitbook 'GitHub: GitBook').
