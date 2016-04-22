@@ -278,8 +278,8 @@ else {
   })
   doc.push('\n');
   var allFields = Object.keys(_.merge(
-    exampleObject(type, 'storage'),
-    exampleObject(type, 'ingestion')
+    exampleObject(type, 'ingestion'),
+    exampleObject(type, 'storage')
   ));
   doc = doc.concat(_.flatten(allFields.map(function(field) {
     var existingSection = existing.match(

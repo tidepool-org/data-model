@@ -40,6 +40,17 @@
 <!-- TODO -->
 <!-- end percent -->
 
+### previous
+
+> This field is **optional**.
+
+[ingestion] An object representing the `basal` event just prior to this event.
+
+[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
+
+<!-- TODO -->
+<!-- end previous -->
+
 ### rate
 
 > This field is **optional**.
@@ -53,12 +64,42 @@
 
 > This field is **optional**.
 
-> This field is **optional**.
-
 [ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.
 
 <!-- TODO -->
 <!-- end suppressed -->
+
+### clockDriftOffset
+
+See [common fields](../../common.md).
+
+### conversionOffset
+
+See [common fields](../../common.md).
+
+### deviceId
+
+See [common fields](../../common.md).
+
+### deviceTime
+
+See [common fields](../../common.md).
+
+### guid
+
+See [common fields](../../common.md).
+
+### time
+
+See [common fields](../../common.md).
+
+### timezoneOffset
+
+See [common fields](../../common.md).
+
+### uploadId
+
+See [common fields](../../common.md).
 
 ### _active
 
@@ -76,27 +117,7 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-### clockDriftOffset
-
-See [common fields](../../common.md).
-
-### conversionOffset
-
-See [common fields](../../common.md).
-
 ### createdTime
-
-See [common fields](../../common.md).
-
-### deviceId
-
-See [common fields](../../common.md).
-
-### deviceTime
-
-See [common fields](../../common.md).
-
-### guid
 
 See [common fields](../../common.md).
 
@@ -104,43 +125,20 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-### time
-
-See [common fields](../../common.md).
-
-### timezoneOffset
-
-See [common fields](../../common.md).
-
-### uploadId
-
-See [common fields](../../common.md).
-
-### previous
-
-> This field is **optional**.
-
-[ingestion] An object representing the `basal` event just prior to this event.
-
-[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
-
-<!-- TODO -->
-<!-- end previous -->
-
 ### example (client)
 
 ```json
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 1800000,
-	"percent": 0.3,
-	"rate": 0.585,
+	"duration": 50400000,
+	"percent": 0.1,
+	"rate": 0.057499999999999996,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Very Active",
-		"rate": 1.95
+		"scheduleName": "Weekend",
+		"rate": 0.575
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -148,13 +146,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-12-14T06:00:05.000Z",
+	"createdTime": "2016-04-22T01:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-13T22:00:00",
-	"guid": "1a850cb9-f997-4487-b6b0-2ceee0fb5598",
-	"id": "46b29d8dcb0c465d94d3b2fb2b29a4d6",
-	"time": "2015-12-14T06:00:00.000Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-21T18:00:00",
+	"guid": "cb0654f4-410e-4499-bfe0-8cae5a6699c7",
+	"id": "7c743024618a4d089ef67e1d6b7077c9",
+	"time": "2016-04-22T01:00:00.000Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -165,14 +163,14 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 34200000,
-	"percent": 0.65,
-	"rate": 0.5525,
+	"duration": 48600000,
+	"percent": 0.85,
+	"rate": 0.27625,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
 		"scheduleName": "Vacation",
-		"rate": 0.85
+		"rate": 0.325
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -180,13 +178,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-12-14T06:00:05.000Z",
+	"createdTime": "2016-04-22T01:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-13T22:00:00",
-	"guid": "453e13d1-97e0-47a5-8f31-328bd80d07ca",
-	"id": "454976a41ce54a4390e1a55a8d1f362e",
-	"time": "2015-12-14T06:00:00.000Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-21T18:00:00",
+	"guid": "7387ebf0-bebd-464a-836a-278fd6d91b33",
+	"id": "04b396b6db57456989fe78fce93f5123",
+	"time": "2016-04-22T01:00:00.000Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -197,14 +195,14 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 36000000,
-	"percent": 0.25,
-	"rate": 0.00625,
+	"duration": 27000000,
+	"percent": 0.85,
+	"rate": 1.19,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Weekday",
-		"rate": 0.025
+		"scheduleName": "Very Active",
+		"rate": 1.4
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -212,13 +210,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-12-14T06:00:05.000Z",
+	"createdTime": "2016-04-22T01:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-13T22:00:00",
-	"guid": "3f88fcc1-7ccf-4283-b726-382c1a46da6d",
-	"id": "8176ee2174524ffbad54e4db381f99d3",
-	"time": "2015-12-14T06:00:00.000Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-21T18:00:00",
+	"guid": "ed7819ee-fcab-492d-8029-625f0f67c8ed",
+	"id": "0357c1c81a1a4a41ad94d5b3cd39b9d9",
+	"time": "2016-04-22T01:00:00.000Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```

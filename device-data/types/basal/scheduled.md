@@ -40,6 +40,15 @@
 <!-- TODO -->
 <!-- end rate -->
 
+### previous
+
+[ingestion] An object representing the `basal` event just prior to this event.
+
+[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
+
+<!-- TODO -->
+<!-- end previous -->
+
 ### scheduleName
 
 > This field is **optional**.
@@ -52,6 +61,38 @@
 
 <!-- TODO -->
 <!-- end scheduleName -->
+
+### clockDriftOffset
+
+See [common fields](../../common.md).
+
+### conversionOffset
+
+See [common fields](../../common.md).
+
+### deviceId
+
+See [common fields](../../common.md).
+
+### deviceTime
+
+See [common fields](../../common.md).
+
+### guid
+
+See [common fields](../../common.md).
+
+### time
+
+See [common fields](../../common.md).
+
+### timezoneOffset
+
+See [common fields](../../common.md).
+
+### uploadId
+
+See [common fields](../../common.md).
 
 ### _active
 
@@ -69,27 +110,7 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-### clockDriftOffset
-
-See [common fields](../../common.md).
-
-### conversionOffset
-
-See [common fields](../../common.md).
-
 ### createdTime
-
-See [common fields](../../common.md).
-
-### deviceId
-
-See [common fields](../../common.md).
-
-### deviceTime
-
-See [common fields](../../common.md).
-
-### guid
 
 See [common fields](../../common.md).
 
@@ -97,49 +118,28 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-### time
-
-See [common fields](../../common.md).
-
-### timezoneOffset
-
-See [common fields](../../common.md).
-
-### uploadId
-
-See [common fields](../../common.md).
-
-### previous
-
-[ingestion] An object representing the `basal` event just prior to this event.
-
-[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
-
-<!-- TODO -->
-<!-- end previous -->
-
 ### example (client)
 
 ```json
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 55800000,
-	"rate": 0.3,
-	"scheduleName": "Stress",
+	"duration": 18000000,
+	"rate": 1.225,
+	"scheduleName": "Weekday",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-12-14T06:00:05.000Z",
+	"createdTime": "2016-04-22T01:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-13T22:00:00",
-	"guid": "acf54a1e-b8cc-4e30-8d02-00f8d19a7705",
-	"id": "e1103d589ed3435b93b55d066a86ca4d",
-	"time": "2015-12-14T06:00:00.000Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-21T18:00:00",
+	"guid": "d3df90a0-50d9-46d2-9272-5f589dc81b4b",
+	"id": "e0a193ebc15c412cb7ecf5e16902b9e1",
+	"time": "2016-04-22T01:00:00.000Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -150,8 +150,8 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 59400000,
-	"rate": 1.95,
+	"duration": 3600000,
+	"rate": 0.35,
 	"scheduleName": "Vacation",
 	"_active": true,
 	"_groupId": "abcdef",
@@ -159,13 +159,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-12-14T06:00:05.000Z",
+	"createdTime": "2016-04-22T01:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-13T22:00:00",
-	"guid": "1fd42248-c2f1-4bc8-bac0-17ec2a00b70d",
-	"id": "aa1d2b35d2ca4e169d6031c20e7dbb31",
-	"time": "2015-12-14T06:00:00.000Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-21T18:00:00",
+	"guid": "dbe7bc72-311a-451c-b4fb-ada6e735359f",
+	"id": "88188e3f83554837a2fee439a28055b5",
+	"time": "2016-04-22T01:00:00.000Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -176,8 +176,8 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 50400000,
-	"rate": 0.8,
+	"duration": 36000000,
+	"rate": 1.85,
 	"scheduleName": "Stress",
 	"_active": true,
 	"_groupId": "abcdef",
@@ -185,13 +185,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-12-14T06:00:05.000Z",
+	"createdTime": "2016-04-22T01:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-13T22:00:00",
-	"guid": "20e7431c-a1e6-417c-a9aa-424b2a7795f4",
-	"id": "5be070148b784212921f1503e2562703",
-	"time": "2015-12-14T06:00:00.000Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-21T18:00:00",
+	"guid": "d8802cc1-f143-4294-a6e3-54a8ccb45621",
+	"id": "c3809a3f8bc24db4905f3039af0143b2",
+	"time": "2016-04-22T01:00:00.000Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```

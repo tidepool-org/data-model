@@ -35,7 +35,7 @@ var schema = {
     instance: function() {
       return chance.floating({min: 0, max: 5, fixed: 1});
     },
-    description: '[ingestion, storage, client] Blood ketone value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.'
+    description: '[ingestion, storage, client] Blood ketone value in mmol/L (float), with appropriately matching `units` field.'
   }
 };
 

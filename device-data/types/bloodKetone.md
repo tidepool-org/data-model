@@ -26,7 +26,7 @@ Blood ketones represent ketone concentration values (specifically beta-ketones, 
 
 ### value
 
-[ingestion, storage, client] Blood ketone value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.
+[ingestion, storage, client] Blood ketone value in mmol/L (float), with appropriately matching `units` field.
 
 <!-- end value -->
 

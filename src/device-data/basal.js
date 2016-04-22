@@ -96,7 +96,7 @@ var schemas = {
     },
     suppressed: {
       instance: {},
-      description: common.propTypes.OPTIONAL + getSuppressedDesc(DELIVERY_TYPES.temp)
+      description: getSuppressedDesc(DELIVERY_TYPES.temp)
     }
   },
   suspend: {
@@ -110,11 +110,11 @@ var schemas = {
     },
     previous: {
       instance: {},
-      description: PREVIOUS
+      description: common.propTypes.OPTIONAL + PREVIOUS
     },
     suppressed: {
       instance: {},
-      description:  common.propTypes.OPTIONAL + getSuppressedDesc(DELIVERY_TYPES.suspend)
+      description: getSuppressedDesc(DELIVERY_TYPES.suspend)
     }
   }
 };
