@@ -14,14 +14,14 @@
 
 [ingestion, storage, client] The string `basal`.
 
-<!-- TODO -->
+This is the sub-type of `basal` event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the basal schedule programmed by the user (or clinician).
+
 <!-- end type -->
 
 ### deliveryType
 
 [ingestion, storage, client] The string `scheduled`.
 
-<!-- TODO -->
 <!-- end deliveryType -->
 
 ### duration
@@ -32,6 +32,15 @@
 
 <!-- TODO -->
 <!-- end duration -->
+
+### expectedDuration
+
+> This field is **optional**.
+
+[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
+
+<!-- TODO -->
+<!-- end expectedDuration -->
 
 ### rate
 
@@ -59,7 +68,14 @@
 
 `_schemaVersion` 2: `scheduleName` became **optional**.
 
-<!-- TODO -->
+In an ideal world, we at Tidepool would love to be able to surface to any user of `basal` data the name of the schedule that generated a particular `scheduled` basal event. Unfortunately, most of the manufacturers of insulin pumps do *not* provide the name of the basal schedule on each basal rate change event reported when the pump switches from one segment of a basal schedule to the next (or switches from a suspended state or temporary basal rate back to the active schedule).
+
+For some manufacturers, we are able to build a complete history of the pump's settings, and thus we are able to infer the active schedule name by looking up the active pump settings for the time of a particular `basal` event. However, again due to how some manufacturers do (or *do not*) record pump settings changes, we are not always able to build this complete history, and so this lookup strategy is also not possible.
+
+Prior to `_schemaVersion` 2, the `scheduleName` was *required* by the jellyfish data ingestion service, and as a result for some of the manufacturers we were providing the name of the currently active (as of time of upload) basal schedule, which is only correct for the final `basal` event in any upload. Thus, the `scheduleName` field should **not** be used for any computation of statistics or surfaced to the user for any `_schemaVersion` 1 data.
+
+Going forward, now that `scheduleName` is an optional field, it should only be added to `basal` data when it is directly available in the raw data from an insulin pump or can be inferred with high confidence via lookup against a complete pump settings history.
+
 <!-- end scheduleName -->
 
 ### clockDriftOffset
