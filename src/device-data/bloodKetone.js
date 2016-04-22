@@ -19,17 +19,23 @@ var Chance = require('chance');
 var chance = new Chance();
 var common = require('./common');
 
-var propTypes = {
-  type: common.propTypes.stringValue('bloodKetone'),
-  units: common.propTypes.stringValue('mmol/L'),
-  value: '[ingestion, storage, client] Blood ketone value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.'
-};
+var TYPE = 'bloodKetone';
+var UNITS = 'mmol/L';
 
 var schema = {
-  type: 'bloodKetone',
-  units: 'mmol/L',
-  value: function() {
-    return chance.floating({min: 0, max: 5, fixed: 1});
+  type: {
+    instance: TYPE,
+    description: common.propTypes.stringValue(TYPE)
+  },
+  units: {
+    instance: UNITS,
+    description: common.propTypes.stringValue(UNITS)
+  },
+  value: {
+    instance: function() {
+      return chance.floating({min: 0, max: 5, fixed: 1});
+    },
+    description: '[ingestion, storage, client] Blood ketone value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.'
   }
 };
 
@@ -38,6 +44,8 @@ module.generate = function(utc, format) {
   return bk;
 };
 
-module.propTypes = propTypes;
+module.propTypes = common.getPropTypes(schema);
+
+module.changeLog = common.getChangeLog(schema);
 
 module.exports = module;

@@ -42,7 +42,13 @@
 
 ### scheduleName
 
+> This field is **optional**.
+
 [ingestion, storage, client] A string: the name of the basal schedule.
+
+#### Changelog for `scheduleName`
+
+`_schemaVersion` 2: `scheduleName` became **optional**.
 
 <!-- TODO -->
 <!-- end scheduleName -->

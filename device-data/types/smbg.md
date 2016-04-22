@@ -2,6 +2,14 @@
 
 **NB:** All fields are *required* unless otherwise noted.
 
+
+> Jump to example JSON:
+
+>  - [client example](#example-client)
+>  - [ingestion example](#example-ingestion)
+>  - [storage example](#example-storage)
+
+
 ### type
 
 [ingestion, storage, client] The string `smbg`.
@@ -16,7 +24,7 @@ This is the Tidepool data type for traditional fingerstick blood glucose meter d
 
 [ingestion, storage, client] String value encoding additional information about the source of the blood glucose value.
 
-Must be one of: `manual`, `linked`.
+If present, must be one of: `manual`, `linked`.
 
 `subType` appears on blood glucose values that are *not* being read directly from a traditional fingerstick blood glucose meter, but rather from another data source such as an insulin pump.
 

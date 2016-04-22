@@ -31,6 +31,7 @@ module.exports = {
   basal: {
     generator: basal.generate,
     propTypes: basal.propTypes,
+    changeLog: basal.changeLog,
     title: 'Basal Insulin',
     subtitle: 'Basal deliveryType',
     subTypes: basal.deliveryTypes,
@@ -39,87 +40,45 @@ module.exports = {
   bloodKetone: {
     generator: bloodKetone.generate,
     propTypes: bloodKetone.propTypes,
+    changeLog: bloodKetone.changeLog,
     title: 'Blood Ketones',
     type: 'bloodKetone'
   },
   bolus: {
-    generator: require('./device-data/bolus'),
-    title: 'Bolus Insulin',
-    subTypes: {
-      key: 'subType',
-      list: [
-        'normal',
-        'square',
-        'dual/square'
-      ]
-    },
-    type: 'bolus'
   },
   cbg: {
     generator: cbg.generate,
     propTypes: cbg.propTypes,
+    changeLog: cbg.changeLog,
     title: 'Continuous Blood Glucose',
     type: 'cbg'
   },
   cgmSettings: {
-    deviceSpecific: ['Dexcom', 'Medtronic'],
-    generator: require('./device-data/cgmSettings'),
-    title: 'CGM Settings',
-    type: 'cgmSettings'
   },
   common: {
     generator: require('./device-data/common').generate.bind(null, {}),
     title: 'Common Fields'
   },
   deviceEvent: {
-    generator: require('./device-data/deviceEvent'),
-    title: 'Miscellaneous (Diabetes) Device Events',
-    subTypes: {
-      key: 'subType',
-      list: [
-        'alarm',
-        'prime',
-        'reservoirChange',
-        'status',
-        'calibration',
-        'timeChange'
-      ]
-    },
-    type: 'deviceEvent'
   },
   pumpSettings: {
-    deviceSpecific: ['Animas', 'Medtronic', 'Insulet', 'Tandem'],
-    generator: require('./device-data/pumpSettings'),
-    title: 'Insulin Pump Settings',
-    type: 'pumpSettings'
   },
   smbg: {
     generator: smbg.generate,
     propTypes: smbg.propTypes,
+    changeLog: smbg.changeLog,
     title: 'Self-Monitored Blood Glucose',
-    subTypes: {
-      key: 'subType',
-      list: [
-        'manual',
-        'linked'
-      ]
-    },
     type: 'smbg'
   },
   upload: {
-    generator: require('./device-data/upload'),
-    title: 'Upload Metadata',
-    type: 'upload'
   },
   urineKetone: {
     generator: urineKetone.generate,
     propTypes: urineKetone.propTypes,
+    changeLog: urineKetone.changeLog,
     title: 'Urine Ketones',
     type: 'urineKetone'
   },
   wizard: {
-    generator: require('./device-data/wizard'),
-    title: 'Bolus Calculator Records',
-    type: 'wizard'
   }
 };

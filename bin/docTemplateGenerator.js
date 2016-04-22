@@ -197,9 +197,10 @@ function commonSectionForField(field) {
  * @method sectionForField
  * @param {String} field the name of a field existing on a data type
  * @param {String} propType Markdown string boilerplate describing the property type for the field
+ * @param {Array} changeLog array of strings, each describing a change on the field's contents or validation
  * @return Markdown string containing boilerplate section (header and contents) for a field in a data type or subType
  */
-function sectionForField(field, propType) {
+function sectionForField(field, propType, changeLog) {
   var fieldSection = [fieldSectionHeader(field)];
   if (commonFields[field] !== undefined) {
     if (hasSubtypes) {
@@ -212,6 +213,12 @@ function sectionForField(field, propType) {
   else {
     if (propType) {
       fieldSection.push(propType + '\n');
+    }
+    if (changeLog) {
+      fieldSection.push(util.format('#### Changelog for `%s`\n', field));
+      _.each(changeLog, function(logItem) {
+        fieldSection.push(logItem + '\n');
+      });
     }
     fieldSection.push('<!-- TODO -->');
     fieldSection.push(util.format('<!-- end %s -->\n', field));
@@ -281,8 +288,9 @@ else {
     if (existingSection && (existingSection[0].search('TODO') === -1)) {
       return existingSection[0];
     }
-    return hasSubtypes ? sectionForField(field, generators[type].propTypes[commander.subType][field]) :
-      sectionForField(field, generators[type].propTypes[field]);
+    return hasSubtypes ?
+      sectionForField(field, generators[type].propTypes[commander.subType][field], generators[type].changeLog[commander.subType][field]) :
+      sectionForField(field, generators[type].propTypes[field], generators[type].changeLog[field]);
   })));
   doc = doc.concat(['client', 'ingestion', 'storage'].map(function(format) {
     var header = formatHeader(format) + '\n';

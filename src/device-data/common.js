@@ -41,6 +41,12 @@ module.bgValue = function(units, ingestion) {
   }
 };
 
+module.changeLog = {
+  madeOptional: function(fieldName, schemaVersion) {
+    return format('`_schemaVersion` %s: `%s` became **optional**.', schemaVersion, fieldName);
+  }
+};
+
 // generates a duration in increments from 30 mins. to 24 hours
 module.duration = function() {
   var MS_IN_30_MINS = 1000 * 60 * 30;
@@ -76,18 +82,26 @@ module.generate = function(schema, utc, format) {
     return obj;
   }
 
-  var schemaObj = _.mapValues(schema, function(val) {
-    if (typeof val === 'function') {
-      if (format === 'ingestion') {
-        return val('mg/dL', true);
-      }
-      return val('mmol/L', false);
-    }
-    else if (Array.isArray(val)) {
-      return val[chance.integer({min: 0, max: val.length - 1})];
+  var schemaObj = _.mapValues(schema, function(field) {
+    // compatibility while refactoring interface
+    if (typeof field === 'object' && _.includes(Object.keys(field), 'instance')) {
+      instance = field.instance;
     }
     else {
-      return val;
+      throw new Error('Expected an object with an `instance` property and didn\'t get it :(');
+    }
+
+    if (typeof instance === 'function') {
+      if (format === 'ingestion') {
+        return instance('mg/dL', true);
+      }
+      return instance('mmol/L', false);
+    }
+    else if (Array.isArray(instance)) {
+      return instance[chance.integer({min: 0, max: instance.length - 1})];
+    }
+    else {
+      return instance;
     }
   });
 
@@ -148,6 +162,34 @@ module.propTypes = {
     return desc + '\n\n' + 'Must be one of: `' + arr.join('`, `') + '`.';
   },
   OPTIONAL: '> This field is **optional**.\n\n'
+};
+
+function extractFromNested(schema, property) {
+  function extract(field) {
+    return field[property];
+  }
+  if (schema.base) {
+    var subTypes = _.reject(Object.keys(schema), 'base');
+    var basePropTypes = _.mapValues(schema.base, extract);
+    return _.mapValues(_.omit(schema, 'base'), function(subSchema) {
+      return _.assign(
+        {},
+        basePropTypes,
+        _.mapValues(subSchema, extract)
+      );
+    });
+  }
+  else {
+    return _.mapValues(schema, extract);
+  }
+}
+
+module.getPropTypes = function(schema) {
+  return extractFromNested(schema, 'description')
+};
+
+module.getChangeLog = function(schema) {
+  return extractFromNested(schema, 'changelog');
 };
 
 module.exports = module;

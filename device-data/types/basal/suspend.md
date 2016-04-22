@@ -35,7 +35,9 @@
 
 > This field is **optional**.
 
-[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.
+> This field is **optional**.
+
+[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this suspend basal is in effect.
 
 <!-- TODO -->
 <!-- end suppressed -->

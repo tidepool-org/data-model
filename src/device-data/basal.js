@@ -23,75 +23,99 @@ var moment = require('moment');
 
 var common = require('./common');
 
-var deliveryTypes = {
+var DELIVERY_TYPES = {
   scheduled: 'scheduled',
   temp: 'temp',
   suspend: 'suspend'
 };
-var longActingInsulins = ['levemir', 'lantus'];
-var scheduleNames = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
+var SCHEDULE_NAMES = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
 
-var TYPE = common.propTypes.stringValue('basal');
+var TYPE = 'basal';
 var RATE = '[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.';
 var PREVIOUS = '[ingestion] An object representing the `basal` event just prior to this event.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
-
-var propTypes = {
-  scheduled: {
-    type: TYPE,
-    deliveryType: common.propTypes.stringValue(deliveryTypes.scheduled),
-    duration: common.propTypes.OPTIONAL + common.propTypes.duration(),
-    rate: RATE,
-    scheduleName: '[ingestion, storage, client] A string: the name of the basal schedule.',
-    previous: PREVIOUS
-  },
-  temp: {
-    type: TYPE,
-    deliveryType: common.propTypes.stringValue(deliveryTypes.temp),
-    duration: common.propTypes.duration(),
-    percent: '[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.',
-    rate: RATE,
-    suppressed: common.propTypes.OPTIONAL + '[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.',
-    previous: PREVIOUS
-  },
-  suspend: {
-    type: TYPE,
-    deliveryType: common.propTypes.stringValue(deliveryTypes.suspend),
-    duration: common.propTypes.duration(),
-    suppressed: common.propTypes.OPTIONAL + '[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.',
-    previous: PREVIOUS
-  }
+var getSuppressedDesc = function(type) {
+  return  common.propTypes.OPTIONAL + format('[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this %s basal is in effect.', type);
 };
 
 var schemas = {
   base: {
-    type: 'basal'
+    type: {
+      instance: TYPE,
+      description: common.propTypes.stringValue(TYPE)
+    }
   },
   scheduled: {
-    deliveryType: deliveryTypes.scheduled,
-    duration: common.duration,
-    rate: function() {
-      // yield float rounded to nearest 0.025
-      return Math.round(chance.floating({min: 0.025, max: 2})*40)/40;
+    deliveryType: {
+      instance: DELIVERY_TYPES.scheduled,
+      description: common.propTypes.stringValue(DELIVERY_TYPES.scheduled)
     },
-    previous: {},
-    scheduleName: scheduleNames
+    duration: {
+      instance: common.duration,
+      description: common.propTypes.OPTIONAL + common.propTypes.duration()
+    },
+    rate: {
+      instance: function() {
+        // yield float rounded to nearest 0.025
+        return Math.round(chance.floating({min: 0.025, max: 2})*40)/40;
+      },
+      description: RATE
+    },
+    previous: {
+      instance: {},
+      description: PREVIOUS
+    },
+    scheduleName: {
+      instance: SCHEDULE_NAMES,
+      description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A string: the name of the basal schedule.',
+      changelog: [common.changeLog.madeOptional('scheduleName', 2)]
+    }
   },
   temp: {
-    deliveryType: deliveryTypes.temp,
-    duration: common.duration,
-    percent: function() {
-      // yield float rounded to nearest 0.05
-      return Math.round(chance.floating({min:0, max:1})*20)/20;
+    deliveryType: {
+      instance: DELIVERY_TYPES.temp,
+      description: common.propTypes.stringValue(DELIVERY_TYPES.temp)
     },
-    previous: {},
-    rate: 0,
-    suppressed: {},
+    duration: {
+      instance: common.duration,
+      description: common.propTypes.duration()
+    },
+    percent: {
+      instance: function() {
+        // yield float rounded to nearest 0.05
+        return Math.round(chance.floating({min:0, max:1})*20)/20;
+      },
+      description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.'
+    },
+    previous: {
+      instance: {},
+      description: common.propTypes.OPTIONAL + PREVIOUS
+    },
+    rate: {
+      instance: 0,
+      description: common.propTypes.OPTIONAL + RATE
+    },
+    suppressed: {
+      instance: {},
+      description: common.propTypes.OPTIONAL + getSuppressedDesc(DELIVERY_TYPES.temp)
+    }
   },
   suspend: {
-    deliveryType: deliveryTypes.suspend,
-    duration: common.duration,
-    previous: {},
-    suppressed: {}
+    deliveryType: {
+      instance: DELIVERY_TYPES.suspend,
+      description: common.propTypes.stringValue(DELIVERY_TYPES.suspend)
+    },
+    duration: {
+      instance: common.duration,
+      description: common.propTypes.duration()
+    },
+    previous: {
+      instance: {},
+      description: PREVIOUS
+    },
+    suppressed: {
+      instance: {},
+      description:  common.propTypes.OPTIONAL + getSuppressedDesc(DELIVERY_TYPES.suspend)
+    }
   }
 };
 
@@ -131,8 +155,10 @@ module.generate = function(opts) {
   return basal;
 };
 
-module.deliveryTypes = _.values(deliveryTypes);
+module.deliveryTypes = _.values(DELIVERY_TYPES);
 
-module.propTypes = propTypes;
+module.propTypes = common.getPropTypes(schemas);
+
+module.changeLog = common.getChangeLog(schemas);
 
 module.exports = module;

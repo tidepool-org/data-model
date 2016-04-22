@@ -33,6 +33,8 @@
 
 ### percent
 
+> This field is **optional**.
+
 [ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.
 
 <!-- TODO -->
@@ -40,12 +42,16 @@
 
 ### rate
 
+> This field is **optional**.
+
 [ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
 
 <!-- TODO -->
 <!-- end rate -->
 
 ### suppressed
+
+> This field is **optional**.
 
 > This field is **optional**.
 
@@ -111,6 +117,8 @@ See [common fields](../../common.md).
 See [common fields](../../common.md).
 
 ### previous
+
+> This field is **optional**.
 
 [ingestion] An object representing the `basal` event just prior to this event.
 

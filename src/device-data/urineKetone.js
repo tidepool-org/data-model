@@ -19,19 +19,21 @@ var Chance = require('chance');
 var chance = new Chance();
 var common = require('./common');
 
-var values = ['negative', 'trace', 'small', 'moderate', 'large'];
-
-var propTypes = {
-  type: common.propTypes.stringValue('urineKetone'),
-  value: common.propTypes.oneOfStringOptions(
-      '[ingestion, storage, client] String value representing a qualitative measurement of urine ketone concentration.',
-      values
-    )
-};
+var TYPE = 'urineKetone';
+var VALUES = ['negative', 'trace', 'small', 'moderate', 'large'];
 
 var schema = {
-  type: 'urineKetone',
-  value: values
+  type: {
+    instance: TYPE,
+    description: common.propTypes.stringValue(TYPE)
+  },
+  value: {
+    instance: VALUES,
+    description: common.propTypes.oneOfStringOptions(
+      '[ingestion, storage, client] String value representing a qualitative measurement of urine ketone concentration.',
+      VALUES
+    )
+  }
 };
 
 module.generate = function(utc, format) {
@@ -39,6 +41,8 @@ module.generate = function(utc, format) {
   return uk;
 };
 
-module.propTypes = propTypes;
+module.propTypes = common.getPropTypes(schema);
+
+module.changeLog = common.getChangeLog(schema);
 
 module.exports = module;

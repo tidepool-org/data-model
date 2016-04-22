@@ -2,6 +2,14 @@
 
 **NB:** All fields are *required* unless otherwise noted.
 
+
+> Jump to example JSON:
+
+>  - [client example](#example-client)
+>  - [ingestion example](#example-ingestion)
+>  - [storage example](#example-storage)
+
+
 ### type
 
 [ingestion, storage, client] The string `bloodKetone`.
