@@ -78,6 +78,39 @@ var commonFields = generators.common.generator(new Date().toISOString(), 'storag
 
 /**
  * Description
+ * @method getIntroSectionRegExp
+ * @param {String} title the title of the data type introduction
+ * @return string for input to RegExp constructor to match a title on a data type's intro in existing input doc
+ */
+function getIntroSectionRegExp(title) {
+  return '##\\s' + title + '\\s+?[\\w\\W\\s]+?<!--\\send\\sintro\\s-->\\n';
+}
+
+/**
+ * Description
+ * @method addIntroTodoToIndexDoc
+ * @param {Array} indexDoc the array of Markdown strings representing the index document for a type with sub-types
+ * @return N/A mutates array
+ */
+function addIntroTodoToIndexDoc(indexDoc) {
+  indexDoc.push('<!-- TODO -->');
+  indexDoc.push('<!-- end intro -->\n');
+}
+
+/**
+ * Description
+ * @method addLinksToIndexDoc
+ * @param {Array} indexDoc the array of Markdown strings representing the index document for a type with sub-types
+ * @return N/A mutates array
+ */
+function addLinksToIndexDoc(indexDoc) {
+  generators[type].subTypes.map(function(subType) {
+    indexDoc.push(util.format('- [%s](./%s.md)', subType, subType))
+  });
+}
+
+/**
+ * Description
  * @method getDocPath
  * @param {String} base path to base directory for generated Markdown docs
  * @return constructed deep path to location in base for doc being generated or updated
@@ -88,16 +121,28 @@ function getDocPath(base) {
   }
   if (hasSubtypes) {
     var indexDoc = [util.format('## %s\n', generators[type].title)];
-    generators[type].subTypes.map(function(subType) {
-      indexDoc.push(util.format('- [%s](./%s.md)', subType, subType))
-    });
+    var existingReadme = '';
     try {
-      fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n'));
+      existingReadme = fs.readFileSync(base + 'types/' + type + '/README.md', 'utf8');
+      var existingIntro = existingReadme.match(
+        new RegExp(getIntroSectionRegExp(generators[type].title))
+      );
+      if (existingIntro && existingReadme.search('TODO') === -1) {
+        indexDoc = [existingIntro];
+        addLinksToIndexDoc(indexDoc);
+      }
+      else {
+        addIntroTodoToIndexDoc(indexDoc);
+        addLinksToIndexDoc(indexDoc);
+      }
+      fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n') + '\n');
     }
     catch(e) {
       if (e.message.search('ENOENT') !== -1) {
+        addIntroTodoToIndexDoc(indexDoc);
+        addLinksToIndexDoc(indexDoc);
         fs.mkdirSync(base + 'types/' + type);
-        fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n'));
+        fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n') + '\n');
       }
       else {
         console.error(e);
