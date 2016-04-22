@@ -15,7 +15,6 @@ Jump to...
   - [id](#id)
   - [time](#time)
   - [timezoneOffset](#timezoneoffset)
-  - [units](#units)
   - [uploadId](#uploadid)
 
 **NB:** All fields are *required* unless otherwise noted.
@@ -145,16 +144,6 @@ Examples:
 - `60` (timezone offset for British Summer Time)
 
 <!-- end timezoneOffset -->
-
-### units
-
-[ingestion, storage, client] Either a string or an object. Added to some events during data processing in the Tidepool uploader Chrome application.
-
-Most often a string value, either `mg/dL` or `mmol/L` and encoding the units of any blood glucose or blood glucose-related values on an object.
-
-On a `pumpSettings` object, `units` is itself an object with two properties: `bg` and `carb`. See [pump settings](./types/pumpSettings.md) for further details.
-
-<!-- end units -->
 
 ### uploadId
 
