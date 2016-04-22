@@ -4,6 +4,8 @@ This is the Tidepool data type for background insulin dosing—the "constant dri
 
 The data model for the basal schedule(s) is part of the Tidepool [`pumpSettings`](../pumpSettings/README.md) type. In contrast, the `basal` data type described in the following three documents represents each actual interval of basal insulin delivery. In brief summary—and ignoring for the moment some differences that are explained in detail in the linked three documents for the `scheduled`, `temp`, and `suspend` delivery sub-types—each `basal` event contains a `time` field representing the start of the delivery of the `rate` (in units of insulin per hour). The `duration` encodes the length of time (in milliseconds) that this `rate` was delivered in actuality (and it may or may not match the duration encoded in the basal schedule, depending on other pump events like global suspensions of insulin delivery or temporary basal rates). In order to calculate the total insulin delivery resulting from a particular `basal` event, all that is needed is conversion of the `duration` from milliseconds to hours and multiplication of the result by the `rate`.
 
+<!-- end intro -->
+
 - [scheduled](./scheduled.md)
 - [temp](./temp.md)
 - [suspend](./suspend.md)
