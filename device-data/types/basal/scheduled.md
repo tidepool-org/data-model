@@ -26,16 +26,21 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 
 ### duration
 
-> This field is **optional**.
+> This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.
 
 [ingestion, storage, client] An integer value representing a duration of time in milliseconds.
 
-<!-- TODO -->
+When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [previous](#previous) below for details.
+
+In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the `duration` field will be required on all `basal`s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of `basal`s based on the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).
+
+Note that for some insulin pumps, even for a scheduled basal *not* interrupted by another event like a `suspend` or `temp`, the `duration` may not be the nice round numbers of milliseconds that might be expected given the schedule in the `pumpSettings`—e.g., 3600000 for a `basal` event lasting an hour. This is because of how some pumps schedule the small pulses of insulin delivery fulfilling the scheduled `rate`; depending on how the pulses are scheduled, the actual duration of the `basal` may be a bit over or under the scheduled `duration`.
+
 <!-- end duration -->
 
 ### expectedDuration
 
-> This field is **optional**.
+> This field is **optional**. It is **only** added by the jellyfish data ingestion service.
 
 [storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
 
@@ -50,6 +55,8 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 <!-- end rate -->
 
 ### previous
+
+> This field is **optional** when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.
 
 [ingestion] An object representing the `basal` event just prior to this event.
 

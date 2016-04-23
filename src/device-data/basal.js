@@ -51,7 +51,11 @@ var schemas = {
     },
     duration: {
       instance: common.duration,
-      description: common.propTypes.OPTIONAL + common.propTypes.duration()
+      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration()
+    },
+    expectedDuration: {
+      instance: 0,
+      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration()
     },
     rate: {
       instance: function() {
@@ -62,7 +66,7 @@ var schemas = {
     },
     previous: {
       instance: {},
-      description: PREVIOUS
+      description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS
     },
     scheduleName: {
       instance: SCHEDULE_NAMES,
