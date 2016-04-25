@@ -419,7 +419,7 @@ Note that the `duration` on the initial basal event was updated to reflect the a
 
 <!-- DRAFT: discuss with @jhbate -->
 
-Note that `.` and `$` are illegal characters in object keys for MongoDB's serialized JSON (BSON). These characters can, however, appear in basal schedule names for some insulin pump manufacturers. At present, we are dealing with this in at least one client-side "driver" for retrieving and processing insulin pump data prior to upload, but we may decide to deal with this on the server side as part of our validation step in the new platform APIs.
+Note that `.` and `$` are illegal characters in object keys for MongoDB's serialized JSON (BSON). These characters can, however, appear in basal schedule names for some insulin pump manufacturers. At present, we are dealing with this in at least one client-side "driver" for retrieving and processing insulin pump data prior to upload[^a], but we may decide to deal with this on the server side as part of our validation step in the new platform APIs.
 
 #### Changelog for `scheduleName`
 
@@ -568,3 +568,5 @@ See [common fields](../../common.md).
 	"uploadId": "SampleUploadId"
 }
 ```
+
+[^a]: See, for example, [this chrome-uploader commit](https://github.com/tidepool-org/chrome-uploader/pull/95/commits/2c2bcf2db3e609c703a65967399784dcd47e49af 'GitHub: chrome-uploader').
