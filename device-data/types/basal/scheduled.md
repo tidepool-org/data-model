@@ -30,7 +30,7 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 
 [ingestion, storage, client] An integer value representing a duration of time in milliseconds.
 
-When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [previous](#previous) below for details.
+When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](#previous) below for details.
 
 In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the `duration` field will be required on all `basal`s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of `basal`s based on the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).
 
@@ -44,7 +44,7 @@ Note that for some insulin pumps, even for a scheduled basal *not* interrupted b
 
 [storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
 
-On a scheduled basal ingested through the legacy jellyfish ingestion service, `expectedDuration` should *never* be included on a `scheduled` basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original `scheduled` basal; most commonly this new event is a `temp` or `suspend`, but it could be a `scheduled` if a user is, for example, switching from one to another schedule as the active basal schedule.
+On a scheduled basal ingested through the legacy jellyfish ingestion service, `expectedDuration` should *never* be included on a `scheduled` basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original `scheduled` basal; most commonly this new event is a `temp` or `suspend`, but it could be a `scheduled` if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples below under [`previous`](#previous).
 
 <!-- DRAFT: discuss with @gniezen! -->
 In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the `expectedDuration` where available and relevant, but it will never be a required field.
@@ -63,7 +63,7 @@ Different insulin pump manufacturers offer the ability to program basal rates wi
 
 > This field is **optional** when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.
 
-[ingestion] An object representing the `basal` event just prior to this event.
+[ingestion] An object representing the `basal` event just prior to this event or, equivalently, just the string `id` of said object.
 
 [storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
 
@@ -80,98 +80,334 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 We start with a basal with no previous:
 
 ```json
-{ type: 'basal',
-	deliveryType: 'scheduled',
-	duration: 3600000,
-	rate: 0.7,
-	scheduleName: 'Vacation',
-	clockDriftOffset: 0,
-	conversionOffset: 0,
-	deviceId: 'DevId0987654321',
-	deviceTime: '2016-04-25T12:00:00',
-	guid: '4f90a365-647c-49e0-8ff5-365df35019cc',
-	time: '2016-04-25T19:00:00.000Z',
-	timezoneOffset: -420,
-	uploadId: 'SampleUploadId' }
+{
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 3600000,
+  "rate": 0.7,
+  "scheduleName": "Vacation",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T12:00:00",
+  "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+  "time": "2016-04-25T19:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
 ```
 
-Then we submit another basal with a `previous`:
+Then we submit another basal that includes the first as its `previous`:
 
 ```json
-{ type: 'basal',
-  deliveryType: 'scheduled',
-  duration: 39600000,
-  rate: 1.2,
-  previous:
-   { type: 'basal',
-     deliveryType: 'scheduled',
-     duration: 3600000,
-     rate: 0.7,
-     scheduleName: 'Vacation',
-     clockDriftOffset: 0,
-     conversionOffset: 0,
-     deviceId: 'DevId0987654321',
-     deviceTime: '2016-04-25T12:00:00',
-     guid: '4f90a365-647c-49e0-8ff5-365df35019cc',
-     time: '2016-04-25T19:00:00.000Z',
-     timezoneOffset: -420,
-     uploadId: 'SampleUploadId' },
-  scheduleName: 'Weekend',
-  clockDriftOffset: 0,
-  conversionOffset: 0,
-  deviceId: 'DevId0987654321',
-  deviceTime: '2016-04-25T13:00:00',
-  guid: 'f41d375f-b92a-4aef-807e-05963370b420',
-  time: '2016-04-25T20:00:00.000Z',
-  timezoneOffset: -420,
-  uploadId: 'SampleUploadId' }
+{
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 39600000,
+  "rate": 1.2,
+  "previous": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "rate": 0.7,
+    "scheduleName": "Vacation",
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T12:00:00",
+    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+    "time": "2016-04-25T19:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  "scheduleName": "Weekend",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T13:00:00",
+  "guid": "f41d375f-b92a-4aef-807e-05963370b420",
+  "time": "2016-04-25T20:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
 ```
 
-This will result in the Tidepool platform storing:
+This will result in the jellyfish API storing the following to the Tidepool cloud:
 
 ```json
 [
-	{ type: 'basal',
-	  deliveryType: 'scheduled',
-	  duration: 3600000,
-	  rate: 0.7,
-	  scheduleName: 'Vacation',
-	  _active: true,
-	  _groupId: 'abcdef',
-	  _schemaVersion: 0,
-	  _version: 0,
-	  clockDriftOffset: 0,
-	  conversionOffset: 0,
-	  createdTime: '2016-04-25T20:00:05.000Z',
-	  deviceId: 'DevId0987654321',
-		deviceTime: '2016-04-25T12:00:00',
-		guid: '4f90a365-647c-49e0-8ff5-365df35019cc',
-	  id: '3c8c58afc9654194944e25cbcadaa6df',
-		time: '2016-04-25T19:00:00.000Z',
-	  timezoneOffset: -420,
-	  uploadId: 'SampleUploadId' }, 
-	{ type: 'basal',
-	  deliveryType: 'scheduled',
-	  duration: 39600000,
-	  rate: 1.2,
-	  scheduleName: 'Weekend',
-	  _active: true,
-	  _groupId: 'abcdef',
-	  _schemaVersion: 0,
-	  _version: 0,
-	  clockDriftOffset: 0,
-	  conversionOffset: 0,
-	  createdTime: '2016-04-25T20:00:05.000Z',
-	  deviceId: 'DevId0987654321',
-	  deviceTime: '2016-04-25T13:00:00',
-	  guid: 'f41d375f-b92a-4aef-807e-05963370b420',
-	  id: '3c8c58afc9654194944e25cbcadaa6df',
-	  time: '2016-04-25T20:00:00.000Z',
-	  timezoneOffset: -420,
-	  uploadId: 'SampleUploadId' }
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "rate": 0.7,
+    "scheduleName": "Vacation",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 0,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T20:00:05.000Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T12:00:00",
+    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+    "id": "fcjk8r9m8hrqaiskaa3oa7ol47tkfefe",
+    "time": "2016-04-25T19:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 39600000,
+    "rate": 1.2,
+    "scheduleName": "Weekend",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 0,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T20:00:05.000Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T13:00:00",
+    "guid": "f41d375f-b92a-4aef-807e-05963370b420",
+    "id": "dshhn6ev3uc7gbbe6kq7aqlik8tvhjn7",
+    "time": "2016-04-25T20:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  }
 ]
 ```
 
+The above case represents the normal and best-case scenario, but the jellyfish API was also designed to handle various cases in which not all of the data expectations are met.
+
+**Case 1**: A sequence of `scheduled` basals with a skipped event.
+
+As before, we start with a basal with no previous:
+
+```json
+
+{
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 3600000,
+  "rate": 0.7,
+  "scheduleName": "Vacation",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T12:00:00",
+  "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+  "time": "2016-04-25T19:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+
+```
+
+Then we submit another basal with a `previous` that is *not* the first `basal` we started with but rather an event that has *not* been uploaded between the first `basal` submitted and the current one:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 73800000,
+  "rate": 0.325,
+  "previous": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "rate": 0.4,
+    "scheduleName": "Stress",
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T15:00:00",
+    "guid": "247c5c1c-d392-48c4-8df2-b55748e873cf",
+    "time": "2016-04-25T22:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  "scheduleName": "Stress",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T16:00:00",
+  "guid": "41f708b3-34fb-4dc8-820c-e780c411a129",
+  "time": "2016-04-25T23:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+This will result in the jellyfish API storing the following to the Tidepool cloud:
+
+```json
+[
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "rate": 0.7,
+    "scheduleName": "Vacation",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 1,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T23:09:05.140Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T12:00:00",
+    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+    "id": "fcjk8r9m8hrqaiskaa3oa7ol47tkfefe",
+    "time": "2016-04-25T19:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId",
+    "annotations": [
+      {
+        "code": "basal/mismatched-series",
+        "nextId": "vppkt7da2u8tdokkt0jbrbvepllthrv2"
+      }
+    ]
+  },
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 73800000,
+    "rate": 0.325,
+    "scheduleName": "Stress",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 0,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T23:09:05.172Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T16:00:00",
+    "guid": "41f708b3-34fb-4dc8-820c-e780c411a129",
+    "id": "vppkt7da2u8tdokkt0jbrbvepllthrv2",
+    "time": "2016-04-25T23:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  }
+]
+
+```
+
+Note that the jellyfish ingestion API does **not** store the `previous` with a `time` of `2016-04-25T22:00:00.000Z` since this reference did *not* match a `basal` event that had already been submitted and stored to the Tidepool cloud. In addition, the first `basal` submitted (i.e., the `basal` just prior to the gap in the sequence) is marked with an annotation with the code `basal/mismatched-series`.
+
+**Case 2**: A `scheduled` that overlaps with a prior event in the basal stream.
+
+Once again we start by submitting a basal with no previous:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 4000000,
+  "rate": 1.9,
+  "scheduleName": "Weekend",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T15:00:00",
+  "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
+  "time": "2016-04-25T22:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+Then we submit another basal that includes the first as its `previous`, except that the `time` of the new `basal` occurs *before* the `time` that would be expected had the `duration` of the first basal event been fulfilled:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 77400000,
+  "rate": 0.875,
+  "previous": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 4000000,
+    "rate": 1.9,
+    "scheduleName": "Weekend",
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T15:00:00",
+    "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
+    "time": "2016-04-25T22:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  "scheduleName": "Weekend",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T16:00:00",
+  "guid": "38d9e8c6-943d-4e76-aede-25c4a6a7b4ba",
+  "time": "2016-04-25T23:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+This will result in the jellyfish API storing the following to the Tidepool cloud:
+
+```json
+[
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "expectedDuration": 4000000,
+    "rate": 1.9,
+    "scheduleName": "Weekend",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 1,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T23:29:52.209Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T15:00:00",
+    "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
+    "id": "up6uvs31k0qte789jd24r7rf27fduuv8",
+    "time": "2016-04-25T22:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 77400000,
+    "rate": 0.875,
+    "scheduleName": "Weekend",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 0,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T23:33:07.008Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T16:00:00",
+    "guid": "38d9e8c6-943d-4e76-aede-25c4a6a7b4ba",
+    "id": "vppkt7da2u8tdokkt0jbrbvepllthrv2",
+    "time": "2016-04-25T23:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  }
+]
+```
+
+Note that the `duration` on the initial basal event was updated to reflect the actual length of the interval during which that segment of the basal schedule ran. An [`expectedDuration`](#expectedduration) was also added by the jellyfish ingestion service to retain a record of the original `duration` that was stored before the first basal event was truncated by the second.
 
 <!-- end previous -->
 
@@ -181,7 +417,9 @@ This will result in the Tidepool platform storing:
 
 [ingestion, storage, client] A string: the name of the basal schedule.
 
+<!-- DRAFT: discuss with @jhbate -->
 
+Note that `.` and `$` are illegal characters in object keys for MongoDB's serialized JSON (BSON). These characters can, however, appear in basal schedule names for some insulin pump manufacturers. At present, we are dealing with this in at least one client-side "driver" for retrieving and processing insulin pump data prior to upload, but we may decide to deal with this on the server side as part of our validation step in the new platform APIs.
 
 #### Changelog for `scheduleName`
 
