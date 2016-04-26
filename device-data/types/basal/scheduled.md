@@ -119,34 +119,34 @@ Then we submit another basal that includes the first as its `previous`:
 
 ```json
 {
-  "type": "basal",
-  "deliveryType": "scheduled",
-  "duration": 39600000,
-  "rate": 1.2,
-  "previous": {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 3600000,
-    "rate": 0.7,
-    "scheduleName": "Vacation",
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T12:00:00",
-    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
-    "time": "2016-04-25T19:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId"
-  },
-  "scheduleName": "Weekend",
-  "clockDriftOffset": 0,
-  "conversionOffset": 0,
-  "deviceId": "DevId0987654321",
-  "deviceTime": "2016-04-25T13:00:00",
-  "guid": "f41d375f-b92a-4aef-807e-05963370b420",
-  "time": "2016-04-25T20:00:00.000Z",
-  "timezoneOffset": -420,
-  "uploadId": "SampleUploadId"
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 39600000,
+  "rate": 1.2,
+  "previous": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "rate": 0.7,
+    "scheduleName": "Vacation",
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T12:00:00",
+    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+    "time": "2016-04-25T19:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  "scheduleName": "Weekend",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T13:00:00",
+  "guid": "f41d375f-b92a-4aef-807e-05963370b420",
+  "time": "2016-04-25T20:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
 }
 ```
 
@@ -154,48 +154,48 @@ This will result in the jellyfish API storing the following to the Tidepool clou
 
 ```json
 [
-  {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 3600000,
-    "rate": 0.7,
-    "scheduleName": "Vacation",
-    "_active": true,
-    "_groupId": "abcdef",
-    "_schemaVersion": 0,
-    "_version": 0,
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "createdTime": "2016-04-25T20:00:05.000Z",
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T12:00:00",
-    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
-    "id": "fcjk8r9m8hrqaiskaa3oa7ol47tkfefe",
-    "time": "2016-04-25T19:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId"
-  },
-  {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 39600000,
-    "rate": 1.2,
-    "scheduleName": "Weekend",
-    "_active": true,
-    "_groupId": "abcdef",
-    "_schemaVersion": 0,
-    "_version": 0,
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "createdTime": "2016-04-25T20:00:05.000Z",
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T13:00:00",
-    "guid": "f41d375f-b92a-4aef-807e-05963370b420",
-    "id": "dshhn6ev3uc7gbbe6kq7aqlik8tvhjn7",
-    "time": "2016-04-25T20:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId"
-  }
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "rate": 0.7,
+    "scheduleName": "Vacation",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 0,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T20:00:05.000Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T12:00:00",
+    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+    "id": "fcjk8r9m8hrqaiskaa3oa7ol47tkfefe",
+    "time": "2016-04-25T19:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 39600000,
+    "rate": 1.2,
+    "scheduleName": "Weekend",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 0,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T20:00:05.000Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T13:00:00",
+    "guid": "f41d375f-b92a-4aef-807e-05963370b420",
+    "id": "dshhn6ev3uc7gbbe6kq7aqlik8tvhjn7",
+    "time": "2016-04-25T20:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  }
 ]
 ```
 
@@ -206,57 +206,55 @@ The above case represents the normal and best-case scenario, but the jellyfish A
 As before, we start with a basal with no previous:
 
 ```json
-
 {
-  "type": "basal",
-  "deliveryType": "scheduled",
-  "duration": 3600000,
-  "rate": 0.7,
-  "scheduleName": "Vacation",
-  "clockDriftOffset": 0,
-  "conversionOffset": 0,
-  "deviceId": "DevId0987654321",
-  "deviceTime": "2016-04-25T12:00:00",
-  "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
-  "time": "2016-04-25T19:00:00.000Z",
-  "timezoneOffset": -420,
-  "uploadId": "SampleUploadId"
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 3600000,
+  "rate": 0.7,
+  "scheduleName": "Vacation",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T12:00:00",
+  "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+  "time": "2016-04-25T19:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
 }
-
 ```
 
 Then we submit another basal with a `previous` that is *not* the first `basal` we started with but rather an event that has *not* been uploaded between the first `basal` submitted and the current one:
 
 ```json
 {
-  "type": "basal",
-  "deliveryType": "scheduled",
-  "duration": 73800000,
-  "rate": 0.325,
-  "previous": {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 3600000,
-    "rate": 0.4,
-    "scheduleName": "Stress",
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T15:00:00",
-    "guid": "247c5c1c-d392-48c4-8df2-b55748e873cf",
-    "time": "2016-04-25T22:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId"
-  },
-  "scheduleName": "Stress",
-  "clockDriftOffset": 0,
-  "conversionOffset": 0,
-  "deviceId": "DevId0987654321",
-  "deviceTime": "2016-04-25T16:00:00",
-  "guid": "41f708b3-34fb-4dc8-820c-e780c411a129",
-  "time": "2016-04-25T23:00:00.000Z",
-  "timezoneOffset": -420,
-  "uploadId": "SampleUploadId"
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 73800000,
+  "rate": 0.325,
+  "previous": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "rate": 0.4,
+    "scheduleName": "Stress",
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T15:00:00",
+    "guid": "247c5c1c-d392-48c4-8df2-b55748e873cf",
+    "time": "2016-04-25T22:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  "scheduleName": "Stress",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T16:00:00",
+  "guid": "41f708b3-34fb-4dc8-820c-e780c411a129",
+  "time": "2016-04-25T23:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
 }
 ```
 
@@ -264,56 +262,55 @@ This will result in the jellyfish API storing the following to the Tidepool clou
 
 ```json
 [
-  {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 3600000,
-    "rate": 0.7,
-    "scheduleName": "Vacation",
-    "_active": true,
-    "_groupId": "abcdef",
-    "_schemaVersion": 0,
-    "_version": 1,
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "createdTime": "2016-04-25T23:09:05.140Z",
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T12:00:00",
-    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
-    "id": "fcjk8r9m8hrqaiskaa3oa7ol47tkfefe",
-    "time": "2016-04-25T19:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId",
-    "annotations": [
-      {
-        "code": "basal/mismatched-series",
-        "nextId": "vppkt7da2u8tdokkt0jbrbvepllthrv2"
-      }
-    ]
-  },
-  {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 73800000,
-    "rate": 0.325,
-    "scheduleName": "Stress",
-    "_active": true,
-    "_groupId": "abcdef",
-    "_schemaVersion": 0,
-    "_version": 0,
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "createdTime": "2016-04-25T23:09:05.172Z",
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T16:00:00",
-    "guid": "41f708b3-34fb-4dc8-820c-e780c411a129",
-    "id": "vppkt7da2u8tdokkt0jbrbvepllthrv2",
-    "time": "2016-04-25T23:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId"
-  }
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "rate": 0.7,
+    "scheduleName": "Vacation",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 1,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T23:09:05.140Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T12:00:00",
+    "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+    "id": "fcjk8r9m8hrqaiskaa3oa7ol47tkfefe",
+    "time": "2016-04-25T19:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId",
+    "annotations": [
+      {
+        "code": "basal/mismatched-series",
+        "nextId": "vppkt7da2u8tdokkt0jbrbvepllthrv2"
+      }
+    ]
+  },
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 73800000,
+    "rate": 0.325,
+    "scheduleName": "Stress",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 0,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T23:09:05.172Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T16:00:00",
+    "guid": "41f708b3-34fb-4dc8-820c-e780c411a129",
+    "id": "vppkt7da2u8tdokkt0jbrbvepllthrv2",
+    "time": "2016-04-25T23:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  }
 ]
-
 ```
 
 Note that the jellyfish ingestion API does **not** store the `previous` with a `time` of `2016-04-25T22:00:00.000Z` since this reference did *not* match a `basal` event that had already been submitted and stored to the Tidepool cloud. In addition, the first `basal` submitted (i.e., the `basal` just prior to the gap in the sequence) is marked with an annotation with the code `basal/mismatched-series`.
@@ -324,19 +321,19 @@ Once again we start by submitting a basal with no previous:
 
 ```json
 {
-  "type": "basal",
-  "deliveryType": "scheduled",
-  "duration": 4000000,
-  "rate": 1.9,
-  "scheduleName": "Weekend",
-  "clockDriftOffset": 0,
-  "conversionOffset": 0,
-  "deviceId": "DevId0987654321",
-  "deviceTime": "2016-04-25T15:00:00",
-  "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
-  "time": "2016-04-25T22:00:00.000Z",
-  "timezoneOffset": -420,
-  "uploadId": "SampleUploadId"
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 4000000,
+  "rate": 1.9,
+  "scheduleName": "Weekend",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T15:00:00",
+  "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
+  "time": "2016-04-25T22:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
 }
 ```
 
@@ -344,34 +341,34 @@ Then we submit another basal that includes the first as its `previous`, except t
 
 ```json
 {
-  "type": "basal",
-  "deliveryType": "scheduled",
-  "duration": 77400000,
-  "rate": 0.875,
-  "previous": {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 4000000,
-    "rate": 1.9,
-    "scheduleName": "Weekend",
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T15:00:00",
-    "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
-    "time": "2016-04-25T22:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId"
-  },
-  "scheduleName": "Weekend",
-  "clockDriftOffset": 0,
-  "conversionOffset": 0,
-  "deviceId": "DevId0987654321",
-  "deviceTime": "2016-04-25T16:00:00",
-  "guid": "38d9e8c6-943d-4e76-aede-25c4a6a7b4ba",
-  "time": "2016-04-25T23:00:00.000Z",
-  "timezoneOffset": -420,
-  "uploadId": "SampleUploadId"
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 77400000,
+  "rate": 0.875,
+  "previous": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 4000000,
+    "rate": 1.9,
+    "scheduleName": "Weekend",
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T15:00:00",
+    "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
+    "time": "2016-04-25T22:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  "scheduleName": "Weekend",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T16:00:00",
+  "guid": "38d9e8c6-943d-4e76-aede-25c4a6a7b4ba",
+  "time": "2016-04-25T23:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
 }
 ```
 
@@ -379,49 +376,49 @@ This will result in the jellyfish API storing the following to the Tidepool clou
 
 ```json
 [
-  {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 3600000,
-    "expectedDuration": 4000000,
-    "rate": 1.9,
-    "scheduleName": "Weekend",
-    "_active": true,
-    "_groupId": "abcdef",
-    "_schemaVersion": 0,
-    "_version": 1,
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "createdTime": "2016-04-25T23:29:52.209Z",
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T15:00:00",
-    "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
-    "id": "up6uvs31k0qte789jd24r7rf27fduuv8",
-    "time": "2016-04-25T22:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId"
-  },
-  {
-    "type": "basal",
-    "deliveryType": "scheduled",
-    "duration": 77400000,
-    "rate": 0.875,
-    "scheduleName": "Weekend",
-    "_active": true,
-    "_groupId": "abcdef",
-    "_schemaVersion": 0,
-    "_version": 0,
-    "clockDriftOffset": 0,
-    "conversionOffset": 0,
-    "createdTime": "2016-04-25T23:33:07.008Z",
-    "deviceId": "DevId0987654321",
-    "deviceTime": "2016-04-25T16:00:00",
-    "guid": "38d9e8c6-943d-4e76-aede-25c4a6a7b4ba",
-    "id": "vppkt7da2u8tdokkt0jbrbvepllthrv2",
-    "time": "2016-04-25T23:00:00.000Z",
-    "timezoneOffset": -420,
-    "uploadId": "SampleUploadId"
-  }
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 3600000,
+    "expectedDuration": 4000000,
+    "rate": 1.9,
+    "scheduleName": "Weekend",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 1,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T23:29:52.209Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T15:00:00",
+    "guid": "f9122f02-3690-439e-8130-4cbda9a5a618",
+    "id": "up6uvs31k0qte789jd24r7rf27fduuv8",
+    "time": "2016-04-25T22:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  },
+  {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "duration": 77400000,
+    "rate": 0.875,
+    "scheduleName": "Weekend",
+    "_active": true,
+    "_groupId": "abcdef",
+    "_schemaVersion": 0,
+    "_version": 0,
+    "clockDriftOffset": 0,
+    "conversionOffset": 0,
+    "createdTime": "2016-04-25T23:33:07.008Z",
+    "deviceId": "DevId0987654321",
+    "deviceTime": "2016-04-25T16:00:00",
+    "guid": "38d9e8c6-943d-4e76-aede-25c4a6a7b4ba",
+    "id": "vppkt7da2u8tdokkt0jbrbvepllthrv2",
+    "time": "2016-04-25T23:00:00.000Z",
+    "timezoneOffset": -420,
+    "uploadId": "SampleUploadId"
+  }
 ]
 ```
 
