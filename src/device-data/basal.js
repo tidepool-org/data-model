@@ -31,11 +31,13 @@ var DELIVERY_TYPES = {
 var SCHEDULE_NAMES = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
 
 var TYPE = 'basal';
-var RATE = '[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.';
+var RATE = '[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.\n\n**Range**: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.';
 var PREVIOUS = '[ingestion] An object representing the `basal` event just prior to this event.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
 var getSuppressedDesc = function(type) {
-  return  common.propTypes.OPTIONAL + format('[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this %s basal is in effect.', type);
+  return  common.propTypes.OPTIONAL + format('[ingestion, storage, client] An object—or, equivalently, just the string `id` of said object—representing another `basal` event - namely, the event that is currently suppressed (inactive) because this %s basal is in effect.', type);
 };
+var DURATION_LIMIT_SCHEDULED = '\n\n**Range**: The new platform APIs expect this value to be >= 0 and <= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.';
+var DURATION_LIMIT_TEMP = '\n\n**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.';
 
 var schemas = {
   base: {
@@ -51,11 +53,11 @@ var schemas = {
     },
     duration: {
       instance: common.duration,
-      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration()
+      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration() + DURATION_LIMIT_SCHEDULED
     },
     expectedDuration: {
       instance: 0,
-      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration()
+      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration() + DURATION_LIMIT_SCHEDULED
     },
     rate: {
       instance: function() {
@@ -81,7 +83,11 @@ var schemas = {
     },
     duration: {
       instance: common.duration,
-      description: common.propTypes.duration()
+      description: common.propTypes.duration() + DURATION_LIMIT_TEMP
+    },
+    expectedDuration: {
+      instance: 0,
+      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration() + DURATION_LIMIT_SCHEDULED
     },
     percent: {
       instance: function() {

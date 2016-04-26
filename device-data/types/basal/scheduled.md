@@ -14,6 +14,8 @@
 
 [ingestion, storage, client] The string `basal`.
 
+<!-- start type -->
+
 This is the sub-type of `basal` event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).
 
 <!-- end type -->
@@ -22,6 +24,8 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 
 [ingestion, storage, client] The string `scheduled`.
 
+<!-- start deliveryType -->
+
 <!-- end deliveryType -->
 
 ### duration
@@ -29,6 +33,10 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 > This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.
 
 [ingestion, storage, client] An integer value representing a duration of time in milliseconds.
+
+**Range**: The new platform APIs expect this value to be >= 0 and <= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.
+
+<!-- start duration -->
 
 When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](#previous) below for details.
 
@@ -44,6 +52,10 @@ Note that for some insulin pumps, even for a scheduled basal *not* interrupted b
 
 [storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
 
+**Range**: The new platform APIs expect this value to be >= 0 and <= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.
+
+<!-- start expectedDuration -->
+
 On a scheduled basal ingested through the legacy jellyfish ingestion service, `expectedDuration` should *never* be included on a `scheduled` basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original `scheduled` basal; most commonly this new event is a `temp` or `suspend`, but it could be a `scheduled` if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples below under [`previous`](#previous).
 
 <!-- DRAFT: discuss with @gniezen! -->
@@ -55,6 +67,10 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 
 [ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
 
+**Range**: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.
+
+<!-- start rate -->
+
 Different insulin pump manufacturers offer the ability to program basal rates with different levels of precision in terms of significant digits on the `rate`. We endeavor to represent each `rate` as accurately as possible for each insulin pump; occasionally when values are stored to a falsely large number of floating point digits this means rounding the raw `rate` value found in a record from a pump in order to match the significant digits of precision advertised by the manufacturer. It is the burden of the uploading client to handle this rounding since the number of significant digits for `rate`s varies according to the pump manufacturer.
 
 <!-- end rate -->
@@ -63,9 +79,11 @@ Different insulin pump manufacturers offer the ability to program basal rates wi
 
 > This field is **optional** when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.
 
-[ingestion] An object representing the `basal` event just prior to this event or, equivalently, just the string `id` of said object.
+[ingestion] An object representing the `basal` event just prior to this event.
 
 [storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
+
+<!-- start previous -->
 
 The legacy jellyfish data ingestion API was designed for *real-time* ingestion of diabetes device data. This posed a problem for ingesting events like `basal` events that are *not* point-in-time but rather represent intervals of time. There are a couple of obvious solutions to this problem:
 1. At the start `time` of a `basal` event, upload the `basal` and include the expected `duration` but update it later if it turns out to be incorrect when the next `basal` event is ingested.
@@ -417,13 +435,15 @@ Note that the `duration` on the initial basal event was updated to reflect the a
 
 [ingestion, storage, client] A string: the name of the basal schedule.
 
-<!-- DRAFT: discuss with @jhbate -->
-
-Note that `.` and `$` are illegal characters in object keys for MongoDB's serialized JSON (BSON). These characters can, however, appear in basal schedule names for some insulin pump manufacturers. At present, we are dealing with this in at least one client-side "driver" for retrieving and processing insulin pump data prior to upload[^a], but we may decide to deal with this on the server side as part of our validation step in the new platform APIs.
-
 #### Changelog for `scheduleName`
 
 `_schemaVersion` 2: `scheduleName` became **optional**.
+
+<!-- start scheduleName -->
+
+<!-- DRAFT: discuss with @jhbate -->
+
+Note that `.` and `$` are illegal characters in object keys for MongoDB's serialized JSON (BSON). These characters can, however, appear in basal schedule names for some insulin pump manufacturers. At present, we are dealing with this in at least one client-side "driver" for retrieving and processing insulin pump data prior to upload[^a], but we may decide to deal with this on the server side as part of our validation step in the new platform APIs.
 
 In an ideal world, we at Tidepool would love to be able to surface to any user of `basal` data the name of the schedule that generated a particular `scheduled` basal event. Unfortunately, most of the manufacturers of insulin pumps do *not* provide the name of the basal schedule on each basal rate change event reported when the pump switches from one segment of a basal schedule to the next (or switches from a suspended state or temporary basal rate back to the active schedule).
 
@@ -439,57 +459,113 @@ Going forward, now that `scheduleName` is an optional field, it should only be a
 
 See [common fields](../../common.md).
 
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+
 ### conversionOffset
 
 See [common fields](../../common.md).
+
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
 
 ### deviceId
 
 See [common fields](../../common.md).
 
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+
 ### deviceTime
 
 See [common fields](../../common.md).
+
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
 
 ### guid
 
 See [common fields](../../common.md).
 
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
+
 ### time
 
 See [common fields](../../common.md).
+
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
 
 ### timezoneOffset
 
 See [common fields](../../common.md).
 
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+
 ### uploadId
 
 See [common fields](../../common.md).
+
+<!-- start uploadId -->
+<!-- TODO -->
+<!-- end uploadId -->
 
 ### _active
 
 See [common fields](../../common.md).
 
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+
 ### _groupId
 
 See [common fields](../../common.md).
+
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
 
 ### _schemaVersion
 
 See [common fields](../../common.md).
 
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+
 ### _version
 
 See [common fields](../../common.md).
+
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
 
 ### createdTime
 
 See [common fields](../../common.md).
 
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+
 ### id
 
 See [common fields](../../common.md).
+
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
 
 ### example (client)
 

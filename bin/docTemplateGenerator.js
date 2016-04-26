@@ -149,7 +149,6 @@ function getDocPath(base) {
         process.exit();
       }
     }
-    
     return base + 'types/' + type + '/' + commander.subType + '.md';
   }
   else {
@@ -265,8 +264,6 @@ function sectionForField(field, propType, changeLog) {
         fieldSection.push(logItem + '\n');
       });
     }
-    fieldSection.push('<!-- TODO -->');
-    fieldSection.push(util.format('<!-- end %s -->\n', field));
   }
   return fieldSection;
 }
@@ -278,7 +275,7 @@ function sectionForField(field, propType, changeLog) {
  * @return string for input to RegExp constructor to match a field on a data type's section header in existing input doc
  */
 function getFieldSectionRegExp(field) {
-  return '###\\s' + field + '\\s+?[\\w\\W\\s]+?<!--\\send\\s' + field + '\\s-->\\n';
+  return '<!--\\sstart\\s' + field + '\\s-->\\s+?[\\w\\W\\s]+?<!--\\send\\s' + field + '\\s-->\\n';
 }
 
 if (type === 'common') {
@@ -330,12 +327,17 @@ else {
     var existingSection = existing.match(
       new RegExp(getFieldSectionRegExp(field))
     );
-    if (existingSection && (existingSection[0].search('TODO') === -1)) {
-      return existingSection[0];
-    }
-    return hasSubtypes ?
+    var sectionBase = hasSubtypes ?
       sectionForField(field, generators[type].propTypes[commander.subType][field], generators[type].changeLog[commander.subType][field]) :
       sectionForField(field, generators[type].propTypes[field], generators[type].changeLog[field]);
+    if (existingSection && (existingSection[0].search('TODO') === -1)) {
+      sectionBase.push(existingSection[0]);
+      return sectionBase;
+    }
+    sectionBase.push(util.format('<!-- start %s -->', field));
+    sectionBase.push('<!-- TODO -->');
+    sectionBase.push(util.format('<!-- end %s -->\n', field));
+    return sectionBase;
   })));
   doc = doc.concat(['client', 'ingestion', 'storage'].map(function(format) {
     var header = formatHeader(format) + '\n';
