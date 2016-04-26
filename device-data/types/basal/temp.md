@@ -14,22 +14,43 @@
 
 [ingestion, storage, client] The string `basal`.
 
-<!-- TODO -->
+<!-- start type -->
+
+This is the sub-type of `basal` event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates *both* by percentage and by manual specification at the user's choice; other insulin pumps only expose one of these interfaces.
+
 <!-- end type -->
 
 ### deliveryType
 
 [ingestion, storage, client] The string `temp`.
 
-<!-- TODO -->
+<!-- start deliveryType -->
+
 <!-- end deliveryType -->
 
 ### duration
 
 [ingestion, storage, client] An integer value representing a duration of time in milliseconds.
 
-<!-- TODO -->
+**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
+
+<!-- start duration -->
+
+Unlike on [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingestion API and the new platform APIs *require* a `duration` on every `temp` basal since an insulin pump user is always required to program a duration for a temporary basal rate interval along with the desired temporary rate (or percentage of active rate) itself.
+
 <!-- end duration -->
+
+### expectedDuration
+
+> This field is **optional**. It is **only** added by the jellyfish data ingestion service.
+
+[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
+
+**Range**: The new platform APIs expect this value to be >= 0 and <= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.
+
+<!-- start expectedDuration -->
+<!-- TODO -->
+<!-- end expectedDuration -->
 
 ### percent
 
@@ -37,6 +58,7 @@
 
 [ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.
 
+<!-- start percent -->
 <!-- TODO -->
 <!-- end percent -->
 
@@ -48,6 +70,7 @@
 
 [storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
 
+<!-- start previous -->
 <!-- TODO -->
 <!-- end previous -->
 
@@ -57,6 +80,9 @@
 
 [ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
 
+**Range**: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.
+
+<!-- start rate -->
 <!-- TODO -->
 <!-- end rate -->
 
@@ -64,8 +90,9 @@
 
 > This field is **optional**.
 
-[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.
+[ingestion, storage, client] An object—or, equivalently, just the string `id` of said object—representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.
 
+<!-- start suppressed -->
 <!-- TODO -->
 <!-- end suppressed -->
 
@@ -73,57 +100,113 @@
 
 See [common fields](../../common.md).
 
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+
 ### conversionOffset
 
 See [common fields](../../common.md).
+
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
 
 ### deviceId
 
 See [common fields](../../common.md).
 
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+
 ### deviceTime
 
 See [common fields](../../common.md).
+
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
 
 ### guid
 
 See [common fields](../../common.md).
 
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
+
 ### time
 
 See [common fields](../../common.md).
+
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
 
 ### timezoneOffset
 
 See [common fields](../../common.md).
 
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+
 ### uploadId
 
 See [common fields](../../common.md).
+
+<!-- start uploadId -->
+<!-- TODO -->
+<!-- end uploadId -->
 
 ### _active
 
 See [common fields](../../common.md).
 
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+
 ### _groupId
 
 See [common fields](../../common.md).
+
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
 
 ### _schemaVersion
 
 See [common fields](../../common.md).
 
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+
 ### _version
 
 See [common fields](../../common.md).
+
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
 
 ### createdTime
 
 See [common fields](../../common.md).
 
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+
 ### id
 
 See [common fields](../../common.md).
+
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
 
 ### example (client)
 
