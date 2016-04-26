@@ -99,19 +99,19 @@ We start with a basal with no previous:
 
 ```json
 {
-  "type": "basal",
-  "deliveryType": "scheduled",
-  "duration": 3600000,
-  "rate": 0.7,
-  "scheduleName": "Vacation",
-  "clockDriftOffset": 0,
-  "conversionOffset": 0,
-  "deviceId": "DevId0987654321",
-  "deviceTime": "2016-04-25T12:00:00",
-  "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
-  "time": "2016-04-25T19:00:00.000Z",
-  "timezoneOffset": -420,
-  "uploadId": "SampleUploadId"
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 3600000,
+  "rate": 0.7,
+  "scheduleName": "Vacation",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-04-25T12:00:00",
+  "guid": "4f90a365-647c-49e0-8ff5-365df35019cc",
+  "time": "2016-04-25T19:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
 }
 ```
 
