@@ -18,6 +18,10 @@
 
 This is the sub-type of `basal` event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates *both* by percentage and by manual specification at the user's choice; other insulin pumps only expose one of these interfaces.
 
+**Field co-occurrence requirements**: Note that when ingesting through the legacy jellyfish ingestion API, at least one of `percent` or `rate` must be provided on a `temp` basal. While each of these fields is marked as *optional*, one or the other **must** be present.
+
+In contrast, under the new platform APIs, `rate` is always *required*.
+
 <!-- end type -->
 
 * * * * *
@@ -104,7 +108,7 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 
 ### rate
 
-> This field is **optional**.
+> This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.
 
 [ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
 
@@ -114,6 +118,8 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 
 See [`rate`](./scheduled.md#rate) on the `scheduled` basals documentation for discussion of significant digits and rounding on basal rate values.
 
+Also note that when ingesting data through the legacy jellyfish ingestion API, providing a `rate` is optional *as long as a `percent` and [`suppressed`](#suppressed) with its own `rate` are also provided*. In the new platform APIs, we are shifting the burden of calculating the `rate` of a percentage-programmed temp basal to the uploading client. (Most, if not all, insulin pump manufacturers provide the `rate` directly in their raw data models anyway.)
+
 <!-- end rate -->
 
 * * * * *
@@ -122,10 +128,20 @@ See [`rate`](./scheduled.md#rate) on the `scheduled` basals documentation for di
 
 > This field is **optional**.
 
-[ingestion, storage, client] An object—or, equivalently, just the string `id` of said object—representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.
+[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.
 
 <!-- start suppressed -->
-<!-- TODO -->
+
+Depending on the data protocol, it is not always possible to keep track of what basal rate would have been in effect had a `temp` basal not been programmed by the user, but where this information is available, it should be provided in as much detail as possible as an embedded `basal` object as the value for the `suppressed` key on a `temp` basal.
+
+This object need only contain the bare minimum of information:
+- a `type` of `basal`
+- a `deliveryType`, usually `scheduled`
+- the `scheduleName` if relevant and available (see [`scheduleName`](./scheduled.md#schedulename) for more details)
+- the suppressed [`rate`](./scheduled.md#rate) if relevant and available
+
+In particular, note that *no time-related fields such as `time`, `deviceTime`, or `duration` are expected to appear on a `suppressed` embedded basal rate event*. By definition, any values for time-related fields are identical to the parent `temp` basal object, and so it is redundant to include them.
+
 <!-- end suppressed -->
 
 * * * * *
