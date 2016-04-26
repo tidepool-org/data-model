@@ -20,6 +20,8 @@ This is the sub-type of `basal` event that represents temporary intervals of bas
 
 <!-- end type -->
 
+* * * * *
+
 ### deliveryType
 
 [ingestion, storage, client] The string `temp`.
@@ -27,6 +29,8 @@ This is the sub-type of `basal` event that represents temporary intervals of bas
 <!-- start deliveryType -->
 
 <!-- end deliveryType -->
+
+* * * * *
 
 ### duration
 
@@ -40,17 +44,29 @@ Unlike on [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingest
 
 <!-- end duration -->
 
+* * * * *
+
 ### expectedDuration
 
 > This field is **optional**. It is **only** added by the jellyfish data ingestion service.
 
 [storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
 
-**Range**: The new platform APIs expect this value to be >= 0 and <= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.
+**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
+
+#### Changelog for `expectedDuration`
+
+`_schemaVersion` ? (future): `expectedDuration` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `expectedDuration` as described.
 
 <!-- start expectedDuration -->
-<!-- TODO -->
+
+On a basal ingested through the legacy jellyfish ingestion service, `expectedDuration` should *never* be included on a `temp` basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original `temp` basal; most commonly this new event is a `scheduled` (user chose to cancel the temporary rate) or a `suspend`. See the examples in [`previous`](./previous.md).
+
+In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the `expectedDuration` where available and relevant, but it will never be a required field. Many insulin pumps provide information on the original programmed duration of a `temp` basal in the raw data and/or provide the programmed "time left" when a `temp` basal is canceled. Where this is true, the uploading client is expected to provide the `expectedDuration` in addition to the actual `duration` (if these two values differ) for a `temp` basal event.
+
 <!-- end expectedDuration -->
+
+* * * * *
 
 ### percent
 
@@ -58,21 +74,33 @@ Unlike on [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingest
 
 [ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.
 
+**Range**: The new platform APIs expect this value to be >= 0.0 and <= 10.0.
+
 <!-- start percent -->
-<!-- TODO -->
+
+Different insulin pump manufacturers expose different interfaces for setting temporary basal rates by percentage—some express the change in terms of a positive or negative percentage *from* the current active rate, and some express the change in terms of an absolute percentage *of* the current active rate. For example, if the current active scheduled basal rate is 0.5 units per hour, a pump that represents the change as positive or negative from the current rate would implement a rate of 0.25 when the user programs a -50% temp basal and a rate of 0.75 when the user programs a +50% temp basal. On the other hand, a pump that represent the change as an absolute percentage of the current rate would require the user to input 50% to yield the 0.25 units per hour temporary rate and 150% to yield the 0.75 temporary rate.
+
+For the Tidepool data model, we have standardized on a floating point representation of the second strategy. For us, the value 0.0 represents a temp basal at 0% of the current active rate, 0.5 at 50% of the current active rate (0.25 units per hour, in the example), 1.0 at a trivial 100% of current active rate (0.5 units per hour), 1.5 at 150% of the current active rate (0.75 units per hour), and so on. The upper limit of 10.0 (representing 1000% percent of the current active rate) was chosen arbitrarily as a common-sense upper bound; at least some pumps set their upper bound for temp basal rate increases much lower than this, for example at < 200% of the current active rate.
+
 <!-- end percent -->
+
+* * * * *
 
 ### previous
 
-> This field is **optional**.
+> This field is **optional** when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.
 
-[ingestion] An object representing the `basal` event just prior to this event.
+[ingestion] An object representing the `basal` event just prior to this event or, equivalently, just the `id` of said object.
 
 [storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
 
 <!-- start previous -->
-<!-- TODO -->
+
+See [`previous`](./previous.md) for detailed documentation on this deprecated field.
+
 <!-- end previous -->
+
+* * * * *
 
 ### rate
 
@@ -83,8 +111,12 @@ Unlike on [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingest
 **Range**: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.
 
 <!-- start rate -->
-<!-- TODO -->
+
+See [`rate`](./scheduled.md#rate) on the `scheduled` basals documentation for discussion of significant digits and rounding on basal rate values.
+
 <!-- end rate -->
+
+* * * * *
 
 ### suppressed
 
@@ -96,6 +128,8 @@ Unlike on [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingest
 <!-- TODO -->
 <!-- end suppressed -->
 
+* * * * *
+
 ### clockDriftOffset
 
 See [common fields](../../common.md).
@@ -103,6 +137,8 @@ See [common fields](../../common.md).
 <!-- start clockDriftOffset -->
 <!-- TODO -->
 <!-- end clockDriftOffset -->
+
+* * * * *
 
 ### conversionOffset
 
@@ -112,6 +148,8 @@ See [common fields](../../common.md).
 <!-- TODO -->
 <!-- end conversionOffset -->
 
+* * * * *
+
 ### deviceId
 
 See [common fields](../../common.md).
@@ -119,6 +157,8 @@ See [common fields](../../common.md).
 <!-- start deviceId -->
 <!-- TODO -->
 <!-- end deviceId -->
+
+* * * * *
 
 ### deviceTime
 
@@ -128,6 +168,8 @@ See [common fields](../../common.md).
 <!-- TODO -->
 <!-- end deviceTime -->
 
+* * * * *
+
 ### guid
 
 See [common fields](../../common.md).
@@ -135,6 +177,8 @@ See [common fields](../../common.md).
 <!-- start guid -->
 <!-- TODO -->
 <!-- end guid -->
+
+* * * * *
 
 ### time
 
@@ -144,6 +188,8 @@ See [common fields](../../common.md).
 <!-- TODO -->
 <!-- end time -->
 
+* * * * *
+
 ### timezoneOffset
 
 See [common fields](../../common.md).
@@ -151,6 +197,8 @@ See [common fields](../../common.md).
 <!-- start timezoneOffset -->
 <!-- TODO -->
 <!-- end timezoneOffset -->
+
+* * * * *
 
 ### uploadId
 
@@ -160,6 +208,8 @@ See [common fields](../../common.md).
 <!-- TODO -->
 <!-- end uploadId -->
 
+* * * * *
+
 ### _active
 
 See [common fields](../../common.md).
@@ -167,6 +217,8 @@ See [common fields](../../common.md).
 <!-- start _active -->
 <!-- TODO -->
 <!-- end _active -->
+
+* * * * *
 
 ### _groupId
 
@@ -176,6 +228,8 @@ See [common fields](../../common.md).
 <!-- TODO -->
 <!-- end _groupId -->
 
+* * * * *
+
 ### _schemaVersion
 
 See [common fields](../../common.md).
@@ -183,6 +237,8 @@ See [common fields](../../common.md).
 <!-- start _schemaVersion -->
 <!-- TODO -->
 <!-- end _schemaVersion -->
+
+* * * * *
 
 ### _version
 
@@ -192,6 +248,8 @@ See [common fields](../../common.md).
 <!-- TODO -->
 <!-- end _version -->
 
+* * * * *
+
 ### createdTime
 
 See [common fields](../../common.md).
@@ -199,6 +257,8 @@ See [common fields](../../common.md).
 <!-- start createdTime -->
 <!-- TODO -->
 <!-- end createdTime -->
+
+* * * * *
 
 ### id
 
@@ -208,33 +268,31 @@ See [common fields](../../common.md).
 <!-- TODO -->
 <!-- end id -->
 
+* * * * *
+
 ### example (client)
 
 ```json
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 50400000,
-	"percent": 0.1,
-	"rate": 0.057499999999999996,
+	"duration": 52200000,
+	"expectedDuration": 62640000,
+	"percent": 0.95,
+	"rate": 0.95,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Weekend",
-		"rate": 0.575
+		"scheduleName": "Very Active",
+		"rate": 1
 	},
-	"_active": true,
-	"_groupId": "abcdef",
-	"_schemaVersion": 0,
-	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-22T01:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-21T18:00:00",
-	"guid": "cb0654f4-410e-4499-bfe0-8cae5a6699c7",
-	"id": "7c743024618a4d089ef67e1d6b7077c9",
-	"time": "2016-04-22T01:00:00.000Z",
+	"deviceTime": "2016-04-26T11:00:00",
+	"guid": "295a6b6f-dcdd-405f-8de4-c23037f895d4",
+	"id": "ee6e431aaeed4c5cab7965ef0b3e3240",
+	"time": "2016-04-26T18:00:00.000Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -246,27 +304,37 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 48600000,
-	"percent": 0.85,
-	"rate": 0.27625,
+	"duration": 21600000,
+	"expectedDuration": 25920000,
+	"percent": 0.8,
+	"previous": {
+		"type": "basal",
+		"deliveryType": "scheduled",
+		"duration": 3600000,
+		"rate": 0.375,
+		"scheduleName": "Stress",
+		"clockDriftOffset": 0,
+		"conversionOffset": 0,
+		"deviceId": "DevId0987654321",
+		"deviceTime": "2016-04-26T10:00:00",
+		"guid": "4368b23a-07da-4fbf-87a6-fe48b26520f6",
+		"time": "2016-04-26T17:00:00.000Z",
+		"timezoneOffset": -420,
+		"uploadId": "SampleUploadId"
+	},
+	"rate": 0.45999999999999996,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Vacation",
-		"rate": 0.325
+		"scheduleName": "Stress",
+		"rate": 0.575
 	},
-	"_active": true,
-	"_groupId": "abcdef",
-	"_schemaVersion": 0,
-	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-22T01:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-21T18:00:00",
-	"guid": "7387ebf0-bebd-464a-836a-278fd6d91b33",
-	"id": "04b396b6db57456989fe78fce93f5123",
-	"time": "2016-04-22T01:00:00.000Z",
+	"deviceTime": "2016-04-26T11:00:00",
+	"guid": "d63814d5-31d0-4593-b5a3-fd897223baf4",
+	"time": "2016-04-26T18:00:00.000Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -278,14 +346,15 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 27000000,
-	"percent": 0.85,
-	"rate": 1.19,
+	"duration": 3600000,
+	"expectedDuration": 4320000,
+	"percent": 1,
+	"rate": 0.175,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Very Active",
-		"rate": 1.4
+		"scheduleName": "Vacation",
+		"rate": 0.175
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -293,12 +362,12 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-22T01:00:05.000Z",
+	"createdTime": "2016-04-26T18:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-21T18:00:00",
-	"guid": "ed7819ee-fcab-492d-8029-625f0f67c8ed",
-	"id": "0357c1c81a1a4a41ad94d5b3cd39b9d9",
-	"time": "2016-04-22T01:00:00.000Z",
+	"deviceTime": "2016-04-26T11:00:00",
+	"guid": "9059717d-3cab-4667-a11a-87d7d8e88e10",
+	"id": "730fdceccef3480482d0505e87ffc77e",
+	"time": "2016-04-26T18:00:00.000Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

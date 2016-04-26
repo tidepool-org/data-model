@@ -195,7 +195,7 @@ function exampleObject(type, format) {
       timestamp: new Date().toISOString()
     });
   }
-  return generators[type].generator(new Date().toISOString(), 'storage');
+  return generators[type].generator(new Date().toISOString(), format);
 }
 
 /**
@@ -207,7 +207,7 @@ function exampleObject(type, format) {
  */
 function exampleJSON(type, format) {
   return '```json\n' + JSON.stringify(
-    exampleObject(type),
+    exampleObject(type, format),
     null,
     '\t'
   ) + '\n```\n';
@@ -319,7 +319,9 @@ else {
     doc.push(util.format('>  - [%s example](#example-%s)', exampleType, exampleType));
   })
   doc.push('\n');
+  var schemaFields = hasSubtypes ? generators[type].propTypes[commander.subType] : generators[type].propTypes;
   var allFields = Object.keys(_.merge(
+    _.cloneDeep(schemaFields),
     exampleObject(type, 'ingestion'),
     exampleObject(type, 'storage')
   ));
@@ -332,21 +334,17 @@ else {
       sectionForField(field, generators[type].propTypes[field], generators[type].changeLog[field]);
     if (existingSection && (existingSection[0].search('TODO') === -1)) {
       sectionBase.push(existingSection[0]);
+      sectionBase.push('* * * * *\n');
       return sectionBase;
     }
     sectionBase.push(util.format('<!-- start %s -->', field));
     sectionBase.push('<!-- TODO -->');
     sectionBase.push(util.format('<!-- end %s -->\n', field));
+    sectionBase.push('* * * * *\n');
     return sectionBase;
   })));
   doc = doc.concat(['client', 'ingestion', 'storage'].map(function(format) {
     var header = formatHeader(format) + '\n';
-    var existingExample = existing.match(
-      new RegExp('###\\s+example\\s+\\(' + format + '\\)\\s+?```json[\\w\\W\\s]+?```\\n')
-    );
-    if (existingExample) {
-      return existingExample[0];
-    }
     return header + exampleJSON(type, format);
   }));
 }

@@ -44,6 +44,9 @@ module.bgValue = function(units, ingestion) {
 module.changeLog = {
   madeOptional: function(fieldName, schemaVersion) {
     return format('`_schemaVersion` %s: `%s` became **optional**.', schemaVersion, fieldName);
+  },
+  plannedImplementation: function(fieldName) {
+    return format('`_schemaVersion` ? (future): `%s` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `expectedDuration` as described.', fieldName);
   }
 };
 

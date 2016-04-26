@@ -32,7 +32,7 @@ var SCHEDULE_NAMES = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active']
 
 var TYPE = 'basal';
 var RATE = '[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.\n\n**Range**: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.';
-var PREVIOUS = '[ingestion] An object representing the `basal` event just prior to this event.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
+var PREVIOUS = '[ingestion] An object representing the `basal` event just prior to this event or, equivalently, just the `id` of said object.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
 var getSuppressedDesc = function(type) {
   return  common.propTypes.OPTIONAL + format('[ingestion, storage, client] An object—or, equivalently, just the string `id` of said object—representing another `basal` event - namely, the event that is currently suppressed (inactive) because this %s basal is in effect.', type);
 };
@@ -87,18 +87,19 @@ var schemas = {
     },
     expectedDuration: {
       instance: 0,
-      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration() + DURATION_LIMIT_SCHEDULED
+      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration() + DURATION_LIMIT_TEMP,
+      changelog: [common.changeLog.plannedImplementation('expectedDuration')]
     },
     percent: {
       instance: function() {
         // yield float rounded to nearest 0.05
         return Math.round(chance.floating({min:0, max:1})*20)/20;
       },
-      description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.'
+      description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.\n\n**Range**: The new platform APIs expect this value to be >= 0.0 and <= 10.0.'
     },
     previous: {
       instance: {},
-      description: common.propTypes.OPTIONAL + PREVIOUS
+      description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS
     },
     rate: {
       instance: 0,
@@ -116,11 +117,11 @@ var schemas = {
     },
     duration: {
       instance: common.duration,
-      description: common.propTypes.duration()
+      description: common.propTypes.duration() + DURATION_LIMIT_TEMP
     },
     previous: {
       instance: {},
-      description: common.propTypes.OPTIONAL + PREVIOUS
+      description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS
     },
     suppressed: {
       instance: {},
@@ -147,7 +148,7 @@ module.generate = function(opts) {
     opts.format
   );
   if (opts.format === 'ingestion') {
-    basal.previous = previous;
+    basal.previous = _.omit(previous, ['expectedDuration', 'previous']);
   }
   else {
     delete basal.previous;
@@ -160,6 +161,12 @@ module.generate = function(opts) {
     basal.suppressed = _.pick(suppressed, ['type', 'deliveryType', 'scheduleName', 'rate'])
     if (basal.percent) {
       basal.rate = basal.percent * suppressed.rate;
+    }
+    basal.expectedDuration = 1.2 * basal.duration;
+  }
+  else {
+    if (basal.expectedDuration != null) {
+      delete basal.expectedDuration;
     }
   }
   return basal;
