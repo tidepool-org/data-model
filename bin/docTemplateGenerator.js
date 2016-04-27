@@ -78,6 +78,39 @@ var commonFields = generators.common.generator(new Date().toISOString(), 'storag
 
 /**
  * Description
+ * @method getIntroSectionRegExp
+ * @param {String} title the title of the data type introduction
+ * @return string for input to RegExp constructor to match a title on a data type's intro in existing input doc
+ */
+function getIntroSectionRegExp(title) {
+  return '##\\s' + title + '\\s+?[\\w\\W\\s]+?<!--\\send\\sintro\\s-->\\n';
+}
+
+/**
+ * Description
+ * @method addIntroTodoToIndexDoc
+ * @param {Array} indexDoc the array of Markdown strings representing the index document for a type with sub-types
+ * @return N/A mutates array
+ */
+function addIntroTodoToIndexDoc(indexDoc) {
+  indexDoc.push('<!-- TODO -->');
+  indexDoc.push('<!-- end intro -->\n');
+}
+
+/**
+ * Description
+ * @method addLinksToIndexDoc
+ * @param {Array} indexDoc the array of Markdown strings representing the index document for a type with sub-types
+ * @return N/A mutates array
+ */
+function addLinksToIndexDoc(indexDoc) {
+  generators[type].subTypes.map(function(subType) {
+    indexDoc.push(util.format('- [%s](./%s.md)', subType, subType))
+  });
+}
+
+/**
+ * Description
  * @method getDocPath
  * @param {String} base path to base directory for generated Markdown docs
  * @return constructed deep path to location in base for doc being generated or updated
@@ -88,23 +121,34 @@ function getDocPath(base) {
   }
   if (hasSubtypes) {
     var indexDoc = [util.format('## %s\n', generators[type].title)];
-    generators[type].subTypes.map(function(subType) {
-      indexDoc.push(util.format('- [%s](./%s.md)', subType, subType))
-    });
+    var existingReadme = '';
     try {
-      fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n'));
+      existingReadme = fs.readFileSync(base + 'types/' + type + '/README.md', 'utf8');
+      var existingIntro = existingReadme.match(
+        new RegExp(getIntroSectionRegExp(generators[type].title))
+      );
+      if (existingIntro && existingReadme.search('TODO') === -1) {
+        indexDoc = [existingIntro];
+        addLinksToIndexDoc(indexDoc);
+      }
+      else {
+        addIntroTodoToIndexDoc(indexDoc);
+        addLinksToIndexDoc(indexDoc);
+      }
+      fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n') + '\n');
     }
     catch(e) {
       if (e.message.search('ENOENT') !== -1) {
+        addIntroTodoToIndexDoc(indexDoc);
+        addLinksToIndexDoc(indexDoc);
         fs.mkdirSync(base + 'types/' + type);
-        fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n'));
+        fs.writeFileSync(base + 'types/' + type + '/README.md', indexDoc.join('\n') + '\n');
       }
       else {
         console.error(e);
         process.exit();
       }
     }
-    
     return base + 'types/' + type + '/' + commander.subType + '.md';
   }
   else {
@@ -151,7 +195,7 @@ function exampleObject(type, format) {
       timestamp: new Date().toISOString()
     });
   }
-  return generators[type].generator(new Date().toISOString(), 'storage');
+  return generators[type].generator(new Date().toISOString(), format);
 }
 
 /**
@@ -163,7 +207,7 @@ function exampleObject(type, format) {
  */
 function exampleJSON(type, format) {
   return '```json\n' + JSON.stringify(
-    exampleObject(type),
+    exampleObject(type, format),
     null,
     '\t'
   ) + '\n```\n';
@@ -220,8 +264,6 @@ function sectionForField(field, propType, changeLog) {
         fieldSection.push(logItem + '\n');
       });
     }
-    fieldSection.push('<!-- TODO -->');
-    fieldSection.push(util.format('<!-- end %s -->\n', field));
   }
   return fieldSection;
 }
@@ -233,7 +275,7 @@ function sectionForField(field, propType, changeLog) {
  * @return string for input to RegExp constructor to match a field on a data type's section header in existing input doc
  */
 function getFieldSectionRegExp(field) {
-  return '###\\s' + field + '\\s+?[\\w\\W\\s]+?<!--\\send\\s' + field + '\\s-->\\n';
+  return '<!--\\sstart\\s' + field + '\\s-->\\s+?[\\w\\W\\s]+?<!--\\send\\s' + field + '\\s-->\\n';
 }
 
 if (type === 'common') {
@@ -277,7 +319,9 @@ else {
     doc.push(util.format('>  - [%s example](#example-%s)', exampleType, exampleType));
   })
   doc.push('\n');
+  var schemaFields = hasSubtypes ? generators[type].propTypes[commander.subType] : generators[type].propTypes;
   var allFields = Object.keys(_.merge(
+    _.cloneDeep(schemaFields),
     exampleObject(type, 'ingestion'),
     exampleObject(type, 'storage')
   ));
@@ -285,21 +329,22 @@ else {
     var existingSection = existing.match(
       new RegExp(getFieldSectionRegExp(field))
     );
-    if (existingSection && (existingSection[0].search('TODO') === -1)) {
-      return existingSection[0];
-    }
-    return hasSubtypes ?
+    var sectionBase = hasSubtypes ?
       sectionForField(field, generators[type].propTypes[commander.subType][field], generators[type].changeLog[commander.subType][field]) :
       sectionForField(field, generators[type].propTypes[field], generators[type].changeLog[field]);
+    if (existingSection && (existingSection[0].search('TODO') === -1)) {
+      sectionBase.push(existingSection[0]);
+      sectionBase.push('* * * * *\n');
+      return sectionBase;
+    }
+    sectionBase.push(util.format('<!-- start %s -->', field));
+    sectionBase.push('<!-- TODO -->');
+    sectionBase.push(util.format('<!-- end %s -->\n', field));
+    sectionBase.push('* * * * *\n');
+    return sectionBase;
   })));
   doc = doc.concat(['client', 'ingestion', 'storage'].map(function(format) {
     var header = formatHeader(format) + '\n';
-    var existingExample = existing.match(
-      new RegExp('###\\s+example\\s+\\(' + format + '\\)\\s+?```json[\\w\\W\\s]+?```\\n')
-    );
-    if (existingExample) {
-      return existingExample[0];
-    }
     return header + exampleJSON(type, format);
   }));
 }

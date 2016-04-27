@@ -44,6 +44,9 @@ module.bgValue = function(units, ingestion) {
 module.changeLog = {
   madeOptional: function(fieldName, schemaVersion) {
     return format('`_schemaVersion` %s: `%s` became **optional**.', schemaVersion, fieldName);
+  },
+  plannedImplementation: function(fieldName) {
+    return format('`_schemaVersion` ? (future): `%s` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `expectedDuration` as described.', fieldName);
   }
 };
 
@@ -141,6 +144,7 @@ module.generate = function(schema, utc, format) {
 };
 
 module.propTypes = {
+  ADDED_BY_JELLYFISH: '> This field is **optional**. At present, it is **only** added by the jellyfish data ingestion service.\n\n',
   bgUnits: function() {
     var ingestion = '[ingestion] One of two string values: `mg/dL` or `mmol/L`.\n\n';
     var elsewhere = '[storage, client] The string `mmol/L`.\n\n';
@@ -155,13 +159,18 @@ module.propTypes = {
   duration: function() {
     return '[ingestion, storage, client] An integer value representing a duration of time in milliseconds.';
   },
+  expectedDuration: function() {
+    return '[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.';
+  },
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);
   },
   oneOfStringOptions: function(desc, arr) {
     return desc + '\n\n' + 'Must be one of: `' + arr.join('`, `') + '`.';
   },
-  OPTIONAL: '> This field is **optional**.\n\n'
+  OPTIONAL: '> This field is **optional**.\n\n',
+  OPTIONAL_JELLYFISH_REQUIRED: '> This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.\n\n',
+  OPTIONAL_JELLYFISH_NONEXISTENT: '> This field is **optional** when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.\n\n'
 };
 
 function extractFromNested(schema, property) {

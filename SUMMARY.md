@@ -8,6 +8,8 @@
       * [scheduled](device-data/types/basal/scheduled.md)
       * [temp](device-data/types/basal/temp.md)
       * [suspend](device-data/types/basal/suspend.md)
+      * [the "previous" field](device-data/types/basal/previous.md)
+      * [the "suppressed" field](device-data/types/basal/suppressed.md)
     * [bloodKetone](device-data/types/bloodKetone.md)
     * [cbg](device-data/types/cbg.md)
     * [smbg](device-data/types/smbg.md)
