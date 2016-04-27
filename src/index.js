@@ -72,13 +72,6 @@ module.exports = {
   },
   upload: {
   },
-  urineKetone: {
-    generator: urineKetone.generate,
-    propTypes: urineKetone.propTypes,
-    changeLog: urineKetone.changeLog,
-    title: 'Urine Ketones',
-    type: 'urineKetone'
-  },
   wizard: {
   }
 };

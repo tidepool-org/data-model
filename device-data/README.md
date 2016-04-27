@@ -5,4 +5,3 @@ The page describing these [common fields](./common.md) that apply to all (or at 
 For a detailed explanation of how units for various values (but especially blood glucose) are treated upon ingestion and in storage, see the [units](./units.md) page.
 
 Otherwise, jump to [diabetes data types](./types/README.md).
- 

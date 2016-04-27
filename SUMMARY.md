@@ -13,4 +13,3 @@
     * [bloodKetone](device-data/types/bloodKetone.md)
     * [cbg](device-data/types/cbg.md)
     * [smbg](device-data/types/smbg.md)
-    * [urineKetone](device-data/types/urineKetone.md)

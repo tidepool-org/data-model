@@ -14,7 +14,7 @@
 
 [ingestion, storage, client] The string `bloodKetone`.
 
-Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool uses a separate data model for [urine ketones](urineKetone.md).
+Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool does not yet provide a data model for urine ketones, which are measured qualitatively, not quantitatively.
 
 <!-- end type -->
 
