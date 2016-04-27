@@ -24,7 +24,6 @@ var deviceEvent = require('./device-data/deviceEvent');
 var pumpSettings = require('./device-data/pumpSettings');
 var smbg = require('./device-data/smbg');
 var upload = require('./device-data/upload');
-var urineKetone = require('./device-data/urineKetone');
 var wizard = require('./device-data/wizard');
 
 module.exports = {
