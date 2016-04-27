@@ -1,0 +1,684 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>the &quot;previous&quot; field | data-model</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.7">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../../../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../../../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../../../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../../../device-data/types/basal/suppressed.html" />
+    
+    
+    <link rel="prev" href="../../../device-data/types/basal/suspend.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book"
+        data-level="1.3.1.4"
+        data-chapter-title="the &quot;previous&quot; field"
+        data-filepath="device-data/types/basal/previous.md"
+        data-basepath="../../.."
+        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../../../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="device-data/index.html">
+            
+                
+                    <a href="../../../device-data/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        diabetes device data
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="device-data/common.html">
+            
+                
+                    <a href="../../../device-data/common.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        common fields
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="device-data/units.html">
+            
+                
+                    <a href="../../../device-data/units.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        units
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="device-data/types/index.html">
+            
+                
+                    <a href="../../../device-data/types/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        types
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="device-data/types/basal/index.html">
+            
+                
+                    <a href="../../../device-data/types/basal/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.</b>
+                        
+                        basal
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="device-data/types/basal/scheduled.html">
+            
+                
+                    <a href="../../../device-data/types/basal/scheduled.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.1.</b>
+                        
+                        scheduled
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="device-data/types/basal/temp.html">
+            
+                
+                    <a href="../../../device-data/types/basal/temp.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.2.</b>
+                        
+                        temp
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="device-data/types/basal/suspend.html">
+            
+                
+                    <a href="../../../device-data/types/basal/suspend.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.3.</b>
+                        
+                        suspend
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.1.4" data-path="device-data/types/basal/previous.html">
+            
+                
+                    <a href="../../../device-data/types/basal/previous.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.4.</b>
+                        
+                        the &quot;previous&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="device-data/types/basal/suppressed.html">
+            
+                
+                    <a href="../../../device-data/types/basal/suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.5.</b>
+                        
+                        the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="device-data/types/bloodKetone.html">
+            
+                
+                    <a href="../../../device-data/types/bloodKetone.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.2.</b>
+                        
+                        bloodKetone
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="device-data/types/cbg.html">
+            
+                
+                    <a href="../../../device-data/types/cbg.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.3.</b>
+                        
+                        cbg
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="device-data/types/smbg.html">
+            
+                
+                    <a href="../../../device-data/types/smbg.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.4.</b>
+                        
+                        smbg
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../" >data-model</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="uploading-sequences-of-basal-events-via-jellyfishs-previous-field">Uploading sequences of <code>basal</code> events via jellyfish&apos;s <code>previous</code> field</h2>
+<p>The legacy jellyfish data ingestion API was designed for <em>real-time</em> ingestion of diabetes device data. This posed a problem for ingesting events like <code>basal</code> events that are <em>not</em> point-in-time but rather represent intervals of time. There are a couple of obvious solutions to this problem:</p>
+<ol>
+<li>At the start <code>time</code> of a <code>basal</code> event, upload the <code>basal</code> and include the expected <code>duration</code> but update it later if it turns out to be incorrect when the next <code>basal</code> event is ingested.</li>
+<li>At the start <code>time</code> of a <code>basal</code> event, upload the <code>basal</code>; when the next <code>basal</code> interval starts, upload it with a reference to the <em>first</em> basal. Keep including a reference to the previous basal on each <code>basal</code> event and use the actual sequence of <code>basal</code>s to determine the actual <code>duration</code> of each.</li>
+</ol>
+<p>Partly because insulin pumps tend to report <code>basal</code> events <em>without</em> durations&#x2014;most pumps simply report &quot;basal rate change&quot; events when the pump switches from delivering one rate to another&#x2014;the second strategy, which does not require the inclusion of a <code>duration</code> on each <code>basal</code> event, was chosen as the strategy implemented in jellyfish. For a deep dive into the details of how the legacy jellyfish ingestion API processed sequenced <code>basal</code> events with a <code>previous</code>, see the following section.</p>
+<p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), <code>previous</code> will no longer be an allowed field on <code>basal</code> events, and all <code>basal</code> events are expected to be uploaded with a <code>duration</code>. Essentially, we are now placing the burden on the client to process the sequence of raw basal (rate change) events coming from an insulin pump and determine the <code>duration</code> of each interval <code>basal</code> event prior to upload. Since the challenge of determining the <code>duration</code> for <code>basal</code> events has proven to be slightly different given each manufacturer&apos;s raw data model, we believe that it makes the most sense for determining the <code>duration</code> of <code>basal</code> events to fall within the uploading client&apos;s responsibilities.</p>
+<h4 id="uploading-sequences-of-scheduled-basal-rate-change-events">Uploading sequences of <code>scheduled</code> basal (rate change) events</h4>
+<p>We start with a basal with no previous:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.7</span>,
+  <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T12:00:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;4f90a365-647c-49e0-8ff5-365df35019cc&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T19:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>Then we submit another basal that includes the first as its <code>previous</code>:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">39600000</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.2</span>,
+  <span class="hljs-string">&quot;previous&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.7</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T12:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;4f90a365-647c-49e0-8ff5-365df35019cc&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T19:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+  },
+  <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T13:00:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f41d375f-b92a-4aef-807e-05963370b420&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T20:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>This will result in the jellyfish API storing the following to the Tidepool cloud:</p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.7</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T20:00:05.000Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T12:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;4f90a365-647c-49e0-8ff5-365df35019cc&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;fcjk8r9m8hrqaiskaa3oa7ol47tkfefe&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T19:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+  },
+  {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">39600000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.2</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T20:00:05.000Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T13:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f41d375f-b92a-4aef-807e-05963370b420&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;dshhn6ev3uc7gbbe6kq7aqlik8tvhjn7&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T20:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+  }
+]
+</code></pre>
+<p>The above case represents the normal and best-case scenario, but the jellyfish API was also designed to handle various cases in which not all of the data expectations are met.</p>
+<p><strong>Case 1</strong>: A sequence of <code>scheduled</code> basals with a skipped event.</p>
+<p>As before, we start with a basal with no previous:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.7</span>,
+  <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T12:00:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;4f90a365-647c-49e0-8ff5-365df35019cc&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T19:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>Then we submit another basal with a <code>previous</code> that is <em>not</em> the first <code>basal</code> we started with but rather an event that has <em>not</em> been uploaded between the first <code>basal</code> submitted and the current one:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">73800000</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.325</span>,
+  <span class="hljs-string">&quot;previous&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.4</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T15:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;247c5c1c-d392-48c4-8df2-b55748e873cf&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T22:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+  },
+  <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T16:00:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;41f708b3-34fb-4dc8-820c-e780c411a129&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T23:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>This will result in the jellyfish API storing the following to the Tidepool cloud:</p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.7</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T23:09:05.140Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T12:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;4f90a365-647c-49e0-8ff5-365df35019cc&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;fcjk8r9m8hrqaiskaa3oa7ol47tkfefe&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T19:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>,
+    <span class="hljs-string">&quot;annotations&quot;</span>: [
+      {
+        <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;basal/mismatched-series&quot;</span>,
+        <span class="hljs-string">&quot;nextId&quot;</span>: <span class="hljs-string">&quot;vppkt7da2u8tdokkt0jbrbvepllthrv2&quot;</span>
+      }
+    ]
+  },
+  {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">73800000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.325</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T23:09:05.172Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T16:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;41f708b3-34fb-4dc8-820c-e780c411a129&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;vppkt7da2u8tdokkt0jbrbvepllthrv2&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T23:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+  }
+]
+</code></pre>
+<p>Note that the jellyfish ingestion API does <strong>not</strong> store the <code>previous</code> with a <code>time</code> of <code>2016-04-25T22:00:00.000Z</code> since this reference did <em>not</em> match a <code>basal</code> event that had already been submitted and stored to the Tidepool cloud. In addition, the first <code>basal</code> submitted (i.e., the <code>basal</code> just prior to the gap in the sequence) is marked with an annotation with the code <code>basal/mismatched-series</code>.</p>
+<p><strong>Case 2</strong>: A <code>scheduled</code> that overlaps with a prior event in the basal stream.</p>
+<p>Once again we start by submitting a basal with no previous:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">4000000</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.9</span>,
+  <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T15:00:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f9122f02-3690-439e-8130-4cbda9a5a618&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T22:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>Then we submit another basal that includes the first as its <code>previous</code>, except that the <code>time</code> of the new <code>basal</code> occurs <em>before</em> the <code>time</code> that would be expected had the <code>duration</code> of the first basal event been fulfilled:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">77400000</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.875</span>,
+  <span class="hljs-string">&quot;previous&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">4000000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.9</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T15:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f9122f02-3690-439e-8130-4cbda9a5a618&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T22:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+  },
+  <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T16:00:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;38d9e8c6-943d-4e76-aede-25c4a6a7b4ba&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T23:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>This will result in the jellyfish API storing the following to the Tidepool cloud:</p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">4000000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.9</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T23:29:52.209Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T15:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f9122f02-3690-439e-8130-4cbda9a5a618&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;up6uvs31k0qte789jd24r7rf27fduuv8&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T22:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+  },
+  {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">77400000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.875</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T23:33:07.008Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-25T16:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;38d9e8c6-943d-4e76-aede-25c4a6a7b4ba&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;vppkt7da2u8tdokkt0jbrbvepllthrv2&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-25T23:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+  }
+]
+</code></pre>
+<p>Note that the <code>duration</code> on the initial basal event was updated to reflect the actual length of the interval during which that segment of the basal schedule ran. An <a href="scheduled.html#expectedduration"><code>expectedDuration</code></a> was also added by the jellyfish ingestion service to retain a record of the original <code>duration</code> that was stored before the first basal event was truncated by the second.</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../../../device-data/types/basal/suspend.html" class="navigation navigation-prev " aria-label="Previous page: suspend"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../../../device-data/types/basal/suppressed.html" class="navigation navigation-next " aria-label="Next page: the &quot;suppressed&quot; field"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../../../gitbook/app.js"></script>
+
+    
+    <script src="../../../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../../../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../../../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../../../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

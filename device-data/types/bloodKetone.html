@@ -40,7 +40,7 @@
     <link rel="next" href="../../device-data/types/cbg.html" />
     
     
-    <link rel="prev" href="../../device-data/types/basal/suspend.html" />
+    <link rel="prev" href="../../device-data/types/basal/suppressed.html" />
     
 
         
@@ -53,7 +53,7 @@
         data-chapter-title="bloodKetone"
         data-filepath="device-data/types/bloodKetone.md"
         data-basepath="../.."
-        data-revision="Thu Apr 21 2016 10:46:04 GMT-0700 (PDT)"
+        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -205,6 +205,36 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.1.4" data-path="device-data/types/basal/previous.html">
+            
+                
+                    <a href="../../device-data/types/basal/previous.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.4.</b>
+                        
+                        the &quot;previous&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="device-data/types/basal/suppressed.html">
+            
+                
+                    <a href="../../device-data/types/basal/suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.5.</b>
+                        
+                        the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
 
             </ul>
             
@@ -255,21 +285,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5" data-path="device-data/types/urineKetone.html">
-            
-                
-                    <a href="../../device-data/types/urineKetone.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.3.5.</b>
-                        
-                        urineKetone
-                    </a>
-            
-            
-        </li>
-    
 
             </ul>
             
@@ -315,15 +330,23 @@
                     
                         <h2 id="blood-ketones-bloodketone">Blood Ketones (bloodKetone)</h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
+<blockquote>
+<p>Jump to example JSON:</p>
+<ul>
+<li><a href="#example-client">client example</a></li>
+<li><a href="#example-ingestion">ingestion example</a></li>
+<li><a href="#example-storage">storage example</a></li>
+</ul>
+</blockquote>
 <h3 id="type">type</h3>
 <p>[ingestion, storage, client] The string <code>bloodKetone</code>.</p>
-<p>Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool uses a separate data model for <a href="urineKetone.html">urine ketones</a>.</p>
+<p>Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool does not yet provide a data model for urine ketones, which are measured qualitatively, not quantitatively.</p>
 <!-- end type -->
 <h3 id="units">units</h3>
 <p>[ingestion, storage, client] The string <code>mmol/L</code>.</p>
 <!-- end units -->
 <h3 id="value">value</h3>
-<p>[ingestion, storage, client] Blood ketone value in mmol/L (float, potentially unrounded), with appropriately matching <code>units</code> field.</p>
+<p>[ingestion, storage, client] Blood ketone value in mmol/L (float), with appropriately matching <code>units</code> field.</p>
 <!-- end value -->
 <h3 id="active">_active</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
@@ -415,7 +438,7 @@
         </div>
 
         
-        <a href="../../device-data/types/basal/suspend.html" class="navigation navigation-prev " aria-label="Previous page: suspend"><i class="fa fa-angle-left"></i></a>
+        <a href="../../device-data/types/basal/suppressed.html" class="navigation navigation-prev " aria-label="Previous page: the &quot;suppressed&quot; field"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../../device-data/types/cbg.html" class="navigation navigation-next " aria-label="Next page: cbg"><i class="fa fa-angle-right"></i></a>

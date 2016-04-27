@@ -53,7 +53,7 @@
         data-chapter-title="temp"
         data-filepath="device-data/types/basal/temp.md"
         data-basepath="../../.."
-        data-revision="Thu Apr 21 2016 10:46:04 GMT-0700 (PDT)"
+        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -205,6 +205,36 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.1.4" data-path="device-data/types/basal/previous.html">
+            
+                
+                    <a href="../../../device-data/types/basal/previous.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.4.</b>
+                        
+                        the &quot;previous&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="device-data/types/basal/suppressed.html">
+            
+                
+                    <a href="../../../device-data/types/basal/suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.5.</b>
+                        
+                        the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
 
             </ul>
             
@@ -250,21 +280,6 @@
                             <b>1.3.4.</b>
                         
                         smbg
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="device-data/types/urineKetone.html">
-            
-                
-                    <a href="../../../device-data/types/urineKetone.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.3.5.</b>
-                        
-                        urineKetone
                     </a>
             
             
@@ -325,90 +340,192 @@
 </blockquote>
 <h3 id="type">type</h3>
 <p>[ingestion, storage, client] The string <code>basal</code>.</p>
-<!-- TODO -->
+<!-- start type -->
+<p>This is the sub-type of <code>basal</code> event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates <em>both</em> by percentage and by manual specification at the user&apos;s choice; other insulin pumps only expose one of these interfaces.</p>
+<p><strong>Field co-occurrence requirements</strong>: Note that when ingesting through the legacy jellyfish ingestion API, at least one of <code>percent</code> or <code>rate</code> must be provided on a <code>temp</code> basal. While each of these fields is marked as <em>optional</em>, one or the other <strong>must</strong> be present.</p>
+<p>In contrast, under the new platform APIs, <code>rate</code> is always <em>required</em>.</p>
 <!-- end type -->
+<hr>
 <h3 id="deliverytype">deliveryType</h3>
 <p>[ingestion, storage, client] The string <code>temp</code>.</p>
-<!-- TODO -->
+<!-- start deliveryType -->
 <!-- end deliveryType -->
+<hr>
 <h3 id="duration">duration</h3>
 <p>[ingestion, storage, client] An integer value representing a duration of time in milliseconds.</p>
-<!-- TODO -->
+<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0 and &lt;= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.</p>
+<!-- start duration -->
+<p>Unlike on <a href="scheduled.html"><code>scheduled</code></a> basals, both the legacy jellyfish ingestion API and the new platform APIs <em>require</em> a <code>duration</code> on every <code>temp</code> basal since an insulin pump user is always required to program a duration for a temporary basal rate interval along with the desired temporary rate (or percentage of active rate) itself.</p>
 <!-- end duration -->
+<hr>
+<h3 id="expectedduration">expectedDuration</h3>
+<blockquote>
+<p>This field is <strong>optional</strong>. At present, it is <strong>only</strong> added by the jellyfish data ingestion service.</p>
+</blockquote>
+<p>[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the <code>duration</code> field on ingestion when a following event has resulted in truncation of the original programmed duration.</p>
+<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0 and &lt;= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.</p>
+<h4 id="changelog-for-expectedduration">Changelog for <code>expectedDuration</code></h4>
+<p><code>_schemaVersion</code> ? (future): <code>expectedDuration</code> is implemented as described in this documentation. If the <code>_schemaVersion</code> listed here is &quot;? (future),&quot; all data up to and including the current <code>_schemaVersion</code> has <strong>not</strong> implemented <code>expectedDuration</code> as described.</p>
+<!-- start expectedDuration -->
+<p>On a basal ingested through the legacy jellyfish ingestion service, <code>expectedDuration</code> should <em>never</em> be included on a <code>temp</code> basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original <code>temp</code> basal; most commonly this new event is a <code>scheduled</code> (user chose to cancel the temporary rate) or a <code>suspend</code>. See the examples in <a href="previous.html"><code>previous</code></a>.</p>
+<p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the <code>expectedDuration</code> where available and relevant, but it will never be a required field. Many insulin pumps provide information on the original programmed duration of a <code>temp</code> basal in the raw data and/or provide the programmed &quot;time left&quot; when a <code>temp</code> basal is canceled. Where this is true, the uploading client is expected to provide the <code>expectedDuration</code> in addition to the actual <code>duration</code> (if these two values differ) for a <code>temp</code> basal event.</p>
+<!-- end expectedDuration -->
+<hr>
 <h3 id="percent">percent</h3>
+<blockquote>
+<p>This field is <strong>optional</strong>.</p>
+</blockquote>
 <p>[ingestion, storage, client] A floating point number &gt;= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.</p>
-<!-- TODO -->
+<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0.0 and &lt;= 10.0.</p>
+<!-- start percent -->
+<p>Different insulin pump manufacturers expose different interfaces for setting temporary basal rates by percentage&#x2014;some express the change in terms of a positive or negative percentage <em>from</em> the current active rate, and some express the change in terms of an absolute percentage <em>of</em> the current active rate. For example, if the current active scheduled basal rate is 0.5 units per hour, a pump that represents the change as positive or negative from the current rate would implement a rate of 0.25 when the user programs a -50% temp basal and a rate of 0.75 when the user programs a +50% temp basal. On the other hand, a pump that represent the change as an absolute percentage of the current rate would require the user to input 50% to yield the 0.25 units per hour temporary rate and 150% to yield the 0.75 temporary rate.</p>
+<p>For the Tidepool data model, we have standardized on a floating point representation of the second strategy. For us, the value 0.0 represents a temp basal at 0% of the current active rate, 0.5 at 50% of the current active rate (0.25 units per hour, in the example), 1.0 at a trivial 100% of current active rate (0.5 units per hour), 1.5 at 150% of the current active rate (0.75 units per hour), and so on. The upper limit of 10.0 (representing 1000% percent of the current active rate) was chosen arbitrarily as a common-sense upper bound; at least some pumps set their upper bound for temp basal rate increases much lower than this, for example at &lt; 200% of the current active rate.</p>
 <!-- end percent -->
+<hr>
+<h3 id="previous">previous</h3>
+<blockquote>
+<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.</p>
+</blockquote>
+<p>[ingestion] An object representing the <code>basal</code> event just prior to this event or, equivalently, just the <code>id</code> of said object.</p>
+<p>[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.</p>
+<!-- start previous -->
+<p>See <a href="previous.html"><code>previous</code></a> for detailed documentation on this deprecated field.</p>
+<!-- end previous -->
+<hr>
 <h3 id="rate">rate</h3>
+<blockquote>
+<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
+</blockquote>
 <p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
-<!-- TODO -->
+<p><strong>Range</strong>: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.</p>
+<!-- start rate -->
+<p>See <a href="scheduled.html#rate"><code>rate</code></a> on the <code>scheduled</code> basals documentation for discussion of significant digits and rounding on basal rate values.</p>
+<p>Also note that when ingesting data through the legacy jellyfish ingestion API, providing a <code>rate</code> is optional <em>as long as a <code>percent</code> and <a href="#suppressed"><code>suppressed</code></a> with its own <code>rate</code> are also provided</em>. In the new platform APIs, we are shifting the burden of calculating the <code>rate</code> of a percentage-programmed temp basal to the uploading client. (Most, if not all, insulin pump manufacturers provide the <code>rate</code> directly in their raw data models anyway.)</p>
 <!-- end rate -->
+<hr>
 <h3 id="suppressed">suppressed</h3>
 <blockquote>
 <p>This field is <strong>optional</strong>.</p>
 </blockquote>
 <p>[ingestion, storage, client] An object representing another <code>basal</code> event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.</p>
-<!-- TODO -->
+<!-- start suppressed -->
+<p>Depending on the data protocol, it is not always possible to keep track of what basal rate would have been in effect had a <code>temp</code> basal not been programmed by the user, but where this information is available, it should be provided in as much detail as possible as an embedded <code>basal</code> object as the value for the <code>suppressed</code> key on a <code>temp</code> basal.</p>
+<p>This object need only contain the bare minimum of information:</p>
+<ul>
+<li>a <code>type</code> of <code>basal</code></li>
+<li>a <code>deliveryType</code>, usually <code>scheduled</code></li>
+<li>the <code>scheduleName</code> if relevant and available (see <a href="scheduled.html#schedulename"><code>scheduleName</code></a> for more details)</li>
+<li>the suppressed <a href="scheduled.html#rate"><code>rate</code></a> if relevant and available</li>
+</ul>
+<p>In particular, note that <em>no time-related fields such as <code>time</code>, <code>deviceTime</code>, or <code>duration</code> are expected to appear on a <code>suppressed</code> embedded basal rate event</em>. By definition, any values for time-related fields are identical to the parent <code>temp</code> basal object, and so it is redundant to include them.</p>
 <!-- end suppressed -->
-<h3 id="active">_active</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="groupid">_groupId</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="schemaversion">_schemaVersion</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="version">_version</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
+<hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+<hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="createdtime">createdTime</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
+<hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+<hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
+<hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="id">id</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
+<hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
+<hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+<hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="previous">previous</h3>
-<p>[ingestion] An object representing the <code>basal</code> event just prior to this event.</p>
-<p>[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.</p>
+<!-- start uploadId -->
 <!-- TODO -->
-<!-- end previous -->
+<!-- end uploadId -->
+<hr>
+<h3 id="active">_active</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+<hr>
+<h3 id="groupid">_groupId</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
+<hr>
+<h3 id="schemaversion">_schemaVersion</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+<hr>
+<h3 id="version">_version</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
+<hr>
+<h3 id="createdtime">createdTime</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+<hr>
+<h3 id="id">id</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
+<hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">1800000</span>,
-    <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.3</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.585</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">52200000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">62640000</span>,
+    <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.95</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.95</span>,
     <span class="hljs-string">&quot;suppressed&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
         <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
         <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Very Active&quot;</span>,
-        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.95</span>
+        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1</span>
     },
-    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
-    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:05.000Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-13T22:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;1a850cb9-f997-4487-b6b0-2ceee0fb5598&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;46b29d8dcb0c465d94d3b2fb2b29a4d6&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:00.000Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;295a6b6f-dcdd-405f-8de4-c23037f895d4&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;ee6e431aaeed4c5cab7965ef0b3e3240&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
@@ -416,28 +533,38 @@
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">34200000</span>,
-    <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.65</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.5525</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">21600000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">25920000</span>,
+    <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.8</span>,
+    <span class="hljs-string">&quot;previous&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+        <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+        <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.375</span>,
+        <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+        <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+        <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T10:00:00&quot;</span>,
+        <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;4368b23a-07da-4fbf-87a6-fe48b26520f6&quot;</span>,
+        <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T17:00:00.000Z&quot;</span>,
+        <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+        <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+    },
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.45999999999999996</span>,
     <span class="hljs-string">&quot;suppressed&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
         <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-        <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
-        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.85</span>
+        <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.575</span>
     },
-    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
-    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:05.000Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-13T22:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;453e13d1-97e0-47a5-8f31-328bd80d07ca&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;454976a41ce54a4390e1a55a8d1f362e&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:00.000Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;d63814d5-31d0-4593-b5a3-fd897223baf4&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
@@ -445,14 +572,15 @@
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">36000000</span>,
-    <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.25</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.00625</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">4320000</span>,
+    <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.175</span>,
     <span class="hljs-string">&quot;suppressed&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
         <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-        <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekday&quot;</span>,
-        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.025</span>
+        <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.175</span>
     },
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
@@ -460,13 +588,13 @@
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:05.000Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:05.000Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-13T22:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;3f88fcc1-7ccf-4283-b726-382c1a46da6d&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;8176ee2174524ffbad54e4db381f99d3&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:00.000Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;9059717d-3cab-4667-a11a-87d7d8e88e10&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;730fdceccef3480482d0505e87ffc77e&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>

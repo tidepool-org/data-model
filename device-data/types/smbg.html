@@ -37,8 +37,6 @@
         
     
     
-    <link rel="next" href="../../device-data/types/urineKetone.html" />
-    
     
     <link rel="prev" href="../../device-data/types/cbg.html" />
     
@@ -53,7 +51,7 @@
         data-chapter-title="smbg"
         data-filepath="device-data/types/smbg.md"
         data-basepath="../.."
-        data-revision="Thu Apr 21 2016 10:46:04 GMT-0700 (PDT)"
+        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -205,6 +203,36 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.1.4" data-path="device-data/types/basal/previous.html">
+            
+                
+                    <a href="../../device-data/types/basal/previous.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.4.</b>
+                        
+                        the &quot;previous&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="device-data/types/basal/suppressed.html">
+            
+                
+                    <a href="../../device-data/types/basal/suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.5.</b>
+                        
+                        the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
 
             </ul>
             
@@ -255,21 +283,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5" data-path="device-data/types/urineKetone.html">
-            
-                
-                    <a href="../../device-data/types/urineKetone.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.3.5.</b>
-                        
-                        urineKetone
-                    </a>
-            
-            
-        </li>
-    
 
             </ul>
             
@@ -315,6 +328,14 @@
                     
                         <h2 id="selfmonitored-blood-glucose-smbg">Self-Monitored Blood Glucose (smbg)</h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
+<blockquote>
+<p>Jump to example JSON:</p>
+<ul>
+<li><a href="#example-client">client example</a></li>
+<li><a href="#example-ingestion">ingestion example</a></li>
+<li><a href="#example-storage">storage example</a></li>
+</ul>
+</blockquote>
 <h3 id="type">type</h3>
 <p>[ingestion, storage, client] The string <code>smbg</code>.</p>
 <p>This is the Tidepool data type for traditional fingerstick blood glucose meter data. <code>smbg</code> is an abbreviation of &apos;self-monitored blood glucose&apos; and contrasts with <code>cbg</code>, abbreviating &apos;continuous blood glucose&apos;. <a href="cbg.html"><code>cbg</code></a> is the Tidepool data type for continuous glucose monitor (CGM) sensor data.</p>
@@ -324,7 +345,7 @@
 <p>This field is <strong>optional</strong>.</p>
 </blockquote>
 <p>[ingestion, storage, client] String value encoding additional information about the source of the blood glucose value.</p>
-<p>Must be one of: <code>manual</code>, <code>linked</code>.</p>
+<p>If present, must be one of: <code>manual</code>, <code>linked</code>.</p>
 <p><code>subType</code> appears on blood glucose values that are <em>not</em> being read directly from a traditional fingerstick blood glucose meter, but rather from another data source such as an insulin pump.</p>
 <p>The value <code>manual</code> indicates that the blood glucose value was manually entered by a user (and is thus, of course, subject to human error).</p>
 <p>The value <code>linked</code> indicates that the blood glucose value was transferred from a blood glucose meter to the pump directly via some sort of data transfer or pairing mechanism. If the blood glucose meter in question is also supported by the Tidepool uploader, duplicate records may exist: both read directly from the meter and pulled in as <code>subType: &apos;linked&apos;</code> records from the insulin pump.</p>
@@ -433,10 +454,8 @@
         </div>
 
         
-        <a href="../../device-data/types/cbg.html" class="navigation navigation-prev " aria-label="Previous page: cbg"><i class="fa fa-angle-left"></i></a>
+        <a href="../../device-data/types/cbg.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: cbg"><i class="fa fa-angle-left"></i></a>
         
-        
-        <a href="../../device-data/types/urineKetone.html" class="navigation navigation-next " aria-label="Next page: urineKetone"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

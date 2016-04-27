@@ -53,7 +53,7 @@
         data-chapter-title="scheduled"
         data-filepath="device-data/types/basal/scheduled.md"
         data-basepath="../../.."
-        data-revision="Thu Apr 21 2016 10:46:04 GMT-0700 (PDT)"
+        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -205,6 +205,36 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.1.4" data-path="device-data/types/basal/previous.html">
+            
+                
+                    <a href="../../../device-data/types/basal/previous.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.4.</b>
+                        
+                        the &quot;previous&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="device-data/types/basal/suppressed.html">
+            
+                
+                    <a href="../../../device-data/types/basal/suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.5.</b>
+                        
+                        the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
 
             </ul>
             
@@ -250,21 +280,6 @@
                             <b>1.3.4.</b>
                         
                         smbg
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="device-data/types/urineKetone.html">
-            
-                
-                    <a href="../../../device-data/types/urineKetone.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.3.5.</b>
-                        
-                        urineKetone
                     </a>
             
             
@@ -325,80 +340,170 @@
 </blockquote>
 <h3 id="type">type</h3>
 <p>[ingestion, storage, client] The string <code>basal</code>.</p>
-<!-- TODO -->
+<!-- start type -->
+<p>This is the sub-type of <code>basal</code> event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).</p>
 <!-- end type -->
+<hr>
 <h3 id="deliverytype">deliveryType</h3>
 <p>[ingestion, storage, client] The string <code>scheduled</code>.</p>
-<!-- TODO -->
+<!-- start deliveryType -->
 <!-- end deliveryType -->
+<hr>
 <h3 id="duration">duration</h3>
+<blockquote>
+<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
+</blockquote>
+<p>[ingestion, storage, client] An integer value representing a duration of time in milliseconds.</p>
+<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0 and &lt;= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.</p>
+<!-- start duration -->
+<p>When ingesting through the legacy jellyfish ingestion service, <code>duration</code> is optional because jellyfish also uses the <em>sequence</em> of basal events to determine their durations - see <a href="previous.html"><code>previous</code></a> for details.</p>
+<p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the <code>duration</code> field will be required on all <code>basal</code>s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of <code>basal</code>s based on the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).</p>
+<p>Note that for some insulin pumps, even for a scheduled basal <em>not</em> interrupted by another event like a <code>suspend</code> or <code>temp</code>, the <code>duration</code> may not be the nice round numbers of milliseconds that might be expected given the schedule in the <code>pumpSettings</code>&#x2014;e.g., 3600000 for a <code>basal</code> event lasting an hour. This is because of how some pumps schedule the small pulses of insulin delivery fulfilling the scheduled <code>rate</code>; depending on how the pulses are scheduled, the actual duration of the <code>basal</code> may be a bit over or under the scheduled <code>duration</code>.</p>
+<!-- end duration -->
+<hr>
+<h3 id="expectedduration">expectedDuration</h3>
+<blockquote>
+<p>This field is <strong>optional</strong>. At present, it is <strong>only</strong> added by the jellyfish data ingestion service.</p>
+</blockquote>
+<p>[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the <code>duration</code> field on ingestion when a following event has resulted in truncation of the original programmed duration.</p>
+<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0 and &lt;= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.</p>
+<!-- start expectedDuration -->
+<p>On a scheduled basal ingested through the legacy jellyfish ingestion service, <code>expectedDuration</code> should <em>never</em> be included on a <code>scheduled</code> basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original <code>scheduled</code> basal; most commonly this new event is a <code>temp</code> or <code>suspend</code>, but it could be a <code>scheduled</code> if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples in <a href="previous.html"><code>previous</code></a>.</p>
+<p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the <code>expectedDuration</code> where available and relevant, but it will never be a required field. Because of how burdensome (or impossible) it is to calculate <code>expectedDuration</code> for <code>scheduled</code> basals, we do <strong>not</strong> expect the uploading client to calculate it, except in cases where the source data makes it easy to include.</p>
+<!-- end expectedDuration -->
+<hr>
+<h3 id="rate">rate</h3>
+<p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
+<p><strong>Range</strong>: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.</p>
+<!-- start rate -->
+<p>Different insulin pump manufacturers offer the ability to program basal rates with different levels of precision in terms of significant digits on the <code>rate</code>. We endeavor to represent each <code>rate</code> as accurately as possible for each insulin pump; occasionally when values are stored to a falsely large number of floating point digits this means rounding the raw <code>rate</code> value found in a record from a pump in order to match the significant digits of precision advertised by the manufacturer. It is the burden of the uploading client to handle this rounding since the number of significant digits for <code>rate</code>s varies according to the pump manufacturer.</p>
+<!-- end rate -->
+<hr>
+<h3 id="previous">previous</h3>
+<blockquote>
+<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.</p>
+</blockquote>
+<p>[ingestion] An object representing the <code>basal</code> event just prior to this event or, equivalently, just the <code>id</code> of said object.</p>
+<p>[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.</p>
+<!-- start previous -->
+<p>See <a href="previous.html"><code>previous</code></a> for detailed documentation on this deprecated field.</p>
+<!-- end previous -->
+<hr>
+<h3 id="schedulename">scheduleName</h3>
 <blockquote>
 <p>This field is <strong>optional</strong>.</p>
 </blockquote>
-<p>[ingestion, storage, client] An integer value representing a duration of time in milliseconds.</p>
-<!-- TODO -->
-<!-- end duration -->
-<h3 id="rate">rate</h3>
-<p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
-<!-- TODO -->
-<!-- end rate -->
-<h3 id="schedulename">scheduleName</h3>
 <p>[ingestion, storage, client] A string: the name of the basal schedule.</p>
-<!-- TODO -->
+<h4 id="changelog-for-schedulename">Changelog for <code>scheduleName</code></h4>
+<p><code>_schemaVersion</code> 2: <code>scheduleName</code> became <strong>optional</strong>.</p>
+<!-- start scheduleName -->
+<!-- DRAFT: discuss with @jhbate -->
+<p>Note that <code>.</code> and <code>$</code> are illegal characters in object keys for MongoDB&apos;s serialized JSON (BSON). These characters can, however, appear in basal schedule names for some insulin pump manufacturers. At present, we are dealing with this in at least one client-side &quot;driver&quot; for retrieving and processing insulin pump data prior to upload<sup><a href="#fn_a" id="reffn_a">a</a></sup>, but we may decide to deal with this on the server side as part of our validation step in the new platform APIs.</p>
+<p>In an ideal world, we at Tidepool would love to be able to surface to any user of <code>basal</code> data the name of the schedule that generated a particular <code>scheduled</code> basal event. Unfortunately, most of the manufacturers of insulin pumps do <em>not</em> provide the name of the basal schedule on each basal rate change event reported when the pump switches from one segment of a basal schedule to the next (or switches from a suspended state or temporary basal rate back to the active schedule).</p>
+<p>For some manufacturers, we are able to build a complete history of the pump&apos;s settings, and thus we are able to infer the active schedule name by looking up the active pump settings at the time of a particular <code>basal</code> event. However, again due to how some manufacturers do (or <em>do not</em>) record pump settings changes, we are not always able to build this complete history, and so this lookup strategy is also in many cases not possible.</p>
+<p>Prior to <code>_schemaVersion</code> 2, the <code>scheduleName</code> was <em>required</em> by the jellyfish data ingestion service, and as a result for some of the manufacturers we were providing the name of the currently active (as of time of upload) basal schedule, which is only correct for the final <code>basal</code> event in any upload. Thus, the <code>scheduleName</code> field should <strong>not</strong> be used for any computation of statistics or surfaced to the user for any <code>_schemaVersion</code> 1 data.</p>
+<p>Going forward, now that <code>scheduleName</code> is an optional field, it should only be added to <code>basal</code> data when it is directly available in the raw data from an insulin pump or can be inferred with high confidence via lookup against a complete pump settings history.</p>
 <!-- end scheduleName -->
-<h3 id="active">_active</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="groupid">_groupId</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="schemaversion">_schemaVersion</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="version">_version</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
+<hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+<hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="createdtime">createdTime</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
+<hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+<hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
+<hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="id">id</h3>
-<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
+<hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
+<hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+<hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<h3 id="previous">previous</h3>
-<p>[ingestion] An object representing the <code>basal</code> event just prior to this event.</p>
-<p>[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.</p>
+<!-- start uploadId -->
 <!-- TODO -->
-<!-- end previous -->
+<!-- end uploadId -->
+<hr>
+<h3 id="active">_active</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+<hr>
+<h3 id="groupid">_groupId</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
+<hr>
+<h3 id="schemaversion">_schemaVersion</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+<hr>
+<h3 id="version">_version</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
+<hr>
+<h3 id="createdtime">createdTime</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+<hr>
+<h3 id="id">id</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
+<hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">55800000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.3</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">50400000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.575</span>,
     <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
-    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
-    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:05.000Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-13T22:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;acf54a1e-b8cc-4e30-8d02-00f8d19a7705&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;e1103d589ed3435b93b55d066a86ca4d&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:00.000Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f0716dc8-d287-483a-93c0-d67c17975bfd&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;2445e7a1a4744f3cbe5accd9940048b5&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
@@ -406,22 +511,31 @@
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">59400000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.95</span>,
-    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
-    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
-    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">27000000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.175</span>,
+    <span class="hljs-string">&quot;previous&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+        <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+        <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.1</span>,
+        <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+        <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+        <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T10:00:00&quot;</span>,
+        <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;c49e58f0-283c-4d00-bcbf-366950e2ea7f&quot;</span>,
+        <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T17:00:00.000Z&quot;</span>,
+        <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+        <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+    },
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:05.000Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-13T22:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;1fd42248-c2f1-4bc8-bac0-17ec2a00b70d&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;aa1d2b35d2ca4e169d6031c20e7dbb31&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:00.000Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;283550cf-b9ba-48c6-8d13-9442c1ad1c14&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
@@ -429,25 +543,28 @@
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">50400000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.8</span>,
-    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">36000000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.65</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekday&quot;</span>,
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
     <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:05.000Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:05.000Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-12-13T22:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;20e7431c-a1e6-417c-a9aa-424b2a7795f4&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;5be070148b784212921f1503e2562703&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-12-14T06:00:00.000Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;059003b6-fc41-4a96-bbe9-b0b07ecff4ea&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;8a0eb8d7357b469583158acc14f8d614&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
+<blockquote id="fn_a">
+<sup>a</sup>. See, for example, <a href="https://github.com/tidepool-org/chrome-uploader/pull/95/commits/2c2bcf2db3e609c703a65967399784dcd47e49af" title="GitHub: chrome-uploader" target="_blank">this chrome-uploader commit</a>.<a href="#reffn_a" title="Jump back to footnote [a] in the text."> &#x21A9;</a>
+</blockquote>
 
                     
                     </section>

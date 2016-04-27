@@ -53,7 +53,7 @@
         data-chapter-title="common fields"
         data-filepath="device-data/common.md"
         data-basepath=".."
-        data-revision="Thu Apr 21 2016 10:46:04 GMT-0700 (PDT)"
+        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -205,6 +205,36 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.1.4" data-path="device-data/types/basal/previous.html">
+            
+                
+                    <a href="../device-data/types/basal/previous.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.4.</b>
+                        
+                        the &quot;previous&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="device-data/types/basal/suppressed.html">
+            
+                
+                    <a href="../device-data/types/basal/suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.1.5.</b>
+                        
+                        the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
 
             </ul>
             
@@ -250,21 +280,6 @@
                             <b>1.3.4.</b>
                         
                         smbg
-                    </a>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="device-data/types/urineKetone.html">
-            
-                
-                    <a href="../device-data/types/urineKetone.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.3.5.</b>
-                        
-                        urineKetone
                     </a>
             
             
@@ -329,7 +344,6 @@
 <li><a href="#id">id</a></li>
 <li><a href="#time">time</a></li>
 <li><a href="#timezoneoffset">timezoneOffset</a></li>
-<li><a href="#units">units</a></li>
 <li><a href="#uploadid">uploadId</a></li>
 </ul>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
@@ -404,11 +418,6 @@
 <li><code>60</code> (timezone offset for British Summer Time)</li>
 </ul>
 <!-- end timezoneOffset -->
-<h3 id="units">units</h3>
-<p>[ingestion, storage, client] Either a string or an object. Added to some events during data processing in the Tidepool uploader Chrome application.</p>
-<p>Most often a string value, either <code>mg/dL</code> or <code>mmol/L</code> and encoding the units of any blood glucose or blood glucose-related values on an object.</p>
-<p>On a <code>pumpSettings</code> object, <code>units</code> is itself an object with two properties: <code>bg</code> and <code>carb</code>. See <a href="types/pumpSettings.md">pump settings</a> for further details.</p>
-<!-- end units -->
 <h3 id="uploadid">uploadId</h3>
 <p>[ingestion, storage, client] A string ID. Added to each event during data processing in the Tidepool uploader Chrome application.</p>
 <p>An upload identifier; this field should be the <code>uploadId</code> of the corresponding <a href="types/upload.md">upload</a> record. At present, <code>uploadId</code>s are generated in Tidepool&apos;s <a href="https://github.com/tidepool-org/chrome-uploader" target="_blank">uploader Chrome application</a> as a hash of various pieces of upload session metadata. See <a href="https://github.com/tidepool-org/chrome-uploader/blob/master/lib/core/api.js" target="_blank"><code>lib/core/api.js</code></a> for the implementation.</p>

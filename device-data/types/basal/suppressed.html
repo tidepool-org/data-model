@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>basal | data-model</title>
+        <title>the &quot;suppressed&quot; field | data-model</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="../../../device-data/types/basal/scheduled.html" />
+    <link rel="next" href="../../../device-data/types/bloodKetone.html" />
     
     
-    <link rel="prev" href="../../../device-data/types/index.html" />
+    <link rel="prev" href="../../../device-data/types/basal/previous.html" />
     
 
         
@@ -49,9 +49,9 @@
         
         
     <div class="book"
-        data-level="1.3.1"
-        data-chapter-title="basal"
-        data-filepath="device-data/types/basal/README.md"
+        data-level="1.3.1.5"
+        data-chapter-title="the &quot;suppressed&quot; field"
+        data-filepath="device-data/types/basal/suppressed.md"
         data-basepath="../../.."
         data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
         data-innerlanguage="">
@@ -144,7 +144,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="device-data/types/basal/index.html">
+        <li class="chapter " data-level="1.3.1" data-path="device-data/types/basal/index.html">
             
                 
                     <a href="../../../device-data/types/basal/index.html">
@@ -220,7 +220,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.1.5" data-path="device-data/types/basal/suppressed.html">
+        <li class="chapter active" data-level="1.3.1.5" data-path="device-data/types/basal/suppressed.html">
             
                 
                     <a href="../../../device-data/types/basal/suppressed.html">
@@ -328,16 +328,7 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="basal-insulin">Basal Insulin</h2>
-<p>This is the Tidepool data type for background insulin dosing&#x2014;the &quot;constant drip&quot; of background insulin programmable in all insulin pumps and providing a replacement for a daily injection of long-acting insulin such as Lantus or Levemir. Different insulin pump manufacturers use different terminology for this insulin dosing, although all provide a similar interface for programming the set(s) of rates (in units of insulin per hour) to be delivered at different times of each day. We have standardized on calling one set of such rates covering a twenty-four hour period a basal &quot;schedule.&quot;</p>
-<p>The data model for the basal schedule(s) is part of the Tidepool <a href="../pumpSettings/README.md"><code>pumpSettings</code></a> type. In contrast, the <code>basal</code> data type described in the following three documents represents each actual interval of basal insulin delivery, whether that matches the active programmed basal schedule or not. In brief summary&#x2014;and ignoring for the moment some differences that are explained in detail in the linked three documents for the <code>scheduled</code>, <code>temp</code>, and <code>suspend</code> delivery sub-types&#x2014;each <code>basal</code> event contains a <code>time</code> field representing the start of the delivery of the <code>rate</code> (in units of insulin per hour). The <code>duration</code> encodes the length of time (in milliseconds) that this <code>rate</code> was delivered in actuality (and it may or may not match the duration encoded in the basal schedule, depending on other pump events like global suspensions of insulin delivery or temporary basal rates). In order to calculate the total insulin delivery resulting from a particular <code>basal</code> event, all that is needed is conversion of the <code>duration</code> from milliseconds to hours and multiplication of the result by the <code>rate</code>.</p>
-<p>Each of the three <code>deliveryType</code>s that fall under the larger <code>basal</code> type are documented in the following pages:
-<!-- end intro --></p>
-<ul>
-<li><a href="scheduled.html">scheduled</a></li>
-<li><a href="temp.html">temp</a></li>
-<li><a href="suspend.html">suspend</a></li>
-</ul>
+                        <p>TODO: doc w/examples showing how <code>suppressed</code> works when a <code>temp</code> or <code>suspend</code> basal crosses &gt; 1 segment of a basal schedule.</p>
 
                     
                     </section>
@@ -348,10 +339,10 @@
         </div>
 
         
-        <a href="../../../device-data/types/index.html" class="navigation navigation-prev " aria-label="Previous page: types"><i class="fa fa-angle-left"></i></a>
+        <a href="../../../device-data/types/basal/previous.html" class="navigation navigation-prev " aria-label="Previous page: the &quot;previous&quot; field"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../../device-data/types/basal/scheduled.html" class="navigation navigation-next " aria-label="Next page: scheduled"><i class="fa fa-angle-right"></i></a>
+        <a href="../../../device-data/types/bloodKetone.html" class="navigation navigation-next " aria-label="Next page: bloodKetone"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
