@@ -117,7 +117,12 @@ var schemas = {
     },
     duration: {
       instance: common.duration,
-      description: common.propTypes.duration() + DURATION_LIMIT_TEMP
+      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration() + DURATION_LIMIT_TEMP
+    },
+    expectedDuration: {
+      instance: 0,
+      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration() + DURATION_LIMIT_TEMP,
+      changelog: [common.changeLog.plannedImplementation('expectedDuration')]
     },
     previous: {
       instance: {},

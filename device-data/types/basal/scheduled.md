@@ -42,7 +42,7 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 
 <!-- start duration -->
 
-When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](#previous) below for details.
+When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](./previous.md) for details.
 
 In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the `duration` field will be required on all `basal`s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of `basal`s based on the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).
 
@@ -54,7 +54,7 @@ Note that for some insulin pumps, even for a scheduled basal *not* interrupted b
 
 ### expectedDuration
 
-> This field is **optional**. It is **only** added by the jellyfish data ingestion service.
+> This field is **optional**. At present, it is **only** added by the jellyfish data ingestion service.
 
 [storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
 

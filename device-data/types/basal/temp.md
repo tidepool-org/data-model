@@ -52,7 +52,7 @@ Unlike on [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingest
 
 ### expectedDuration
 
-> This field is **optional**. It is **only** added by the jellyfish data ingestion service.
+> This field is **optional**. At present, it is **only** added by the jellyfish data ingestion service.
 
 [storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
 

@@ -144,7 +144,7 @@ module.generate = function(schema, utc, format) {
 };
 
 module.propTypes = {
-  ADDED_BY_JELLYFISH: '> This field is **optional**. It is **only** added by the jellyfish data ingestion service.\n\n',
+  ADDED_BY_JELLYFISH: '> This field is **optional**. At present, it is **only** added by the jellyfish data ingestion service.\n\n',
   bgUnits: function() {
     var ingestion = '[ingestion] One of two string values: `mg/dL` or `mmol/L`.\n\n';
     var elsewhere = '[storage, client] The string `mmol/L`.\n\n';
