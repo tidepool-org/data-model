@@ -21,6 +21,8 @@ Jump to...
 
 ### _active
 
+<!-- start _active -->
+
 [storage] A Boolean value. Added to each event by the ingestion API prior to storage.
 
 A flag that enables 'tombstoning' of events. Any data with `_active: false` does *not* get returned from the API(s) that serve data to client applications. Hence, this flag strategy allows for effective deletion of data while maintaining an audit trail.
@@ -29,6 +31,8 @@ A flag that enables 'tombstoning' of events. Any data with `_active: false` does
 
 ### _groupId
 
+<!-- start _groupId -->
+
 [storage] A string ID. Added to each event by the ingestion API prior to storage.
 
 An ID hash linking each datum to a particular Tidepool platform user. `_groupId` is a *private* hash ID, not to be confused with a user's public user ID hash.
@@ -36,6 +40,8 @@ An ID hash linking each datum to a particular Tidepool platform user. `_groupId`
 <!-- end _groupId -->
 
 ### _schemaVersion
+
+<!-- start _schemaVersion -->
 
 [storage] An integer value. Added to each event by the ingestion API prior to storage.
 
@@ -47,6 +53,8 @@ All data prior to the release of 'Bootstrapping to UTC' (see [technical document
 
 ### _version
 
+<!-- start _version -->
+
 [storage] An integer value. Added to each event by the ingestion API prior to storage.
 
 A 'version' for each datum. The original datum will have a `_version` of 0. If and when the datum is modified, the original datum will be marked `_active: false` while the modified datum will have its `_version` bumped to 1.
@@ -54,6 +62,8 @@ A 'version' for each datum. The original datum will have a `_version` of 0. If a
 <!-- end _version -->
 
 ### clockDriftOffset
+
+<!-- start clockDriftOffset -->
 
 [ingestion, storage, client] (OPTIONAL) An integer value representing milliseconds. Optionally added to each event during data processing in the Tidepool uploader Chrome application.
 
@@ -63,6 +73,8 @@ This field is another result of the Tidepool platform's best effort to convert d
 
 ### conversionOffset
 
+<!-- start conversionOffset -->
+
 [ingestion, storage, client] An integer value representing milliseconds. Added to each event during data processing in the Tidepool uploader Chrome application.
 
 This field is another result of the Tidepool platform's best effort to convert device local (relative) display time (see [`deviceTime`](#devicetime) below) to UTC. While `time` encodes the UTC timestamp resulting from the conversion, `conversionOffset` (which may be - and often is - `0`) records the offset from UTC in milliseconds resulting from very large adjustments a user may make to a device's display time due to realizing that the device was set to the wrong day, month, or even year. See the technical documentation describing '[Bootstrapping to UTC](https://github.com/tidepool-org/chrome-uploader/blob/master/docs/BootstrappingToUTC.md)' for the details of this 'best effort' conversion.
@@ -71,6 +83,8 @@ This field is another result of the Tidepool platform's best effort to convert d
 
 ### createdTime
 
+<!-- start createdTime -->
+
 [storage] An ISO-8601 string timestamp. Added to each event by the ingestion API prior to storage.
 
 An [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 'Wikipedia: ISO 8601')-formatted UTC timestamp with a final `Z` for 'Zulu' time - e.g., `2015-11-09T03:58:44.584Z`. `createdTime` is the machine-time when the event was first ingested into the Tidepool platform.
@@ -78,6 +92,8 @@ An [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 'Wikipedia: ISO 8601')-form
 <!-- end createdTime -->
 
 ### deviceId
+
+<!-- start deviceId -->
 
 [ingestion, storage, client] A string ID. Added to each event during data processing in the Tidepool uploader Chrome application.
 
@@ -92,6 +108,8 @@ Examples:
 
 ### deviceTime
 
+<!-- start deviceTime -->
+
 [ingestion, storage, client]  An ISO-8601 string timestamp *without* timezone offset information. Added to each event during data processing in the Tidepool uploader Chrome application.
 
 No diabetes device presently available stores data in UTC or anchored to UTC via a timezone offset. In other words, all diabetes devices currently store the time at which events on the device occurred in device relative time - that is, the display time on the device at the time the event occurred. The Tidepool platform makes a best effort to convert this device time to UTC (stored in the [`time`](#time) field), but the raw `deviceTime` is also stored for data-auditing purposes. It is stored in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 'Wikipedia: ISO 8601') format, but *without* any timezone offset information - e.g., `2015-11-08T17:06:53`.
@@ -100,6 +118,8 @@ No diabetes device presently available stores data in UTC or anchored to UTC via
 
 ### guid
 
+<!-- start guid -->
+
 [ingestion, storage, client] A string ID. Added to each event during data processing in the Tidepool uploader Chrome application.
 
 An [RFC 4122](https://www.ietf.org/rfc/rfc4122.txt 'RFC 4122') version 4 UUID, generated using the [node-uuid](https://github.com/broofa/node-uuid 'GitHub: node-uuid') library in Tidepool's [uploader Chrome application](https://github.com/tidepool-org/chrome-uploader). See [`lib/core/api.js`](https://github.com/tidepool-org/chrome-uploader/blob/master/lib/core/api.js) for the implementation.
@@ -107,6 +127,8 @@ An [RFC 4122](https://www.ietf.org/rfc/rfc4122.txt 'RFC 4122') version 4 UUID, g
 <!-- end guid -->
 
 ### id
+
+<!-- start id -->
 
 [storage, client] A string ID. Added to each event by the ingestion API prior to storage.
 
@@ -117,6 +139,8 @@ This `id` is used for data de-duplication: since the same combination of the fie
 <!-- end id -->
 
 ### time
+
+<!-- start time -->
 
 [ingestion, storage, client] An ISO-8601 string timestamp. Added to each event during data processing in the Tidepool uploader Chrome application.
 
@@ -133,6 +157,8 @@ Examples:
 
 ### timezoneOffset
 
+<!-- start timezoneOffset -->
+
 [ingestion, storage, client] A positive or negative integer value representing minutes from UTC. Added to each event during data processing in the Tidepool uploader Chrome application.
 
 This field is another result of the Tidepool platform's best effort to convert device local (relative) display time (see [`deviceTime`](#devicetime) above) to UTC. While `time` encodes the UTC timestamp resulting from the conversion, `timezoneOffset` encodes the offest in minutes *from* UTC to convert the UTC timestamp back to local display time. See the technical documentation describing '[Bootstrapping to UTC](https://github.com/tidepool-org/chrome-uploader/blob/master/docs/BootstrappingToUTC.md)' for the details of this 'best effort' conversion.
@@ -146,6 +172,8 @@ Examples:
 <!-- end timezoneOffset -->
 
 ### uploadId
+
+<!-- start uploadId -->
 
 [ingestion, storage, client] A string ID. Added to each event during data processing in the Tidepool uploader Chrome application.
 
@@ -165,14 +193,13 @@ Note that `uploadId` does not figure in the calculations of an event record's `i
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-11-09T03:21:22.550Z",
+	"createdTime": "2016-04-28T07:47:28.115Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-11-08T19:21:17",
-	"guid": "629f9fbf-c7cd-43f0-87b0-202273cb3411",
-	"id": "bf8538fa1bbe435c8574e7f7ca052e19",
-	"time": "2015-11-09T03:21:17.550Z",
-	"timezoneOffset": -480,
-	"units": "mmol/L",
+	"deviceTime": "2016-04-28T00:47:23",
+	"guid": "a3ffeb91-0156-4de2-9c3d-844317bf6192",
+	"id": "e6ae281570ac42c988b332a7ae57cc5b",
+	"time": "2016-04-28T07:47:23.115Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```

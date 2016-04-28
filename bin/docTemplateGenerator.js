@@ -326,20 +326,12 @@ if (type === 'common') {
       new RegExp(getFieldSectionRegExp(field))
     );
     if (existingSection && (existing[0].search('TODO') === -1)) {
-      return existingSection[0];
+      return [fieldSectionHeader(field), existingSection[0]];
     }
     return commonSectionForField(field);
   })));
   var exampleHeader = '### example (all possible fields)\n\n';
-  var existingExample = existing.match(
-    /###\s+example\s+\(all\spossible\sfields\)\s+?```json[\w\W\s]+?```\n/
-  );
-  if (existingExample) {
-    doc = doc.concat(existingExample[0]);
-  }
-  else {
-    doc = doc.concat([exampleHeader + exampleJSON(type, 'storage')]);
-  }
+  doc = doc.concat([exampleHeader + exampleJSON(type, 'storage')]);
 }
 else {
   var doc;
