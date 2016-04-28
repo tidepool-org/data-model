@@ -27,6 +27,14 @@ var SUB_TYPES = {
   combo: 'dual/square'
 };
 
+var randomBolusValue = function() {
+  return chance.floating({
+    fixed: 2,
+    min: 0.5,
+    max: 10.0
+  });
+};
+
 var schemas = {
   base: {
     type: {
@@ -41,14 +49,18 @@ var schemas = {
     }
   },
   normal: {
+    subType: {
+      instance: SUB_TYPES.normal,
+      summary: {
+        description: common.propTypes.stringValue(SUB_TYPES.normal),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
+    },
     normal: {
-      instance: function() {
-        return Math.round(chance.floating({
-          fixed: 2,
-          min: 0.5,
-          max: 10.0
-        }))
-      },
+      instance: randomBolusValue,
       summary: common.bolusInsulinSummary
     },
     expectedNormal: {
@@ -61,8 +73,69 @@ var schemas = {
         },
         numericalType: common.numericalTypes.FLOATING_POINT_DEVICE_SIG_FIGS,
         range: {
-          min: '0.0',
+          min: '> `normal`',
           max: '100.0'
+        }
+      }
+    }
+  },
+  square: {
+    subType: {
+      instance: SUB_TYPES.extended,
+      summary: {
+        description: common.propTypes.stringValue(SUB_TYPES.extended),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
+    },
+    extended: {
+      instance: randomBolusValue,
+      summary: common.bolusInsulinSummary
+    },
+    expectedExtended: {
+      instance: 0,
+      summary: {
+        description: common.propTypes.OPTIONAL + common.propTypes.insulinUnits(),
+        required: {
+          jellyfish: false,
+          platform: false
+        },
+        numericalType: common.numericalTypes.FLOATING_POINT_DEVICE_SIG_FIGS,
+        range: {
+          min: '> `extended`',
+          max: '100.0'
+        }
+      }
+    },
+    duration: {
+      instance: common.duration,
+      summary: {
+        description: common.propTypes.duration(),
+        required: {
+          jellyfish: true,
+          platform: true
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: 86400000
+        }
+      }
+    },
+    expectedDuration: {
+      instance: 0,
+      summary: {
+        description: common.propTypes.OPTIONAL + common.propTypes.expectedDurationBolus(),
+        required: {
+          jellyfish: false,
+          platform: false
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: '> `duration`',
+          max: 86400000
         }
       }
     }

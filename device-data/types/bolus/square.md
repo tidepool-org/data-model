@@ -1,4 +1,4 @@
-## Bolus subType: `normal`
+## Bolus subType: `square`
 
 **NB:** All fields are *required* unless otherwise noted.
 
@@ -26,7 +26,7 @@
 
 ### subType
 
-[ingestion, storage, client] The string `normal`.
+[ingestion, storage, client] The string `square`.
 
 	QUICK SUMMARY
 	Required:
@@ -38,7 +38,7 @@
 
 * * * * *
 
-### normal
+### extended
 
 [ingestion, storage, client] A floating point value representing units of insulin.
 
@@ -50,13 +50,13 @@
 	Range:
 		min: 0.0
 		max: 100.0
-<!-- start normal -->
+<!-- start extended -->
 <!-- TODO -->
-<!-- end normal -->
+<!-- end extended -->
 
 * * * * *
 
-### expectedNormal
+### expectedExtended
 
 > This field is **optional**.
 
@@ -68,11 +68,49 @@
 		platform: no (optional)
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > `normal`
+		min: > `extended`
 		max: 100.0
-<!-- start expectedNormal -->
+<!-- start expectedExtended -->
 <!-- TODO -->
-<!-- end expectedNormal -->
+<!-- end expectedExtended -->
+
+* * * * *
+
+### duration
+
+[ingestion, storage, client] An integer value representing a duration of time in milliseconds.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Numerical type: Integer value representing milliseconds.
+	Range:
+		min: 0
+		max: 86400000
+<!-- start duration -->
+<!-- TODO -->
+<!-- end duration -->
+
+* * * * *
+
+### expectedDuration
+
+> This field is **optional**.
+
+[ingestion, storage, client] An integer value representing an original programmed duration of time in milliseconds when the programmed event did not complete due to interruption or user cancellation.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
+	Numerical type: Integer value representing milliseconds.
+	Range:
+		min: > `duration`
+		max: 86400000
+<!-- start expectedDuration -->
+<!-- TODO -->
+<!-- end expectedDuration -->
 
 * * * * *
 
@@ -156,6 +194,14 @@ See [common fields](../../common.md).
 
 * * * * *
 
+### expectedNormal
+
+<!-- start expectedNormal -->
+<!-- TODO -->
+<!-- end expectedNormal -->
+
+* * * * *
+
 ### _active
 
 See [common fields](../../common.md).
@@ -221,18 +267,21 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "bolus",
-	"subType": "normal",
-	"normal": 1.64,
-	"expectedNormal": 2.05,
+	"subType": "square",
+	"extended": 9.21,
+	"expectedExtended": 0,
+	"duration": 82800000,
+	"expectedDuration": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T15:54:16",
-	"guid": "1cd3f8ac-2387-4241-bcd0-9c080d1f0d01",
-	"id": "2fdaf157a2fd428992c847c71173e5d8",
-	"time": "2016-04-28T22:54:16.820Z",
+	"deviceTime": "2016-04-28T15:54:25",
+	"guid": "3c097b60-4e0f-403b-8b93-033123c31d6a",
+	"id": "c832dbf1c2644e969e35ced383862a4c",
+	"time": "2016-04-28T22:54:25.091Z",
 	"timezoneOffset": -420,
-	"uploadId": "SampleUploadId"
+	"uploadId": "SampleUploadId",
+	"expectedNormal": null
 }
 ```
 
@@ -241,17 +290,20 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "bolus",
-	"subType": "normal",
-	"normal": 9.78,
-	"expectedNormal": 12.225,
+	"subType": "square",
+	"extended": 9.87,
+	"expectedExtended": 0,
+	"duration": 50400000,
+	"expectedDuration": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T15:54:16",
-	"guid": "bb4e92db-3f44-4e3a-a90e-4f7ca6e8ec89",
-	"time": "2016-04-28T22:54:16.821Z",
+	"deviceTime": "2016-04-28T15:54:25",
+	"guid": "0a0d182f-fc91-4271-b4c6-bb17c602126e",
+	"time": "2016-04-28T22:54:25.092Z",
 	"timezoneOffset": -420,
-	"uploadId": "SampleUploadId"
+	"uploadId": "SampleUploadId",
+	"expectedNormal": null
 }
 ```
 
@@ -260,22 +312,25 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "bolus",
-	"subType": "normal",
-	"normal": 1.48,
-	"expectedNormal": 1.85,
+	"subType": "square",
+	"extended": 8.46,
+	"expectedExtended": 0,
+	"duration": 32400000,
+	"expectedDuration": 0,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-28T22:54:21.821Z",
+	"createdTime": "2016-04-28T22:54:30.092Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T15:54:16",
-	"guid": "650331f0-acf9-4f6d-a616-6628557d9a5d",
-	"id": "ebb4a9ee368b495da226c37972eb3f2a",
-	"time": "2016-04-28T22:54:16.821Z",
+	"deviceTime": "2016-04-28T15:54:25",
+	"guid": "79881563-fbec-464d-a00f-6a7c157d055c",
+	"id": "8a50e9bfa473485ba65dfea1539434ce",
+	"time": "2016-04-28T22:54:25.092Z",
 	"timezoneOffset": -420,
-	"uploadId": "SampleUploadId"
+	"uploadId": "SampleUploadId",
+	"expectedNormal": null
 }
 ```
