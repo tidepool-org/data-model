@@ -80,7 +80,7 @@ The new platform APIs expect this value to be >= 0 and <= 86400000 (the number o
 		platform: no (optional)
 	Numerical type: Integer value representing milliseconds.
 	Range:
-		min: 0
+		min: > `duration`
 		max: 86400000
 #### Changelog for `expectedDuration`
 

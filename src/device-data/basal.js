@@ -79,14 +79,14 @@ var schemas = {
     expectedDuration: {
       instance: 0,
       summary: {
-        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration(),
+        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDurationBasal(),
         required: {
           jellyfish: false,
           platform: false
         },
         numericalType: common.numericalTypes.INTEGER_MS,
         range: {
-          min: 0,
+          min: '> `duration`',
           max: 432000000
         }
       }
@@ -160,14 +160,14 @@ var schemas = {
     expectedDuration: {
       instance: 0,
       summary: {
-        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration(),
+        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDurationBasal(),
         required: {
           jellyfish: false,
           platform: false
         },
         numericalType: common.numericalTypes.INTEGER_MS,
         range: {
-          min: 0,
+          min: '> `duration`',
           max: 86400000
         }
       },
@@ -256,14 +256,14 @@ var schemas = {
     expectedDuration: {
       instance: 0,
       summary: {
-        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration(),
+        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDurationBasal(),
         required: {
           jellyfish: false,
           platform: false
         },
         numericalType: common.numericalTypes.INTEGER_MS,
         range: {
-          min: 0,
+          min: '> `duration`',
           max: 86400000
         }
       },

@@ -159,8 +159,11 @@ module.propTypes = {
   duration: function() {
     return '[ingestion, storage, client] An integer value representing a duration of time in milliseconds.';
   },
-  expectedDuration: function() {
+  expectedDurationBasal: function() {
     return '[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.';
+  },
+  expectedDurationBolus: function() {
+    return '[ingestion, storage, client] An integer value representing an original programmed duration of time in milliseconds when the programmed event did not complete due to interruption or user cancellation.';
   },
   insulinUnits: function() {
     return '[ingestion, storage, client] A floating point value representing units of insulin.';
