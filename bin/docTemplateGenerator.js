@@ -282,7 +282,7 @@ function sectionForField(field, summary, changeLog) {
           var prefix, postfix;
           switch (sectionKey) {
             case 'numericalType':
-              prefix = '\tType: ';
+              prefix = '\tNumerical type: ';
               postfix = '';
               break;
             default:

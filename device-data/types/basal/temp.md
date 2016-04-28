@@ -52,7 +52,7 @@ In contrast, under the new platform APIs, `rate` is always *required*.
 	Required:
 		jellyfish: yes
 		platform: yes
-	Type: Integer value representing milliseconds.
+	Numerical type: Integer value representing milliseconds.
 	Range:
 		min: 0
 		max: 86400000
@@ -76,7 +76,7 @@ The new platform APIs expect this value to be >= 0 and <= 86400000 (the number o
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
-	Type: Integer value representing milliseconds.
+	Numerical type: Integer value representing milliseconds.
 	Range:
 		min: 0
 		max: 86400000
@@ -104,7 +104,7 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
-	Type: Floating point value representing a percentage, where 1.0 represents 100%.
+	Numerical type: Floating point value representing a percentage, where 1.0 represents 100%.
 	Range:
 		min: 0.0
 		max: 10.0
@@ -148,7 +148,7 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 	Required:
 		jellyfish: no (optional)
 		platform: yes
-	Type: Floating point value rounded to the appropriate significant figures for the device's precision.
+	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
 		min: 0.0
 		max: 20.0

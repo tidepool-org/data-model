@@ -52,7 +52,7 @@ Note, however, that no `rate` field appears on `suspend` basal events. The `rate
 	Required:
 		jellyfish: no (optional)
 		platform: yes
-	Type: Integer value representing milliseconds.
+	Numerical type: Integer value representing milliseconds.
 	Range:
 		min: 0
 		max: 86400000
@@ -78,7 +78,7 @@ The new platform APIs expect this value to be >= 0 and <= 86400000 (the number o
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
-	Type: Integer value representing milliseconds.
+	Numerical type: Integer value representing milliseconds.
 	Range:
 		min: 0
 		max: 86400000

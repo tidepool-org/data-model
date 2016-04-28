@@ -50,7 +50,7 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 	Required:
 		jellyfish: no (optional)
 		platform: yes
-	Type: Integer value representing milliseconds.
+	Numerical type: Integer value representing milliseconds.
 	Range:
 		min: 0
 		max: 432000000
@@ -78,7 +78,7 @@ The new platform APIs expect this value to be >= 0 and <= 432000000 (the number 
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
-	Type: Integer value representing milliseconds.
+	Numerical type: Integer value representing milliseconds.
 	Range:
 		min: 0
 		max: 432000000
@@ -100,7 +100,7 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 	Required:
 		jellyfish: yes
 		platform: yes
-	Type: Floating point value rounded to the appropriate significant figures for the device's precision.
+	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
 		min: 0.0
 		max: 20.0

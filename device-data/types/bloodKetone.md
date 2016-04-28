@@ -48,7 +48,7 @@ Blood ketones represent ketone concentration values (specifically beta-ketones, 
 	Required:
 		jellyfish: yes
 		platform: yes
-	Type: Floating point value representing a `mmol/L` value.
+	Numerical type: Floating point value representing a `mmol/L` value.
 	Range:
 		min: 0.0
 		max: 10.0
