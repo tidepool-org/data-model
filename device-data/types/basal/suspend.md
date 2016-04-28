@@ -14,6 +14,10 @@
 
 [ingestion, storage, client] The string `basal`.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
 <!-- start type -->
 
 This is the sub-type of `basal` event that represents the total suspension of insulin delivery on an insulin pump within the stream of `basal` events, which should in the vast majority of cases be contiguous—that is, without gaps or overlaps. The user's inputs to suspend (and, later, resume) insulin delivery are part of Tidepool's `deviceEvent` data type, as the sub-type [`status`](../deviceEvent/status.md). Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is *also* represented as a `suspend` basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.
@@ -28,6 +32,10 @@ Note, however, that no `rate` field appears on `suspend` basal events. The `rate
 
 [ingestion, storage, client] The string `suspend`.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
 <!-- start deliveryType -->
 
 <!-- end deliveryType -->
@@ -40,13 +48,21 @@ Note, however, that no `rate` field appears on `suspend` basal events. The `rate
 
 [ingestion, storage, client] An integer value representing a duration of time in milliseconds.
 
-**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
-
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: yes
+	Type: Integer value representing milliseconds.
+	Range:
+		min: 0
+		max: 86400000
 <!-- start duration -->
 
 Just like [`scheduled`](./scheduled.md) basals, when ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](./previous.md) for details.
 
 In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the `duration` field will be required on all `basal`s, including `suspend` basals, placing the burden on the client to determine the length of the interval between any pair of suspension and resumption of insulin delivery events that together define a `suspend` basal. (On only one insulin pump that we know of are suspensions of insulin delivery programmed for a set length of time upfront, like `temp` basals; in such cases, obviously, it is easy to provide the `duration` for the `suspend` basal.)
+
+The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
 
 <!-- end duration -->
 
@@ -58,8 +74,14 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 
 [storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
 
-**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
-
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
+	Type: Integer value representing milliseconds.
+	Range:
+		min: 0
+		max: 86400000
 #### Changelog for `expectedDuration`
 
 `_schemaVersion` ? (future): `expectedDuration` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `expectedDuration` as described.
@@ -80,6 +102,10 @@ Refer to the discussion of [`expectedDuration`](./temp.md#expectedduration) in t
 
 [storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: nonexistent
 <!-- start previous -->
 
 See [`previous`](./previous.md) for detailed documentation on this deprecated field.
@@ -94,6 +120,10 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 
 [ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this suspend basal is in effect.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
 <!-- start suppressed -->
 
 See the discussion of the [`suppressed`](./temp.md#suppressed) field on `temp` basals.

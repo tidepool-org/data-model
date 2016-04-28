@@ -14,6 +14,10 @@
 
 [ingestion, storage, client] The string `basal`.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
 <!-- start type -->
 
 This is the sub-type of `basal` event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates *both* by percentage and by manual specification at the user's choice; other insulin pumps only expose one of these interfaces.
@@ -30,6 +34,10 @@ In contrast, under the new platform APIs, `rate` is always *required*.
 
 [ingestion, storage, client] The string `temp`.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
 <!-- start deliveryType -->
 
 <!-- end deliveryType -->
@@ -40,11 +48,19 @@ In contrast, under the new platform APIs, `rate` is always *required*.
 
 [ingestion, storage, client] An integer value representing a duration of time in milliseconds.
 
-**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
-
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Type: Integer value representing milliseconds.
+	Range:
+		min: 0
+		max: 86400000
 <!-- start duration -->
 
 Unlike on [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingestion API and the new platform APIs *require* a `duration` on every `temp` basal since an insulin pump user is always required to program a duration for a temporary basal rate interval along with the desired temporary rate (or percentage of active rate) itself.
+
+The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
 
 <!-- end duration -->
 
@@ -56,8 +72,14 @@ Unlike on [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingest
 
 [storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
 
-**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
-
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
+	Type: Integer value representing milliseconds.
+	Range:
+		min: 0
+		max: 86400000
 #### Changelog for `expectedDuration`
 
 `_schemaVersion` ? (future): `expectedDuration` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `expectedDuration` as described.
@@ -78,8 +100,14 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 
 [ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.
 
-**Range**: The new platform APIs expect this value to be >= 0.0 and <= 10.0.
-
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
+	Type: Floating point value representing a percentage, where 1.0 represents 100%.
+	Range:
+		min: 0.0
+		max: 10.0
 <!-- start percent -->
 
 Different insulin pump manufacturers expose different interfaces for setting temporary basal rates by percentage—some express the change in terms of a positive or negative percentage *from* the current active rate, and some express the change in terms of an absolute percentage *of* the current active rate. For example, if the current active scheduled basal rate is 0.5 units per hour, a pump that represents the change as positive or negative from the current rate would implement a rate of 0.25 when the user programs a -50% temp basal and a rate of 0.75 when the user programs a +50% temp basal. On the other hand, a pump that represent the change as an absolute percentage of the current rate would require the user to input 50% to yield the 0.25 units per hour temporary rate and 150% to yield the 0.75 temporary rate.
@@ -98,6 +126,10 @@ For the Tidepool data model, we have standardized on a floating point representa
 
 [storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: nonexistent
 <!-- start previous -->
 
 See [`previous`](./previous.md) for detailed documentation on this deprecated field.
@@ -112,8 +144,14 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 
 [ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
 
-**Range**: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.
-
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: yes
+	Type: Floating point value rounded to the appropriate significant figures for the device's precision.
+	Range:
+		min: 0.0
+		max: 20.0
 <!-- start rate -->
 
 See [`rate`](./scheduled.md#rate) on the `scheduled` basals documentation for discussion of significant digits and rounding on basal rate values.
@@ -130,6 +168,10 @@ Also note that when ingesting data through the legacy jellyfish ingestion API, p
 
 [ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
 <!-- start suppressed -->
 
 Depending on the data protocol, it is not always possible to keep track of what basal rate would have been in effect had a `temp` basal not been programmed by the user, but where this information is available, it should be provided in as much detail as possible as an embedded `basal` object as the value for the `suppressed` key on a `temp` basal.

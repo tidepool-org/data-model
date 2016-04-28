@@ -36,7 +36,6 @@ var PREVIOUS = '[ingestion] An object representing the `basal` event just prior 
 var getSuppressedDesc = function(type) {
   return  common.propTypes.OPTIONAL + format('[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this %s basal is in effect.', type);
 };
-var DURATION_LIMIT_TEMP = '\n\n**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.';
 
 var schemas = {
   base: {
@@ -135,15 +134,43 @@ var schemas = {
   temp: {
     deliveryType: {
       instance: DELIVERY_TYPES.temp,
-      description: common.propTypes.stringValue(DELIVERY_TYPES.temp)
+      summary: {
+        description: common.propTypes.stringValue(DELIVERY_TYPES.temp),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
     },
     duration: {
       instance: common.duration,
-      description: common.propTypes.duration() + DURATION_LIMIT_TEMP
+      summary: {
+        description: common.propTypes.duration(),
+        required: {
+          jellyfish: true,
+          platform: true
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: 86400000
+        }
+      }
     },
     expectedDuration: {
       instance: 0,
-      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration() + DURATION_LIMIT_TEMP,
+      summary: {
+        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration(),
+        required: {
+          jellyfish: false,
+          platform: false
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: 86400000
+        }
+      },
       changelog: [common.changeLog.plannedImplementation('expectedDuration')]
     },
     percent: {
@@ -151,42 +178,116 @@ var schemas = {
         // yield float rounded to nearest 0.05
         return Math.round(chance.floating({min:0, max:1})*20)/20;
       },
-      description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.\n\n**Range**: The new platform APIs expect this value to be >= 0.0 and <= 10.0.'
+      summary: {
+        description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.',
+        required: {
+          jellyfish: false,
+          platform: false
+        },
+        numericalType: 'Floating point value representing a percentage, where 1.0 represents 100%.',
+        range: {
+          min: '0.0',
+          max: '10.0'
+        }
+      }
     },
     previous: {
       instance: {},
-      description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS,
+        required: {
+          jellyfish: false,
+          platform: null
+        }
+      }
     },
     rate: {
       instance: 0,
-      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + RATE
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + RATE,
+        required: {
+          jellyfish: false,
+          platform: true
+        },
+        numericalType: common.numericalTypes.FLOATING_POINT_DEVICE_SIG_FIGS,
+        range: {
+          min: '0.0',
+          max: '20.0'
+        }
+      }
     },
     suppressed: {
       instance: {},
-      description: getSuppressedDesc(DELIVERY_TYPES.temp)
+      summary: {
+        description: getSuppressedDesc(DELIVERY_TYPES.temp),
+        required: {
+          jellyfish: false,
+          platform: false
+        }
+      }
     }
   },
   suspend: {
     deliveryType: {
       instance: DELIVERY_TYPES.suspend,
-      description: common.propTypes.stringValue(DELIVERY_TYPES.suspend)
+      summary: {
+        description: common.propTypes.stringValue(DELIVERY_TYPES.suspend),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
     },
     duration: {
       instance: common.duration,
-      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration() + DURATION_LIMIT_TEMP
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration(),
+        required: {
+          jellyfish: false,
+          platform: true
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: 86400000
+        }
+      }
     },
     expectedDuration: {
       instance: 0,
-      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration() + DURATION_LIMIT_TEMP,
+      summary: {
+        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration(),
+        required: {
+          jellyfish: false,
+          platform: false
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: 86400000
+        }
+      },
       changelog: [common.changeLog.plannedImplementation('expectedDuration')]
     },
     previous: {
       instance: {},
-      description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS,
+        required: {
+          jellyfish: false,
+          platform: null
+        }
+      }
     },
     suppressed: {
       instance: {},
-      description: getSuppressedDesc(DELIVERY_TYPES.suspend)
+      summary: {
+        description: getSuppressedDesc(DELIVERY_TYPES.suspend),
+        required: {
+          jellyfish: false,
+          platform: false
+        }
+      }
     }
   }
 };
