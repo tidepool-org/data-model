@@ -53,7 +53,7 @@
         data-chapter-title="scheduled"
         data-filepath="device-data/types/basal/scheduled.md"
         data-basepath="../../.."
-        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
+        data-revision="Thu Apr 28 2016 11:21:17 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -340,13 +340,21 @@
 </blockquote>
 <h3 id="type">type</h3>
 <p>[ingestion, storage, client] The string <code>basal</code>.</p>
-<!-- start type -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start type -->
 <p>This is the sub-type of <code>basal</code> event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).</p>
 <!-- end type -->
 <hr>
 <h3 id="deliverytype">deliveryType</h3>
 <p>[ingestion, storage, client] The string <code>scheduled</code>.</p>
-<!-- start deliveryType -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start deliveryType -->
 <!-- end deliveryType -->
 <hr>
 <h3 id="duration">duration</h3>
@@ -354,11 +362,19 @@
 <p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
 </blockquote>
 <p>[ingestion, storage, client] An integer value representing a duration of time in milliseconds.</p>
-<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0 and &lt;= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.</p>
-<!-- start duration -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: 432000000
+</code></pre><!-- start duration -->
 <p>When ingesting through the legacy jellyfish ingestion service, <code>duration</code> is optional because jellyfish also uses the <em>sequence</em> of basal events to determine their durations - see <a href="previous.html"><code>previous</code></a> for details.</p>
 <p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the <code>duration</code> field will be required on all <code>basal</code>s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of <code>basal</code>s based on the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).</p>
 <p>Note that for some insulin pumps, even for a scheduled basal <em>not</em> interrupted by another event like a <code>suspend</code> or <code>temp</code>, the <code>duration</code> may not be the nice round numbers of milliseconds that might be expected given the schedule in the <code>pumpSettings</code>&#x2014;e.g., 3600000 for a <code>basal</code> event lasting an hour. This is because of how some pumps schedule the small pulses of insulin delivery fulfilling the scheduled <code>rate</code>; depending on how the pulses are scheduled, the actual duration of the <code>basal</code> may be a bit over or under the scheduled <code>duration</code>.</p>
+<p>The new platform APIs expect this value to be &gt;= 0 and &lt;= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.</p>
 <!-- end duration -->
 <hr>
 <h3 id="expectedduration">expectedDuration</h3>
@@ -366,17 +382,32 @@
 <p>This field is <strong>optional</strong>. At present, it is <strong>only</strong> added by the jellyfish data ingestion service.</p>
 </blockquote>
 <p>[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the <code>duration</code> field on ingestion when a following event has resulted in truncation of the original programmed duration.</p>
-<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0 and &lt;= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.</p>
-<!-- start expectedDuration -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: 432000000
+</code></pre><!-- start expectedDuration -->
 <p>On a scheduled basal ingested through the legacy jellyfish ingestion service, <code>expectedDuration</code> should <em>never</em> be included on a <code>scheduled</code> basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original <code>scheduled</code> basal; most commonly this new event is a <code>temp</code> or <code>suspend</code>, but it could be a <code>scheduled</code> if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples in <a href="previous.html"><code>previous</code></a>.</p>
 <p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the <code>expectedDuration</code> where available and relevant, but it will never be a required field. Because of how burdensome (or impossible) it is to calculate <code>expectedDuration</code> for <code>scheduled</code> basals, we do <strong>not</strong> expect the uploading client to calculate it, except in cases where the source data makes it easy to include.</p>
 <!-- end expectedDuration -->
 <hr>
 <h3 id="rate">rate</h3>
 <p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
-<p><strong>Range</strong>: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.</p>
-<!-- start rate -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Floating point value rounded to the appropriate significant figures for the device&apos;s precision.
+Range:
+    min: 0.0
+    max: 20.0
+</code></pre><!-- start rate -->
 <p>Different insulin pump manufacturers offer the ability to program basal rates with different levels of precision in terms of significant digits on the <code>rate</code>. We endeavor to represent each <code>rate</code> as accurately as possible for each insulin pump; occasionally when values are stored to a falsely large number of floating point digits this means rounding the raw <code>rate</code> value found in a record from a pump in order to match the significant digits of precision advertised by the manufacturer. It is the burden of the uploading client to handle this rounding since the number of significant digits for <code>rate</code>s varies according to the pump manufacturer.</p>
+<p>Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.</p>
 <!-- end rate -->
 <hr>
 <h3 id="previous">previous</h3>
@@ -385,7 +416,11 @@
 </blockquote>
 <p>[ingestion] An object representing the <code>basal</code> event just prior to this event or, equivalently, just the <code>id</code> of said object.</p>
 <p>[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.</p>
-<!-- start previous -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: nonexistent
+</code></pre><!-- start previous -->
 <p>See <a href="previous.html"><code>previous</code></a> for detailed documentation on this deprecated field.</p>
 <!-- end previous -->
 <hr>
@@ -394,7 +429,11 @@
 <p>This field is <strong>optional</strong>.</p>
 </blockquote>
 <p>[ingestion, storage, client] A string: the name of the basal schedule.</p>
-<h4 id="changelog-for-schedulename">Changelog for <code>scheduleName</code></h4>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+</code></pre><h4 id="changelog-for-schedulename">Changelog for <code>scheduleName</code></h4>
 <p><code>_schemaVersion</code> 2: <code>scheduleName</code> became <strong>optional</strong>.</p>
 <!-- start scheduleName -->
 <!-- DRAFT: discuss with @jhbate -->

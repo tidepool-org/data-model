@@ -53,7 +53,7 @@
         data-chapter-title="bloodKetone"
         data-filepath="device-data/types/bloodKetone.md"
         data-basepath="../.."
-        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
+        data-revision="Thu Apr 28 2016 11:21:17 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -340,91 +340,169 @@
 </blockquote>
 <h3 id="type">type</h3>
 <p>[ingestion, storage, client] The string <code>bloodKetone</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start type -->
 <p>Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool does not yet provide a data model for urine ketones, which are measured qualitatively, not quantitatively.</p>
 <!-- end type -->
+<hr>
 <h3 id="units">units</h3>
 <p>[ingestion, storage, client] The string <code>mmol/L</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start units -->
 <!-- end units -->
+<hr>
 <h3 id="value">value</h3>
 <p>[ingestion, storage, client] Blood ketone value in mmol/L (float), with appropriately matching <code>units</code> field.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Floating point value representing a `mmol/L` value.
+Range:
+    min: 0.0
+    max: 10.0
+</code></pre><!-- start value -->
 <!-- end value -->
-<h3 id="active">_active</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<h3 id="groupid">_groupId</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<h3 id="schemaversion">_schemaVersion</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<h3 id="version">_version</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
+<hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+<hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<h3 id="createdtime">createdTime</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
+<hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+<hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
+<hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<h3 id="id">id</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
+<hr>
 <h3 id="time">time</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
+<hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+<hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
+<!-- start uploadId -->
+<!-- TODO -->
+<!-- end uploadId -->
+<hr>
+<h3 id="active">_active</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+<hr>
+<h3 id="groupid">_groupId</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
+<hr>
+<h3 id="schemaversion">_schemaVersion</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+<hr>
+<h3 id="version">_version</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
+<hr>
+<h3 id="createdtime">createdTime</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+<hr>
+<h3 id="id">id</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
+<hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bloodKetone&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
     <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">3</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-11-25T19:20:27&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;13d95c21-d909-4f63-b594-7c6b8bb9be39&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;c19df6b0d3ac4f5788eb462f457cde6b&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-11-26T03:20:27.739Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
-    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-27T23:00:10&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;6a90d165-ff18-4b4e-949b-15a6516af21f&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;55fa02e5800a434c9d9afae180a11069&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T06:00:10.223Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
 <h3 id="example-ingestion">example (ingestion)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bloodKetone&quot;</span>,
-    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">1.4</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">0.5</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-11-25T19:20:27&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;2a4d4c7e-548c-4f0c-bbf9-b6dc1b078c1e&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-11-26T03:20:27.740Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
-    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-27T23:00:10&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;c5e6534f-6a2a-4d82-aa3d-fef86af41d9e&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T06:00:10.224Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
 <h3 id="example-storage">example (storage)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bloodKetone&quot;</span>,
-    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">1.7</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">5</span>,
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
     <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2015-11-26T03:20:32.740Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T06:00:15.224Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2015-11-25T19:20:27&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f81688e4-9768-4a5e-a4e2-12ce838a322d&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;b8ff67379ab0419baa9f73ae1966f729&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-11-26T03:20:27.740Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">480</span>,
-    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-27T23:00:10&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b4e026a6-c120-4fd8-9a6d-d2b1bd700577&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;d9d19a698a1a438ca69e6fc373d36a11&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T06:00:10.224Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>

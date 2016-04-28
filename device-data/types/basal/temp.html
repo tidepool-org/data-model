@@ -53,7 +53,7 @@
         data-chapter-title="temp"
         data-filepath="device-data/types/basal/temp.md"
         data-basepath="../../.."
-        data-revision="Tue Apr 26 2016 23:54:21 GMT-0700 (PDT)"
+        data-revision="Thu Apr 28 2016 11:21:17 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -340,7 +340,11 @@
 </blockquote>
 <h3 id="type">type</h3>
 <p>[ingestion, storage, client] The string <code>basal</code>.</p>
-<!-- start type -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start type -->
 <p>This is the sub-type of <code>basal</code> event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates <em>both</em> by percentage and by manual specification at the user&apos;s choice; other insulin pumps only expose one of these interfaces.</p>
 <p><strong>Field co-occurrence requirements</strong>: Note that when ingesting through the legacy jellyfish ingestion API, at least one of <code>percent</code> or <code>rate</code> must be provided on a <code>temp</code> basal. While each of these fields is marked as <em>optional</em>, one or the other <strong>must</strong> be present.</p>
 <p>In contrast, under the new platform APIs, <code>rate</code> is always <em>required</em>.</p>
@@ -348,14 +352,26 @@
 <hr>
 <h3 id="deliverytype">deliveryType</h3>
 <p>[ingestion, storage, client] The string <code>temp</code>.</p>
-<!-- start deliveryType -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start deliveryType -->
 <!-- end deliveryType -->
 <hr>
 <h3 id="duration">duration</h3>
 <p>[ingestion, storage, client] An integer value representing a duration of time in milliseconds.</p>
-<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0 and &lt;= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.</p>
-<!-- start duration -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: 86400000
+</code></pre><!-- start duration -->
 <p>Unlike on <a href="scheduled.html"><code>scheduled</code></a> basals, both the legacy jellyfish ingestion API and the new platform APIs <em>require</em> a <code>duration</code> on every <code>temp</code> basal since an insulin pump user is always required to program a duration for a temporary basal rate interval along with the desired temporary rate (or percentage of active rate) itself.</p>
+<p>The new platform APIs expect this value to be &gt;= 0 and &lt;= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.</p>
 <!-- end duration -->
 <hr>
 <h3 id="expectedduration">expectedDuration</h3>
@@ -363,8 +379,15 @@
 <p>This field is <strong>optional</strong>. At present, it is <strong>only</strong> added by the jellyfish data ingestion service.</p>
 </blockquote>
 <p>[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the <code>duration</code> field on ingestion when a following event has resulted in truncation of the original programmed duration.</p>
-<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0 and &lt;= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.</p>
-<h4 id="changelog-for-expectedduration">Changelog for <code>expectedDuration</code></h4>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: 86400000
+</code></pre><h4 id="changelog-for-expectedduration">Changelog for <code>expectedDuration</code></h4>
 <p><code>_schemaVersion</code> ? (future): <code>expectedDuration</code> is implemented as described in this documentation. If the <code>_schemaVersion</code> listed here is &quot;? (future),&quot; all data up to and including the current <code>_schemaVersion</code> has <strong>not</strong> implemented <code>expectedDuration</code> as described.</p>
 <!-- start expectedDuration -->
 <p>On a basal ingested through the legacy jellyfish ingestion service, <code>expectedDuration</code> should <em>never</em> be included on a <code>temp</code> basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original <code>temp</code> basal; most commonly this new event is a <code>scheduled</code> (user chose to cancel the temporary rate) or a <code>suspend</code>. See the examples in <a href="previous.html"><code>previous</code></a>.</p>
@@ -376,8 +399,15 @@
 <p>This field is <strong>optional</strong>.</p>
 </blockquote>
 <p>[ingestion, storage, client] A floating point number &gt;= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.</p>
-<p><strong>Range</strong>: The new platform APIs expect this value to be &gt;= 0.0 and &lt;= 10.0.</p>
-<!-- start percent -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+Numerical type: Floating point value representing a percentage, where 1.0 represents 100%.
+Range:
+    min: 0.0
+    max: 10.0
+</code></pre><!-- start percent -->
 <p>Different insulin pump manufacturers expose different interfaces for setting temporary basal rates by percentage&#x2014;some express the change in terms of a positive or negative percentage <em>from</em> the current active rate, and some express the change in terms of an absolute percentage <em>of</em> the current active rate. For example, if the current active scheduled basal rate is 0.5 units per hour, a pump that represents the change as positive or negative from the current rate would implement a rate of 0.25 when the user programs a -50% temp basal and a rate of 0.75 when the user programs a +50% temp basal. On the other hand, a pump that represent the change as an absolute percentage of the current rate would require the user to input 50% to yield the 0.25 units per hour temporary rate and 150% to yield the 0.75 temporary rate.</p>
 <p>For the Tidepool data model, we have standardized on a floating point representation of the second strategy. For us, the value 0.0 represents a temp basal at 0% of the current active rate, 0.5 at 50% of the current active rate (0.25 units per hour, in the example), 1.0 at a trivial 100% of current active rate (0.5 units per hour), 1.5 at 150% of the current active rate (0.75 units per hour), and so on. The upper limit of 10.0 (representing 1000% percent of the current active rate) was chosen arbitrarily as a common-sense upper bound; at least some pumps set their upper bound for temp basal rate increases much lower than this, for example at &lt; 200% of the current active rate.</p>
 <!-- end percent -->
@@ -388,7 +418,11 @@
 </blockquote>
 <p>[ingestion] An object representing the <code>basal</code> event just prior to this event or, equivalently, just the <code>id</code> of said object.</p>
 <p>[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.</p>
-<!-- start previous -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: nonexistent
+</code></pre><!-- start previous -->
 <p>See <a href="previous.html"><code>previous</code></a> for detailed documentation on this deprecated field.</p>
 <!-- end previous -->
 <hr>
@@ -397,8 +431,15 @@
 <p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
 </blockquote>
 <p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
-<p><strong>Range</strong>: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.</p>
-<!-- start rate -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+Numerical type: Floating point value rounded to the appropriate significant figures for the device&apos;s precision.
+Range:
+    min: 0.0
+    max: 20.0
+</code></pre><!-- start rate -->
 <p>See <a href="scheduled.html#rate"><code>rate</code></a> on the <code>scheduled</code> basals documentation for discussion of significant digits and rounding on basal rate values.</p>
 <p>Also note that when ingesting data through the legacy jellyfish ingestion API, providing a <code>rate</code> is optional <em>as long as a <code>percent</code> and <a href="#suppressed"><code>suppressed</code></a> with its own <code>rate</code> are also provided</em>. In the new platform APIs, we are shifting the burden of calculating the <code>rate</code> of a percentage-programmed temp basal to the uploading client. (Most, if not all, insulin pump manufacturers provide the <code>rate</code> directly in their raw data models anyway.)</p>
 <!-- end rate -->
@@ -408,7 +449,11 @@
 <p>This field is <strong>optional</strong>.</p>
 </blockquote>
 <p>[ingestion, storage, client] An object representing another <code>basal</code> event - namely, the event that is currently suppressed (inactive) because this temp basal is in effect.</p>
-<!-- start suppressed -->
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+</code></pre><!-- start suppressed -->
 <p>Depending on the data protocol, it is not always possible to keep track of what basal rate would have been in effect had a <code>temp</code> basal not been programmed by the user, but where this information is available, it should be provided in as much detail as possible as an embedded <code>basal</code> object as the value for the <code>suppressed</code> key on a <code>temp</code> basal.</p>
 <p>This object need only contain the bare minimum of information:</p>
 <ul>
