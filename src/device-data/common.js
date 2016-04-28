@@ -162,6 +162,9 @@ module.propTypes = {
   expectedDuration: function() {
     return '[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.';
   },
+  insulinUnits: function() {
+    return '[ingestion, storage, client] A floating point value representing units of insulin.';
+  },
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);
   },
@@ -236,6 +239,19 @@ module.bgValueSummary = {
       min: '0.0',
       max: '55.0'
     }
+  }
+};
+
+module.bolusInsulinSummary = {
+  description: module.propTypes.insulinUnits(),
+  required: {
+    jellyfish: true,
+    platform: true
+  },
+  numericalType: module.numericalTypes.FLOATING_POINT_DEVICE_SIG_FIGS,
+  range: {
+    min: '0.0',
+    max: '100.0'
   }
 };
 

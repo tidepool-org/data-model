@@ -44,6 +44,13 @@ module.exports = {
     type: 'bloodKetone'
   },
   bolus: {
+    generator: bolus.generate,
+    summary: bolus.summary,
+    changeLog: bolus.changeLog,
+    title: 'Bolus Insulin',
+    subtitle: 'Bolus subType',
+    subTypes: bolus.subTypes,
+    type: 'bolus'
   },
   cbg: {
     generator: cbg.generate,
