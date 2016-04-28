@@ -268,10 +268,25 @@ function sectionForField(field, summary, changeLog) {
                 return util.format('\t\t%s: ' + (section[api] ? 'yes' : ((section[api] === null) ? 'nonexistent' : 'no (optional)')), api);
               }).join('\n'));
               break;
+            case 'numericalType':
+              fieldSection.push('\tNumerical type:');
+              fieldSection.push(Object.keys(section).map(function(units) {
+                return util.format('\t\t%s: %s', units, section[units]);
+              }).join('\n'));
+              break;
             case 'range':
               fieldSection.push('\tRange:');
-              fieldSection.push(Object.keys(section).map(function(bound) {
-                return util.format('\t\t%s: %s', bound, section[bound]);
+              fieldSection.push(Object.keys(section).map(function(item) {
+                if (typeof section[item] === 'object') {
+                  fieldSection.push(util.format('\t\t%s:', item));
+                  fieldSection.push(Object.keys(section[item]).map(function(bound) {
+                    return util.format('\t\t\t%s: %s', bound, section[item][bound]);
+                  }).join('\n'));
+                  return '';
+                }
+                else {
+                  return util.format('\t\t%s: %s', item, section[item]);
+                }
               }).join('\n'));
               break;
             default:
@@ -283,6 +298,10 @@ function sectionForField(field, summary, changeLog) {
           switch (sectionKey) {
             case 'numericalType':
               prefix = '\tNumerical type: ';
+              postfix = '';
+              break;
+            case 'range':
+              prefix = '\tRange: ';
               postfix = '';
               break;
             default:

@@ -14,9 +14,17 @@
 
 [ingestion, storage, client] The string `cbg`.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+<!-- start type -->
+
 This is the Tidepool data type for continuous glucose monitor (CGM) sensor data. `cbg` is an abbreviation of 'continuous blood glucose' and contrasts with `smbg`, abbreviating 'self-monitored blood glucose'. [`smbg`](smbg.md) is the Tidepool data type for traditional fingerstick blood glucose meter data.
 
 <!-- end type -->
+
+* * * * *
 
 ### units
 
@@ -26,7 +34,16 @@ This is the Tidepool data type for continuous glucose monitor (CGM) sensor data.
 
 See [units](../units.md) for further explanation of blood glucose units.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Range: Must be one of: `mg/dL`, `mmol/L`.
+<!-- start units -->
+
 <!-- end units -->
+
+* * * * *
 
 ### value
 
@@ -34,79 +51,183 @@ See [units](../units.md) for further explanation of blood glucose units.
 
 [storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Numerical type:
+		mg/dL: Integer value representing a `mg/dL` value.
+		mmol/L: Floating point value representing a `mmol/L` value.
+	Range:
+		mg/dL:
+			min: 0
+			max: 1000
+		mmol/L:
+			min: 0.0
+			max: 55.0
+
+
+<!-- start value -->
+
 <!-- end value -->
 
-### _active
-
-See [common fields](../common.md).
-
-### _groupId
-
-See [common fields](../common.md).
-
-### _schemaVersion
-
-See [common fields](../common.md).
-
-### _version
-
-See [common fields](../common.md).
+* * * * *
 
 ### clockDriftOffset
 
 See [common fields](../common.md).
 
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+
+* * * * *
+
 ### conversionOffset
 
 See [common fields](../common.md).
 
-### createdTime
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
 
-See [common fields](../common.md).
+* * * * *
 
 ### deviceId
 
 See [common fields](../common.md).
 
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+
+* * * * *
+
 ### deviceTime
 
 See [common fields](../common.md).
+
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
+
+* * * * *
 
 ### guid
 
 See [common fields](../common.md).
 
-### id
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
 
-See [common fields](../common.md).
+* * * * *
 
 ### time
 
 See [common fields](../common.md).
 
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
+
+* * * * *
+
 ### timezoneOffset
 
 See [common fields](../common.md).
 
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+
+* * * * *
+
 ### uploadId
 
 See [common fields](../common.md).
+
+<!-- start uploadId -->
+<!-- TODO -->
+<!-- end uploadId -->
+
+* * * * *
+
+### _active
+
+See [common fields](../common.md).
+
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+
+* * * * *
+
+### _groupId
+
+See [common fields](../common.md).
+
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
+
+* * * * *
+
+### _schemaVersion
+
+See [common fields](../common.md).
+
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+
+* * * * *
+
+### _version
+
+See [common fields](../common.md).
+
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
+
+* * * * *
+
+### createdTime
+
+See [common fields](../common.md).
+
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+
+* * * * *
+
+### id
+
+See [common fields](../common.md).
+
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
+
+* * * * *
 
 ### example (client)
 
 ```json
 {
 	"type": "cbg",
+	"units": "mmol/L",
 	"value": 33.026950546720926,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-11-08T20:46:34",
-	"guid": "4d6e70b9-84b4-417d-9c88-55b090132186",
-	"id": "fc52ab2a65d441bdbc1c76526ccc762d",
-	"time": "2015-11-09T04:46:34.238Z",
-	"timezoneOffset": -480,
-	"units": "mmol/L",
+	"deviceTime": "2016-04-28T11:18:05",
+	"guid": "81064d4f-0047-4171-9f47-58d0c840921f",
+	"id": "b8464da295e940eb94f09eafb0e32e18",
+	"time": "2016-04-28T18:18:05.692Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -116,15 +237,15 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "cbg",
-	"value": 242,
+	"units": "mg/dL",
+	"value": 463,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-11-08T20:46:34",
-	"guid": "39a8b40a-b182-4106-be89-3d05678e08e9",
-	"time": "2015-11-09T04:46:34.239Z",
-	"timezoneOffset": -480,
-	"units": "mg/dL",
+	"deviceTime": "2016-04-28T11:18:05",
+	"guid": "0c8b932f-01bc-4fa1-8243-f5289e353387",
+	"time": "2016-04-28T18:18:05.693Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -134,21 +255,21 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "cbg",
-	"value": 2.719866515612311,
+	"units": "mmol/L",
+	"value": 28.586352153884498,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-11-09T04:46:39.240Z",
+	"createdTime": "2016-04-28T18:18:10.693Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-11-08T20:46:34",
-	"guid": "7431a469-b0fc-4dbd-95c0-41cf272795c3",
-	"id": "5a6b3ea800be46288e2a2f036cbff848",
-	"time": "2015-11-09T04:46:34.240Z",
-	"timezoneOffset": -480,
-	"units": "mmol/L",
+	"deviceTime": "2016-04-28T11:18:05",
+	"guid": "4b33f238-1052-4eb7-a553-24bc8d5cf50f",
+	"id": "f50f97800f7e44a791ca0f17f223ab7b",
+	"time": "2016-04-28T18:18:05.693Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```

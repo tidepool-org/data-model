@@ -165,8 +165,8 @@ module.propTypes = {
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);
   },
-  oneOfStringOptions: function(desc, arr) {
-    return desc + '\n\n' + 'Must be one of: `' + arr.join('`, `') + '`.';
+  oneOfStringOptions: function(arr) {
+    return 'Must be one of: `' + arr.join('`, `') + '`.';
   },
   OPTIONAL: '> This field is **optional**.\n\n',
   OPTIONAL_JELLYFISH_REQUIRED: '> This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.\n\n',
@@ -206,6 +206,37 @@ module.numericalTypes = {
   FLOATING_POINT_MMOL: 'Floating point value representing a `mmol/L` value.',
   INTEGER_MGDL: 'Integer value representing a `mg/dL` value.',
   INTEGER_MS: 'Integer value representing milliseconds.'
+};
+
+module.bgUnitsSummary = {
+  description: module.propTypes.bgUnits(),
+  required: {
+    jellyfish: true,
+    platform: true
+  },
+  range: module.propTypes.oneOfStringOptions(['mg/dL', 'mmol/L'])
+};
+
+module.bgValueSummary = {
+  description: module.propTypes.bgValue(),
+  required: {
+    jellyfish: true,
+    platform: true
+  },
+  numericalType: {
+    'mg/dL': module.numericalTypes.INTEGER_MGDL,
+    'mmol/L': module.numericalTypes.FLOATING_POINT_MMOL
+  },
+  range: {
+    'mg/dL': {
+      min: 0,
+      max: 1000
+    },
+    'mmol/L': {
+      min: '0.0',
+      max: '55.0'
+    }
+  }
 };
 
 module.exports = module;

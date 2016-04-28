@@ -22,15 +22,21 @@ var TYPE = 'cbg';
 var schema = {
   type: {
     instance: TYPE,
-    description: common.propTypes.stringValue(TYPE)
+    summary: {
+      description: common.propTypes.stringValue(TYPE),
+      required: {
+        jellyfish: true,
+        platform: true
+      }
+    }
   },
   units: {
     instance: common.bgUnits,
-    description: common.propTypes.bgUnits()
+    summary: common.bgUnitsSummary
   },
   value: {
     instance: common.bgValue,
-    description: common.propTypes.bgValue()
+    summary: common.bgValueSummary
   }
 };
 
@@ -39,7 +45,7 @@ module.generate = function(utc, format) {
   return cbg;
 };
 
-module.propTypes = common.getSummary(schema);
+module.summary = common.getSummary(schema);
 
 module.changeLog = common.getChangeLog(schema);
 

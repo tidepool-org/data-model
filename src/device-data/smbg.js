@@ -20,25 +20,37 @@ var common = require('./common');
 var TYPE = 'smbg';
 var SUBTYPES = ['manual', 'linked'];
 
+var BG_SUBTYPE = '[ingestion, storage, client] String value encoding additional information about the source of the blood glucose value.';
+
 var schema = {
   type: {
     instance: TYPE,
-    description: common.propTypes.stringValue(TYPE)
+    summary: {
+      description: common.propTypes.stringValue(TYPE),
+      required: {
+        jellyfish: true,
+        platform: true
+      }
+    }
   },
   subType: {
     instance: SUBTYPES,
-    description: common.propTypes.OPTIONAL + common.propTypes.oneOfStringOptions(
-      '[ingestion, storage, client] String value encoding additional information about the source of the blood glucose value.',
-      SUBTYPES
-    )
+    summary: {
+      description: common.propTypes.OPTIONAL + BG_SUBTYPE,
+      required: {
+        jellyfish: false,
+        platform: false
+      },
+      range: common.propTypes.oneOfStringOptions(SUBTYPES)
+    }
   },
   units: {
     instance: common.bgUnits,
-    description: common.propTypes.bgUnits()
+    summary: common.bgUnitsSummary
   },
   value: {
     instance: common.bgValue,
-    description: common.propTypes.bgValue()
+    summary: common.bgValueSummary
   }
 };
 
@@ -47,7 +59,7 @@ module.generate = function(utc, format) {
   return smbg;
 };
 
-module.propTypes = common.getSummary(schema);
+module.summary = common.getSummary(schema);
 
 module.changeLog = common.getChangeLog(schema);
 

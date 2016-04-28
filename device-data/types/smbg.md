@@ -14,9 +14,17 @@
 
 [ingestion, storage, client] The string `smbg`.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+<!-- start type -->
+
 This is the Tidepool data type for traditional fingerstick blood glucose meter data. `smbg` is an abbreviation of 'self-monitored blood glucose' and contrasts with `cbg`, abbreviating 'continuous blood glucose'. [`cbg`](cbg.md) is the Tidepool data type for continuous glucose monitor (CGM) sensor data.
 
 <!-- end type -->
+
+* * * * *
 
 ### subType
 
@@ -24,7 +32,12 @@ This is the Tidepool data type for traditional fingerstick blood glucose meter d
 
 [ingestion, storage, client] String value encoding additional information about the source of the blood glucose value.
 
-If present, must be one of: `manual`, `linked`.
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
+	Range: Must be one of: `manual`, `linked`.
+<!-- start subType -->
 
 `subType` appears on blood glucose values that are *not* being read directly from a traditional fingerstick blood glucose meter, but rather from another data source such as an insulin pump.
 
@@ -34,6 +47,8 @@ The value `linked` indicates that the blood glucose value was transferred from a
 
 <!-- end subType -->
 
+* * * * *
+
 ### units
 
 [ingestion] One of two string values: `mg/dL` or `mmol/L`.
@@ -42,8 +57,16 @@ The value `linked` indicates that the blood glucose value was transferred from a
 
 See [units](../units.md) for further explanation of blood glucose units.
 
-<!-- TODO -->
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Range: Must be one of: `mg/dL`, `mmol/L`.
+<!-- start units -->
+
 <!-- end units -->
+
+* * * * *
 
 ### value
 
@@ -51,64 +74,167 @@ See [units](../units.md) for further explanation of blood glucose units.
 
 [storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.
 
-<!-- TODO -->
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Numerical type:
+		mg/dL: Integer value representing a `mg/dL` value.
+		mmol/L: Floating point value representing a `mmol/L` value.
+	Range:
+		mg/dL:
+			min: 0
+			max: 1000
+		mmol/L:
+			min: 0.0
+			max: 55.0
+
+
+<!-- start value -->
+
 <!-- end value -->
 
-### _active
-
-See [common fields](../common.md).
-
-### _groupId
-
-See [common fields](../common.md).
-
-### _schemaVersion
-
-See [common fields](../common.md).
-
-### _version
-
-See [common fields](../common.md).
+* * * * *
 
 ### clockDriftOffset
 
 See [common fields](../common.md).
 
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+
+* * * * *
+
 ### conversionOffset
 
 See [common fields](../common.md).
 
-### createdTime
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
 
-See [common fields](../common.md).
+* * * * *
 
 ### deviceId
 
 See [common fields](../common.md).
 
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+
+* * * * *
+
 ### deviceTime
 
 See [common fields](../common.md).
+
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
+
+* * * * *
 
 ### guid
 
 See [common fields](../common.md).
 
-### id
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
 
-See [common fields](../common.md).
+* * * * *
 
 ### time
 
 See [common fields](../common.md).
 
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
+
+* * * * *
+
 ### timezoneOffset
 
 See [common fields](../common.md).
 
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+
+* * * * *
+
 ### uploadId
 
 See [common fields](../common.md).
+
+<!-- start uploadId -->
+<!-- TODO -->
+<!-- end uploadId -->
+
+* * * * *
+
+### _active
+
+See [common fields](../common.md).
+
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+
+* * * * *
+
+### _groupId
+
+See [common fields](../common.md).
+
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
+
+* * * * *
+
+### _schemaVersion
+
+See [common fields](../common.md).
+
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+
+* * * * *
+
+### _version
+
+See [common fields](../common.md).
+
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
+
+* * * * *
+
+### createdTime
+
+See [common fields](../common.md).
+
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+
+* * * * *
+
+### id
+
+See [common fields](../common.md).
+
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
+
+* * * * *
 
 ### example (client)
 
@@ -117,15 +243,15 @@ See [common fields](../common.md).
 	"type": "smbg",
 	"subType": "manual",
 	"units": "mmol/L",
-	"value": 19.927185287853465,
+	"value": 21.370379765525303,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-03T00:26:47",
-	"guid": "b2c1d8f7-e8e3-4fea-ab67-196c731bd225",
-	"id": "822cb6b0ce704179993d26026393477c",
-	"time": "2015-12-03T08:26:47.894Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-28T11:18:03",
+	"guid": "51414496-a20f-4214-95b8-8c1ea1b0cc89",
+	"id": "771fd8f0f9a949728b96caf255656664",
+	"time": "2016-04-28T18:18:03.069Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -137,14 +263,14 @@ See [common fields](../common.md).
 	"type": "smbg",
 	"subType": "manual",
 	"units": "mg/dL",
-	"value": 330,
+	"value": 74,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-03T00:26:47",
-	"guid": "5a4680c8-0ece-469b-ad8b-4d8bf1f36f4e",
-	"time": "2015-12-03T08:26:47.895Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-28T11:18:03",
+	"guid": "b268180b-9a4e-44b5-8877-756e8e665395",
+	"time": "2016-04-28T18:18:03.069Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -156,20 +282,20 @@ See [common fields](../common.md).
 	"type": "smbg",
 	"subType": "manual",
 	"units": "mmol/L",
-	"value": 18.42848333027117,
+	"value": 24.589813600331713,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2015-12-03T08:26:52.896Z",
+	"createdTime": "2016-04-28T18:18:08.069Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2015-12-03T00:26:47",
-	"guid": "8f127839-7b54-4627-abe0-8c5b0aa0ff8e",
-	"id": "fac22501d1f244d9b595b5cb36c0559f",
-	"time": "2015-12-03T08:26:47.896Z",
-	"timezoneOffset": -480,
+	"deviceTime": "2016-04-28T11:18:03",
+	"guid": "fdad17ab-836a-4430-99e4-b8066e882bda",
+	"id": "0b7c669bc472412ea12ed414e1848f33",
+	"time": "2016-04-28T18:18:03.069Z",
+	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
