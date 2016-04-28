@@ -193,7 +193,7 @@ function extractFromNested(schema, property) {
   }
 }
 
-module.getPropTypes = function(schema) {
+module.getSummary = function(schema) {
   return extractFromNested(schema, 'summary')
 };
 
@@ -202,8 +202,10 @@ module.getChangeLog = function(schema) {
 };
 
 module.numericalTypes = {
+  FLOATING_POINT_DEVICE_SIG_FIGS: 'Floating point value rounded to the appropriate significant figures for the device\'s precision.',
   FLOATING_POINT_MMOL: 'Floating point value representing a `mmol/L` value.',
-  INTEGER_MGDL: 'Integer value representing a `mg/dL` value.'
+  INTEGER_MGDL: 'Integer value representing a `mg/dL` value.',
+  INTEGER_MS: 'Integer value representing milliseconds.'
 };
 
 module.exports = module;

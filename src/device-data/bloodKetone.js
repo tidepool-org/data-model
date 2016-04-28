@@ -67,7 +67,7 @@ module.generate = function(utc, format) {
   return bk;
 };
 
-module.summary = common.getPropTypes(schema);
+module.summary = common.getSummary(schema);
 
 module.changeLog = common.getChangeLog(schema);
 

@@ -16,8 +16,8 @@
 
 	QUICK SUMMARY
 	Required:
-		yes: jellyfish
-		yes: platform
+		jellyfish: yes
+		platform: yes
 <!-- start type -->
 
 Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool does not yet provide a data model for urine ketones, which are measured qualitatively, not quantitatively.
@@ -32,8 +32,8 @@ Blood ketones represent ketone concentration values (specifically beta-ketones, 
 
 	QUICK SUMMARY
 	Required:
-		yes: jellyfish
-		yes: platform
+		jellyfish: yes
+		platform: yes
 <!-- start units -->
 
 <!-- end units -->
@@ -46,8 +46,8 @@ Blood ketones represent ketone concentration values (specifically beta-ketones, 
 
 	QUICK SUMMARY
 	Required:
-		yes: jellyfish
-		yes: platform
+		jellyfish: yes
+		platform: yes
 	Type: Floating point value representing a `mmol/L` value.
 	Range:
 		min: 0.0

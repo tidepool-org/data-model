@@ -47,7 +47,7 @@ module.generate = function(utc, format) {
   return smbg;
 };
 
-module.propTypes = common.getPropTypes(schema);
+module.propTypes = common.getSummary(schema);
 
 module.changeLog = common.getChangeLog(schema);
 

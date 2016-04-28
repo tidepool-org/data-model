@@ -265,7 +265,7 @@ function sectionForField(field, summary, changeLog) {
               fieldSection.push('\tQUICK SUMMARY');
               fieldSection.push('\tRequired:');
               fieldSection.push(Object.keys(section).map(function(api) {
-                return util.format('\t\t' + (section[api] ? 'yes' : 'no') + ': %s', api);
+                return util.format('\t\t%s: ' + (section[api] ? 'yes' : ((section[api] === null) ? 'nonexistent' : 'no (optional)')), api);
               }).join('\n'));
               break;
             case 'range':

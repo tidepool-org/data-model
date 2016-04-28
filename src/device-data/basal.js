@@ -31,48 +31,104 @@ var DELIVERY_TYPES = {
 var SCHEDULE_NAMES = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
 
 var TYPE = 'basal';
-var RATE = '[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.\n\n**Range**: Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.';
+var RATE = '[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.';
 var PREVIOUS = '[ingestion] An object representing the `basal` event just prior to this event or, equivalently, just the `id` of said object.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
 var getSuppressedDesc = function(type) {
   return  common.propTypes.OPTIONAL + format('[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this %s basal is in effect.', type);
 };
-var DURATION_LIMIT_SCHEDULED = '\n\n**Range**: The new platform APIs expect this value to be >= 0 and <= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.';
 var DURATION_LIMIT_TEMP = '\n\n**Range**: The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.';
 
 var schemas = {
   base: {
     type: {
       instance: TYPE,
-      description: common.propTypes.stringValue(TYPE)
+      summary: {
+        description: common.propTypes.stringValue(TYPE),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
     }
   },
   scheduled: {
     deliveryType: {
       instance: DELIVERY_TYPES.scheduled,
-      description: common.propTypes.stringValue(DELIVERY_TYPES.scheduled)
+      summary: {
+        description: common.propTypes.stringValue(DELIVERY_TYPES.scheduled),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
     },
     duration: {
       instance: common.duration,
-      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration() + DURATION_LIMIT_SCHEDULED
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration(),
+        required: {
+          jellyfish: false,
+          platform: true
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: 432000000
+        }
+      }
     },
     expectedDuration: {
       instance: 0,
-      description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration() + DURATION_LIMIT_SCHEDULED
+      summary: {
+        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDuration(),
+        required: {
+          jellyfish: false,
+          platform: false
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: 432000000
+        }
+      }
     },
     rate: {
       instance: function() {
         // yield float rounded to nearest 0.025
         return Math.round(chance.floating({min: 0.025, max: 2})*40)/40;
       },
-      description: RATE
+      summary: {
+        description: RATE,
+        required: {
+          jellyfish: true,
+          platform: true
+        },
+        numericalType: common.numericalTypes.FLOATING_POINT_DEVICE_SIG_FIGS,
+        range: {
+          min: '0.0',
+          max: '20.0'
+        }
+      }
     },
     previous: {
       instance: {},
-      description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS,
+        required: {
+          jellyfish: false,
+          platform: null
+        }
+      }
     },
     scheduleName: {
       instance: SCHEDULE_NAMES,
-      description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A string: the name of the basal schedule.',
+      summary: {
+        description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A string: the name of the basal schedule.',
+        required: {
+          jellyfish: false,
+          platform: false
+        }
+      },
       changelog: [common.changeLog.madeOptional('scheduleName', 2)]
     }
   },
@@ -179,7 +235,7 @@ module.generate = function(opts) {
 
 module.deliveryTypes = _.values(DELIVERY_TYPES);
 
-module.propTypes = common.getPropTypes(schemas);
+module.summary = common.getSummary(schemas);
 
 module.changeLog = common.getChangeLog(schemas);
 
