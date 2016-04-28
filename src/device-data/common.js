@@ -194,11 +194,16 @@ function extractFromNested(schema, property) {
 }
 
 module.getPropTypes = function(schema) {
-  return extractFromNested(schema, 'description')
+  return extractFromNested(schema, 'summary')
 };
 
 module.getChangeLog = function(schema) {
   return extractFromNested(schema, 'changelog');
+};
+
+module.numericalTypes = {
+  FLOATING_POINT_MMOL: 'Floating point value representing a `mmol/L` value.',
+  INTEGER_MGDL: 'Integer value representing a `mg/dL` value.'
 };
 
 module.exports = module;

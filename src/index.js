@@ -29,7 +29,7 @@ var wizard = require('./device-data/wizard');
 module.exports = {
   basal: {
     generator: basal.generate,
-    propTypes: basal.propTypes,
+    summary: basal.summary,
     changeLog: basal.changeLog,
     title: 'Basal Insulin',
     subtitle: 'Basal deliveryType',
@@ -38,7 +38,7 @@ module.exports = {
   },
   bloodKetone: {
     generator: bloodKetone.generate,
-    propTypes: bloodKetone.propTypes,
+    summary: bloodKetone.summary,
     changeLog: bloodKetone.changeLog,
     title: 'Blood Ketones',
     type: 'bloodKetone'
@@ -47,7 +47,7 @@ module.exports = {
   },
   cbg: {
     generator: cbg.generate,
-    propTypes: cbg.propTypes,
+    summary: cbg.summary,
     changeLog: cbg.changeLog,
     title: 'Continuous Blood Glucose',
     type: 'cbg'
@@ -64,7 +64,7 @@ module.exports = {
   },
   smbg: {
     generator: smbg.generate,
-    propTypes: smbg.propTypes,
+    summary: smbg.summary,
     changeLog: smbg.changeLog,
     title: 'Self-Monitored Blood Glucose',
     type: 'smbg'

@@ -240,11 +240,11 @@ function commonSectionForField(field) {
  * Description
  * @method sectionForField
  * @param {String} field the name of a field existing on a data type
- * @param {String} propType Markdown string boilerplate describing the property type for the field
+ * @param {String} summary Markdown string boilerplate giving a summary for the field
  * @param {Array} changeLog array of strings, each describing a change on the field's contents or validation
  * @return Markdown string containing boilerplate section (header and contents) for a field in a data type or subType
  */
-function sectionForField(field, propType, changeLog) {
+function sectionForField(field, summary, changeLog) {
   var fieldSection = [fieldSectionHeader(field)];
   if (commonFields[field] !== undefined) {
     if (hasSubtypes) {
@@ -255,8 +255,44 @@ function sectionForField(field, propType, changeLog) {
     }
   }
   else {
-    if (propType) {
-      fieldSection.push(propType + '\n');
+    if (summary) {
+      _.forOwn(summary, function(section, sectionKey) {
+        var isObj = typeof section === 'object';
+        if (isObj) {
+          switch (sectionKey) {
+            case 'required':
+              // the QUICK SUMMARY indicator goes here because `required` is always first
+              fieldSection.push('\tQUICK SUMMARY');
+              fieldSection.push('\tRequired:');
+              fieldSection.push(Object.keys(section).map(function(api) {
+                return util.format('\t\t' + (section[api] ? 'yes' : 'no') + ': %s', api);
+              }).join('\n'));
+              break;
+            case 'range':
+              fieldSection.push('\tRange:');
+              fieldSection.push(Object.keys(section).map(function(bound) {
+                return util.format('\t\t%s: %s', bound, section[bound]);
+              }).join('\n'));
+              break;
+            default:
+              fieldSection.push('');
+          }
+        }
+        else {
+          var prefix, postfix;
+          switch (sectionKey) {
+            case 'numericalType':
+              prefix = '\tType: ';
+              postfix = '';
+              break;
+            default:
+              prefix = '';
+              postfix = '\n';
+          }
+          var isFn = typeof section === 'function';
+          fieldSection.push(prefix + (isFn ? section() : section) + postfix);
+        }
+      });
     }
     if (changeLog) {
       fieldSection.push(util.format('#### Changelog for `%s`\n', field));
@@ -319,7 +355,7 @@ else {
     doc.push(util.format('>  - [%s example](#example-%s)', exampleType, exampleType));
   })
   doc.push('\n');
-  var schemaFields = hasSubtypes ? generators[type].propTypes[commander.subType] : generators[type].propTypes;
+  var schemaFields = hasSubtypes ? generators[type].summary[commander.subType] : generators[type].summary;
   var allFields = Object.keys(_.merge(
     _.cloneDeep(schemaFields),
     exampleObject(type, 'ingestion'),
@@ -330,8 +366,8 @@ else {
       new RegExp(getFieldSectionRegExp(field))
     );
     var sectionBase = hasSubtypes ?
-      sectionForField(field, generators[type].propTypes[commander.subType][field], generators[type].changeLog[commander.subType][field]) :
-      sectionForField(field, generators[type].propTypes[field], generators[type].changeLog[field]);
+      sectionForField(field, generators[type].summary[commander.subType][field], generators[type].changeLog[commander.subType][field]) :
+      sectionForField(field, generators[type].summary[field], generators[type].changeLog[field]);
     if (existingSection && (existingSection[0].search('TODO') === -1)) {
       sectionBase.push(existingSection[0]);
       sectionBase.push('* * * * *\n');
