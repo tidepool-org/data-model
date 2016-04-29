@@ -105,7 +105,7 @@ function addIntroTodoToIndexDoc(indexDoc) {
  */
 function addLinksToIndexDoc(indexDoc) {
   generators[type].subTypes.map(function(subType) {
-    indexDoc.push(util.format('- [%s](./%s.md)', subType, subType))
+    indexDoc.push(util.format('- [%s](./%s.md)', subType, subType.replace('/', '-')))
   });
 }
 
