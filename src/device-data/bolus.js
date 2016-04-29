@@ -28,11 +28,11 @@ var SUB_TYPES = {
 };
 
 var randomBolusValue = function() {
-  return chance.floating({
-    fixed: 2,
+  // yield float rounded to nearest 0.25
+  return Math.round(chance.floating({
     min: 0.5,
     max: 10.0
-  });
+  })*4)/4;
 };
 
 var schemas = {
@@ -142,6 +142,8 @@ var schemas = {
   }
 };
 
+schemas['dual/square'] = _.merge({}, schemas.normal, schemas.square);
+
 module.generate = function(opts) {
   if (!_.includes(module.subTypes, opts.subType)) {
     console.error(format(
@@ -156,7 +158,14 @@ module.generate = function(opts) {
     opts.timestamp,
     opts.format
   );
-  bolus.expectedNormal = 1.25 * bolus.normal;
+  if (bolus.extended) {
+    bolus.expectedExtended = Math.round(1.5 * bolus.extended * 40)/40;
+    bolus.expectedDuration = 1.5 * bolus.duration;
+    delete bolus.expectedNormal;
+  }
+  else if (bolus.normal) {
+    bolus.expectedNormal = Math.round(1.2 * bolus.normal * 40)/40;
+  }
   return bolus;
 };
 

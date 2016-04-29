@@ -149,7 +149,7 @@ function getDocPath(base) {
         process.exit();
       }
     }
-    return base + 'types/' + type + '/' + commander.subType + '.md';
+    return base + 'types/' + type + '/' + commander.subType.replace('/', '-') + '.md';
   }
   else {
     return base + 'types/' + type + '.md';
