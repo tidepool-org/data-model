@@ -19,7 +19,9 @@
 		jellyfish: yes
 		platform: yes
 <!-- start type -->
-<!-- TODO -->
+
+This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to be delivered spread evenly over a `duration` of time (typically fifteen minutes to several hours).
+
 <!-- end type -->
 
 * * * * *
@@ -33,7 +35,9 @@
 		jellyfish: yes
 		platform: yes
 <!-- start subType -->
-<!-- TODO -->
+
+We plan to migrate all Tidepool data to use `extended` as the value of this sub-type rather than `square` in order to improve the consistency of the data model. With `subType` containing `extended` and the `extended` field containing the value of the delivered insulin dose, this sub-type of `bolus` event will be parallel to `normal` boluses, where the `subType` is `normal` and the `normal` field contains the value of the delivered insulin dose.
+
 <!-- end subType -->
 
 * * * * *
@@ -48,10 +52,14 @@
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: 0.0
+		min: > 0.0
 		max: 100.0
 <!-- start extended -->
-<!-- TODO -->
+
+The `extended` field encodes the numerical value of the dose of insulin delivered over the `duration` by an insulin pump. As with `normal` boluses, we do not allow the upload of boluses with a total delivered dose of 0 units.
+
+Refer to the documentation for [`normal`](normal.md) boluses for an explanation of the range of this field.
+
 <!-- end extended -->
 
 * * * * *
@@ -71,7 +79,11 @@
 		min: > `extended`
 		max: 100.0
 <!-- start expectedExtended -->
-<!-- TODO -->
+
+When a `square` bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedExtended` field is used to store the original value of the dose of insulin that the user programmed, while `extended` represents the value of the dose that was actually delivered.
+
+Refer to the documentation for [`normal`](normal.md) boluses for an explanation of the range of this field.
+
 <!-- end expectedExtended -->
 
 * * * * *
@@ -89,7 +101,14 @@
 		min: 0
 		max: 86400000
 <!-- start duration -->
-<!-- TODO -->
+
+The `duration` field encodes the actual elapsed duration of time, in milliseconds, spent delivering the dose of insulin encoded in `extended`.
+
+<!-- DRAFT: discuss with Gerrit -->
+The user interface for some insulin pumps allows a user to program a `square` bolus with a 0 duration; this is logically equivalent to a `normal` bolus but in order to expose device data with the highest level of fidelity possible, we preserve the record as a sub-type `square` and allow the upload of the event with a value of 0 for `duration`.
+
+To the best of our knowledge, no insulin pump allows the programming of a `square` bolus with a duration longer than twenty-four hours, and so we have chosen this as the maximum value accepted by the new platform APIs.
+
 <!-- end duration -->
 
 * * * * *
@@ -109,7 +128,11 @@
 		min: > `duration`
 		max: 86400000
 <!-- start expectedDuration -->
-<!-- TODO -->
+
+When a `square` bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedDuration` field is used to store the original duration of time that the user programmed for delivery of the dose of insulin encoded in `extended`. The `duration` field, in contrast, encodes the actual elapsed duration of dose delivery.
+
+The minimum value of `expectedDuration` is any value greater than that encoded under `duration` since any other value (i.e., less than or equal to `duration`) cannot obtain from interruption or cancellation of a bolus. See above under [`duration`](#duration) for discussion of the maximum value for this field.
+
 <!-- end expectedDuration -->
 
 * * * * *

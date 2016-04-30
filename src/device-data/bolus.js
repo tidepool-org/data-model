@@ -142,7 +142,18 @@ var schemas = {
   }
 };
 
-schemas['dual/square'] = _.merge({}, schemas.normal, schemas.square);
+schemas['dual/square'] = _.merge({}, schemas.normal, schemas.square, {
+  subType: {
+    instance: SUB_TYPES.combo,
+    summary: {
+      description: common.propTypes.stringValue(SUB_TYPES.combo),
+      required: {
+        jellyfish: true,
+        platform: true
+      }
+    }
+  }
+});
 
 module.generate = function(opts) {
   if (!_.includes(module.subTypes, opts.subType)) {

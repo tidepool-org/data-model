@@ -19,7 +19,9 @@
 		jellyfish: yes
 		platform: yes
 <!-- start type -->
-<!-- TODO -->
+
+This is the sub-type of `bolus` event that represents a bolus insulin dose delivered more-or-less immediately (within a matter of seconds or a small number of minutes, depending on the insulin pump and the user's settings). At Tidepool we follow the common convention of representing `normal` boluses as point-in-time events since their durations are short enough to be negligible.
+
 <!-- end type -->
 
 * * * * *
@@ -48,10 +50,14 @@
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: 0.0
+		min: > 0.0
 		max: 100.0
 <!-- start normal -->
-<!-- TODO -->
+
+The `normal` field encodes the numerical value of the dose of insulin delivered by an insulin pump. To avoid noise in the data (especially as some insulin pumps make it very easy to deliver "doses" of 0 units when no additional dose is recommended given the PWD's current blood glucose and insulin on board), we have chosen _not_ to allow the upload of boluses with a total delivered dose of 0 units; the value must be greater than 0.
+
+Most, if not all, insulin pumps include a maximum bolus setting that a PWD can customize to his or her typical dosing in order to prevent accidental delivery of very large doses of insulin. However, we could not find any indication that insulin pumps typically set a default maximum dose; hence we have chosen 100 units as an arbitrarily large maximum dose that we can imagine someone with type 1 diabetes programming.
+
 <!-- end normal -->
 
 * * * * *
@@ -71,7 +77,11 @@
 		min: > `normal`
 		max: 100.0
 <!-- start expectedNormal -->
-<!-- TODO -->
+
+When a bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedNormal` field is used to store the original value of the dose of insulin that the user programmed, while `normal` represents the value of the dose that was actually delivered.
+
+The minimum value of `expectedNormal` is any value greater than that encoded under `normal` since any other value (i.e., less than or equal to `normal`) cannot obtain from interruption or cancellation of a bolus. See above in [`normal`](#normal) for discussion of the maximum value for this field.
+
 <!-- end expectedNormal -->
 
 * * * * *

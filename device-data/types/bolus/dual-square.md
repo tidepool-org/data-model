@@ -19,21 +19,27 @@
 		jellyfish: yes
 		platform: yes
 <!-- start type -->
-<!-- TODO -->
+
+This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to deliver part of the dose using the immediate delivery strategy (a `normal` bolus) and the remainder using the delivery spread evenly over a `duration` strategy (a `square` bolus). The data model is essentially just a combination of the models for [`normal`](normal.md) and [`square`](square.md) boluses.
+
+Most (and perhaps all) insulin pumps ask the user to divide the `normal` and `square` portions of a `dual/square` bolus by *percentage* of the total insulin dose. We do **not** encode this programmed percentage directly, but it is recoverable (for surfacing in a client application's UI) through computation using the appropriate combination of values from the `normal`, `extended`, `expectedNormal`, and `expectedExtended` fields and/or the appropriate sum of these.
+
 <!-- end type -->
 
 * * * * *
 
 ### subType
 
-[ingestion, storage, client] The string `square`.
+[ingestion, storage, client] The string `dual/square`.
 
 	QUICK SUMMARY
 	Required:
 		jellyfish: yes
 		platform: yes
 <!-- start subType -->
-<!-- TODO -->
+
+We plan to migrate all Tidepool data to use `combo` as the value of this sub-type rather than `dual/square` in order to improve the transparency of the data model and avoid `/` in a `subType` string.
+
 <!-- end subType -->
 
 * * * * *
@@ -48,10 +54,12 @@
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: 0.0
+		min: > 0.0
 		max: 100.0
 <!-- start normal -->
-<!-- TODO -->
+
+See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
+
 <!-- end normal -->
 
 * * * * *
@@ -71,7 +79,11 @@
 		min: > `normal`
 		max: 100.0
 <!-- start expectedNormal -->
-<!-- TODO -->
+
+See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
+
+Note that if a `dual/square` bolus is interrupted or canceled during the `normal` portion of delivery, by definition the `extended` delivery should _not_ yet have begun, so the value of `extended` and `duration` should be 0 and `expectedExtended` and `expectedDuration` should have a values.
+
 <!-- end expectedNormal -->
 
 * * * * *
@@ -86,10 +98,12 @@
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: 0.0
+		min: > 0.0
 		max: 100.0
 <!-- start extended -->
-<!-- TODO -->
+
+See the explanation of this field in the documentation for [`square`](square.md) boluses.
+
 <!-- end extended -->
 
 * * * * *
@@ -109,7 +123,11 @@
 		min: > `extended`
 		max: 100.0
 <!-- start expectedExtended -->
-<!-- TODO -->
+
+See the explanation of this field in the documentation for [`square`](square.md) boluses.
+
+Note that if a `dual/square` bolus is interrupted or canceled during the `extended` portion of delivery, by definition the `normal` delivery should have completed successfully, so the `expectedNormal` field _should not_ have a value. An example of this type of interruption appears below in the [examples](#example-client).
+
 <!-- end expectedExtended -->
 
 * * * * *
@@ -127,7 +145,9 @@
 		min: 0
 		max: 86400000
 <!-- start duration -->
-<!-- TODO -->
+
+See the explanation of this field in the documentation for [`square`](square.md) boluses.
+
 <!-- end duration -->
 
 * * * * *
@@ -147,7 +167,9 @@
 		min: > `duration`
 		max: 86400000
 <!-- start expectedDuration -->
-<!-- TODO -->
+
+See the explanation of this field in the documentation for [`square`](square.md) boluses.
+
 <!-- end expectedDuration -->
 
 * * * * *
@@ -297,19 +319,19 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "bolus",
-	"subType": "square",
-	"normal": 9.25,
-	"extended": 6.5,
-	"expectedExtended": 9.75,
-	"duration": 27000000,
-	"expectedDuration": 40500000,
+	"subType": "dual/square",
+	"normal": 4.5,
+	"extended": 3.75,
+	"expectedExtended": 5.625,
+	"duration": 23400000,
+	"expectedDuration": 35100000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T17:42:50",
-	"guid": "14ad526d-c8ca-459f-9bd2-cef883fd0784",
-	"id": "e591a058ea1a4395a2d9ba95fbfd358b",
-	"time": "2016-04-29T00:42:50.241Z",
+	"deviceTime": "2016-04-29T18:02:48",
+	"guid": "715c0ca0-8233-4997-a682-6ec6253bbad2",
+	"id": "2b78040abb17400bb8740fb5d7b40653",
+	"time": "2016-04-30T01:02:48.006Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -320,18 +342,18 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "bolus",
-	"subType": "square",
-	"normal": 1.75,
-	"extended": 1.5,
-	"expectedExtended": 2.25,
-	"duration": 7200000,
-	"expectedDuration": 10800000,
+	"subType": "dual/square",
+	"normal": 8.25,
+	"extended": 5.25,
+	"expectedExtended": 7.875,
+	"duration": 18000000,
+	"expectedDuration": 27000000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T17:42:50",
-	"guid": "544bc319-ea50-4bb0-965f-420c12b6a055",
-	"time": "2016-04-29T00:42:50.241Z",
+	"deviceTime": "2016-04-29T18:02:48",
+	"guid": "dbe29ba6-02e9-4cf9-b7d8-67fa5bc3bfd5",
+	"time": "2016-04-30T01:02:48.006Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -342,24 +364,24 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "bolus",
-	"subType": "square",
-	"normal": 6.25,
-	"extended": 8.5,
-	"expectedExtended": 12.75,
-	"duration": 16200000,
-	"expectedDuration": 24300000,
+	"subType": "dual/square",
+	"normal": 3.5,
+	"extended": 8,
+	"expectedExtended": 12,
+	"duration": 12600000,
+	"expectedDuration": 18900000,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-29T00:42:55.241Z",
+	"createdTime": "2016-04-30T01:02:53.006Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T17:42:50",
-	"guid": "8c101ad4-89d5-47b7-b364-49efe6ef20f1",
-	"id": "fad88c91f6544c38aec4faab2f6305bc",
-	"time": "2016-04-29T00:42:50.241Z",
+	"deviceTime": "2016-04-29T18:02:48",
+	"guid": "41e79307-d722-463f-a4bb-866f295109f1",
+	"id": "98294e0ba3494b41ae4e246e9a49552c",
+	"time": "2016-04-30T01:02:48.006Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
