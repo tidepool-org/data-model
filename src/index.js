@@ -66,6 +66,13 @@ module.exports = {
     title: 'Common Fields'
   },
   deviceEvent: {
+    generator: deviceEvent.generate,
+    summary: deviceEvent.summary,
+    changeLog: deviceEvent.changeLog,
+    title: 'Device Events',
+    subtitle: 'Device event subType',
+    subTypes: deviceEvent.subTypes,
+    type: 'deviceEvent'
   },
   pumpSettings: {
   },
