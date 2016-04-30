@@ -44,7 +44,7 @@
 
 [storage, client] The string `mmol/L`.
 
-See [units](../units.md) for further explanation of blood glucose units.
+See [units](../../units.md) for further explanation of blood glucose units.
 
 	QUICK SUMMARY
 	Required:
