@@ -33,6 +33,8 @@ var fs = require('fs');
 
 var generators = require('../src/');
 
+var common = require('../src/device-data/common');
+
 var type, hasSubtypes = false;
 
 commander.usage('[options] <type>')
@@ -248,9 +250,15 @@ function sectionForField(field, summary, changeLog) {
   var fieldSection = [fieldSectionHeader(field)];
   if (commonFields[field] !== undefined) {
     if (hasSubtypes) {
+      if (generators[type].optionalCommon[commander.subType][field] === true) {
+        fieldSection.push(common.propTypes.OPTIONAL);
+      }
       fieldSection.push('See [common fields](../../common.md).\n');
     }
     else {
+      if (generators[type].optionalCommon[field] === true) {
+        fieldSection.push(common.propTypes.OPTIONAL);
+      }
       fieldSection.push('See [common fields](../common.md).\n');
     }
   }

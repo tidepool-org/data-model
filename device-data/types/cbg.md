@@ -18,6 +18,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start type -->
 
 This is the Tidepool data type for continuous glucose monitor (CGM) sensor data. `cbg` is an abbreviation of 'continuous blood glucose' and contrasts with `smbg`, abbreviating 'self-monitored blood glucose'. [`smbg`](smbg.md) is the Tidepool data type for traditional fingerstick blood glucose meter data.
@@ -41,6 +42,7 @@ See [units](../units.md) for further explanation of blood glucose units.
 		jellyfish: yes
 		platform: yes
 	Range: Must be one of: `mg/dL`, `mmol/L`.
+
 <!-- start units -->
 
 <!-- end units -->
@@ -67,6 +69,7 @@ See [units](../units.md) for further explanation of blood glucose units.
 		mmol/L:
 			min: 0.0
 			max: 55.0
+
 
 
 <!-- start value -->
@@ -108,6 +111,7 @@ See [common fields](../common.md).
 ### deviceTime
 
 > This field is **optional**.
+
 
 See [common fields](../common.md).
 

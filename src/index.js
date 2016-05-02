@@ -56,6 +56,9 @@ module.exports = {
     generator: cbg.generate,
     summary: cbg.summary,
     changeLog: cbg.changeLog,
+    optionalCommon: {
+      deviceTime: true
+    },
     title: 'Continuous Blood Glucose',
     type: 'cbg'
   },
