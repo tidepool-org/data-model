@@ -18,6 +18,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start type -->
 <!-- TODO -->
 <!-- end type -->
@@ -32,6 +33,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start subType -->
 <!-- TODO -->
 <!-- end subType -->
@@ -50,7 +52,10 @@ See [units](../../units.md) for further explanation of blood glucose units.
 	Required:
 		jellyfish: yes
 		platform: yes
-	Range: Must be one of: `mg/dL`, `mmol/L`.
+	Range: Must be one of:
+		`mg/dL`
+		`mmol/L`
+
 <!-- start units -->
 <!-- TODO -->
 <!-- end units -->
@@ -77,6 +82,7 @@ See [units](../../units.md) for further explanation of blood glucose units.
 		mmol/L:
 			min: 0.0
 			max: 55.0
+
 
 
 <!-- start value -->

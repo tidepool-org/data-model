@@ -49,6 +49,15 @@ var CAN_SUSPEND = [
   'auto_off'
 ];
 var PRIME_TARGETS = ['cannula', 'tubing'];
+var STATUSES = ['suspended', 'resumed'];
+var AGENTS = ['manual', 'automatic'];
+var TIME_CHANGE_REASONS = [
+  'from_daylight_savings',
+  'to_daylight_savings',
+  'travel',
+  'correction',
+  'other'
+];
 
 var schemas = {
   base: {
@@ -113,7 +122,14 @@ var schemas = {
     },
     units: {
       instance: common.bgUnits,
-      summary: common.bgUnitsSummary
+      summary: {
+        description: common.propTypes.bgUnits(true),
+        required: {
+          jellyfish: true,
+          platform: true
+        },
+        range: common.propTypes.oneOfStringOptions(['mg/dL', 'mmol/L'])
+      }
     },
     value: {
       instance: common.bgValue,
@@ -166,6 +182,195 @@ var schemas = {
         }
       }
     }
+  },
+  reservoirChange: {
+    subType: {
+      instance: 'reservoirChange',
+      summary: {
+        description: common.propTypes.stringValue('reservoirChange'),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
+    },
+    status: {
+      instance: function() {
+        return uuid.v4().replace(/-/g, '');
+      },
+      summary: {
+        description: common.propTypes.OPTIONAL + '[ingestion, storage, client] String `id` (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type `deviceEvent`, subType `status` object that is logically connected to this reservoirChange.',
+        required: {
+          jellyfish: false,
+          platform: false
+        }
+      }
+    }
+  },
+  status: {
+    subType: {
+      instance: 'status',
+      summary: {
+        description: common.propTypes.stringValue('status'),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
+    },
+    status: {
+      instance: function() {
+        return chance.pickone(STATUSES);
+      },
+      summary: {
+        description: '[ingestion, storage, client] String value encoding insulin pump status as `suspended` or `resumed`.',
+        required: {
+          jellyfish: true,
+          platform: true
+        },
+        range: {
+          jellyfish: common.propTypes.oneOfStringOptions(STATUSES),
+          platform: common.propTypes.stringValue(STATUSES[0])
+        }
+      }
+    },
+    duration: {
+      instance: common.duration,
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration(),
+        required: {
+          jellyfish: false,
+          platform: true
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: '< ∞'
+        }
+      }
+    },
+    expectedDuration: {
+      instance: 0,
+      summary: {
+        description: common.propTypes.ADDED_BY_JELLYFISH + common.propTypes.expectedDurationBasal(),
+        required: {
+          jellyfish: false,
+          platform: false
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: '> `duration`',
+          max: '< ∞'
+        }
+      }
+    },
+    reason: {
+      instance: function() {
+        return {
+          suspended: chance.pickone(AGENTS),
+          resumed: chance.pickone(AGENTS)
+        };
+      },
+      summary: {
+        description: '[ingestion, storage, client] An object with two key-value pairs encoding the cause of a `suspended` or `resumed` event as `manual` (user-initiated) or `automatic` (pump-initiated).',
+        required: {
+          jellyfish: true,
+          platform: true
+        },
+        range: common.propTypes.oneOfStringOptions(AGENTS)
+      }
+    }
+  },
+  timeChange: {
+    subType: {
+      instance: 'timeChange',
+      summary: {
+        description: common.propTypes.stringValue('timeChange'),
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
+    },
+    change: {
+      instance: function() {
+        var from = new Date();
+        var to = new Date(from.valueOf() - (57 * 60 * 1000) + 25000);
+        return {
+          from: from.toISOString().slice(0,-5),
+          to: to.toISOString().slice(0,-5),
+          agent: 'manual',
+          reasons: ['travel', 'correction'],
+          timezone: chance.pickone(common.timeConstants.TIMEZONES)
+        };
+      },
+      summary: {
+        description: '[ingestion, storage, client] An object encoding as much information as possible about a diabetes device display time change event.',
+        nested: true,
+        keys: {
+          from: {
+            summary: {
+              description: common.propTypes.deviceTime(),
+              required: {
+                jellyfish: true,
+                platform: true
+              },
+              range: {
+                min: common.timeConstants.MIN_DEVICE_TIME,
+                max: 'none'
+              }
+            }
+          },
+          to: {
+            summary: {
+              description: common.propTypes.deviceTime(),
+              required: {
+                jellyfish: true,
+                platform: true
+              },
+              range: {
+                min: common.timeConstants.MIN_DEVICE_TIME,
+                max: 'none'
+              }
+            }
+          },
+          agent: {
+            summary: {
+              description: '[ingestion, storage, client] A string encoding the agent of the diabetes device display time change event.',
+              required: {
+                jellyfish: true,
+                platform: true
+              },
+              range: common.propTypes.oneOfStringOptions(AGENTS)
+            }
+          },
+          reasons: {
+            summary: {
+              description: common.propTypes.OPTIONAL + '[ingestion, storage, client] An array of tags describing the reason(s) for the diabetes device display time change.',
+              required: {
+                jellyfish: false,
+                platform: false
+              },
+              range: common.propTypes.oneOrMoreOfStringOptions(TIME_CHANGE_REASONS)
+            }
+          },
+          timezone: {
+            summary: {
+              description: common.propTypes.OPTIONAL + '[ingestion, storage, client] The name of the timezone that applies to the result of this diabetes device display time change.',
+              required: {
+                jellyfish: false,
+                platform: false
+              },
+              range: 'Must be a string timezone name from the IANA Timezone Database.'
+            }
+          }
+        },
+        required: {
+          jellyfish: true,
+          platform: true
+        }
+      }
+    }
   }
 };
 
@@ -190,6 +395,9 @@ module.generate = function(opts) {
   }
   if (opts.subType === 'prime' && deviceEvent.primeTarget === 'cannula') {
     deviceEvent.volume = chance.pickone(['0.3', '0.5', '0.7']);
+  }
+  if (opts.subType === 'status') {
+    deviceEvent.expectedDuration = 1.2 * deviceEvent.duration;
   }
 
   return deviceEvent;

@@ -246,17 +246,22 @@ function commonSectionForField(field) {
  * @param {Array} changeLog array of strings, each describing a change on the field's contents or validation
  * @return Markdown string containing boilerplate section (header and contents) for a field in a data type or subType
  */
-function sectionForField(field, summary, changeLog) {
-  var fieldSection = [fieldSectionHeader(field)];
+function sectionForField(field, summary, changeLog, fieldSection) {
+  if (!fieldSection) {
+    fieldSection = [fieldSectionHeader(field)];
+  }
+  else {
+    fieldSection.push(util.format('#### %s\n', field));
+  }
   if (commonFields[field] !== undefined) {
     if (hasSubtypes) {
-      if (generators[type].optionalCommon[commander.subType][field] === true) {
+      if (_.get(generators[type], ['optionalCommon', commander.subType, field], false)) {
         fieldSection.push(common.propTypes.OPTIONAL);
       }
       fieldSection.push('See [common fields](../../common.md).\n');
     }
     else {
-      if (generators[type].optionalCommon[field] === true) {
+      if (_.get(generators[type], ['optionalCommon', field], false)) {
         fieldSection.push(common.propTypes.OPTIONAL);
       }
       fieldSection.push('See [common fields](../common.md).\n');
@@ -264,62 +269,72 @@ function sectionForField(field, summary, changeLog) {
   }
   else {
     if (summary) {
-      _.forOwn(summary, function(section, sectionKey) {
-        var isObj = typeof section === 'object';
-        if (isObj) {
-          switch (sectionKey) {
-            case 'required':
-              // the QUICK SUMMARY indicator goes here because `required` is always first
-              fieldSection.push('\tQUICK SUMMARY');
-              fieldSection.push('\tRequired:');
-              fieldSection.push(Object.keys(section).map(function(api) {
-                return util.format('\t\t%s: ' + (section[api] ? 'yes' : ((section[api] === null) ? 'nonexistent' : 'no (optional)')), api);
-              }).join('\n'));
-              break;
-            case 'numericalType':
-              fieldSection.push('\tNumerical type:');
-              fieldSection.push(Object.keys(section).map(function(units) {
-                return util.format('\t\t%s: %s', units, section[units]);
-              }).join('\n'));
-              break;
-            case 'range':
-              fieldSection.push('\tRange:');
-              fieldSection.push(Object.keys(section).map(function(item) {
-                if (typeof section[item] === 'object') {
-                  fieldSection.push(util.format('\t\t%s:', item));
-                  fieldSection.push(Object.keys(section[item]).map(function(bound) {
-                    return util.format('\t\t\t%s: %s', bound, section[item][bound]);
-                  }).join('\n'));
-                  return '';
-                }
-                else {
-                  return util.format('\t\t%s: %s', item, section[item]);
-                }
-              }).join('\n'));
-              break;
-            default:
-              fieldSection.push('');
+      if (summary.nested) {
+        fieldSection.push(summary.description + '\n');
+        fieldSection.push('Contains the following properties:\n\n * ' + Object.keys(summary.keys).join('\n * ') + '\n');
+        _.forOwn(summary.keys, function(innerSummary, key) {
+          sectionForField(key, innerSummary.summary, null, fieldSection);
+        });
+      }
+      else {
+        _.forOwn(summary, function(section, sectionKey) {
+          var isObj = typeof section === 'object';
+          if (isObj) {
+            switch (sectionKey) {
+              case 'required':
+                // the QUICK SUMMARY indicator goes here because `required` is always first
+                fieldSection.push('\tQUICK SUMMARY');
+                fieldSection.push('\tRequired:');
+                fieldSection.push(Object.keys(section).map(function(api) {
+                  return util.format('\t\t%s: ' + (section[api] ? 'yes' : ((section[api] === null) ? 'nonexistent' : 'no (optional)')), api);
+                }).join('\n'));
+                break;
+              case 'numericalType':
+                fieldSection.push('\tNumerical type:');
+                fieldSection.push(Object.keys(section).map(function(units) {
+                  return util.format('\t\t%s: %s', units, section[units]);
+                }).join('\n'));
+                break;
+              case 'range':
+                fieldSection.push('\tRange:');
+                fieldSection.push(Object.keys(section).map(function(item) {
+                  if (typeof section[item] === 'object') {
+                    fieldSection.push(util.format('\t\t%s:', item));
+                    fieldSection.push(Object.keys(section[item]).map(function(bound) {
+                      return util.format('\t\t\t%s: %s', bound, section[item][bound]);
+                    }).join('\n'));
+                    return '';
+                  }
+                  else {
+                    return util.format('\t\t%s: %s', item, section[item]);
+                  }
+                }).join('\n'));
+                break;
+              default:
+                fieldSection.push('');
+            }
           }
-        }
-        else {
-          var prefix, postfix;
-          switch (sectionKey) {
-            case 'numericalType':
-              prefix = '\tNumerical type: ';
-              postfix = '';
-              break;
-            case 'range':
-              prefix = '\tRange: ';
-              postfix = '';
-              break;
-            default:
-              prefix = '';
-              postfix = '\n';
+          else {
+            var prefix, postfix;
+            switch (sectionKey) {
+              case 'numericalType':
+                prefix = '\tNumerical type: ';
+                postfix = '';
+                break;
+              case 'range':
+                prefix = '\tRange: ';
+                postfix = '';
+                break;
+              default:
+                prefix = '';
+                postfix = '\n';
+            }
+            var isFn = typeof section === 'function';
+            fieldSection.push(prefix + (isFn ? section() : section) + postfix);
           }
-          var isFn = typeof section === 'function';
-          fieldSection.push(prefix + (isFn ? section() : section) + postfix);
-        }
-      });
+        });
+        fieldSection.push('');
+      }
     }
     if (changeLog) {
       fieldSection.push(util.format('#### Changelog for `%s`\n', field));
