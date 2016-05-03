@@ -145,16 +145,20 @@ module.generate = function(schema, utc, format) {
 
 module.propTypes = {
   ADDED_BY_JELLYFISH: '> This field is **optional**. At present, it is **only** added by the jellyfish data ingestion service.\n\n',
-  bgUnits: function() {
+  bgUnits: function(hasSubtypes) {
     var ingestion = '[ingestion] One of two string values: `mg/dL` or `mmol/L`.\n\n';
     var elsewhere = '[storage, client] The string `mmol/L`.\n\n';
-    var units = 'See [units](../units.md) for further explanation of blood glucose units.';
+    var units = hasSubtypes ? 'See [units](../../units.md) for further explanation of blood glucose units.' :
+      'See [units](../units.md) for further explanation of blood glucose units.';
     return ingestion + elsewhere + units;
   },
   bgValue: function() {
     var ingestion = '[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.\n\n';
     var elsewhere = '[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.';
     return ingestion + elsewhere;
+  },
+  deviceTime: function() {
+    return '[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `' + new Date().toISOString().slice(0, -5) + '`.';
   },
   duration: function() {
     return '[ingestion, storage, client] An integer value representing a duration of time in milliseconds.';
@@ -171,8 +175,13 @@ module.propTypes = {
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);
   },
-  oneOfStringOptions: function(arr) {
-    return 'Must be one of: `' + arr.join('`, `') + '`.';
+  oneOfStringOptions: function(arr, extraIndent) {
+    var divider = extraIndent || false ? '\n\t\t\t' : '\n\t\t';
+    return 'Must be one of:' + divider + '`' + arr.join('`' + divider + '`') + '`';
+  },
+  oneOrMoreOfStringOptions: function(arr, extraIndent) {
+    var divider = extraIndent || false ? '\n\t\t\t' : '\n\t\t';
+    return 'One or more of:' + divider + '`' + arr.join('`' + divider + '`') + '`';
   },
   OPTIONAL: '> This field is **optional**.\n\n',
   OPTIONAL_JELLYFISH_REQUIRED: '> This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.\n\n',
@@ -256,6 +265,19 @@ module.bolusInsulinSummary = {
     min: '> 0.0',
     max: '100.0'
   }
+};
+
+module.timeConstants = {
+  MIN_DEVICE_TIME: '2007-01-01T00:00:00',
+  TIMEZONES: [
+    'US/Pacific',
+    'Pacific/Auckland',
+    'Europe/Budapest',
+    'US/Eastern',
+    'US/Mountain',
+    'US/Central',
+    'Europe/London'
+  ]
 };
 
 module.exports = module;

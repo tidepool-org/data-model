@@ -18,6 +18,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start type -->
 
 This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to deliver part of the dose using the immediate delivery strategy (a `normal` bolus) and the remainder using the delivery spread evenly over a `duration` strategy (a `square` bolus). The data model is essentially just a combination of the models for [`normal`](normal.md) and [`square`](square.md) boluses.
@@ -36,6 +37,7 @@ Most (and perhaps all) insulin pumps ask the user to divide the `normal` and `sq
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start subType -->
 
 We plan to migrate all Tidepool data to use `combo` as the value of this sub-type rather than `dual/square` in order to improve the transparency of the data model and avoid `/` in a `subType` string.
@@ -56,6 +58,7 @@ We plan to migrate all Tidepool data to use `combo` as the value of this sub-typ
 	Range:
 		min: > 0.0
 		max: 100.0
+
 <!-- start normal -->
 
 See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
@@ -78,6 +81,7 @@ See the explanation of this field in the documentation for [`normal`](normal.md)
 	Range:
 		min: > `normal`
 		max: 100.0
+
 <!-- start expectedNormal -->
 
 See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
@@ -100,6 +104,7 @@ Note that if a `dual/square` bolus is interrupted or canceled during the `normal
 	Range:
 		min: > 0.0
 		max: 100.0
+
 <!-- start extended -->
 
 See the explanation of this field in the documentation for [`square`](square.md) boluses.
@@ -122,6 +127,7 @@ See the explanation of this field in the documentation for [`square`](square.md)
 	Range:
 		min: > `extended`
 		max: 100.0
+
 <!-- start expectedExtended -->
 
 See the explanation of this field in the documentation for [`square`](square.md) boluses.
@@ -144,6 +150,7 @@ Note that if a `dual/square` bolus is interrupted or canceled during the `extend
 	Range:
 		min: 0
 		max: 86400000
+
 <!-- start duration -->
 
 See the explanation of this field in the documentation for [`square`](square.md) boluses.
@@ -166,6 +173,7 @@ See the explanation of this field in the documentation for [`square`](square.md)
 	Range:
 		min: > `duration`
 		max: 86400000
+
 <!-- start expectedDuration -->
 
 See the explanation of this field in the documentation for [`square`](square.md) boluses.

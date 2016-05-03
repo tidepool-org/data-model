@@ -1,4 +1,4 @@
-## Continuous Blood Glucose (cbg)
+## Device event subType: `calibration`
 
 **NB:** All fields are *required* unless otherwise noted.
 
@@ -12,7 +12,7 @@
 
 ### type
 
-[ingestion, storage, client] The string `cbg`.
+[ingestion, storage, client] The string `deviceEvent`.
 
 	QUICK SUMMARY
 	Required:
@@ -20,12 +20,23 @@
 		platform: yes
 
 <!-- start type -->
-
-This is the Tidepool data type for continuous glucose monitor (CGM) sensor data. `cbg` is an abbreviation of 'continuous blood glucose' and contrasts with `smbg`, abbreviating 'self-monitored blood glucose'. [`smbg`](smbg.md) is the Tidepool data type for traditional fingerstick blood glucose meter data.
-
-Note that [`deviceTime`](#devicetime) is **optional** for this data type alone of all diabetes device data types that Tidepool ingests. This is due to the fact that we are now ingesting Dexcom G5 data via integration with Apple's HealthKit; since this data originates with a cellular- and/or Internet-connected iPhone operating as the receiver for a Dexcom G5 sensor, the only stored timestamp *is* a UTC-anchored timestamp, and there is no notion of a "receiver display time" as there is with earlier generations of Dexcom devices.
-
+<!-- TODO -->
 <!-- end type -->
+
+* * * * *
+
+### subType
+
+[ingestion, storage, client] The string `calibration`.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+
+<!-- start subType -->
+<!-- TODO -->
+<!-- end subType -->
 
 * * * * *
 
@@ -35,7 +46,7 @@ Note that [`deviceTime`](#devicetime) is **optional** for this data type alone o
 
 [storage, client] The string `mmol/L`.
 
-See [units](../units.md) for further explanation of blood glucose units.
+See [units](../../units.md) for further explanation of blood glucose units.
 
 	QUICK SUMMARY
 	Required:
@@ -46,7 +57,7 @@ See [units](../units.md) for further explanation of blood glucose units.
 		`mmol/L`
 
 <!-- start units -->
-
+<!-- TODO -->
 <!-- end units -->
 
 * * * * *
@@ -75,14 +86,14 @@ See [units](../units.md) for further explanation of blood glucose units.
 
 
 <!-- start value -->
-
+<!-- TODO -->
 <!-- end value -->
 
 * * * * *
 
 ### clockDriftOffset
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start clockDriftOffset -->
 <!-- TODO -->
@@ -92,7 +103,7 @@ See [common fields](../common.md).
 
 ### conversionOffset
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start conversionOffset -->
 <!-- TODO -->
@@ -102,7 +113,7 @@ See [common fields](../common.md).
 
 ### deviceId
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start deviceId -->
 <!-- TODO -->
@@ -112,10 +123,7 @@ See [common fields](../common.md).
 
 ### deviceTime
 
-> This field is **optional**.
-
-
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start deviceTime -->
 <!-- TODO -->
@@ -125,7 +133,7 @@ See [common fields](../common.md).
 
 ### guid
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start guid -->
 <!-- TODO -->
@@ -135,7 +143,7 @@ See [common fields](../common.md).
 
 ### time
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start time -->
 <!-- TODO -->
@@ -145,7 +153,7 @@ See [common fields](../common.md).
 
 ### timezoneOffset
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start timezoneOffset -->
 <!-- TODO -->
@@ -155,7 +163,7 @@ See [common fields](../common.md).
 
 ### uploadId
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start uploadId -->
 <!-- TODO -->
@@ -165,7 +173,7 @@ See [common fields](../common.md).
 
 ### _active
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start _active -->
 <!-- TODO -->
@@ -175,7 +183,7 @@ See [common fields](../common.md).
 
 ### _groupId
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start _groupId -->
 <!-- TODO -->
@@ -185,7 +193,7 @@ See [common fields](../common.md).
 
 ### _schemaVersion
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start _schemaVersion -->
 <!-- TODO -->
@@ -195,7 +203,7 @@ See [common fields](../common.md).
 
 ### _version
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start _version -->
 <!-- TODO -->
@@ -205,7 +213,7 @@ See [common fields](../common.md).
 
 ### createdTime
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start createdTime -->
 <!-- TODO -->
@@ -215,7 +223,7 @@ See [common fields](../common.md).
 
 ### id
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start id -->
 <!-- TODO -->
@@ -227,16 +235,17 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "cbg",
+	"type": "deviceEvent",
+	"subType": "calibration",
 	"units": "mmol/L",
-	"value": 33.026950546720926,
+	"value": 21.31487228561485,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T11:18:05",
-	"guid": "81064d4f-0047-4171-9f47-58d0c840921f",
-	"id": "b8464da295e940eb94f09eafb0e32e18",
-	"time": "2016-04-28T18:18:05.692Z",
+	"deviceTime": "2016-04-28T19:49:49",
+	"guid": "f0d319a6-bf5a-429a-9d05-011d8adfc582",
+	"id": "12c5e2fd2bce4263aa5b5b13d471bd8e",
+	"time": "2016-04-29T02:49:49.942Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -246,15 +255,16 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "cbg",
+	"type": "deviceEvent",
+	"subType": "calibration",
 	"units": "mg/dL",
-	"value": 463,
+	"value": 164,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T11:18:05",
-	"guid": "0c8b932f-01bc-4fa1-8243-f5289e353387",
-	"time": "2016-04-28T18:18:05.693Z",
+	"deviceTime": "2016-04-28T19:49:49",
+	"guid": "b2c5d664-2d5d-4237-9829-a5b445d271ea",
+	"time": "2016-04-29T02:49:49.943Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -264,21 +274,22 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "cbg",
+	"type": "deviceEvent",
+	"subType": "calibration",
 	"units": "mmol/L",
-	"value": 28.586352153884498,
+	"value": 13.710347537882468,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-28T18:18:10.693Z",
+	"createdTime": "2016-04-29T02:49:54.943Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T11:18:05",
-	"guid": "4b33f238-1052-4eb7-a553-24bc8d5cf50f",
-	"id": "f50f97800f7e44a791ca0f17f223ab7b",
-	"time": "2016-04-28T18:18:05.693Z",
+	"deviceTime": "2016-04-28T19:49:49",
+	"guid": "28d5ed07-3ee9-42e1-81a6-dd65111c3acc",
+	"id": "fa1b98e18cb4464ead7193f35feab8c5",
+	"time": "2016-04-29T02:49:49.943Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

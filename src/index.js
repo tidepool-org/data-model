@@ -56,6 +56,9 @@ module.exports = {
     generator: cbg.generate,
     summary: cbg.summary,
     changeLog: cbg.changeLog,
+    optionalCommon: {
+      deviceTime: true
+    },
     title: 'Continuous Blood Glucose',
     type: 'cbg'
   },
@@ -66,6 +69,13 @@ module.exports = {
     title: 'Common Fields'
   },
   deviceEvent: {
+    generator: deviceEvent.generate,
+    summary: deviceEvent.summary,
+    changeLog: deviceEvent.changeLog,
+    title: 'Device Events',
+    subtitle: 'Device event subType',
+    subTypes: deviceEvent.subTypes,
+    type: 'deviceEvent'
   },
   pumpSettings: {
   },

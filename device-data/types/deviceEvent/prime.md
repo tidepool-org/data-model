@@ -1,4 +1,4 @@
-## Blood Ketones (bloodKetone)
+## Device event subType: `prime`
 
 **NB:** All fields are *required* unless otherwise noted.
 
@@ -12,7 +12,7 @@
 
 ### type
 
-[ingestion, storage, client] The string `bloodKetone`.
+[ingestion, storage, client] The string `deviceEvent`.
 
 	QUICK SUMMARY
 	Required:
@@ -20,52 +20,73 @@
 		platform: yes
 
 <!-- start type -->
-
-Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool does not yet provide a data model for urine ketones, which are measured qualitatively, not quantitatively.
-
+<!-- TODO -->
 <!-- end type -->
 
 * * * * *
 
-### units
+### subType
 
-[ingestion, storage, client] The string `mmol/L`.
+[ingestion, storage, client] The string `prime`.
 
 	QUICK SUMMARY
 	Required:
 		jellyfish: yes
 		platform: yes
 
-<!-- start units -->
-
-<!-- end units -->
+<!-- start subType -->
+<!-- TODO -->
+<!-- end subType -->
 
 * * * * *
 
-### value
+### primeTarget
 
-[ingestion, storage, client] Blood ketone value in mmol/L (float), with appropriately matching `units` field.
+[ingestion, storage, client] String encoding the target of the priming action.
 
 	QUICK SUMMARY
 	Required:
 		jellyfish: yes
 		platform: yes
-	Numerical type: Floating point value representing a `mmol/L` value.
+	Range: Must be one of:
+		`cannula`
+		`tubing`
+
+<!-- start primeTarget -->
+<!-- TODO -->
+<!-- end primeTarget -->
+
+* * * * *
+
+### volume
+
+> This field is **optional**.
+
+[ingestion, storage, client] A floating point value representing units of insulin.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
 	Range:
-		min: 0.0
-		max: 10.0
+		cannula:
+			min: 0.0
+			max: 3.0
+		tubing:
+			min: 0.0
+			max: 100.0
 
-<!-- start value -->
 
-The most widely used blood ketone meter on the American market - the [Abbott Precision Xtra](https://www.abbottdiabetescare.com/precision-xtra 'Abbott Precision Xtra') yields `HI` for blood ketone values higher than 8.0 mmol/L. Using this as a ballpark value for the range of all current and future blood ketone meters, we have chosen 10.0 mmol/L as the maximum value that will be accepted by the new platform APIs.
 
-<!-- end value -->
+<!-- start volume -->
+<!-- TODO -->
+<!-- end volume -->
 
 * * * * *
 
 ### clockDriftOffset
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start clockDriftOffset -->
 <!-- TODO -->
@@ -75,7 +96,7 @@ See [common fields](../common.md).
 
 ### conversionOffset
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start conversionOffset -->
 <!-- TODO -->
@@ -85,7 +106,7 @@ See [common fields](../common.md).
 
 ### deviceId
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start deviceId -->
 <!-- TODO -->
@@ -95,7 +116,7 @@ See [common fields](../common.md).
 
 ### deviceTime
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start deviceTime -->
 <!-- TODO -->
@@ -105,7 +126,7 @@ See [common fields](../common.md).
 
 ### guid
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start guid -->
 <!-- TODO -->
@@ -115,7 +136,7 @@ See [common fields](../common.md).
 
 ### time
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start time -->
 <!-- TODO -->
@@ -125,7 +146,7 @@ See [common fields](../common.md).
 
 ### timezoneOffset
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start timezoneOffset -->
 <!-- TODO -->
@@ -135,7 +156,7 @@ See [common fields](../common.md).
 
 ### uploadId
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start uploadId -->
 <!-- TODO -->
@@ -145,7 +166,7 @@ See [common fields](../common.md).
 
 ### _active
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start _active -->
 <!-- TODO -->
@@ -155,7 +176,7 @@ See [common fields](../common.md).
 
 ### _groupId
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start _groupId -->
 <!-- TODO -->
@@ -165,7 +186,7 @@ See [common fields](../common.md).
 
 ### _schemaVersion
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start _schemaVersion -->
 <!-- TODO -->
@@ -175,7 +196,7 @@ See [common fields](../common.md).
 
 ### _version
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start _version -->
 <!-- TODO -->
@@ -185,7 +206,7 @@ See [common fields](../common.md).
 
 ### createdTime
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start createdTime -->
 <!-- TODO -->
@@ -195,7 +216,7 @@ See [common fields](../common.md).
 
 ### id
 
-See [common fields](../common.md).
+See [common fields](../../common.md).
 
 <!-- start id -->
 <!-- TODO -->
@@ -207,16 +228,17 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "bloodKetone",
-	"units": "mmol/L",
-	"value": 3,
+	"type": "deviceEvent",
+	"subType": "prime",
+	"primeTarget": "tubing",
+	"volume": 11.1,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-27T23:00:10",
-	"guid": "6a90d165-ff18-4b4e-949b-15a6516af21f",
-	"id": "55fa02e5800a434c9d9afae180a11069",
-	"time": "2016-04-28T06:00:10.223Z",
+	"deviceTime": "2016-04-29T16:11:03",
+	"guid": "fca99661-9288-4f78-93ca-20c1e55e29f2",
+	"id": "e74f1d25f8864a7680164aeee6a05642",
+	"time": "2016-04-29T23:11:03.679Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -226,15 +248,16 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "bloodKetone",
-	"units": "mmol/L",
-	"value": 0.5,
+	"type": "deviceEvent",
+	"subType": "prime",
+	"primeTarget": "tubing",
+	"volume": 18.8,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-27T23:00:10",
-	"guid": "c5e6534f-6a2a-4d82-aa3d-fef86af41d9e",
-	"time": "2016-04-28T06:00:10.224Z",
+	"deviceTime": "2016-04-29T16:11:03",
+	"guid": "02b663c9-09db-49e3-b1f9-83c4b795a31c",
+	"time": "2016-04-29T23:11:03.679Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -244,21 +267,22 @@ See [common fields](../common.md).
 
 ```json
 {
-	"type": "bloodKetone",
-	"units": "mmol/L",
-	"value": 5,
+	"type": "deviceEvent",
+	"subType": "prime",
+	"primeTarget": "cannula",
+	"volume": "0.7",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-28T06:00:15.224Z",
+	"createdTime": "2016-04-29T23:11:08.679Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-27T23:00:10",
-	"guid": "b4e026a6-c120-4fd8-9a6d-d2b1bd700577",
-	"id": "d9d19a698a1a438ca69e6fc373d36a11",
-	"time": "2016-04-28T06:00:10.224Z",
+	"deviceTime": "2016-04-29T16:11:03",
+	"guid": "81a2dd7d-9ea7-46b4-ad68-b6df8960d5c8",
+	"id": "85df714aa73e4af08d82237db135d6c5",
+	"time": "2016-04-29T23:11:03.679Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

@@ -4,4 +4,5 @@ web/
 
 LICENSE
 package.json
+regenerate-all-docs.sh
 update-gh-pages.sh

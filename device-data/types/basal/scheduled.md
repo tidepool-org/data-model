@@ -18,6 +18,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start type -->
 
 This is the sub-type of `basal` event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).
@@ -34,6 +35,7 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start deliveryType -->
 
 <!-- end deliveryType -->
@@ -54,6 +56,7 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 	Range:
 		min: 0
 		max: 432000000
+
 <!-- start duration -->
 
 When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](./previous.md) for details.
@@ -82,6 +85,7 @@ The new platform APIs expect this value to be >= 0 and <= 432000000 (the number 
 	Range:
 		min: > `duration`
 		max: 432000000
+
 <!-- start expectedDuration -->
 
 On a scheduled basal ingested through the legacy jellyfish ingestion service, `expectedDuration` should *never* be included on a `scheduled` basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original `scheduled` basal; most commonly this new event is a `temp` or `suspend`, but it could be a `scheduled` if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples in [`previous`](./previous.md).
@@ -104,6 +108,7 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 	Range:
 		min: 0.0
 		max: 20.0
+
 <!-- start rate -->
 
 Different insulin pump manufacturers offer the ability to program basal rates with different levels of precision in terms of significant digits on the `rate`. We endeavor to represent each `rate` as accurately as possible for each insulin pump; occasionally when values are stored to a falsely large number of floating point digits this means rounding the raw `rate` value found in a record from a pump in order to match the significant digits of precision advertised by the manufacturer. It is the burden of the uploading client to handle this rounding since the number of significant digits for `rate`s varies according to the pump manufacturer.
@@ -126,6 +131,7 @@ Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15
 	Required:
 		jellyfish: no (optional)
 		platform: nonexistent
+
 <!-- start previous -->
 
 See [`previous`](./previous.md) for detailed documentation on this deprecated field.
@@ -144,6 +150,7 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
+
 #### Changelog for `scheduleName`
 
 `_schemaVersion` 2: `scheduleName` became **optional**.

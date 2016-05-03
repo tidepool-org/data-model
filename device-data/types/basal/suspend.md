@@ -18,6 +18,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start type -->
 
 This is the sub-type of `basal` event that represents the total suspension of insulin delivery on an insulin pump within the stream of `basal` events, which should in the vast majority of cases be contiguous—that is, without gaps or overlaps. The user's inputs to suspend (and, later, resume) insulin delivery are part of Tidepool's `deviceEvent` data type, as the sub-type [`status`](../deviceEvent/status.md). Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is *also* represented as a `suspend` basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.
@@ -36,6 +37,7 @@ Note, however, that no `rate` field appears on `suspend` basal events. The `rate
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start deliveryType -->
 
 <!-- end deliveryType -->
@@ -56,6 +58,7 @@ Note, however, that no `rate` field appears on `suspend` basal events. The `rate
 	Range:
 		min: 0
 		max: 86400000
+
 <!-- start duration -->
 
 Just like [`scheduled`](./scheduled.md) basals, when ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](./previous.md) for details.
@@ -82,6 +85,7 @@ The new platform APIs expect this value to be >= 0 and <= 86400000 (the number o
 	Range:
 		min: > `duration`
 		max: 86400000
+
 #### Changelog for `expectedDuration`
 
 `_schemaVersion` ? (future): `expectedDuration` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `expectedDuration` as described.
@@ -106,6 +110,7 @@ Refer to the discussion of [`expectedDuration`](./temp.md#expectedduration) in t
 	Required:
 		jellyfish: no (optional)
 		platform: nonexistent
+
 <!-- start previous -->
 
 See [`previous`](./previous.md) for detailed documentation on this deprecated field.
@@ -124,6 +129,7 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
+
 <!-- start suppressed -->
 
 See the discussion of the [`suppressed`](./temp.md#suppressed) field on `temp` basals.
