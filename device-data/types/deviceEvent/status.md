@@ -1,4 +1,4 @@
-## Device event subType: `prime`
+## Device event subType: `status`
 
 **NB:** All fields are *required* unless otherwise noted.
 
@@ -27,7 +27,7 @@
 
 ### subType
 
-[ingestion, storage, client] The string `prime`.
+[ingestion, storage, client] The string `status`.
 
 	QUICK SUMMARY
 	Required:
@@ -40,47 +40,83 @@
 
 * * * * *
 
-### primeTarget
+### status
 
-[ingestion, storage, client] String encoding the target of the priming action.
+[ingestion, storage, client] String value encoding insulin pump status as `suspended` or `resumed`.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Range:
+		jellyfish: Must be one of:
+			`suspended`
+			`resumed`
+		platform: [ingestion, storage, client] The string `suspended`.
+
+<!-- start status -->
+<!-- TODO -->
+<!-- end status -->
+
+* * * * *
+
+### duration
+
+> This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.
+
+[ingestion, storage, client] An integer value representing a duration of time in milliseconds.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: yes
+	Numerical type: Integer value representing milliseconds.
+	Range:
+		min: 0
+		max: < ∞
+
+<!-- start duration -->
+<!-- TODO -->
+<!-- end duration -->
+
+* * * * *
+
+### expectedDuration
+
+> This field is **optional**. At present, it is **only** added by the jellyfish data ingestion service.
+
+[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
+	Numerical type: Integer value representing milliseconds.
+	Range:
+		min: > `duration`
+		max: < ∞
+
+<!-- start expectedDuration -->
+<!-- TODO -->
+<!-- end expectedDuration -->
+
+* * * * *
+
+### reason
+
+[ingestion, storage, client] An object with two key-value pairs encoding the cause of a `suspended` or `resumed` event as `manual` (user-initiated) or `automatic` (pump-initiated).
 
 	QUICK SUMMARY
 	Required:
 		jellyfish: yes
 		platform: yes
 	Range: Must be one of:
-		`cannula`
-		`tubing`
+		`manual`
+		`automatic`
 
-<!-- start primeTarget -->
+<!-- start reason -->
 <!-- TODO -->
-<!-- end primeTarget -->
-
-* * * * *
-
-### volume
-
-> This field is **optional**.
-
-[ingestion, storage, client] A floating point value representing units of insulin.
-
-	QUICK SUMMARY
-	Required:
-		jellyfish: no (optional)
-		platform: no (optional)
-	Range:
-		cannula:
-			min: 0.0
-			max: 3.0
-		tubing:
-			min: 0.0
-			max: 100.0
-
-
-
-<!-- start volume -->
-<!-- TODO -->
-<!-- end volume -->
+<!-- end reason -->
 
 * * * * *
 
@@ -229,16 +265,21 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "deviceEvent",
-	"subType": "prime",
-	"primeTarget": "tubing",
-	"volume": 11.1,
+	"subType": "status",
+	"status": "suspended",
+	"duration": 0,
+	"expectedDuration": 0,
+	"reason": {
+		"suspended": "manual",
+		"resumed": "manual"
+	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-29T16:11:03",
-	"guid": "fca99661-9288-4f78-93ca-20c1e55e29f2",
-	"id": "e74f1d25f8864a7680164aeee6a05642",
-	"time": "2016-04-29T23:11:03.679Z",
+	"deviceTime": "2016-05-02T17:22:32",
+	"guid": "f53e9f4f-b8ae-4ee7-b952-266899ea7a70",
+	"id": "26ee125b458544c79af4b400cca06dfc",
+	"time": "2016-05-03T00:22:32.367Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -249,15 +290,20 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "deviceEvent",
-	"subType": "prime",
-	"primeTarget": "tubing",
-	"volume": 18.8,
+	"subType": "status",
+	"status": "suspended",
+	"duration": 63000000,
+	"expectedDuration": 75600000,
+	"reason": {
+		"suspended": "manual",
+		"resumed": "automatic"
+	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-29T16:11:03",
-	"guid": "02b663c9-09db-49e3-b1f9-83c4b795a31c",
-	"time": "2016-04-29T23:11:03.679Z",
+	"deviceTime": "2016-05-02T17:22:32",
+	"guid": "136ef1a7-0b30-4454-9ce0-de5a7a711e17",
+	"time": "2016-05-03T00:22:32.377Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -268,21 +314,26 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "deviceEvent",
-	"subType": "prime",
-	"primeTarget": "cannula",
-	"volume": "0.7",
+	"subType": "status",
+	"status": "suspended",
+	"duration": 7200000,
+	"expectedDuration": 8640000,
+	"reason": {
+		"suspended": "automatic",
+		"resumed": "automatic"
+	},
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-29T23:11:08.679Z",
+	"createdTime": "2016-05-03T00:22:37.378Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-29T16:11:03",
-	"guid": "81a2dd7d-9ea7-46b4-ad68-b6df8960d5c8",
-	"id": "85df714aa73e4af08d82237db135d6c5",
-	"time": "2016-04-29T23:11:03.679Z",
+	"deviceTime": "2016-05-02T17:22:32",
+	"guid": "8da52d89-6410-4e73-974f-f77e9271922e",
+	"id": "de6e9dffdd494c8fbfd3d0d127147332",
+	"time": "2016-05-03T00:22:32.378Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

@@ -48,7 +48,16 @@
 	Required:
 		jellyfish: yes
 		platform: yes
-	Range: Must be one of: `low_insulin`, `no_insulin`, `low_power`, `no_power`, `occlusion`, `no_delivery`, `auto_off`, `over_limit`, `other`.
+	Range: Must be one of:
+		`low_insulin`
+		`no_insulin`
+		`low_power`
+		`no_power`
+		`occlusion`
+		`no_delivery`
+		`auto_off`
+		`over_limit`
+		`other`
 
 <!-- start alarmType -->
 <!-- TODO -->

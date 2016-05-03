@@ -1,4 +1,4 @@
-## Device event subType: `prime`
+## Device event subType: `reservoirChange`
 
 **NB:** All fields are *required* unless otherwise noted.
 
@@ -27,7 +27,7 @@
 
 ### subType
 
-[ingestion, storage, client] The string `prime`.
+[ingestion, storage, client] The string `reservoirChange`.
 
 	QUICK SUMMARY
 	Required:
@@ -40,47 +40,20 @@
 
 * * * * *
 
-### primeTarget
-
-[ingestion, storage, client] String encoding the target of the priming action.
-
-	QUICK SUMMARY
-	Required:
-		jellyfish: yes
-		platform: yes
-	Range: Must be one of:
-		`cannula`
-		`tubing`
-
-<!-- start primeTarget -->
-<!-- TODO -->
-<!-- end primeTarget -->
-
-* * * * *
-
-### volume
+### status
 
 > This field is **optional**.
 
-[ingestion, storage, client] A floating point value representing units of insulin.
+[ingestion, storage, client] String `id` (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type `deviceEvent`, subType `status` object that is logically connected to this reservoirChange.
 
 	QUICK SUMMARY
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
-	Range:
-		cannula:
-			min: 0.0
-			max: 3.0
-		tubing:
-			min: 0.0
-			max: 100.0
 
-
-
-<!-- start volume -->
+<!-- start status -->
 <!-- TODO -->
-<!-- end volume -->
+<!-- end status -->
 
 * * * * *
 
@@ -229,16 +202,15 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "deviceEvent",
-	"subType": "prime",
-	"primeTarget": "tubing",
-	"volume": 11.1,
+	"subType": "reservoirChange",
+	"status": "dd8a867f66754d3b8a5197fe04383972",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-29T16:11:03",
-	"guid": "fca99661-9288-4f78-93ca-20c1e55e29f2",
-	"id": "e74f1d25f8864a7680164aeee6a05642",
-	"time": "2016-04-29T23:11:03.679Z",
+	"deviceTime": "2016-05-02T15:01:47",
+	"guid": "cda443ea-e576-4c64-936b-16153841ebf1",
+	"id": "c74db6e6d8014bdd8db67ed39288d05c",
+	"time": "2016-05-02T22:01:47.895Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -249,15 +221,14 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "deviceEvent",
-	"subType": "prime",
-	"primeTarget": "tubing",
-	"volume": 18.8,
+	"subType": "reservoirChange",
+	"status": "e2b28477ff1b4c0f91315710c9a204ed",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-29T16:11:03",
-	"guid": "02b663c9-09db-49e3-b1f9-83c4b795a31c",
-	"time": "2016-04-29T23:11:03.679Z",
+	"deviceTime": "2016-05-02T15:01:47",
+	"guid": "88cc6312-fe41-481f-b268-8c05927da3f0",
+	"time": "2016-05-02T22:01:47.895Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -268,21 +239,20 @@ See [common fields](../../common.md).
 ```json
 {
 	"type": "deviceEvent",
-	"subType": "prime",
-	"primeTarget": "cannula",
-	"volume": "0.7",
+	"subType": "reservoirChange",
+	"status": "133fc7e4f8074786910208f2b293aa3f",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-29T23:11:08.679Z",
+	"createdTime": "2016-05-02T22:01:52.896Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-29T16:11:03",
-	"guid": "81a2dd7d-9ea7-46b4-ad68-b6df8960d5c8",
-	"id": "85df714aa73e4af08d82237db135d6c5",
-	"time": "2016-04-29T23:11:03.679Z",
+	"deviceTime": "2016-05-02T15:01:47",
+	"guid": "871f9de3-cf17-4624-b382-6b95f5e08750",
+	"id": "0291d6f8e60f4eb5ba01b856e5c25001",
+	"time": "2016-05-02T22:01:47.896Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
