@@ -175,11 +175,13 @@ module.propTypes = {
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);
   },
-  oneOfStringOptions: function(arr) {
-    return 'Must be one of:\n\t\t`' + arr.join('`\n\t\t`') + '`';
+  oneOfStringOptions: function(arr, extraIndent) {
+    var divider = extraIndent || false ? '\n\t\t\t' : '\n\t\t';
+    return 'Must be one of:' + divider + '`' + arr.join('`' + divider + '`') + '`';
   },
-  oneOrMoreOfStringOptions: function(arr) {
-    return 'One or more of:\n\t\t`' + arr.join('`\n\t\t`') + '`';
+  oneOrMoreOfStringOptions: function(arr, extraIndent) {
+    var divider = extraIndent || false ? '\n\t\t\t' : '\n\t\t';
+    return 'One or more of:' + divider + '`' + arr.join('`' + divider + '`') + '`';
   },
   OPTIONAL: '> This field is **optional**.\n\n',
   OPTIONAL_JELLYFISH_REQUIRED: '> This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.\n\n',

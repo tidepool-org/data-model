@@ -18,8 +18,10 @@
 var _ = require('lodash');
 var Chance = require('chance');
 var chance = new Chance();
-var common = require('./common');
+var format = require('util').format;
 var uuid = require('node-uuid');
+
+var common = require('./common');
 
 var TYPE = 'deviceEvent';
 var SUB_TYPES = [
@@ -220,7 +222,7 @@ var schemas = {
     },
     status: {
       instance: function() {
-        return chance.pickone(STATUSES);
+        return STATUSES[0];
       },
       summary: {
         description: '[ingestion, storage, client] String value encoding insulin pump status as `suspended` or `resumed`.',
@@ -229,7 +231,7 @@ var schemas = {
           platform: true
         },
         range: {
-          jellyfish: common.propTypes.oneOfStringOptions(STATUSES),
+          jellyfish: common.propTypes.oneOfStringOptions(STATUSES, true),
           platform: common.propTypes.stringValue(STATUSES[0])
         }
       }
