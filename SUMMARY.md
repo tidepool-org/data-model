@@ -26,6 +26,7 @@
       * [reservoirChange](device-data/types/deviceEvent/reservoirChange.md)
       * [status](device-data/types/deviceEvent/status.md)
       * [timeChange](device-data/types/deviceEvent/timeChange.md)
+      * [the "previous" field](device-data/types/deviceEvent/previous.md)
     * [pumpSettings](device-data/types/pumpSettings.md)
     * [smbg](device-data/types/smbg.md)
     * [upload](device-data/types/upload.md)
