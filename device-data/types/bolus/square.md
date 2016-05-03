@@ -18,6 +18,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start type -->
 
 This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to be delivered spread evenly over a `duration` of time (typically fifteen minutes to several hours).
@@ -34,6 +35,7 @@ This is the sub-type of `bolus` event that represents a bolus insulin dose progr
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start subType -->
 
 We plan to migrate all Tidepool data to use `extended` as the value of this sub-type rather than `square` in order to improve the consistency of the data model. With `subType` containing `extended` and the `extended` field containing the value of the delivered insulin dose, this sub-type of `bolus` event will be parallel to `normal` boluses, where the `subType` is `normal` and the `normal` field contains the value of the delivered insulin dose.
@@ -54,6 +56,7 @@ We plan to migrate all Tidepool data to use `extended` as the value of this sub-
 	Range:
 		min: > 0.0
 		max: 100.0
+
 <!-- start extended -->
 
 The `extended` field encodes the numerical value of the dose of insulin delivered over the `duration` by an insulin pump. As with `normal` boluses, we do not allow the upload of boluses with a total delivered dose of 0 units.
@@ -78,6 +81,7 @@ Refer to the documentation for [`normal`](normal.md) boluses for an explanation 
 	Range:
 		min: > `extended`
 		max: 100.0
+
 <!-- start expectedExtended -->
 
 When a `square` bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedExtended` field is used to store the original value of the dose of insulin that the user programmed, while `extended` represents the value of the dose that was actually delivered.
@@ -100,6 +104,7 @@ Refer to the documentation for [`normal`](normal.md) boluses for an explanation 
 	Range:
 		min: 0
 		max: 86400000
+
 <!-- start duration -->
 
 The `duration` field encodes the actual elapsed duration of time, in milliseconds, spent delivering the dose of insulin encoded in `extended`.
@@ -127,6 +132,7 @@ To the best of our knowledge, no insulin pump allows the programming of a `squar
 	Range:
 		min: > `duration`
 		max: 86400000
+
 <!-- start expectedDuration -->
 
 When a `square` bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedDuration` field is used to store the original duration of time that the user programmed for delivery of the dose of insulin encoded in `extended`. The `duration` field, in contrast, encodes the actual elapsed duration of dose delivery.

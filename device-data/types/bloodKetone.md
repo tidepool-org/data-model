@@ -18,6 +18,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start type -->
 
 Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool does not yet provide a data model for urine ketones, which are measured qualitatively, not quantitatively.
@@ -34,6 +35,7 @@ Blood ketones represent ketone concentration values (specifically beta-ketones, 
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start units -->
 
 <!-- end units -->
@@ -52,6 +54,7 @@ Blood ketones represent ketone concentration values (specifically beta-ketones, 
 	Range:
 		min: 0.0
 		max: 10.0
+
 <!-- start value -->
 
 The most widely used blood ketone meter on the American market - the [Abbott Precision Xtra](https://www.abbottdiabetescare.com/precision-xtra 'Abbott Precision Xtra') yields `HI` for blood ketone values higher than 8.0 mmol/L. Using this as a ballpark value for the range of all current and future blood ketone meters, we have chosen 10.0 mmol/L as the maximum value that will be accepted by the new platform APIs.

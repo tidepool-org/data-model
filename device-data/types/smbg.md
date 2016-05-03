@@ -18,6 +18,7 @@
 	Required:
 		jellyfish: yes
 		platform: yes
+
 <!-- start type -->
 
 This is the Tidepool data type for traditional fingerstick blood glucose meter data. `smbg` is an abbreviation of 'self-monitored blood glucose' and contrasts with `cbg`, abbreviating 'continuous blood glucose'. [`cbg`](cbg.md) is the Tidepool data type for continuous glucose monitor (CGM) sensor data.
@@ -36,7 +37,10 @@ This is the Tidepool data type for traditional fingerstick blood glucose meter d
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
-	Range: Must be one of: `manual`, `linked`.
+	Range: Must be one of:
+		`manual`
+		`linked`
+
 <!-- start subType -->
 
 `subType` appears on blood glucose values that are *not* being read directly from a traditional fingerstick blood glucose meter, but rather from another data source such as an insulin pump.
@@ -61,7 +65,10 @@ See [units](../units.md) for further explanation of blood glucose units.
 	Required:
 		jellyfish: yes
 		platform: yes
-	Range: Must be one of: `mg/dL`, `mmol/L`.
+	Range: Must be one of:
+		`mg/dL`
+		`mmol/L`
+
 <!-- start units -->
 
 <!-- end units -->
@@ -88,6 +95,7 @@ See [units](../units.md) for further explanation of blood glucose units.
 		mmol/L:
 			min: 0.0
 			max: 55.0
+
 
 
 <!-- start value -->

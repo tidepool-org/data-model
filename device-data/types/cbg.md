@@ -41,7 +41,9 @@ See [units](../units.md) for further explanation of blood glucose units.
 	Required:
 		jellyfish: yes
 		platform: yes
-	Range: Must be one of: `mg/dL`, `mmol/L`.
+	Range: Must be one of:
+		`mg/dL`
+		`mmol/L`
 
 <!-- start units -->
 
