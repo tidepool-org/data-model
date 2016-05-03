@@ -9,4 +9,4 @@
  - [device events](./deviceEvent/README.md)
  - [insulin pump settings](./pumpSettings/README.md)
  - [self-monitored blood glucose (smbg)](./smbg.md)
- - [upload metadata](./upload/README.md)
+ - [upload metadata](./upload.md)

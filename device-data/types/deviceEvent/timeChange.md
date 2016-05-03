@@ -44,6 +44,10 @@
 
 [ingestion, storage, client] An object encoding as much information as possible about a diabetes device display time change event.
 
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
 Contains the following properties:
 
  * from
