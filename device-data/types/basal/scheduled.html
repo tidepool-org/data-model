@@ -53,7 +53,7 @@
         data-chapter-title="scheduled"
         data-filepath="device-data/types/basal/scheduled.md"
         data-basepath="../../.."
-        data-revision="Mon May 02 2016 14:57:51 GMT-0700 (PDT)"
+        data-revision="Mon May 02 2016 17:34:31 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -429,14 +429,30 @@
     
         <li class="chapter " data-level="1.5.5.4" data-path="device-data/types/deviceEvent/reservoirChange.html">
             
-            <span><b>1.5.5.4.</b> reservoirChange</span>
+                
+                    <a href="../../../device-data/types/deviceEvent/reservoirChange.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.5.4.</b>
+                        
+                        reservoirChange
+                    </a>
             
             
         </li>
     
         <li class="chapter " data-level="1.5.5.5" data-path="device-data/types/deviceEvent/status.html">
             
-            <span><b>1.5.5.5.</b> status</span>
+                
+                    <a href="../../../device-data/types/deviceEvent/status.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.5.5.</b>
+                        
+                        status
+                    </a>
             
             
         </li>
@@ -723,16 +739,16 @@ Required:
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">50400000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.575</span>,
-    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">64800000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.425</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f0716dc8-d287-483a-93c0-d67c17975bfd&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;2445e7a1a4744f3cbe5accd9940048b5&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-02T17:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;1d068fea-ea8e-48af-9029-90e0f2c91daf&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;7391b5379ccf42beae29df50cd648dd4&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T00:00:00.000Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -741,30 +757,30 @@ Required:
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">27000000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.175</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">84600000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.775</span>,
     <span class="hljs-string">&quot;previous&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
         <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
         <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
-        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.1</span>,
-        <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+        <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.1</span>,
+        <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekday&quot;</span>,
         <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
         <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
         <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-        <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T10:00:00&quot;</span>,
-        <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;c49e58f0-283c-4d00-bcbf-366950e2ea7f&quot;</span>,
-        <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T17:00:00.000Z&quot;</span>,
+        <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-02T16:00:00&quot;</span>,
+        <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b15133aa-3f85-4be3-b2af-97d10a5d9a3a&quot;</span>,
+        <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-02T23:00:00.000Z&quot;</span>,
         <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
         <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
     },
-    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Very Active&quot;</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;283550cf-b9ba-48c6-8d13-9442c1ad1c14&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-02T17:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;bf4d18fa-2b54-42de-b8d5-a507a39e325b&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T00:00:00.000Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -773,28 +789,25 @@ Required:
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
     <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">36000000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.65</span>,
-    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekday&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">82800000</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.95</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
     <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:05.000Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T00:00:05.000Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-26T11:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;059003b6-fc41-4a96-bbe9-b0b07ecff4ea&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;8a0eb8d7357b469583158acc14f8d614&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-26T18:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-02T17:00:00&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;bb7a8e87-5ae5-4e0c-be36-9829ac55b575&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;0aadc9d68e0f44a59a01aff2e3b85424&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T00:00:00.000Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
-<blockquote id="fn_a">
-<sup>a</sup>. See, for example, <a href="https://github.com/tidepool-org/chrome-uploader/pull/95/commits/2c2bcf2db3e609c703a65967399784dcd47e49af" title="GitHub: chrome-uploader" target="_blank">this chrome-uploader commit</a>.<a href="#reffn_a" title="Jump back to footnote [a] in the text."> &#x21A9;</a>
-</blockquote>
 
                     
                     </section>

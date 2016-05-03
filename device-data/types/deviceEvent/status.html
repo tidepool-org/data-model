@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>bolus | data-model</title>
+        <title>status | data-model</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="../../../device-data/types/bolus/normal.html" />
+    <link rel="next" href="../../../device-data/types/deviceEvent/timeChange.html" />
     
     
-    <link rel="prev" href="../../../device-data/types/basal/suppressed.html" />
+    <link rel="prev" href="../../../device-data/types/deviceEvent/reservoirChange.html" />
     
 
         
@@ -49,9 +49,9 @@
         
         
     <div class="book"
-        data-level="1.5.2"
-        data-chapter-title="bolus"
-        data-filepath="device-data/types/bolus/README.md"
+        data-level="1.5.5.5"
+        data-chapter-title="status"
+        data-filepath="device-data/types/deviceEvent/status.md"
         data-basepath="../../.."
         data-revision="Mon May 02 2016 17:34:31 GMT-0700 (PDT)"
         data-innerlanguage="">
@@ -270,7 +270,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.2" data-path="device-data/types/bolus/index.html">
+        <li class="chapter " data-level="1.5.2" data-path="device-data/types/bolus/index.html">
             
                 
                     <a href="../../../device-data/types/bolus/index.html">
@@ -442,7 +442,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.5.5" data-path="device-data/types/deviceEvent/status.html">
+        <li class="chapter active" data-level="1.5.5.5" data-path="device-data/types/deviceEvent/status.html">
             
                 
                     <a href="../../../device-data/types/deviceEvent/status.html">
@@ -535,15 +535,252 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="bolus-insulin">Bolus Insulin</h2>
-<p>This is the Tidepool data type for one-time doses of fast-acting insulin programmed on an insulin pump to &quot;cover&quot; meals or correct high blood glucose (hyperglycemia). A bolus event can be interrupted or canceled; since it is very important for behavioral auditing as well as statistical analysis of a PWD&apos;s data to know exactly how much insulin was delivered, the Tidepool data model includes fields to represent programmed vs. delivered bolus amounts and durations.</p>
-<p>All insulin pumps provide several strategies for delivering boluses of insulin, and each manufacturer uses different terminology for each strategy, although the strategies are equivalent across insulin pumps. The different strategies are handled by our three different <code>subType</code>s of boluses&#x2014;<code>normal</code>, <code>square</code>, and <code>dual/square</code>. These are documented on the following pages:
-<!-- end intro --></p>
+                        <h2 id="device-event-subtype-status">Device event subType: <code>status</code></h2>
+<p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
+<blockquote>
+<p>Jump to example JSON:</p>
 <ul>
-<li><a href="normal.html">normal</a></li>
-<li><a href="square.html">square</a></li>
-<li><a href="dual-square.html">dual/square</a></li>
+<li><a href="#example-client">client example</a></li>
+<li><a href="#example-ingestion">ingestion example</a></li>
+<li><a href="#example-storage">storage example</a></li>
 </ul>
+</blockquote>
+<h3 id="type">type</h3>
+<p>[ingestion, storage, client] The string <code>deviceEvent</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start type -->
+<!-- TODO -->
+<!-- end type -->
+<hr>
+<h3 id="subtype">subType</h3>
+<p>[ingestion, storage, client] The string <code>status</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start subType -->
+<!-- TODO -->
+<!-- end subType -->
+<hr>
+<h3 id="status">status</h3>
+<p>[ingestion, storage, client] String value encoding insulin pump status as <code>suspended</code> or <code>resumed</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Range:
+    jellyfish: Must be one of:
+        `suspended`
+        `resumed`
+    platform: [ingestion, storage, client] The string `suspended`.
+</code></pre><!-- start status -->
+<!-- TODO -->
+<!-- end status -->
+<hr>
+<h3 id="duration">duration</h3>
+<blockquote>
+<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
+</blockquote>
+<p>[ingestion, storage, client] An integer value representing a duration of time in milliseconds.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: &lt; &#x221E;
+</code></pre><!-- start duration -->
+<!-- TODO -->
+<!-- end duration -->
+<hr>
+<h3 id="expectedduration">expectedDuration</h3>
+<blockquote>
+<p>This field is <strong>optional</strong>. At present, it is <strong>only</strong> added by the jellyfish data ingestion service.</p>
+</blockquote>
+<p>[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the <code>duration</code> field on ingestion when a following event has resulted in truncation of the original programmed duration.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: &gt; `duration`
+    max: &lt; &#x221E;
+</code></pre><!-- start expectedDuration -->
+<!-- TODO -->
+<!-- end expectedDuration -->
+<hr>
+<h3 id="reason">reason</h3>
+<p>[ingestion, storage, client] An object with two key-value pairs encoding the cause of a <code>suspended</code> or <code>resumed</code> event as <code>manual</code> (user-initiated) or <code>automatic</code> (pump-initiated).</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Range: Must be one of:
+    `manual`
+    `automatic`
+</code></pre><!-- start reason -->
+<!-- TODO -->
+<!-- end reason -->
+<hr>
+<h3 id="clockdriftoffset">clockDriftOffset</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+<hr>
+<h3 id="conversionoffset">conversionOffset</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
+<hr>
+<h3 id="deviceid">deviceId</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+<hr>
+<h3 id="devicetime">deviceTime</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
+<hr>
+<h3 id="guid">guid</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
+<hr>
+<h3 id="time">time</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
+<hr>
+<h3 id="timezoneoffset">timezoneOffset</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+<hr>
+<h3 id="uploadid">uploadId</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start uploadId -->
+<!-- TODO -->
+<!-- end uploadId -->
+<hr>
+<h3 id="active">_active</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+<hr>
+<h3 id="groupid">_groupId</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
+<hr>
+<h3 id="schemaversion">_schemaVersion</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+<hr>
+<h3 id="version">_version</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
+<hr>
+<h3 id="createdtime">createdTime</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+<hr>
+<h3 id="id">id</h3>
+<p>See <a href="../../common.html">common fields</a>.</p>
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
+<hr>
+<h3 id="example-client">example (client)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;deviceEvent&quot;</span>,
+    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;status&quot;</span>,
+    <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;suspended&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">59400000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">71280000</span>,
+    <span class="hljs-string">&quot;reason&quot;</span>: {
+        <span class="hljs-string">&quot;suspended&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
+        <span class="hljs-string">&quot;resumed&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>
+    },
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-02T17:30:29&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;5445a58a-8d7a-407a-99c3-98d476103109&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;487b9aadab8c4f82874610389b4b44f8&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T00:30:29.346Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="example-ingestion">example (ingestion)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;deviceEvent&quot;</span>,
+    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;status&quot;</span>,
+    <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;suspended&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">81000000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">97200000</span>,
+    <span class="hljs-string">&quot;reason&quot;</span>: {
+        <span class="hljs-string">&quot;suspended&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
+        <span class="hljs-string">&quot;resumed&quot;</span>: <span class="hljs-string">&quot;automatic&quot;</span>
+    },
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-02T17:30:29&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b0c6652e-6892-4a76-a372-0ed046f22f29&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T00:30:29.346Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="example-storage">example (storage)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;deviceEvent&quot;</span>,
+    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;status&quot;</span>,
+    <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;suspended&quot;</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">50400000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">60480000</span>,
+    <span class="hljs-string">&quot;reason&quot;</span>: {
+        <span class="hljs-string">&quot;suspended&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
+        <span class="hljs-string">&quot;resumed&quot;</span>: <span class="hljs-string">&quot;automatic&quot;</span>
+    },
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T00:30:34.347Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-02T17:30:29&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;9eee2c4d-1cf3-4ea6-bfaa-54e282841445&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;548724d428c2436187e877edb62b1787&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T00:30:29.347Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
 
                     
                     </section>
@@ -554,10 +791,10 @@
         </div>
 
         
-        <a href="../../../device-data/types/basal/suppressed.html" class="navigation navigation-prev " aria-label="Previous page: the &quot;suppressed&quot; field"><i class="fa fa-angle-left"></i></a>
+        <a href="../../../device-data/types/deviceEvent/reservoirChange.html" class="navigation navigation-prev " aria-label="Previous page: reservoirChange"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../../device-data/types/bolus/normal.html" class="navigation navigation-next " aria-label="Next page: normal"><i class="fa fa-angle-right"></i></a>
+        <a href="../../../device-data/types/deviceEvent/timeChange.html" class="navigation navigation-next " aria-label="Next page: timeChange"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
