@@ -27,14 +27,6 @@ var SUB_TYPES = {
   combo: 'dual/square'
 };
 
-var randomBolusValue = function() {
-  // yield float rounded to nearest 0.25
-  return Math.round(chance.floating({
-    min: 0.5,
-    max: 10.0
-  })*4)/4;
-};
-
 var schemas = {
   base: {
     type: {
@@ -60,7 +52,7 @@ var schemas = {
       }
     },
     normal: {
-      instance: randomBolusValue,
+      instance: common.randomBolusValue,
       summary: common.bolusInsulinSummary
     },
     expectedNormal: {
@@ -91,7 +83,7 @@ var schemas = {
       }
     },
     extended: {
-      instance: randomBolusValue,
+      instance: common.randomBolusValue,
       summary: common.bolusInsulinSummary
     },
     expectedExtended: {

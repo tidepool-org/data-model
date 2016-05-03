@@ -28,17 +28,34 @@ module.bgUnits = function(units, ingestion) {
   return ingestion ? units : 'mmol/L';
 };
 
+module.transformToMmolLInput = function(value) {
+  return Number(Number(value/GLUCOSE_MM).toFixed(1));
+};
+
+module.transformToMmolLStorage = function(value) {
+  return value/GLUCOSE_MM;
+};
+
 module.bgValue = function(units, ingestion) {
   var value = chance.natural({min: 20, max: 600});
+
   if (units === 'mg/dL') {
     return value;
   }
   else if (units === 'mmol/L' && ingestion) {
-    return Number(Number(value/GLUCOSE_MM).toFixed(1));
+    return module.transformToMmolLInput(value);
   }
   else {
-    return value/GLUCOSE_MM;
+    return module.transformToMmolLStorage(value);
   }
+};
+
+module.randomBolusValue = function() {
+  // yield float rounded to nearest 0.25
+  return Math.round(chance.floating({
+    min: 0.5,
+    max: 10.0
+  })*4)/4;
 };
 
 module.changeLog = {
@@ -56,7 +73,7 @@ module.duration = function() {
   return chance.natural({min: 0, max: 48}) * MS_IN_30_MINS;
 };
 
-module.generate = function(schema, utc, format) {
+module.generate = function(schema, utc, format, manufacturer) {
   if (!schema) {
     console.error('Must provide a datatype schema as first param!');
   }
@@ -96,9 +113,9 @@ module.generate = function(schema, utc, format) {
 
     if (typeof instance === 'function') {
       if (format === 'ingestion') {
-        return instance('mg/dL', true);
+        return instance('mg/dL', true, manufacturer);
       }
-      return instance('mmol/L', false);
+      return instance('mmol/L', false, manufacturer);
     }
     else if (Array.isArray(instance)) {
       return instance[chance.integer({min: 0, max: instance.length - 1})];
@@ -219,6 +236,8 @@ module.getChangeLog = function(schema) {
 module.numericalTypes = {
   FLOATING_POINT_DEVICE_SIG_FIGS: 'Floating point value rounded to the appropriate significant figures for the device\'s precision.',
   FLOATING_POINT_MMOL: 'Floating point value representing a `mmol/L` value.',
+  INTEGER_CARB_RATIO: 'Integer value representing grams of carbohydrate per unit of insulin.',
+  INTEGER_CARBS: 'Integer value representing grams of carbohydrate.',
   INTEGER_MGDL: 'Integer value representing a `mg/dL` value.',
   INTEGER_MS: 'Integer value representing milliseconds.'
 };
@@ -279,5 +298,7 @@ module.timeConstants = {
     'Europe/London'
   ]
 };
+
+module.MANUFACTURERS = ['animas', 'insulet', 'medtronic', 'tandem'];
 
 module.exports = module;

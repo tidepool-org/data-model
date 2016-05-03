@@ -240,10 +240,27 @@ function commonSectionForField(field) {
 
 /**
  * Description
+ * @method addRequiredInfoToSection
+ * @param {Array} fieldSection optional array of Markdown strings constituting a section
+ * @param {Object} required object encoding the API requirements for the field
+ * @return N/A mutates array
+ */
+function addRequiredInfoToSection(fieldSection, required) {
+  // the QUICK SUMMARY indicator goes here because `required` is always first
+  fieldSection.push('\tQUICK SUMMARY');
+  fieldSection.push('\tRequired:');
+  fieldSection.push(Object.keys(required).map(function(api) {
+    return util.format('\t\t%s: ' + (required[api] ? 'yes' : ((required[api] === null) ? 'nonexistent' : 'no (optional)')), api);
+  }).join('\n'));
+}
+
+/**
+ * Description
  * @method sectionForField
  * @param {String} field the name of a field existing on a data type
  * @param {String} summary Markdown string boilerplate giving a summary for the field
  * @param {Array} changeLog array of strings, each describing a change on the field's contents or validation
+ * @param {Array} fieldSection optional array of Markdown strings constituting a section
  * @return Markdown string containing boilerplate section (header and contents) for a field in a data type or subType
  */
 function sectionForField(field, summary, changeLog, fieldSection) {
@@ -271,6 +288,15 @@ function sectionForField(field, summary, changeLog, fieldSection) {
     if (summary) {
       if (summary.nested) {
         fieldSection.push(summary.description + '\n');
+        if (summary.required) {
+          addRequiredInfoToSection(fieldSection, summary.required);
+        }
+        if (summary.nestedSchemas) {
+          fieldSection.push('\n\tVALID INNER SCHEMAS');
+          _.forOwn(summary.nestedSchemas, function(innerSchema, schemaKey) {
+            fieldSection.push('\t\t' + schemaKey + ': {`' + innerSchema.join('`, `') + '`}');
+          });
+        }
         fieldSection.push('Contains the following properties:\n\n * ' + Object.keys(summary.keys).join('\n * ') + '\n');
         _.forOwn(summary.keys, function(innerSummary, key) {
           sectionForField(key, innerSummary.summary, null, fieldSection);
@@ -282,12 +308,7 @@ function sectionForField(field, summary, changeLog, fieldSection) {
           if (isObj) {
             switch (sectionKey) {
               case 'required':
-                // the QUICK SUMMARY indicator goes here because `required` is always first
-                fieldSection.push('\tQUICK SUMMARY');
-                fieldSection.push('\tRequired:');
-                fieldSection.push(Object.keys(section).map(function(api) {
-                  return util.format('\t\t%s: ' + (section[api] ? 'yes' : ((section[api] === null) ? 'nonexistent' : 'no (optional)')), api);
-                }).join('\n'));
+                addRequiredInfoToSection(fieldSection, section);
                 break;
               case 'numericalType':
                 fieldSection.push('\tNumerical type:');

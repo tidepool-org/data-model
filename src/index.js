@@ -89,5 +89,10 @@ module.exports = {
   upload: {
   },
   wizard: {
+    generator: wizard.generate,
+    summary: wizard.summary,
+    changeLog: wizard.changeLog,
+    title: 'Bolus Calculator Records',
+    type: 'wizard'
   }
 };
