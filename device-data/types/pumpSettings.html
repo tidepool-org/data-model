@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>types | data-model</title>
+        <title>pumpSettings | data-model</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="../../device-data/types/basal/index.html" />
+    <link rel="next" href="../../device-data/types/smbg.html" />
     
     
-    <link rel="prev" href="../../device-data/out-of-range.html" />
+    <link rel="prev" href="../../device-data/types/deviceEvent/previous.html" />
     
 
         
@@ -49,9 +49,9 @@
         
         
     <div class="book"
-        data-level="1.5"
-        data-chapter-title="types"
-        data-filepath="device-data/types/README.md"
+        data-level="1.5.7"
+        data-chapter-title="pumpSettings"
+        data-filepath="device-data/types/pumpSettings.md"
         data-basepath="../.."
         data-revision="Tue May 03 2016 17:49:30 GMT-0700 (PDT)"
         data-innerlanguage="">
@@ -158,7 +158,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="device-data/types/index.html">
+        <li class="chapter " data-level="1.5" data-path="device-data/types/index.html">
             
                 
                     <a href="../../device-data/types/index.html">
@@ -499,7 +499,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.7" data-path="device-data/types/pumpSettings.html">
+        <li class="chapter active" data-level="1.5.7" data-path="device-data/types/pumpSettings.html">
             
                 
                     <a href="../../device-data/types/pumpSettings.html">
@@ -594,19 +594,250 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="diabetes-data-types">Diabetes Data Types</h2>
+                        <h2 id="insulin-pump-settings-pumpsettings">Insulin pump settings (pumpSettings)</h2>
+<p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
+<blockquote>
+<p>Jump to example JSON:</p>
 <ul>
-<li><a href="basal/index.html">basal insulin</a></li>
-<li><a href="bloodKetone.html">blood ketones</a></li>
-<li><a href="bolus/index.html">bolus insulin</a></li>
-<li><a href="wizard.html">(bolus) calculator/&quot;wizard&quot; records</a></li>
-<li><a href="cbg.html">continuous blood glucose (cbg)</a></li>
-<li><a href="cgmSettings.md">CGM settings</a></li>
-<li><a href="deviceEvent/index.html">device events</a></li>
-<li><a href="pumpSettings.html">insulin pump settings</a></li>
-<li><a href="smbg.html">self-monitored blood glucose (smbg)</a></li>
-<li><a href="upload.md">upload metadata</a></li>
+<li><a href="#example-client">client example</a></li>
+<li><a href="#example-ingestion">ingestion example</a></li>
+<li><a href="#example-storage">storage example</a></li>
 </ul>
+</blockquote>
+<h3 id="type">type</h3>
+<p>[ingestion, storage, client] The string <code>pumpSettings</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start type -->
+<!-- TODO -->
+<!-- end type -->
+<hr>
+<h3 id="activeschedule">activeSchedule</h3>
+<!-- start activeSchedule -->
+<!-- TODO -->
+<!-- end activeSchedule -->
+<hr>
+<h3 id="basalschedules">basalSchedules</h3>
+<p>[ingestion, storage, client] A set of key-value pairs encoding the PWD&apos;s programmed basal schedules, where each key is a basal schedule name and each value is an array of basal schedule segment objects.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><p>Each basal schedule segment object within each array value contains the following properties:</p>
+<ul>
+<li>rate</li>
+<li>start</li>
+</ul>
+<h4 id="rate">rate</h4>
+<p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Floating point value rounded to the appropriate significant figures for the device&apos;s precision.
+Range:
+    min: 0.0
+    max: 20.0
+</code></pre><h4 id="start">start</h4>
+<p>[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: &lt; 86400000
+</code></pre><!-- start basalSchedules -->
+<!-- TODO -->
+<!-- end basalSchedules -->
+<hr>
+<h3 id="units">units</h3>
+<p>[ingestion, storage, client] An object encoding the units for carbohydrates and blood glucose on the PWD&apos;s insulin pump.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><p>Contains the following properties:</p>
+<ul>
+<li>carbs</li>
+<li>bg</li>
+</ul>
+<h4 id="carbs">carbs</h4>
+<blockquote>
+<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
+</blockquote>
+<p>[ingestion, storage, client] A string value encoding the (universal) units for carbohydrate input as <code>grams</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+Range: The string `grams`.
+</code></pre><h4 id="bg">bg</h4>
+<blockquote>
+<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
+</blockquote>
+<p>[ingestion, storage, client] A string value encoding the blood glucose units exposed in the user interface on this insulin pump.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+Range: Must be one of:
+    `mg/dL`
+    `mmol/L`
+</code></pre><h4 id="changelog-for-units">Changelog for <code>units</code></h4>
+<p><code>_schemaVersion</code> ? (future): <code>exchanges</code> may be added as an accepted value for <code>units.carbs</code> in the future.</p>
+<!-- start units -->
+<!-- TODO -->
+<!-- end units -->
+<hr>
+<h3 id="clockdriftoffset">clockDriftOffset</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start clockDriftOffset -->
+<!-- TODO -->
+<!-- end clockDriftOffset -->
+<hr>
+<h3 id="conversionoffset">conversionOffset</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start conversionOffset -->
+<!-- TODO -->
+<!-- end conversionOffset -->
+<hr>
+<h3 id="deviceid">deviceId</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start deviceId -->
+<!-- TODO -->
+<!-- end deviceId -->
+<hr>
+<h3 id="devicetime">deviceTime</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start deviceTime -->
+<!-- TODO -->
+<!-- end deviceTime -->
+<hr>
+<h3 id="guid">guid</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start guid -->
+<!-- TODO -->
+<!-- end guid -->
+<hr>
+<h3 id="time">time</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start time -->
+<!-- TODO -->
+<!-- end time -->
+<hr>
+<h3 id="timezoneoffset">timezoneOffset</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start timezoneOffset -->
+<!-- TODO -->
+<!-- end timezoneOffset -->
+<hr>
+<h3 id="uploadid">uploadId</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start uploadId -->
+<!-- TODO -->
+<!-- end uploadId -->
+<hr>
+<h3 id="active">_active</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start _active -->
+<!-- TODO -->
+<!-- end _active -->
+<hr>
+<h3 id="groupid">_groupId</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start _groupId -->
+<!-- TODO -->
+<!-- end _groupId -->
+<hr>
+<h3 id="schemaversion">_schemaVersion</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start _schemaVersion -->
+<!-- TODO -->
+<!-- end _schemaVersion -->
+<hr>
+<h3 id="version">_version</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start _version -->
+<!-- TODO -->
+<!-- end _version -->
+<hr>
+<h3 id="createdtime">createdTime</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start createdTime -->
+<!-- TODO -->
+<!-- end createdTime -->
+<hr>
+<h3 id="id">id</h3>
+<p>See <a href="../common.html">common fields</a>.</p>
+<!-- start id -->
+<!-- TODO -->
+<!-- end id -->
+<hr>
+<h3 id="example-client">example (client)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pumpSettings&quot;</span>,
+    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Very Active&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: {
+        <span class="hljs-string">&quot;carbs&quot;</span>: <span class="hljs-string">&quot;grams&quot;</span>,
+        <span class="hljs-string">&quot;bg&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>
+    },
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T13:23:59&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b2bc4e42-9174-4129-8a5e-cf578213fbbe&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;96046b22671045a1872413d72cfd5212&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T20:23:59.444Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="example-ingestion">example (ingestion)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pumpSettings&quot;</span>,
+    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: {
+        <span class="hljs-string">&quot;carbs&quot;</span>: <span class="hljs-string">&quot;grams&quot;</span>,
+        <span class="hljs-string">&quot;bg&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>
+    },
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T13:23:59&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;0bbc70e0-68e0-4609-8b6a-18e1e7677130&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T20:23:59.445Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="example-storage">example (storage)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pumpSettings&quot;</span>,
+    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Weekday&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: {
+        <span class="hljs-string">&quot;carbs&quot;</span>: <span class="hljs-string">&quot;grams&quot;</span>,
+        <span class="hljs-string">&quot;bg&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>
+    },
+    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
+    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T20:24:04.445Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T13:23:59&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;0fc0b3b1-7869-4937-8c0b-5f6a46e830f3&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;a48d75267df44ea6b1d731b56e225f2e&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T20:23:59.445Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
 
                     
                     </section>
@@ -617,10 +848,10 @@
         </div>
 
         
-        <a href="../../device-data/out-of-range.html" class="navigation navigation-prev " aria-label="Previous page: out of range values"><i class="fa fa-angle-left"></i></a>
+        <a href="../../device-data/types/deviceEvent/previous.html" class="navigation navigation-prev " aria-label="Previous page: the &quot;previous&quot; field"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../device-data/types/basal/index.html" class="navigation navigation-next " aria-label="Next page: basal"><i class="fa fa-angle-right"></i></a>
+        <a href="../../device-data/types/smbg.html" class="navigation navigation-next " aria-label="Next page: smbg"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

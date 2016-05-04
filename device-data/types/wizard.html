@@ -51,7 +51,7 @@
         data-chapter-title="wizard"
         data-filepath="device-data/types/wizard.md"
         data-basepath="../.."
-        data-revision="Tue May 03 2016 11:11:38 GMT-0700 (PDT)"
+        data-revision="Tue May 03 2016 17:49:30 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -477,6 +477,21 @@
             
         </li>
     
+        <li class="chapter " data-level="1.5.6.7" data-path="device-data/types/deviceEvent/previous.html">
+            
+                
+                    <a href="../../device-data/types/deviceEvent/previous.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.6.7.</b>
+                        
+                        the &quot;previous&quot; field
+                    </a>
+            
+            
+        </li>
+    
 
             </ul>
             
@@ -484,7 +499,15 @@
     
         <li class="chapter " data-level="1.5.7" data-path="device-data/types/pumpSettings.html">
             
-            <span><b>1.5.7.</b> pumpSettings</span>
+                
+                    <a href="../../device-data/types/pumpSettings.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.7.</b>
+                        
+                        pumpSettings
+                    </a>
             
             
         </li>
@@ -585,7 +608,9 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
+</code></pre><h4 id="changelog-for-type">Changelog for <code>type</code></h4>
+<p><code>_schemaVersion</code> ? (future): We plan to migrate from <code>wizard</code> to <code>calculator</code> in the future.</p>
+<!-- start type -->
 <!-- TODO -->
 <!-- end type -->
 <hr>
@@ -628,7 +653,7 @@ VALID INNER SCHEMAS
     insulet: {`target`, `high`}
     medtronic: {`low`, `high`}
     tandem: {`target`}
-</code></pre><p>Contains the following properties:</p>
+</code></pre><p>Contains a subset of the following properties:</p>
 <ul>
 <li>low</li>
 <li>high</li>
@@ -642,11 +667,11 @@ VALID INNER SCHEMAS
     mmol/L: Floating point value representing a `mmol/L` value.
 Range:
     mg/dL:
-        min: 40
-        max: 200
+        min: 0
+        max: 1000
     mmol/L:
-        min: 2.2
-        max: 11.1
+        min: 0.0
+        max: 55.0
 </code></pre><h4 id="high">high</h4>
 <p>[ingestion, storage, client] An integer encoding the upper bound of a PWD&apos;s blood glucose target.</p>
 <pre><code>Numerical type:
@@ -654,11 +679,11 @@ Range:
     mmol/L: Floating point value representing a `mmol/L` value.
 Range:
     mg/dL:
-        min: 80
-        max: 200
+        min: &gt; `low` or `target`, whichever present
+        max: 1000
     mmol/L:
-        min: 4.4
-        max: 11.1
+        min: &gt; `low` or `target`, whichever present
+        max: 55.0
 </code></pre><h4 id="target">target</h4>
 <p>[ingestion, storage, client] An integer encoding the PWD&apos;s target blood glucose as a single value.</p>
 <pre><code>Numerical type:
@@ -666,11 +691,11 @@ Range:
     mmol/L: Floating point value representing a `mmol/L` value.
 Range:
     mg/dL:
-        min: 80
-        max: 200
+        min: 0
+        max: 1000
     mmol/L:
-        min: 4.4
-        max: 11.1
+        min: 0.0
+        max: 55.0
 </code></pre><h4 id="range">range</h4>
 <p>[ingestion, storage, client] An integer encoding the allowed deviation above or below the PWD&apos;s target blood glucose.</p>
 <pre><code>Numerical type: An integer value representing an allowed range +/- an associated target.
@@ -761,11 +786,11 @@ Numerical type:
     mmol/L: Floating point value representing a `mmol/L` value.
 Range:
     mg/dL:
-        min: &gt; 0
-        max: 500
+        min: 0
+        max: 1000
     mmol/L:
-        min: &gt; 0.0
-        max: 27.7
+        min: 0.0
+        max: 55.0
 </code></pre><!-- start insulinSensitivity -->
 <!-- TODO -->
 <!-- end insulinSensitivity -->
@@ -779,7 +804,7 @@ Range:
 Required:
     jellyfish: no (optional)
     platform: no (optional)
-</code></pre><p>Contains the following properties:</p>
+</code></pre><p>May contain the following properties:</p>
 <ul>
 <li>carb</li>
 <li>correction</li>
