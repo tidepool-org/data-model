@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>smbg | data-model</title>
+        <title>cgmSettings | data-model</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="../../device-data/types/wizard.html" />
+    <link rel="next" href="../../device-data/types/deviceEvent/index.html" />
     
     
-    <link rel="prev" href="../../device-data/types/pumpSettings.html" />
+    <link rel="prev" href="../../device-data/types/cbg.html" />
     
 
         
@@ -49,9 +49,9 @@
         
         
     <div class="book"
-        data-level="1.5.8"
-        data-chapter-title="smbg"
-        data-filepath="device-data/types/smbg.md"
+        data-level="1.5.5"
+        data-chapter-title="cgmSettings"
+        data-filepath="device-data/types/cgmSettings.md"
         data-basepath="../.."
         data-revision="Tue May 03 2016 19:47:00 GMT-0700 (PDT)"
         data-innerlanguage="">
@@ -366,7 +366,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.5" data-path="device-data/types/cgmSettings.html">
+        <li class="chapter active" data-level="1.5.5" data-path="device-data/types/cgmSettings.html">
             
                 
                     <a href="../../device-data/types/cgmSettings.html">
@@ -522,7 +522,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.8" data-path="device-data/types/smbg.html">
+        <li class="chapter " data-level="1.5.8" data-path="device-data/types/smbg.html">
             
                 
                     <a href="../../device-data/types/smbg.html">
@@ -602,218 +602,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="selfmonitored-blood-glucose-smbg">Self-Monitored Blood Glucose (smbg)</h2>
-<p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
-<blockquote>
-<p>Jump to example JSON:</p>
-<ul>
-<li><a href="#example-client">client example</a></li>
-<li><a href="#example-ingestion">ingestion example</a></li>
-<li><a href="#example-storage">storage example</a></li>
-</ul>
-</blockquote>
-<h3 id="type">type</h3>
-<p>[ingestion, storage, client] The string <code>smbg</code>.</p>
-<pre><code>QUICK SUMMARY
-Required:
-    jellyfish: yes
-    platform: yes
-</code></pre><!-- start type -->
-<p>This is the Tidepool data type for traditional fingerstick blood glucose meter data. <code>smbg</code> is an abbreviation of &apos;self-monitored blood glucose&apos; and contrasts with <code>cbg</code>, abbreviating &apos;continuous blood glucose&apos;. <a href="cbg.html"><code>cbg</code></a> is the Tidepool data type for continuous glucose monitor (CGM) sensor data.</p>
-<!-- end type -->
-<hr>
-<h3 id="subtype">subType</h3>
-<blockquote>
-<p>This field is <strong>optional</strong>.</p>
-</blockquote>
-<p>[ingestion, storage, client] String value encoding additional information about the source of the blood glucose value.</p>
-<pre><code>QUICK SUMMARY
-Required:
-    jellyfish: no (optional)
-    platform: no (optional)
-Range: Must be one of:
-    `manual`
-    `linked`
-</code></pre><!-- start subType -->
-<p><code>subType</code> appears on blood glucose values that are <em>not</em> being read directly from a traditional fingerstick blood glucose meter, but rather from another data source such as an insulin pump.</p>
-<p>The value <code>manual</code> indicates that the blood glucose value was manually entered by a user (and is thus, of course, subject to human error).</p>
-<p>The value <code>linked</code> indicates that the blood glucose value was transferred from a blood glucose meter to the pump directly via some sort of data transfer or pairing mechanism. If the blood glucose meter in question is also supported by the Tidepool uploader, duplicate records may exist: both read directly from the meter and pulled in as <code>subType: &apos;linked&apos;</code> records from the insulin pump.</p>
-<!-- end subType -->
-<hr>
-<h3 id="units">units</h3>
-<p>[ingestion] One of two string values: <code>mg/dL</code> or <code>mmol/L</code>.</p>
-<p>[storage, client] The string <code>mmol/L</code>.</p>
-<p>See <a href="../units.html">units</a> for further explanation of blood glucose units.</p>
-<pre><code>QUICK SUMMARY
-Required:
-    jellyfish: yes
-    platform: yes
-Range: Must be one of:
-    `mg/dL`
-    `mmol/L`
-</code></pre><!-- start units -->
-<!-- end units -->
-<hr>
-<h3 id="value">value</h3>
-<p>[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching <code>units</code> field.</p>
-<p>[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching <code>units</code> field.</p>
-<pre><code>QUICK SUMMARY
-Required:
-    jellyfish: yes
-    platform: yes
-Numerical type:
-    mg/dL: Integer value representing a `mg/dL` value.
-    mmol/L: Floating point value representing a `mmol/L` value.
-Range:
-    mg/dL:
-        min: 0
-        max: 1000
-    mmol/L:
-        min: 0.0
-        max: 55.0
-</code></pre><!-- start value -->
-<!-- end value -->
-<hr>
-<h3 id="clockdriftoffset">clockDriftOffset</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
-<!-- TODO -->
-<!-- end clockDriftOffset -->
-<hr>
-<h3 id="conversionoffset">conversionOffset</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
-<!-- TODO -->
-<!-- end conversionOffset -->
-<hr>
-<h3 id="deviceid">deviceId</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start deviceId -->
-<!-- TODO -->
-<!-- end deviceId -->
-<hr>
-<h3 id="devicetime">deviceTime</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
-<!-- TODO -->
-<!-- end deviceTime -->
-<hr>
-<h3 id="guid">guid</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start guid -->
-<!-- TODO -->
-<!-- end guid -->
-<hr>
-<h3 id="time">time</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start time -->
-<!-- TODO -->
-<!-- end time -->
-<hr>
-<h3 id="timezoneoffset">timezoneOffset</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
-<!-- TODO -->
-<!-- end timezoneOffset -->
-<hr>
-<h3 id="uploadid">uploadId</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start uploadId -->
-<!-- TODO -->
-<!-- end uploadId -->
-<hr>
-<h3 id="active">_active</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start _active -->
-<!-- TODO -->
-<!-- end _active -->
-<hr>
-<h3 id="groupid">_groupId</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start _groupId -->
-<!-- TODO -->
-<!-- end _groupId -->
-<hr>
-<h3 id="schemaversion">_schemaVersion</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
-<!-- TODO -->
-<!-- end _schemaVersion -->
-<hr>
-<h3 id="version">_version</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start _version -->
-<!-- TODO -->
-<!-- end _version -->
-<hr>
-<h3 id="createdtime">createdTime</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start createdTime -->
-<!-- TODO -->
-<!-- end createdTime -->
-<hr>
-<h3 id="id">id</h3>
-<p>See <a href="../common.html">common fields</a>.</p>
-<!-- start id -->
-<!-- TODO -->
-<!-- end id -->
-<hr>
-<h3 id="example-client">example (client)</h3>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
-    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
-    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
-    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">21.370379765525303</span>,
-    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T11:18:03&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;51414496-a20f-4214-95b8-8c1ea1b0cc89&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;771fd8f0f9a949728b96caf255656664&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T18:18:03.069Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
-    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
-}
-</code></pre>
-<h3 id="example-ingestion">example (ingestion)</h3>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
-    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
-    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
-    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">74</span>,
-    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T11:18:03&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b268180b-9a4e-44b5-8877-756e8e665395&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T18:18:03.069Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
-    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
-}
-</code></pre>
-<h3 id="example-storage">example (storage)</h3>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
-    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
-    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
-    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">24.589813600331713</span>,
-    <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
-    <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T18:18:08.069Z&quot;</span>,
-    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T11:18:03&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;fdad17ab-836a-4430-99e4-b8066e882bda&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;0b7c669bc472412ea12ed414e1848f33&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T18:18:03.069Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
-    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
-}
-</code></pre>
-
+                        <p>Coming soon!</p>
+<!-- TODO: document cgmSettings -->
                     
                     </section>
                 
@@ -823,10 +613,10 @@ Range:
         </div>
 
         
-        <a href="../../device-data/types/pumpSettings.html" class="navigation navigation-prev " aria-label="Previous page: pumpSettings"><i class="fa fa-angle-left"></i></a>
+        <a href="../../device-data/types/cbg.html" class="navigation navigation-prev " aria-label="Previous page: cbg"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../device-data/types/wizard.html" class="navigation navigation-next " aria-label="Next page: wizard"><i class="fa fa-angle-right"></i></a>
+        <a href="../../device-data/types/deviceEvent/index.html" class="navigation navigation-next " aria-label="Next page: deviceEvent"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

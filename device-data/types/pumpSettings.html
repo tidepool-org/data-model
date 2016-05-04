@@ -53,7 +53,7 @@
         data-chapter-title="pumpSettings"
         data-filepath="device-data/types/pumpSettings.md"
         data-basepath="../.."
-        data-revision="Tue May 03 2016 17:49:30 GMT-0700 (PDT)"
+        data-revision="Tue May 03 2016 19:47:00 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -368,7 +368,15 @@
     
         <li class="chapter " data-level="1.5.5" data-path="device-data/types/cgmSettings.html">
             
-            <span><b>1.5.5.</b> cgmSettings</span>
+                
+                    <a href="../../device-data/types/cgmSettings.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.5.</b>
+                        
+                        cgmSettings
+                    </a>
             
             
         </li>
@@ -615,7 +623,12 @@ Required:
 <!-- end type -->
 <hr>
 <h3 id="activeschedule">activeSchedule</h3>
-<!-- start activeSchedule -->
+<p>[ingestion, storage, client] A string value encoding the name of the PWD&apos;s active basal schedule.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start activeSchedule -->
 <!-- TODO -->
 <!-- end activeSchedule -->
 <hr>
@@ -653,6 +666,124 @@ Range:
 </code></pre><!-- start basalSchedules -->
 <!-- TODO -->
 <!-- end basalSchedules -->
+<hr>
+<h3 id="bgtarget">bgTarget</h3>
+<p><strong>NB</strong>: Either <code>bgTarget</code> <em>or</em> <code>bgTargets</code> (but not both!) must be present for a <code>pumpSettings</code> object to be valid.</p>
+<p>[ingestion, storage, client] An array of objects describing the PWD&apos;s target blood glucose at different times of day; the format of this object varies according to the make of the insulin pump.</p>
+<p>Each blood glucose target segment object in the array contains a subset of the following properties:</p>
+<ul>
+<li>low</li>
+<li>high</li>
+<li>target</li>
+<li>range</li>
+<li>start</li>
+</ul>
+<h4 id="low">low</h4>
+<p>[ingestion, storage, client] An integer encoding the lower bound of a PWD&apos;s blood glucose target.</p>
+<pre><code>Numerical type:
+    mg/dL: Integer value representing a `mg/dL` value.
+    mmol/L: Floating point value representing a `mmol/L` value.
+Range:
+    mg/dL:
+        min: 0
+        max: 1000
+    mmol/L:
+        min: 0.0
+        max: 55.0
+</code></pre><h4 id="high">high</h4>
+<p>[ingestion, storage, client] An integer encoding the upper bound of a PWD&apos;s blood glucose target.</p>
+<pre><code>Numerical type:
+    mg/dL: Integer value representing a `mg/dL` value.
+    mmol/L: Floating point value representing a `mmol/L` value.
+Range:
+    mg/dL:
+        min: &gt; `low` or `target`, whichever present
+        max: 1000
+    mmol/L:
+        min: &gt; `low` or `target`, whichever present
+        max: 55.0
+</code></pre><h4 id="target">target</h4>
+<p>[ingestion, storage, client] An integer encoding the PWD&apos;s target blood glucose as a single value.</p>
+<pre><code>Numerical type:
+    mg/dL: Integer value representing a `mg/dL` value.
+    mmol/L: Floating point value representing a `mmol/L` value.
+Range:
+    mg/dL:
+        min: 0
+        max: 1000
+    mmol/L:
+        min: 0.0
+        max: 55.0
+</code></pre><h4 id="range">range</h4>
+<p>[ingestion, storage, client] An integer encoding the allowed deviation above or below the PWD&apos;s target blood glucose.</p>
+<pre><code>Numerical type: An integer value representing an allowed range +/- an associated target.
+Range:
+    min: 0
+    max: 50
+</code></pre><h4 id="start">start</h4>
+<p>[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: &lt; 86400000
+</code></pre><!-- start bgTarget -->
+<!-- TODO -->
+<!-- end bgTarget -->
+<hr>
+<h3 id="bgtargets">bgTargets</h3>
+<p><strong>NB</strong>: Either <code>bgTargets</code> <em>or</em> <code>bgTarget</code> (but not both!) must be present for a <code>pumpSettings</code> object to be valid.</p>
+<p>[ingestion, storage, client] A set of key-value pairs encoding the PWD&apos;s programmed blood glucose target schedules, where each key is a schedule name and each value is an array of blood glucose target segment objects.</p>
+<p>See <a href="#bgtarget"><code>bgTarget</code></a> above for documentation of the fields within each blood glucose segment object.</p>
+<!-- start bgTargets -->
+<!-- TODO -->
+<!-- end bgTargets -->
+<hr>
+<h3 id="carbratio">carbRatio</h3>
+<p><strong>NB</strong>: Either <code>carbRatio</code> <em>or</em> <code>carbRatios</code> (but not both!) must be present for a <code>pumpSettings</code> object to be valid.</p>
+<p>[ingestion, storage, client] An array of objects encoding the PWD&apos;s insulin carb ratio starting at a time in milliseconds from the start of a twenty-four hour day.</p>
+<p>Each carb ratio segment object in the array contains the following properties:</p>
+<ul>
+<li>amount</li>
+<li>start</li>
+</ul>
+<h4 id="amount">amount</h4>
+<blockquote>
+<p>This field is <strong>optional</strong>.</p>
+</blockquote>
+<p>[ingestion, storage, client] An integer encoding the grams of carbohydrate &quot;covered&quot; by one unit of insulin for the PWD.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+Numerical type: Integer value representing grams of carbohydrate per unit of insulin.
+Range:
+    min: 0
+    max: 250
+</code></pre><h4 id="start">start</h4>
+<p>[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: &lt; 86400000
+</code></pre><!-- start carbRatio -->
+<!-- TODO -->
+<!-- end carbRatio -->
+<hr>
+<h3 id="carbratios">carbRatios</h3>
+<p><strong>NB</strong>: Either <code>carbRatios</code> <em>or</em> <code>carbRatio</code> (but not both!) must be present for a <code>pumpSettings</code> object to be valid.</p>
+<p>[ingestion, storage, client] A set of key-value pairs encoding the PWD&apos;s programmed carb ratio schedules, where each key is a schedule name and each value is an array of carb ratio segment objects.</p>
+<p>See <a href="#carbratio"><code>carbRatio</code></a> above for documentation of the fields within each carb ratio segment object.</p>
+<!-- start carbRatios -->
+<!-- TODO -->
+<!-- end carbRatios -->
 <hr>
 <h3 id="units">units</h3>
 <p>[ingestion, storage, client] An object encoding the units for carbohydrates and blood glucose on the PWD&apos;s insulin pump.</p>
@@ -780,18 +911,51 @@ Range: Must be one of:
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pumpSettings&quot;</span>,
-    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Very Active&quot;</span>,
+    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Normal&quot;</span>,
+    <span class="hljs-string">&quot;basalSchedules&quot;</span>: {
+        <span class="hljs-string">&quot;Normal&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.75</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">23400000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.95</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">46800000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.35</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">55800000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.575</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">63000000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.025</span>
+            }
+        ]
+    },
     <span class="hljs-string">&quot;units&quot;</span>: {
         <span class="hljs-string">&quot;carbs&quot;</span>: <span class="hljs-string">&quot;grams&quot;</span>,
         <span class="hljs-string">&quot;bg&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>
     },
+    <span class="hljs-string">&quot;bgTarget&quot;</span>: [
+        <span class="hljs-literal">null</span>
+    ],
+    <span class="hljs-string">&quot;carbRatio&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">8</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
+        }
+    ],
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T13:23:59&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b2bc4e42-9174-4129-8a5e-cf578213fbbe&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;96046b22671045a1872413d72cfd5212&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T20:23:59.444Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T19:34:52&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;d4bcaea5-2696-499a-b25c-a7c755bfabdc&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;99bbe168f953427aaa2bc0da594a183e&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T02:34:52.500Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -799,17 +963,52 @@ Range: Must be one of:
 <h3 id="example-ingestion">example (ingestion)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pumpSettings&quot;</span>,
-    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Normal&quot;</span>,
+    <span class="hljs-string">&quot;basalSchedules&quot;</span>: {
+        <span class="hljs-string">&quot;Normal&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.725</span>
+            }
+        ],
+        <span class="hljs-string">&quot;Stress&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">39600000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">2</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">64800000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.775</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">84600000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.75</span>
+            }
+        ]
+    },
     <span class="hljs-string">&quot;units&quot;</span>: {
         <span class="hljs-string">&quot;carbs&quot;</span>: <span class="hljs-string">&quot;grams&quot;</span>,
         <span class="hljs-string">&quot;bg&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>
     },
+    <span class="hljs-string">&quot;bgTarget&quot;</span>: [
+        <span class="hljs-literal">null</span>
+    ],
+    <span class="hljs-string">&quot;carbRatio&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">5</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
+        }
+    ],
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T13:23:59&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;0bbc70e0-68e0-4609-8b6a-18e1e7677130&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T20:23:59.445Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T19:34:52&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;bb166824-1f42-4c31-97a1-281dbb2b967c&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T02:34:52.509Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -817,23 +1016,64 @@ Range: Must be one of:
 <h3 id="example-storage">example (storage)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pumpSettings&quot;</span>,
-    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Weekday&quot;</span>,
+    <span class="hljs-string">&quot;activeSchedule&quot;</span>: <span class="hljs-string">&quot;Normal&quot;</span>,
+    <span class="hljs-string">&quot;basalSchedules&quot;</span>: {
+        <span class="hljs-string">&quot;Normal&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.175</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">10800000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.15</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">19800000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.9</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">48600000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.925</span>
+            }
+        ],
+        <span class="hljs-string">&quot;Stress&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.55</span>
+            }
+        ],
+        <span class="hljs-string">&quot;Weekend&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.95</span>
+            }
+        ]
+    },
     <span class="hljs-string">&quot;units&quot;</span>: {
         <span class="hljs-string">&quot;carbs&quot;</span>: <span class="hljs-string">&quot;grams&quot;</span>,
         <span class="hljs-string">&quot;bg&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>
     },
+    <span class="hljs-string">&quot;bgTarget&quot;</span>: [
+        <span class="hljs-literal">null</span>
+    ],
+    <span class="hljs-string">&quot;carbRatio&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">7</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
+        }
+    ],
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
     <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T20:24:04.445Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T02:34:57.510Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T13:23:59&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;0fc0b3b1-7869-4937-8c0b-5f6a46e830f3&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;a48d75267df44ea6b1d731b56e225f2e&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T20:23:59.445Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T19:34:52&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f449aac6-3f0d-496e-89ea-8943c9085d3e&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;a64258f561464e5aadbd19d8a66cb72c&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T02:34:52.510Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
