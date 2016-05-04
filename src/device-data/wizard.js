@@ -117,7 +117,11 @@ var schema = {
           }
         }
       }
-    }
+    },
+    changelog: [
+      '`_schemaVersion` 2: The minimal `{target: [val]}` schema was added as valid to handle Tandem\'s `bgTarget` data.',
+      '`_schemaVersion` 2: The nonexistent (in currently handled devices) `{low: [val], target: [val], high: [val]}` schema was *removed*.'
+    ]
   },
   bolus: {
     instance: function() {

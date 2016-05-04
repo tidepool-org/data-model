@@ -143,6 +143,12 @@ Contains a subset of the following properties:
 		min: 0
 		max: 50
 
+#### Changelog for `bgTarget`
+
+`_schemaVersion` 2: The minimal `{target: [val]}` schema was added as valid to handle Tandem's `bgTarget` data.
+
+`_schemaVersion` 2: The nonexistent (in currently handled devices) `{low: [val], target: [val], high: [val]}` schema was *removed*.
+
 <!-- start bgTarget -->
 <!-- TODO -->
 <!-- end bgTarget -->
@@ -496,29 +502,28 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 8.048584587016023,
+	"bgInput": 27.920262394959032,
 	"bgTarget": {
-		"target": 6.1058227901500866,
-		"high": 8.048584587016023
+		"target": 6.383360189702364
 	},
-	"bolus": "66959fa33e5849c5848948201cb4c378",
-	"carbInput": 125,
-	"insulinCarbRatio": 20,
-	"insulinOnBoard": 8.944,
-	"insulinSensitivity": 41,
+	"bolus": "17f0097f7e71427dbb27e65905c332fb",
+	"carbInput": 108,
+	"insulinCarbRatio": 17,
+	"insulinOnBoard": 24.869,
+	"insulinSensitivity": 63,
 	"recommended": {
 		"carb": 6.25,
-		"correction": 0.25,
+		"correction": 0.5,
 		"net": 0
 	},
 	"units": "mmol/L",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-03T11:06:13",
-	"guid": "ba502dcb-f49d-4e6f-a7e9-bee502ffc88b",
-	"id": "8cc9acc434854e499dc46cb65a2e5fea",
-	"time": "2016-05-03T18:06:13.996Z",
+	"deviceTime": "2016-05-04T01:18:06",
+	"guid": "5d7afc51-7d9f-4504-ba79-6731d299f1a2",
+	"id": "3bd709477d564a3ebf099a59b545c044",
+	"time": "2016-05-04T08:18:06.629Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -529,28 +534,28 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 462,
+	"bgInput": 574,
 	"bgTarget": {
-		"target": 100,
-		"high": 135
+		"target": 105,
+		"range": 10
 	},
-	"bolus": "512bcf1f3aea4e5380aac382d0b69026",
-	"carbInput": 147,
+	"bolus": "30c349186b7f4c1780538f9290ff0e7a",
+	"carbInput": 95,
 	"insulinCarbRatio": 13,
-	"insulinOnBoard": 8.726,
-	"insulinSensitivity": 92,
+	"insulinOnBoard": 12.881,
+	"insulinSensitivity": 71,
 	"recommended": {
-		"carb": 11.25,
-		"correction": 5,
-		"net": 7.5
+		"carb": 7.25,
+		"correction": 6.5,
+		"net": 0.75
 	},
 	"units": "mg/dL",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-03T11:06:13",
-	"guid": "5b799146-ed76-41c6-bd19-068ea77f8b00",
-	"time": "2016-05-03T18:06:13.997Z",
+	"deviceTime": "2016-05-04T01:18:06",
+	"guid": "a3b00d7b-b506-435e-b039-9237ed1e891d",
+	"time": "2016-05-04T08:18:06.630Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -561,19 +566,19 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 25.866485638272184,
+	"bgInput": 31.306218669496808,
 	"bgTarget": {
-		"target": 5.550747991045533,
-		"range": 1.1101495982091067
+		"target": 5.273210591493257,
+		"high": 6.66089758925464
 	},
-	"bolus": "57c5dd917cb74697b1a1a32601534834",
-	"carbInput": 121,
-	"insulinCarbRatio": 22,
-	"insulinOnBoard": 19.824,
-	"insulinSensitivity": 53,
+	"bolus": "f2f23ebc808e4c4396a7c59942dc290a",
+	"carbInput": 149,
+	"insulinCarbRatio": 14,
+	"insulinOnBoard": 21.778,
+	"insulinSensitivity": 77,
 	"recommended": {
-		"carb": 5.5,
-		"correction": 0.25,
+		"carb": 10.75,
+		"correction": 0.5,
 		"net": 0
 	},
 	"units": "mmol/L",
@@ -583,12 +588,12 @@ See [common fields](../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-03T18:06:18.998Z",
+	"createdTime": "2016-05-04T08:18:11.630Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-03T11:06:13",
-	"guid": "f9bac31f-5432-40c8-a5df-448596217abc",
-	"id": "c707b478ab1849fb9700e96733798bd4",
-	"time": "2016-05-03T18:06:13.998Z",
+	"deviceTime": "2016-05-04T01:18:06",
+	"guid": "2e180503-152a-4644-8683-e6d099537fd2",
+	"id": "e9974a6e87b54f10baf2b828a046dad9",
+	"time": "2016-05-04T08:18:06.630Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

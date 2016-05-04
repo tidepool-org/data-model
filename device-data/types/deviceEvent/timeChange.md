@@ -58,7 +58,7 @@ Contains the following properties:
 
 #### from
 
-[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-05-02T21:55:04`.
+[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-05-04T08:18:06`.
 
 	QUICK SUMMARY
 	Required:
@@ -70,7 +70,7 @@ Contains the following properties:
 
 #### to
 
-[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-05-02T21:55:04`.
+[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-05-04T08:18:06`.
 
 	QUICK SUMMARY
 	Required:
@@ -274,22 +274,22 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "timeChange",
 	"change": {
-		"from": "2016-05-02T21:55:04",
-		"to": "2016-05-02T20:58:29",
+		"from": "2016-05-04T08:18:06",
+		"to": "2016-05-04T07:21:31",
 		"agent": "manual",
 		"reasons": [
 			"travel",
 			"correction"
 		],
-		"timezone": "US/Eastern"
+		"timezone": "US/Central"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T14:55:04",
-	"guid": "228f8edf-7b90-4083-bc83-a959e4402bb9",
-	"id": "fcadfaa856e64ff3be2edfb27fb9d578",
-	"time": "2016-05-02T21:55:04.437Z",
+	"deviceTime": "2016-05-04T01:18:06",
+	"guid": "e99d9828-d412-4e53-8645-a11cf21caee7",
+	"id": "f547c206c2ce4361b28b2a95ff3b6d1b",
+	"time": "2016-05-04T08:18:06.023Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -302,21 +302,21 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "timeChange",
 	"change": {
-		"from": "2016-05-02T21:55:04",
-		"to": "2016-05-02T20:58:29",
+		"from": "2016-05-04T08:18:06",
+		"to": "2016-05-04T07:21:31",
 		"agent": "manual",
 		"reasons": [
 			"travel",
 			"correction"
 		],
-		"timezone": "US/Central"
+		"timezone": "Europe/London"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T14:55:04",
-	"guid": "daaee7dd-2c3f-4483-84c9-26fbb97f0e53",
-	"time": "2016-05-02T21:55:04.438Z",
+	"deviceTime": "2016-05-04T01:18:06",
+	"guid": "d86f4881-9eb5-4638-9f06-afad83caa52b",
+	"time": "2016-05-04T08:18:06.024Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -329,14 +329,14 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "timeChange",
 	"change": {
-		"from": "2016-05-02T21:55:04",
-		"to": "2016-05-02T20:58:29",
+		"from": "2016-05-04T08:18:06",
+		"to": "2016-05-04T07:21:31",
 		"agent": "manual",
 		"reasons": [
 			"travel",
 			"correction"
 		],
-		"timezone": "Europe/Budapest"
+		"timezone": "US/Mountain"
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -344,12 +344,12 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-02T21:55:09.438Z",
+	"createdTime": "2016-05-04T08:18:11.024Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T14:55:04",
-	"guid": "24600742-1d64-47cf-ba94-496b8ed238bd",
-	"id": "05c7b5ed450c4b5b8da142a100838ada",
-	"time": "2016-05-02T21:55:04.438Z",
+	"deviceTime": "2016-05-04T01:18:06",
+	"guid": "6b285d97-c5fc-483a-9c08-67713a0e2775",
+	"id": "c1288c03e9d4473daef65685178a5cab",
+	"time": "2016-05-04T08:18:06.024Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

@@ -203,14 +203,14 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "dd8a867f66754d3b8a5197fe04383972",
+	"status": "2e66a40bbab74780b9959cd38fbebb3f",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T15:01:47",
-	"guid": "cda443ea-e576-4c64-936b-16153841ebf1",
-	"id": "c74db6e6d8014bdd8db67ed39288d05c",
-	"time": "2016-05-02T22:01:47.895Z",
+	"deviceTime": "2016-05-04T01:18:05",
+	"guid": "5603ddc5-3a0b-4e67-963a-8ca7e3e5eefb",
+	"id": "09f071b87ad34213a4c8271325bc7e2f",
+	"time": "2016-05-04T08:18:05.646Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -222,13 +222,13 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "e2b28477ff1b4c0f91315710c9a204ed",
+	"status": "9245bff336f548a6a0512b77a09bbff1",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T15:01:47",
-	"guid": "88cc6312-fe41-481f-b268-8c05927da3f0",
-	"time": "2016-05-02T22:01:47.895Z",
+	"deviceTime": "2016-05-04T01:18:05",
+	"guid": "10ecfdd7-6b28-4b4d-9bc4-892f4e1537a7",
+	"time": "2016-05-04T08:18:05.647Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -240,19 +240,19 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "133fc7e4f8074786910208f2b293aa3f",
+	"status": "a7fa19b17e324dbdba797adf22ac7883",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-02T22:01:52.896Z",
+	"createdTime": "2016-05-04T08:18:10.647Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T15:01:47",
-	"guid": "871f9de3-cf17-4624-b382-6b95f5e08750",
-	"id": "0291d6f8e60f4eb5ba01b856e5c25001",
-	"time": "2016-05-02T22:01:47.896Z",
+	"deviceTime": "2016-05-04T01:18:05",
+	"guid": "0b0c5ab9-22fb-4919-96fe-9db7e539856b",
+	"id": "db0726abd919430ea719683f8bb6afbf",
+	"time": "2016-05-04T08:18:05.647Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

@@ -229,14 +229,14 @@ See [common fields](../common.md).
 {
 	"type": "cbg",
 	"units": "mmol/L",
-	"value": 33.026950546720926,
+	"value": 14.542959736539297,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T11:18:05",
-	"guid": "81064d4f-0047-4171-9f47-58d0c840921f",
-	"id": "b8464da295e940eb94f09eafb0e32e18",
-	"time": "2016-04-28T18:18:05.692Z",
+	"deviceTime": "2016-05-04T01:18:04",
+	"guid": "cc094920-e2b6-4a80-9832-a6a1ee14115f",
+	"id": "22d499a1053c4c2c9aac2e470c428e61",
+	"time": "2016-05-04T08:18:04.889Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -248,13 +248,13 @@ See [common fields](../common.md).
 {
 	"type": "cbg",
 	"units": "mg/dL",
-	"value": 463,
+	"value": 525,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T11:18:05",
-	"guid": "0c8b932f-01bc-4fa1-8243-f5289e353387",
-	"time": "2016-04-28T18:18:05.693Z",
+	"deviceTime": "2016-05-04T01:18:04",
+	"guid": "5931d0cf-03b7-48b6-89db-b8021454f31f",
+	"time": "2016-05-04T08:18:04.889Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -266,19 +266,19 @@ See [common fields](../common.md).
 {
 	"type": "cbg",
 	"units": "mmol/L",
-	"value": 28.586352153884498,
+	"value": 6.050315310239632,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-28T18:18:10.693Z",
+	"createdTime": "2016-05-04T08:18:09.889Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-28T11:18:05",
-	"guid": "4b33f238-1052-4eb7-a553-24bc8d5cf50f",
-	"id": "f50f97800f7e44a791ca0f17f223ab7b",
-	"time": "2016-04-28T18:18:05.693Z",
+	"deviceTime": "2016-05-04T01:18:04",
+	"guid": "81eae598-805c-448f-879d-a909d578ae75",
+	"id": "4c150e1578874bf799f966c81f110309",
+	"time": "2016-05-04T08:18:04.889Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

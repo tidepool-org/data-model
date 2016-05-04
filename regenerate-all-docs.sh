@@ -21,6 +21,10 @@ cd bin/
 ./docTemplateGenerator.js deviceEvent --subType status
 ./docTemplateGenerator.js deviceEvent --subType timeChange
 
+./docTemplateGenerator.js pumpSettings
+
 ./docTemplateGenerator.js smbg
+
+./docTemplateGenerator.js wizard
 
 cd ../

@@ -220,7 +220,12 @@ var schemas = {
         }
       }
     },
-    bgTarget: bgTarget,
+    bgTarget: _.assign({}, bgTarget, {
+      changelog: [
+        '`_schemaVersion` 2: The minimal `{target: [val], start: [milliseconds]}` schema was added as valid to handle Tandem\'s `bgTarget` settings.',
+        '`_schemaVersion` 2: The nonexistent (in currently handled devices) `{low: [val], target: [val], high: [val], start: [milliseconds]}` schema was *removed*.'
+      ]
+    }),
     bgTargets: bgTargets,
     carbRatio: carbRatio,
     carbRatios: carbRatios,

@@ -267,19 +267,19 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 0,
-	"expectedDuration": 0,
+	"duration": 64800000,
+	"expectedDuration": 77760000,
 	"reason": {
 		"suspended": "manual",
-		"resumed": "manual"
+		"resumed": "automatic"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T17:22:32",
-	"guid": "f53e9f4f-b8ae-4ee7-b952-266899ea7a70",
-	"id": "26ee125b458544c79af4b400cca06dfc",
-	"time": "2016-05-03T00:22:32.367Z",
+	"deviceTime": "2016-05-04T01:18:05",
+	"guid": "c6167608-a489-42db-98af-ccf3e9251d9a",
+	"id": "961dd4e8b3d54ae19088964141f55f8f",
+	"time": "2016-05-04T08:18:05.836Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -292,8 +292,8 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 63000000,
-	"expectedDuration": 75600000,
+	"duration": 37800000,
+	"expectedDuration": 45360000,
 	"reason": {
 		"suspended": "manual",
 		"resumed": "automatic"
@@ -301,9 +301,9 @@ See [common fields](../../common.md).
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T17:22:32",
-	"guid": "136ef1a7-0b30-4454-9ce0-de5a7a711e17",
-	"time": "2016-05-03T00:22:32.377Z",
+	"deviceTime": "2016-05-04T01:18:05",
+	"guid": "252abbf0-4a11-4dcf-8f55-dd1519d71cda",
+	"time": "2016-05-04T08:18:05.837Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -316,11 +316,11 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 7200000,
-	"expectedDuration": 8640000,
+	"duration": 19800000,
+	"expectedDuration": 23760000,
 	"reason": {
-		"suspended": "automatic",
-		"resumed": "automatic"
+		"suspended": "manual",
+		"resumed": "manual"
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -328,12 +328,12 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-03T00:22:37.378Z",
+	"createdTime": "2016-05-04T08:18:10.837Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-02T17:22:32",
-	"guid": "8da52d89-6410-4e73-974f-f77e9271922e",
-	"id": "de6e9dffdd494c8fbfd3d0d127147332",
-	"time": "2016-05-03T00:22:32.378Z",
+	"deviceTime": "2016-05-04T01:18:05",
+	"guid": "468168ab-a4f9-46e2-a6f9-81a38782ce45",
+	"id": "d40e0dcf7df543f2be93aa53b35cd9df",
+	"time": "2016-05-04T08:18:05.837Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

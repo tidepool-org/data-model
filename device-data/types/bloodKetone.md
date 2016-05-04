@@ -209,14 +209,14 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 3,
+	"value": 5,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-27T23:00:10",
-	"guid": "6a90d165-ff18-4b4e-949b-15a6516af21f",
-	"id": "55fa02e5800a434c9d9afae180a11069",
-	"time": "2016-04-28T06:00:10.223Z",
+	"deviceTime": "2016-05-04T01:18:04",
+	"guid": "2fb03c7f-4040-4e2f-a3a0-43474d4e20d9",
+	"id": "d46136b10e964d308d3853b5fa7db708",
+	"time": "2016-05-04T08:18:04.704Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -228,13 +228,13 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 0.5,
+	"value": 4.3,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-27T23:00:10",
-	"guid": "c5e6534f-6a2a-4d82-aa3d-fef86af41d9e",
-	"time": "2016-04-28T06:00:10.224Z",
+	"deviceTime": "2016-05-04T01:18:04",
+	"guid": "a46d3df5-48d6-49ad-b9b9-4a7c6c816b5d",
+	"time": "2016-05-04T08:18:04.704Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -246,19 +246,19 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 5,
+	"value": 0.9,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-04-28T06:00:15.224Z",
+	"createdTime": "2016-05-04T08:18:09.705Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-04-27T23:00:10",
-	"guid": "b4e026a6-c120-4fd8-9a6d-d2b1bd700577",
-	"id": "d9d19a698a1a438ca69e6fc373d36a11",
-	"time": "2016-04-28T06:00:10.224Z",
+	"deviceTime": "2016-05-04T01:18:04",
+	"guid": "8fb6f783-0a32-4b42-b0cf-444f2477d30d",
+	"id": "bb579528b60f4ee9b9c76fa696340eaa",
+	"time": "2016-05-04T08:18:04.705Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
