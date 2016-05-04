@@ -45,7 +45,7 @@ var TANDEM_SCHEDULES = [
 var bgTarget = {
   instance: function(units, isIngestion, manufacturer) {
     return _.map(getStarts(), function(aStart) {
-      _.assign({start: aStart}, common.bgTarget(units, isIngestion, manufacturer));
+      return _.assign({start: aStart}, common.bgTarget(units, isIngestion, manufacturer));
     });
   },
   summary: {
@@ -120,11 +120,46 @@ var carbRatios = {
 };
 
 var insulinSensitivity = {
-
+  instance: function() {
+    return _.map(getStarts(), function(aStart) {
+      return {
+        amount: common.insulinSensitivity(),
+        start: aStart
+      };
+    });
+  },
+  summary: {
+    description: common.propTypes.eitherOr('insulinSensitivity', 'insulinSensitivities', TYPE) + '[ingestion, storage, client] An array of objects encoding the PWD\'s insulin sensitivity starting at a time in milliseconds from the start of a twenty-four hour day.',
+    nested: true,
+    nestedPropertiesIntro: 'Each insulin sensitivity segment object in the array contains the following properties',
+    keys: {
+      amount: {
+        summary: wizard.summary.insulinSensitivity
+      },
+      start: {
+        summary: common.startSummary
+      }
+    }
+  }
 };
 
 var insulinSensitivities = {
+  instance: function() {
+    var insulinSensitivities = {};
+    _.each(TANDEM_SCHEDULES, function(scheduleName) {
+      insulinSensitivities[scheduleName] = _.map(getStarts(), function(aStart) {
+        return {
+          amount: common.insulinSensitivity(),
+          start: aStart
+        };
+      });
+    });
 
+    return insulinSensitivities;
+  },
+  summary: {
+    description: common.propTypes.eitherOr('insulinSensitivities', 'insulinSensitivity', TYPE) +  '[ingestion, storage, client] A set of key-value pairs encoding the PWD\'s programmed insulin sensitivity schedules, where each key is a schedule name and each value is an array of insulin sensitivity segment objects.\n\nSee [`insulinSensitivity`](#insulinsensitivity) above for documentation of the fields within each insulin sensitivity segment object.'
+  }
 };
 
 var schemas = {
@@ -189,6 +224,8 @@ var schemas = {
     bgTargets: bgTargets,
     carbRatio: carbRatio,
     carbRatios: carbRatios,
+    insulinSensitivity: insulinSensitivity,
+    insulinSensitivities: insulinSensitivities,
     units: {
       instance: function(units) {
         return {
@@ -232,19 +269,23 @@ var schemas = {
   },
   animas: {
     bgTarget: bgTarget,
-    carbRatio: carbRatio
+    carbRatio: carbRatio,
+    insulinSensitivity: insulinSensitivity
   },
   insulet: {
     bgTarget: bgTarget,
-    carbRatio: carbRatio
+    carbRatio: carbRatio,
+    insulinSensitivity: insulinSensitivity
   },
   medtronic: {
     bgTarget: bgTarget,
-    carbRatio: carbRatio
+    carbRatio: carbRatio,
+    insulinSensitivity: insulinSensitivity
   },
   tandem: {
     bgTargets: bgTargets,
-    carbRatios: carbRatios
+    carbRatios: carbRatios,
+    insulinSensitivities: insulinSensitivities
   }
 };
 

@@ -52,7 +52,7 @@ var schemas = {
       }
     },
     normal: {
-      instance: common.randomBolusValue,
+      instance: common.bolusValue,
       summary: common.bolusInsulinSummary
     },
     expectedNormal: {
@@ -84,7 +84,7 @@ var schemas = {
       changelog: [common.changeLog.plannedChange(SUB_TYPES.extended, Object.keys(SUB_TYPES)[1])]
     },
     extended: {
-      instance: common.randomBolusValue,
+      instance: common.bolusValue,
       summary: common.bolusInsulinSummary
     },
     expectedExtended: {

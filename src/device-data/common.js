@@ -77,14 +77,6 @@ module.bgUnits = function(units, ingestion) {
   return ingestion ? units : 'mmol/L';
 };
 
-module.transformToMmolLInput = function(value) {
-  return Number(Number(value/GLUCOSE_MM).toFixed(1));
-};
-
-module.transformToMmolLStorage = function(value) {
-  return value/GLUCOSE_MM;
-};
-
 module.bgValue = function(units, ingestion) {
   var value = chance.natural({min: 20, max: 600});
 
@@ -99,16 +91,28 @@ module.bgValue = function(units, ingestion) {
   }
 };
 
-module.insulinCarbRatio = function() {
-  return chance.natural({min: 5, max: 25});
-};
-
-module.randomBolusValue = function() {
+module.bolusValue = function() {
   // yield float rounded to nearest 0.25
   return Math.round(chance.floating({
     min: 0.5,
     max: 10.0
   })*4)/4;
+};
+
+module.insulinCarbRatio = function() {
+  return chance.natural({min: 5, max: 25});
+};
+
+module.insulinSensitivity = function() {
+  return chance.natural({min: 5, max: 100});
+};
+
+module.transformToMmolLInput = function(value) {
+  return Number(Number(value/GLUCOSE_MM).toFixed(1));
+};
+
+module.transformToMmolLStorage = function(value) {
+  return value/GLUCOSE_MM;
 };
 
 module.changeLog = {

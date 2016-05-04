@@ -185,9 +185,7 @@ var schema = {
     }
   },
   insulinSensitivity: {
-    instance: function() {
-      return chance.natural({min: 5, max: 100});
-    },
+    instance: common.insulinSensitivity,
     summary: {
       description: common.propTypes.OPTIONAL + '[ingestion] A numerical representation of the estimation of blood glucose value drop per unit of insulin delivered in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.\n\n[storage, client] A numerical representation of the estimation of blood glucose value drop in mmol/L (float, potentially unrounded), with appropriately matching `units` field.',
       required: {
@@ -213,11 +211,11 @@ var schema = {
       nestedPropertiesIntro: 'May contain the following properties',
       keys: {
         carb: {
-          instance: common.randomBolusValue,
+          instance: common.bolusValue,
           summary: recommendedInsulinSummary
         },
         correction: {
-          instance: common.randomBolusValue,
+          instance: common.bolusValue,
           summary: {
             description: recommendedInsulinSummary.description,
             required: recommendedInsulinSummary.required,
