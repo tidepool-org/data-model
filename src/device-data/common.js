@@ -119,7 +119,7 @@ module.changeLog = {
     return format('`_schemaVersion` ? (future): We plan to migrate from `%s` to `%s` in the future.', oldValue, newValue);
   },
   plannedImplementation: function(fieldName) {
-    return format('`_schemaVersion` ? (future): `%s` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `%s` as described.', fieldName);
+    return format('`_schemaVersion` ? (future): `%s` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `%s` as described.', fieldName, fieldName);
   },
   potentialAddedValue: function(fieldName, value) {
     return format('`_schemaVersion` ? (future): `%s` may be added as an accepted value for `%s` in the future.', value, fieldName);

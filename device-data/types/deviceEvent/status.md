@@ -52,7 +52,7 @@
 		jellyfish: Must be one of:
 			`suspended`
 			`resumed`
-		platform: [ingestion, storage, client] The string `suspended`.
+		platform: The string `suspended`.
 
 <!-- start status -->
 <!-- TODO -->
