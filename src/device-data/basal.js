@@ -28,10 +28,8 @@ var DELIVERY_TYPES = {
   temp: 'temp',
   suspend: 'suspend'
 };
-var SCHEDULE_NAMES = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
 
 var TYPE = 'basal';
-var RATE = '[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.';
 var PREVIOUS = '[ingestion] An object representing the `basal` event just prior to this event or, equivalently, just the `id` of said object.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
 var getSuppressedDesc = function(type) {
   return  common.propTypes.OPTIONAL + format('[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this %s basal is in effect.', type);
@@ -96,18 +94,7 @@ var schemas = {
         // yield float rounded to nearest 0.025
         return Math.round(chance.floating({min: 0.025, max: 2})*40)/40;
       },
-      summary: {
-        description: RATE,
-        required: {
-          jellyfish: true,
-          platform: true
-        },
-        numericalType: common.numericalTypes.FLOATING_POINT_DEVICE_SIG_FIGS,
-        range: {
-          min: '0.0',
-          max: '20.0'
-        }
-      }
+      summary: common.basalRateSummary
     },
     previous: {
       instance: {},
@@ -120,7 +107,7 @@ var schemas = {
       }
     },
     scheduleName: {
-      instance: SCHEDULE_NAMES,
+      instance: common.SCHEDULE_NAMES,
       summary: {
         description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A string: the name of the basal schedule.',
         required: {
@@ -204,7 +191,7 @@ var schemas = {
     rate: {
       instance: 0,
       summary: {
-        description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + RATE,
+        description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.basalRate(),
         required: {
           jellyfish: false,
           platform: true

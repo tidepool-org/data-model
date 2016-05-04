@@ -36,6 +36,10 @@ This is the sub-type of `bolus` event that represents a bolus insulin dose progr
 		jellyfish: yes
 		platform: yes
 
+#### Changelog for `subType`
+
+`_schemaVersion` ? (future): We plan to migrate from `square` to `extended` in the future.
+
 <!-- start subType -->
 
 We plan to migrate all Tidepool data to use `extended` as the value of this sub-type rather than `square` in order to improve the consistency of the data model. With `subType` containing `extended` and the `extended` field containing the value of the delivered insulin dose, this sub-type of `bolus` event will be parallel to `normal` boluses, where the `subType` is `normal` and the `normal` field contains the value of the delivered insulin dose.

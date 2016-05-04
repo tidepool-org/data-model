@@ -78,7 +78,8 @@ var schema = {
         jellyfish: true,
         platform: true
       }
-    }
+    },
+    changelog: [common.changeLog.plannedChange(TYPE, 'calculator')]
   },
   bgInput: {
     instance: common.bgValue,
@@ -88,25 +89,13 @@ var schema = {
         jellyfish: false,
         platform: false
       },
-      numericalType: {
-        'mg/dL': common.numericalTypes.INTEGER_MGDL,
-        'mmol/L': common.numericalTypes.FLOATING_POINT_MMOL
-      },
-      range: {
-        'mg/dL': {
-          min: 0,
-          max: 1000
-        },
-        'mmol/L': {
-          min: '0.0',
-          max: '55.0'
-        }
-      }
+      numericalType: common.bgValueSummary.numericalType,
+      range: common.bgValueSummary.range
     }
   },
   bgTarget: {
     instance: function(units, isIngestion, manufacturer) {
-      var nestedSchema = bgTargetNestedSchemas[chance.pickone(common.MANUFACTURERS)];
+      var nestedSchema = bgTargetNestedSchemas[chance.pickone(common.PUMP_MANUFACTURERS)];
       if (manufacturer) {
         nestedSchema = bgTargetNestedSchemas[manufacturer];
       }
@@ -126,78 +115,40 @@ var schema = {
         platform: false
       },
       nested: true,
+      nestedPropertiesIntro: 'Contains a subset of the following properties',
       nestedSchemas: bgTargetNestedSchemas,
       keys: {
         low: {
-          instance: function() {
-            return chance.integer({min: 70, max: 120});
-          },
           summary: {
             description: boundDesc('lower'),
-            numericalType: {
-              'mg/dL': common.numericalTypes.INTEGER_MGDL,
-              'mmol/L': common.numericalTypes.FLOATING_POINT_MMOL
-            },
-            range: {
-              'mg/dL': {
-                min: 40,
-                max: 200
-              },
-              'mmol/L': {
-                min: 2.2,
-                max: 11.1
-              }
-            }
+            numericalType: common.bgValueSummary.numericalType,
+            range: common.bgValueSummary.range
           }
         },
         high: {
-          instance: function() {
-            return chance.integer({min: 100, max: 150});
-          },
           summary: {
             description: boundDesc('upper'),
-            numericalType: {
-              'mg/dL': common.numericalTypes.INTEGER_MGDL,
-              'mmol/L': common.numericalTypes.FLOATING_POINT_MMOL
-            },
+            numericalType: common.bgValueSummary.numericalType,
             range: {
               'mg/dL': {
-                min: 80,
-                max: 200
+                min: '> `low` or `target`, whichever present',
+                max: 1000
               },
               'mmol/L': {
-                min: 4.4,
-                max: 11.1
+                min: '> `low` or `target`, whichever present',
+                max: '55.0'
               }
             }
           }
         },
         target: {
-          instance: function() {
-            return chance.integer({min: 70, max: 150});
-          },
           summary: {
             description: '[ingestion, storage, client] An integer encoding the PWD\'s target blood glucose as a single value.',
-            numericalType: {
-              'mg/dL': common.numericalTypes.INTEGER_MGDL,
-              'mmol/L': common.numericalTypes.FLOATING_POINT_MMOL
-            },
-            range: {
-              'mg/dL': {
-                min: 80,
-                max: 200
-              },
-              'mmol/L': {
-                min: 4.4,
-                max: 11.1
-              }
-            }
+            numericalType: common.bgValueSummary.numericalType,
+            range: common.bgValueSummary.range
           }
         },
         range: {
-          instance: function() {
-            return chance.integer({min: 5, max: 20});
-          },
           summary: {
             description: '[ingestion, storage, client] An integer encoding the allowed deviation above or below the PWD\'s target blood glucose.',
             numericalType: 'An integer value representing an allowed range +/- an associated target.',
@@ -287,20 +238,8 @@ var schema = {
         jellyfish: false,
         platform: false
       },
-      numericalType: {
-        'mg/dL': common.numericalTypes.INTEGER_MGDL,
-        'mmol/L': common.numericalTypes.FLOATING_POINT_MMOL
-      },
-      range: {
-        'mg/dL': {
-          min: '> 0',
-          max: 500
-        },
-        'mmol/L': {
-          min: '> 0.0',
-          max: '27.7'
-        }
-      }
+      numericalType: common.bgValueSummary.numericalType,
+      range: common.bgValueSummary.range
     }
   },
   recommended: {
@@ -315,6 +254,7 @@ var schema = {
         platform: false
       },
       nested: true,
+      nestedPropertiesIntro: 'May contain the following properties',
       keys: {
         carb: {
           instance: common.randomBolusValue,

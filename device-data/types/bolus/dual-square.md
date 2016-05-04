@@ -38,6 +38,10 @@ Most (and perhaps all) insulin pumps ask the user to divide the `normal` and `sq
 		jellyfish: yes
 		platform: yes
 
+#### Changelog for `subType`
+
+`_schemaVersion` ? (future): We plan to migrate from `dual/square` to `combo` in the future.
+
 <!-- start subType -->
 
 We plan to migrate all Tidepool data to use `combo` as the value of this sub-type rather than `dual/square` in order to improve the transparency of the data model and avoid `/` in a `subType` string.

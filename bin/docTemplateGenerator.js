@@ -27,6 +27,8 @@
 
 var _ = require('lodash');
 var chalk = require('chalk');
+var Chance = require('chance');
+var chance = Chance();
 var commander = require('commander');
 var util = require('util');
 var fs = require('fs');
@@ -35,7 +37,7 @@ var generators = require('../src/');
 
 var common = require('../src/device-data/common');
 
-var type, hasSubtypes = false;
+var type, hasOptionalSubtypes = false, hasSubtypes = false;
 
 commander.usage('[options] <type>')
   .option('-p, --path <value>', 'path to docs directory', '../device-data/')
@@ -51,7 +53,8 @@ if (_.isEmpty(commander.args)) {
 else {
   type = commander.args[0];
   subTypes = generators[type].subTypes;
-  hasSubtypes = Array.isArray(subTypes) && !_.isEmpty(subTypes);
+  hasOptionalSubtypes = Array.isArray(subTypes) && !_.isEmpty(subTypes);
+  hasSubtypes = Array.isArray(subTypes) && !_.isEmpty(subTypes) && !generators[type].docWithoutSubtypes;
   if (!generators[type] || typeof generators[type].generator !== 'function') {
     console.log();
     console.error(chalk.bold.red('Sorry, no generator defined yet for %s :('), type);
@@ -190,10 +193,10 @@ function formatHeader(format) {
  */
 function exampleObject(type, format) {
   format = format || 'storage';
-  if (hasSubtypes) {
+  if (hasSubtypes || hasOptionalSubtypes) {
     return generators[type].generator({
       format: format,
-      subType: commander.subType,
+      subType: commander.subType || chance.pickone(generators[type].subTypes),
       timestamp: new Date().toISOString()
     });
   }
@@ -297,7 +300,8 @@ function sectionForField(field, summary, changeLog, fieldSection) {
             fieldSection.push('\t\t' + schemaKey + ': {`' + innerSchema.join('`, `') + '`}');
           });
         }
-        fieldSection.push('Contains the following properties:\n\n * ' + Object.keys(summary.keys).join('\n * ') + '\n');
+
+        fieldSection.push(summary.nestedPropertiesIntro + ':\n\n * ' + Object.keys(summary.keys).join('\n * ') + '\n');
         _.forOwn(summary.keys, function(innerSummary, key) {
           sectionForField(key, innerSummary.summary, null, fieldSection);
         });

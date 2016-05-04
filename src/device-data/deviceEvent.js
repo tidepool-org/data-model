@@ -86,9 +86,7 @@ var schemas = {
       }
     },
     alarmType: {
-      instance: function() {
-        return chance.pickone(ALARM_TYPES);
-      },
+      instance: ALARM_TYPES,
       summary: {
         description: '[ingestion, storage, client] String value encoding the type of alarm, with `other` as the catch-all/default category.',
         required: {
@@ -150,9 +148,7 @@ var schemas = {
       }
     },
     primeTarget: {
-      instance: function() {
-        return chance.pickone(PRIME_TARGETS)
-      },
+      instance: PRIME_TARGETS,
       summary: {
         description: '[ingestion, storage, client] String encoding the target of the priming action.',
         required: {
@@ -232,7 +228,7 @@ var schemas = {
         },
         range: {
           jellyfish: common.propTypes.oneOfStringOptions(STATUSES, true),
-          platform: common.propTypes.stringValue(STATUSES[0])
+          platform: 'The string `suspended`.'
         }
       }
     },
@@ -309,6 +305,7 @@ var schemas = {
       summary: {
         description: '[ingestion, storage, client] An object encoding as much information as possible about a diabetes device display time change event.',
         nested: true,
+        nestedPropertiesIntro: 'Contains the following properties',
         keys: {
           from: {
             summary: {

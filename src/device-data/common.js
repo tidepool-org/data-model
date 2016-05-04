@@ -24,6 +24,8 @@ var uuid = require('node-uuid');
 
 var GLUCOSE_MM = 18.01559;
 
+
+
 module.bgUnits = function(units, ingestion) {
   return ingestion ? units : 'mmol/L';
 };
@@ -62,8 +64,14 @@ module.changeLog = {
   madeOptional: function(fieldName, schemaVersion) {
     return format('`_schemaVersion` %s: `%s` became **optional**.', schemaVersion, fieldName);
   },
+  plannedChange: function(oldValue, newValue) {
+    return format('`_schemaVersion` ? (future): We plan to migrate from `%s` to `%s` in the future.', oldValue, newValue);
+  },
   plannedImplementation: function(fieldName) {
-    return format('`_schemaVersion` ? (future): `%s` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `expectedDuration` as described.', fieldName);
+    return format('`_schemaVersion` ? (future): `%s` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `%s` as described.', fieldName);
+  },
+  potentialAddedValue: function(fieldName, value) {
+    return format('`_schemaVersion` ? (future): `%s` may be added as an accepted value for `%s` in the future.', value, fieldName);
   }
 };
 
@@ -162,6 +170,9 @@ module.generate = function(schema, utc, format, manufacturer) {
 
 module.propTypes = {
   ADDED_BY_JELLYFISH: '> This field is **optional**. At present, it is **only** added by the jellyfish data ingestion service.\n\n',
+  basalRate: function() {
+    return '[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.';
+  },
   bgUnits: function(hasSubtypes) {
     var ingestion = '[ingestion] One of two string values: `mg/dL` or `mmol/L`.\n\n';
     var elsewhere = '[storage, client] The string `mmol/L`.\n\n';
@@ -242,6 +253,19 @@ module.numericalTypes = {
   INTEGER_MS: 'Integer value representing milliseconds.'
 };
 
+module.basalRateSummary = {
+  description: module.propTypes.basalRate(),
+  required: {
+    jellyfish: true,
+    platform: true
+  },
+  numericalType: module.numericalTypes.FLOATING_POINT_DEVICE_SIG_FIGS,
+  range: {
+    min: '0.0',
+    max: '20.0'
+  }
+};
+
 module.bgUnitsSummary = {
   description: module.propTypes.bgUnits(),
   required: {
@@ -286,6 +310,19 @@ module.bolusInsulinSummary = {
   }
 };
 
+module.startSummary = {
+  description: '[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.',
+  required: {
+    jellyfish: true,
+    platform: true
+  },
+  numericalType: module.numericalTypes.INTEGER_MS,
+  range: {
+    min: 0,
+    max: '< 86400000'
+  }
+};
+
 module.timeConstants = {
   MIN_DEVICE_TIME: '2007-01-01T00:00:00',
   TIMEZONES: [
@@ -299,6 +336,7 @@ module.timeConstants = {
   ]
 };
 
-module.MANUFACTURERS = ['animas', 'insulet', 'medtronic', 'tandem'];
+module.PUMP_MANUFACTURERS = ['animas', 'insulet', 'medtronic', 'tandem'];
+module.SCHEDULE_NAMES = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
 
 module.exports = module;

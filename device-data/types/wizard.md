@@ -19,6 +19,10 @@
 		jellyfish: yes
 		platform: yes
 
+#### Changelog for `type`
+
+`_schemaVersion` ? (future): We plan to migrate from `wizard` to `calculator` in the future.
+
 <!-- start type -->
 <!-- TODO -->
 <!-- end type -->
@@ -72,7 +76,7 @@
 		insulet: {`target`, `high`}
 		medtronic: {`low`, `high`}
 		tandem: {`target`}
-Contains the following properties:
+Contains a subset of the following properties:
 
  * low
  * high
@@ -88,11 +92,11 @@ Contains the following properties:
 		mmol/L: Floating point value representing a `mmol/L` value.
 	Range:
 		mg/dL:
-			min: 40
-			max: 200
+			min: 0
+			max: 1000
 		mmol/L:
-			min: 2.2
-			max: 11.1
+			min: 0.0
+			max: 55.0
 
 
 
@@ -105,11 +109,11 @@ Contains the following properties:
 		mmol/L: Floating point value representing a `mmol/L` value.
 	Range:
 		mg/dL:
-			min: 80
-			max: 200
+			min: > `low` or `target`, whichever present
+			max: 1000
 		mmol/L:
-			min: 4.4
-			max: 11.1
+			min: > `low` or `target`, whichever present
+			max: 55.0
 
 
 
@@ -122,11 +126,11 @@ Contains the following properties:
 		mmol/L: Floating point value representing a `mmol/L` value.
 	Range:
 		mg/dL:
-			min: 80
-			max: 200
+			min: 0
+			max: 1000
 		mmol/L:
-			min: 4.4
-			max: 11.1
+			min: 0.0
+			max: 55.0
 
 
 
@@ -244,11 +248,11 @@ Contains the following properties:
 		mmol/L: Floating point value representing a `mmol/L` value.
 	Range:
 		mg/dL:
-			min: > 0
-			max: 500
+			min: 0
+			max: 1000
 		mmol/L:
-			min: > 0.0
-			max: 27.7
+			min: 0.0
+			max: 55.0
 
 
 
@@ -268,7 +272,7 @@ Contains the following properties:
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
-Contains the following properties:
+May contain the following properties:
 
  * carb
  * correction

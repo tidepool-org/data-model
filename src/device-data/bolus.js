@@ -80,7 +80,8 @@ var schemas = {
           jellyfish: true,
           platform: true
         }
-      }
+      },
+      changelog: [common.changeLog.plannedChange(SUB_TYPES.extended, Object.keys(SUB_TYPES)[1])]
     },
     extended: {
       instance: common.randomBolusValue,
@@ -143,7 +144,8 @@ schemas['dual/square'] = _.merge({}, schemas.normal, schemas.square, {
         jellyfish: true,
         platform: true
       }
-    }
+    },
+    changelog: [common.changeLog.plannedChange(SUB_TYPES.combo, Object.keys(SUB_TYPES)[2])]
   }
 });
 
