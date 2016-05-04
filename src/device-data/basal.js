@@ -90,10 +90,7 @@ var schemas = {
       }
     },
     rate: {
-      instance: function() {
-        // yield float rounded to nearest 0.025
-        return Math.round(chance.floating({min: 0.025, max: 2})*40)/40;
-      },
+      instance: common.basalRateValue,
       summary: common.basalRateSummary
     },
     previous: {

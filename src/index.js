@@ -15,6 +15,8 @@
  * == BSD2 LICENSE ==
  */
 
+var common = require('./device-data/common');
+
 var basal = require('./device-data/basal');
 var bloodKetone = require('./device-data/bloodKetone');
 var bolus = require('./device-data/bolus');
@@ -78,6 +80,13 @@ module.exports = {
     type: 'deviceEvent'
   },
   pumpSettings: {
+    generator: pumpSettings.generate,
+    summary: pumpSettings.summary,
+    changeLog: pumpSettings.changeLog,
+    title: 'Insulin pump settings',
+    subTypes: common.PUMP_MANUFACTURERS,
+    docWithoutSubtypes: true,
+    type: 'pumpSettings'
   },
   smbg: {
     generator: smbg.generate,

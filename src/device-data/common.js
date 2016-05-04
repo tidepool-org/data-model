@@ -24,7 +24,54 @@ var uuid = require('node-uuid');
 
 var GLUCOSE_MM = 18.01559;
 
+module.basalRateValue = function() {
+  // yield float rounded to nearest 0.025
+  return Math.round(chance.floating({min: 0.025, max: 2})*40)/40;
+};
 
+module.bgTargetNestedSchemas = {
+  animas: ['target', 'range'],
+  insulet: ['target', 'high'],
+  medtronic: ['low', 'high'],
+  tandem: ['target']
+};
+
+module.bgTarget = function(units, isIngestion, manufacturer) {
+  var bgTargetFnMaker = function(range) {
+    return function(units, isIngestion) {
+      var value = Math.round(chance.natural(range)/5)*5;
+      if (units === 'mg/dL') {
+        return value;
+      }
+      else if (units === 'mmol/L' && isIngestion) {
+        return module.transformToMmolLInput(value);
+      }
+      else {
+        return module.transformToMmolLStorage(value);
+      }
+    };
+  };
+
+  var bgTargetGenerators = {
+    low: bgTargetFnMaker({min: 60, max: 80}),
+    high: bgTargetFnMaker({min: 120, max: 150}),
+    target: bgTargetFnMaker({min: 85, max: 115}),
+    range: bgTargetFnMaker({min: 5, max: 25})
+  };
+
+  var nestedSchema = module.bgTargetNestedSchemas[chance.pickone(module.PUMP_MANUFACTURERS)];
+  if (manufacturer) {
+    nestedSchema = module.bgTargetNestedSchemas[manufacturer];
+  }
+
+  var bgTarget = {};
+
+  _.forEach(nestedSchema, function(bgTargetKey) {
+    bgTarget[bgTargetKey] = bgTargetGenerators[bgTargetKey](units, isIngestion);
+  });
+
+  return bgTarget;
+};
 
 module.bgUnits = function(units, ingestion) {
   return ingestion ? units : 'mmol/L';
@@ -50,6 +97,10 @@ module.bgValue = function(units, ingestion) {
   else {
     return module.transformToMmolLStorage(value);
   }
+};
+
+module.insulinCarbRatio = function() {
+  return chance.natural({min: 5, max: 25});
 };
 
 module.randomBolusValue = function() {
@@ -190,6 +241,9 @@ module.propTypes = {
   },
   duration: function() {
     return '[ingestion, storage, client] An integer value representing a duration of time in milliseconds.';
+  },
+  eitherOr: function(eitherField, orField, type) {
+    return format('**NB**: Either `%s` *or* `%s` (but not both!) must be present for a `%s` object to be valid.\n\n', eitherField, orField, type);
   },
   expectedDurationBasal: function() {
     return '[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the `duration` field on ingestion when a following event has resulted in truncation of the original programmed duration.';

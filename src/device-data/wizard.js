@@ -30,35 +30,6 @@ var boundDesc = function(bound) {
   return '[ingestion, storage, client] An integer encoding the ' + bound + ' bound of a PWD\'s blood glucose target.';
 };
 
-var bgTargetNestedSchemas = {
-  animas: ['target', 'range'],
-  insulet: ['target', 'high'],
-  medtronic: ['low', 'high'],
-  tandem: ['target']
-};
-
-var bgTargetFnMaker = function(range) {
-  return function(units, isIngestion) {
-    var value = Math.round(chance.natural(range)/5)*5;
-    if (units === 'mg/dL') {
-      return value;
-    }
-    else if (units === 'mmol/L' && isIngestion) {
-      return common.transformToMmolLInput(value);
-    }
-    else {
-      return common.transformToMmolLStorage(value);
-    }
-  };
-};
-
-var bgTargetGenerators = {
-  low: bgTargetFnMaker({min: 60, max: 80}),
-  high: bgTargetFnMaker({min: 120, max: 150}),
-  target: bgTargetFnMaker({min: 85, max: 115}),
-  range: bgTargetFnMaker({min: 5, max: 25})
-};
-
 var recommendedInsulinSummary = {
   description: common.propTypes.OPTIONAL + common.propTypes.insulinUnits(),
   required: {
@@ -94,20 +65,7 @@ var schema = {
     }
   },
   bgTarget: {
-    instance: function(units, isIngestion, manufacturer) {
-      var nestedSchema = bgTargetNestedSchemas[chance.pickone(common.PUMP_MANUFACTURERS)];
-      if (manufacturer) {
-        nestedSchema = bgTargetNestedSchemas[manufacturer];
-      }
-
-      var bgTarget = {};
-
-      _.forEach(nestedSchema, function(bgTargetKey) {
-        bgTarget[bgTargetKey] = bgTargetGenerators[bgTargetKey](units, isIngestion);
-      });
-
-      return bgTarget;
-    },
+    instance: common.bgTarget,
     summary: {
       description: common.propTypes.OPTIONAL + '[ingestion, storage, client] An object describing the PWD\'s target blood glucose; the format of this object varies according to the make of the insulin pump.',
       required: {
@@ -116,7 +74,7 @@ var schema = {
       },
       nested: true,
       nestedPropertiesIntro: 'Contains a subset of the following properties',
-      nestedSchemas: bgTargetNestedSchemas,
+      nestedSchemas: common.bgTargetNestedSchemas,
       keys: {
         low: {
           summary: {
@@ -195,9 +153,7 @@ var schema = {
     }
   },
   insulinCarbRatio: {
-    instance: function() {
-      return chance.natural({min: 5, max: 25});
-    },
+    instance: common.insulinCarbRatio,
     summary: {
       description: common.propTypes.OPTIONAL + '[ingestion, storage, client] An integer encoding the grams of carbohydrate "covered" by one unit of insulin for the PWD.',
       required: {
