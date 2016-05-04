@@ -53,7 +53,7 @@
         data-chapter-title="common fields"
         data-filepath="device-data/common.md"
         data-basepath=".."
-        data-revision="Wed May 04 2016 00:08:52 GMT-0700 (PDT)"
+        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -539,7 +539,15 @@
     
         <li class="chapter " data-level="1.5.9" data-path="device-data/types/upload.html">
             
-            <span><b>1.5.9.</b> upload</span>
+                
+                    <a href="../device-data/types/upload.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.9.</b>
+                        
+                        upload
+                    </a>
             
             
         </li>
@@ -708,7 +716,7 @@
 <h3 id="uploadid">uploadId</h3>
 <!-- start uploadId -->
 <p>[ingestion, storage, client] A string ID. Added to each event during data processing in the Tidepool uploader Chrome application.</p>
-<p>An upload identifier; this field should be the <code>uploadId</code> of the corresponding <a href="types/upload.md">upload</a> record. At present, <code>uploadId</code>s are generated in Tidepool&apos;s <a href="https://github.com/tidepool-org/chrome-uploader" target="_blank">uploader Chrome application</a> as a hash of various pieces of upload session metadata. See <a href="https://github.com/tidepool-org/chrome-uploader/blob/master/lib/core/api.js" target="_blank"><code>lib/core/api.js</code></a> for the implementation.</p>
+<p>An upload identifier; this field should be the <code>uploadId</code> of the corresponding <a href="types/upload.html">upload</a> record. At present, <code>uploadId</code>s are generated in Tidepool&apos;s <a href="https://github.com/tidepool-org/chrome-uploader" target="_blank">uploader Chrome application</a> as a hash of various pieces of upload session metadata. See <a href="https://github.com/tidepool-org/chrome-uploader/blob/master/lib/core/api.js" target="_blank"><code>lib/core/api.js</code></a> for the implementation.</p>
 <p>Note that <code>uploadId</code> does not figure in the calculations of an event record&apos;s <code>id</code>. This is so that multiple attempts to upload the same event record will nevertheless result in the same <code>id</code>; this <code>id</code> is used to prevent storage of multiple copies of the same event.</p>
 <!-- end uploadId -->
 <h3 id="example-all-possible-fields">example (all possible fields)</h3>

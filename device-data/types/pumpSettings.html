@@ -53,7 +53,7 @@
         data-chapter-title="pumpSettings"
         data-filepath="device-data/types/pumpSettings.md"
         data-basepath="../.."
-        data-revision="Wed May 04 2016 00:08:52 GMT-0700 (PDT)"
+        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -539,7 +539,15 @@
     
         <li class="chapter " data-level="1.5.9" data-path="device-data/types/upload.html">
             
-            <span><b>1.5.9.</b> upload</span>
+                
+                    <a href="../../device-data/types/upload.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.9.</b>
+                        
+                        upload
+                    </a>
             
             
         </li>
@@ -730,7 +738,10 @@ Numerical type: Integer value representing milliseconds.
 Range:
     min: 0
     max: &lt; 86400000
-</code></pre><!-- start bgTarget -->
+</code></pre><h4 id="changelog-for-bgtarget">Changelog for <code>bgTarget</code></h4>
+<p><code>_schemaVersion</code> 2: The minimal <code>{target: [val], start: [milliseconds]}</code> schema was added as valid to handle Tandem&apos;s <code>bgTarget</code> settings.</p>
+<p><code>_schemaVersion</code> 2: The nonexistent (in currently handled devices) <code>{low: [val], target: [val], high: [val], start: [milliseconds]}</code> schema was <em>removed</em>.</p>
+<!-- start bgTarget -->
 <!-- TODO -->
 <!-- end bgTarget -->
 <hr>
@@ -966,19 +977,17 @@ Range: Must be one of:
         <span class="hljs-string">&quot;Normal&quot;</span>: [
             {
                 <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.075</span>
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.65</span>
             }
         ],
-        <span class="hljs-string">&quot;Weekday&quot;</span>: [
+        <span class="hljs-string">&quot;Stress&quot;</span>: [
             {
                 <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.65</span>
-            }
-        ],
-        <span class="hljs-string">&quot;Weekend&quot;</span>: [
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.85</span>
+            },
             {
-                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.525</span>
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">3600000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.075</span>
             }
         ]
     },
@@ -989,39 +998,65 @@ Range: Must be one of:
     <span class="hljs-string">&quot;bgTarget&quot;</span>: [
         {
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">3.6079861941795968</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">5.273210591493257</span>,
+            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">7.49350978791147</span>
+        },
+        {
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">12600000</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">6.1058227901500866</span>,
+            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">6.938434988806917</span>
+        },
+        {
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">23400000</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">4.9956731919409805</span>,
             <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">8.048584587016023</span>
         },
         {
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">72000000</span>,
-            <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">3.33044879462732</span>,
-            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">6.66089758925464</span>
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">36000000</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">5.550747991045533</span>,
+            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">7.771047187463747</span>
         },
         {
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">81000000</span>,
-            <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">4.16306099328415</span>,
-            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">7.49350978791147</span>
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">64800000</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">6.1058227901500866</span>,
+            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">7.771047187463747</span>
         }
     ],
     <span class="hljs-string">&quot;carbRatio&quot;</span>: [
         {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">18</span>,
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">7</span>,
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
         }
     ],
     <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: [
         {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">80</span>,
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">25</span>,
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
+        },
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">58</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1800000</span>
+        },
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">15</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">3600000</span>
+        },
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">72</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">39600000</span>
+        },
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">42</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">52200000</span>
         }
     ],
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T00:07:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f42dc6ac-0fa5-4576-8204-7c835248830a&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;4d9889f7d19544a585e384a16477f5e6&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T07:07:00.424Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;edfca509-4bbb-476e-a598-ccb0b043c526&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;d35fc7ff984645baba3a342ca8968eb3&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.211Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -1034,35 +1069,19 @@ Range: Must be one of:
         <span class="hljs-string">&quot;Normal&quot;</span>: [
             {
                 <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.6</span>
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.625</span>
+            }
+        ],
+        <span class="hljs-string">&quot;Weekend&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.125</span>
             }
         ],
         <span class="hljs-string">&quot;Vacation&quot;</span>: [
             {
                 <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.975</span>
-            }
-        ],
-        <span class="hljs-string">&quot;Stress&quot;</span>: [
-            {
-                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.525</span>
-            },
-            {
-                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">3600000</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.025</span>
-            },
-            {
-                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">34200000</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.975</span>
-            },
-            {
-                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">46800000</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.3</span>
-            },
-            {
-                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">50400000</span>,
-                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.15</span>
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.075</span>
             }
         ]
     },
@@ -1073,36 +1092,64 @@ Range: Must be one of:
     <span class="hljs-string">&quot;bgTarget&quot;</span>: [
         {
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">80</span>,
-            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">135</span>
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">105</span>,
+            <span class="hljs-string">&quot;range&quot;</span>: <span class="hljs-number">10</span>
+        },
+        {
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">19800000</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">100</span>,
+            <span class="hljs-string">&quot;range&quot;</span>: <span class="hljs-number">5</span>
+        },
+        {
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">30600000</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">105</span>,
+            <span class="hljs-string">&quot;range&quot;</span>: <span class="hljs-number">10</span>
+        },
+        {
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">61200000</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">110</span>,
+            <span class="hljs-string">&quot;range&quot;</span>: <span class="hljs-number">25</span>
+        },
+        {
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">70200000</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">110</span>,
+            <span class="hljs-string">&quot;range&quot;</span>: <span class="hljs-number">10</span>
         }
     ],
     <span class="hljs-string">&quot;carbRatio&quot;</span>: [
         {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">6</span>,
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">9</span>,
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
         }
     ],
     <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: [
         {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">68</span>,
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">10</span>,
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
         },
         {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">41</span>,
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">46800000</span>
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">95</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">19800000</span>
         },
         {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">86</span>,
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">52200000</span>
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">79</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">36000000</span>
+        },
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">52</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">45000000</span>
+        },
+        {
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">50</span>,
+            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">66600000</span>
         }
     ],
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T00:07:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;9f93049f-5049-4a59-a04c-43d766611861&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T07:07:00.427Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;8318ed09-a5a1-4c90-84b4-793e5e60252d&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.214Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -1117,6 +1164,34 @@ Range: Must be one of:
                 <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
                 <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.675</span>
             }
+        ],
+        <span class="hljs-string">&quot;Weekday&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.325</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">12600000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.95</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">16200000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.5</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">45000000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.525</span>
+            },
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">81000000</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.45</span>
+            }
+        ],
+        <span class="hljs-string">&quot;Stress&quot;</span>: [
+            {
+                <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.35</span>
+            }
         ]
     },
     <span class="hljs-string">&quot;units&quot;</span>: {
@@ -1127,54 +1202,18 @@ Range: Must be one of:
         {
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
             <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">3.8855235937318735</span>,
-            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">8.048584587016023</span>
-        },
-        {
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">21600000</span>,
-            <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">4.440598392836427</span>,
-            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">7.2159723883591935</span>
-        },
-        {
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">39600000</span>,
-            <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">4.440598392836427</span>,
             <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">7.49350978791147</span>
-        },
-        {
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">70200000</span>,
-            <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">4.16306099328415</span>,
-            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">8.048584587016023</span>
-        },
-        {
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">73800000</span>,
-            <span class="hljs-string">&quot;low&quot;</span>: <span class="hljs-number">4.16306099328415</span>,
-            <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">8.048584587016023</span>
         }
     ],
     <span class="hljs-string">&quot;carbRatio&quot;</span>: [
         {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">14</span>,
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">6</span>,
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
-        },
-        {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">23</span>,
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">37800000</span>
-        },
-        {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">20</span>,
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">45000000</span>
-        },
-        {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">5</span>,
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">63000000</span>
-        },
-        {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">16</span>,
-            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">77400000</span>
         }
     ],
     <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: [
         {
-            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">52</span>,
+            <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">64</span>,
             <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>
         }
     ],
@@ -1184,12 +1223,12 @@ Range: Must be one of:
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T07:07:05.429Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:11.215Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T00:07:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;0c391e28-f98f-4a58-84a0-097992ed4ccf&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;0701698f25d140f8b1ed1095ba5ac013&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T07:07:00.429Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;76d90928-3649-42b1-bbe4-b83f0beb86f7&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;78dbc7e7d1c64ba3a01fb1fe70d1a723&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.215Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }

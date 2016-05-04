@@ -38,7 +38,7 @@
     
     
     
-    <link rel="prev" href="../../device-data/types/smbg.html" />
+    <link rel="prev" href="../../device-data/types/upload.html" />
     
 
         
@@ -51,7 +51,7 @@
         data-chapter-title="wizard"
         data-filepath="device-data/types/wizard.md"
         data-basepath="../.."
-        data-revision="Wed May 04 2016 00:08:52 GMT-0700 (PDT)"
+        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -537,7 +537,15 @@
     
         <li class="chapter " data-level="1.5.9" data-path="device-data/types/upload.html">
             
-            <span><b>1.5.9.</b> upload</span>
+                
+                    <a href="../../device-data/types/upload.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.9.</b>
+                        
+                        upload
+                    </a>
             
             
         </li>
@@ -710,7 +718,10 @@ Range:
 Range:
     min: 0
     max: 50
-</code></pre><!-- start bgTarget -->
+</code></pre><h4 id="changelog-for-bgtarget">Changelog for <code>bgTarget</code></h4>
+<p><code>_schemaVersion</code> 2: The minimal <code>{target: [val]}</code> schema was added as valid to handle Tandem&apos;s <code>bgTarget</code> data.</p>
+<p><code>_schemaVersion</code> 2: The nonexistent (in currently handled devices) <code>{low: [val], target: [val], high: [val]}</code> schema was <em>removed</em>.</p>
+<!-- start bgTarget -->
 <!-- TODO -->
 <!-- end bgTarget -->
 <hr>
@@ -963,29 +974,28 @@ Range: Must be one of:
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;wizard&quot;</span>,
-    <span class="hljs-string">&quot;bgInput&quot;</span>: <span class="hljs-number">8.048584587016023</span>,
+    <span class="hljs-string">&quot;bgInput&quot;</span>: <span class="hljs-number">27.920262394959032</span>,
     <span class="hljs-string">&quot;bgTarget&quot;</span>: {
-        <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">6.1058227901500866</span>,
-        <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">8.048584587016023</span>
+        <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">6.383360189702364</span>
     },
-    <span class="hljs-string">&quot;bolus&quot;</span>: <span class="hljs-string">&quot;66959fa33e5849c5848948201cb4c378&quot;</span>,
-    <span class="hljs-string">&quot;carbInput&quot;</span>: <span class="hljs-number">125</span>,
-    <span class="hljs-string">&quot;insulinCarbRatio&quot;</span>: <span class="hljs-number">20</span>,
-    <span class="hljs-string">&quot;insulinOnBoard&quot;</span>: <span class="hljs-number">8.944</span>,
-    <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: <span class="hljs-number">41</span>,
+    <span class="hljs-string">&quot;bolus&quot;</span>: <span class="hljs-string">&quot;17f0097f7e71427dbb27e65905c332fb&quot;</span>,
+    <span class="hljs-string">&quot;carbInput&quot;</span>: <span class="hljs-number">108</span>,
+    <span class="hljs-string">&quot;insulinCarbRatio&quot;</span>: <span class="hljs-number">17</span>,
+    <span class="hljs-string">&quot;insulinOnBoard&quot;</span>: <span class="hljs-number">24.869</span>,
+    <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: <span class="hljs-number">63</span>,
     <span class="hljs-string">&quot;recommended&quot;</span>: {
         <span class="hljs-string">&quot;carb&quot;</span>: <span class="hljs-number">6.25</span>,
-        <span class="hljs-string">&quot;correction&quot;</span>: <span class="hljs-number">0.25</span>,
+        <span class="hljs-string">&quot;correction&quot;</span>: <span class="hljs-number">0.5</span>,
         <span class="hljs-string">&quot;net&quot;</span>: <span class="hljs-number">0</span>
     },
     <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T11:06:13&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;ba502dcb-f49d-4e6f-a7e9-bee502ffc88b&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;8cc9acc434854e499dc46cb65a2e5fea&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T18:06:13.996Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;5d7afc51-7d9f-4504-ba79-6731d299f1a2&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;3bd709477d564a3ebf099a59b545c044&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.629Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -993,28 +1003,28 @@ Range: Must be one of:
 <h3 id="example-ingestion">example (ingestion)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;wizard&quot;</span>,
-    <span class="hljs-string">&quot;bgInput&quot;</span>: <span class="hljs-number">462</span>,
+    <span class="hljs-string">&quot;bgInput&quot;</span>: <span class="hljs-number">574</span>,
     <span class="hljs-string">&quot;bgTarget&quot;</span>: {
-        <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">100</span>,
-        <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">135</span>
+        <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">105</span>,
+        <span class="hljs-string">&quot;range&quot;</span>: <span class="hljs-number">10</span>
     },
-    <span class="hljs-string">&quot;bolus&quot;</span>: <span class="hljs-string">&quot;512bcf1f3aea4e5380aac382d0b69026&quot;</span>,
-    <span class="hljs-string">&quot;carbInput&quot;</span>: <span class="hljs-number">147</span>,
+    <span class="hljs-string">&quot;bolus&quot;</span>: <span class="hljs-string">&quot;30c349186b7f4c1780538f9290ff0e7a&quot;</span>,
+    <span class="hljs-string">&quot;carbInput&quot;</span>: <span class="hljs-number">95</span>,
     <span class="hljs-string">&quot;insulinCarbRatio&quot;</span>: <span class="hljs-number">13</span>,
-    <span class="hljs-string">&quot;insulinOnBoard&quot;</span>: <span class="hljs-number">8.726</span>,
-    <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: <span class="hljs-number">92</span>,
+    <span class="hljs-string">&quot;insulinOnBoard&quot;</span>: <span class="hljs-number">12.881</span>,
+    <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: <span class="hljs-number">71</span>,
     <span class="hljs-string">&quot;recommended&quot;</span>: {
-        <span class="hljs-string">&quot;carb&quot;</span>: <span class="hljs-number">11.25</span>,
-        <span class="hljs-string">&quot;correction&quot;</span>: <span class="hljs-number">5</span>,
-        <span class="hljs-string">&quot;net&quot;</span>: <span class="hljs-number">7.5</span>
+        <span class="hljs-string">&quot;carb&quot;</span>: <span class="hljs-number">7.25</span>,
+        <span class="hljs-string">&quot;correction&quot;</span>: <span class="hljs-number">6.5</span>,
+        <span class="hljs-string">&quot;net&quot;</span>: <span class="hljs-number">0.75</span>
     },
     <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T11:06:13&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;5b799146-ed76-41c6-bd19-068ea77f8b00&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T18:06:13.997Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;a3b00d7b-b506-435e-b039-9237ed1e891d&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.630Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -1022,19 +1032,19 @@ Range: Must be one of:
 <h3 id="example-storage">example (storage)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;wizard&quot;</span>,
-    <span class="hljs-string">&quot;bgInput&quot;</span>: <span class="hljs-number">25.866485638272184</span>,
+    <span class="hljs-string">&quot;bgInput&quot;</span>: <span class="hljs-number">31.306218669496808</span>,
     <span class="hljs-string">&quot;bgTarget&quot;</span>: {
-        <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">5.550747991045533</span>,
-        <span class="hljs-string">&quot;range&quot;</span>: <span class="hljs-number">1.1101495982091067</span>
+        <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-number">5.273210591493257</span>,
+        <span class="hljs-string">&quot;high&quot;</span>: <span class="hljs-number">6.66089758925464</span>
     },
-    <span class="hljs-string">&quot;bolus&quot;</span>: <span class="hljs-string">&quot;57c5dd917cb74697b1a1a32601534834&quot;</span>,
-    <span class="hljs-string">&quot;carbInput&quot;</span>: <span class="hljs-number">121</span>,
-    <span class="hljs-string">&quot;insulinCarbRatio&quot;</span>: <span class="hljs-number">22</span>,
-    <span class="hljs-string">&quot;insulinOnBoard&quot;</span>: <span class="hljs-number">19.824</span>,
-    <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: <span class="hljs-number">53</span>,
+    <span class="hljs-string">&quot;bolus&quot;</span>: <span class="hljs-string">&quot;f2f23ebc808e4c4396a7c59942dc290a&quot;</span>,
+    <span class="hljs-string">&quot;carbInput&quot;</span>: <span class="hljs-number">149</span>,
+    <span class="hljs-string">&quot;insulinCarbRatio&quot;</span>: <span class="hljs-number">14</span>,
+    <span class="hljs-string">&quot;insulinOnBoard&quot;</span>: <span class="hljs-number">21.778</span>,
+    <span class="hljs-string">&quot;insulinSensitivity&quot;</span>: <span class="hljs-number">77</span>,
     <span class="hljs-string">&quot;recommended&quot;</span>: {
-        <span class="hljs-string">&quot;carb&quot;</span>: <span class="hljs-number">5.5</span>,
-        <span class="hljs-string">&quot;correction&quot;</span>: <span class="hljs-number">0.25</span>,
+        <span class="hljs-string">&quot;carb&quot;</span>: <span class="hljs-number">10.75</span>,
+        <span class="hljs-string">&quot;correction&quot;</span>: <span class="hljs-number">0.5</span>,
         <span class="hljs-string">&quot;net&quot;</span>: <span class="hljs-number">0</span>
     },
     <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
@@ -1044,12 +1054,12 @@ Range: Must be one of:
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T18:06:18.998Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:11.630Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-03T11:06:13&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f9bac31f-5432-40c8-a5df-448596217abc&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;c707b478ab1849fb9700e96733798bd4&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-03T18:06:13.998Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;2e180503-152a-4644-8683-e6d099537fd2&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;e9974a6e87b54f10baf2b828a046dad9&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.630Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -1064,7 +1074,7 @@ Range: Must be one of:
         </div>
 
         
-        <a href="../../device-data/types/smbg.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: smbg"><i class="fa fa-angle-left"></i></a>
+        <a href="../../device-data/types/upload.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: upload"><i class="fa fa-angle-left"></i></a>
         
         
     </div>

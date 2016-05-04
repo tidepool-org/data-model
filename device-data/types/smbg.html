@@ -37,7 +37,7 @@
         
     
     
-    <link rel="next" href="../../device-data/types/wizard.html" />
+    <link rel="next" href="../../device-data/types/upload.html" />
     
     
     <link rel="prev" href="../../device-data/types/pumpSettings.html" />
@@ -53,7 +53,7 @@
         data-chapter-title="smbg"
         data-filepath="device-data/types/smbg.md"
         data-basepath="../.."
-        data-revision="Wed May 04 2016 00:08:52 GMT-0700 (PDT)"
+        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -539,7 +539,15 @@
     
         <li class="chapter " data-level="1.5.9" data-path="device-data/types/upload.html">
             
-            <span><b>1.5.9.</b> upload</span>
+                
+                    <a href="../../device-data/types/upload.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.9.</b>
+                        
+                        upload
+                    </a>
             
             
         </li>
@@ -761,16 +769,16 @@ Range:
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
-    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
+    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;linked&quot;</span>,
     <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
-    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">21.370379765525303</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">11.212510941911978</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T11:18:03&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;51414496-a20f-4214-95b8-8c1ea1b0cc89&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;771fd8f0f9a949728b96caf255656664&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T18:18:03.069Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;dd6b243c-7bf0-4b98-a4d7-542ac2d81b89&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;3b1ab0bb540442f68c56f071f7cb3547&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.425Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -778,15 +786,15 @@ Range:
 <h3 id="example-ingestion">example (ingestion)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
-    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
+    <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;linked&quot;</span>,
     <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
-    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">74</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">188</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T11:18:03&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b268180b-9a4e-44b5-8877-756e8e665395&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T18:18:03.069Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f2d45d3f-1a32-4979-bc41-db7bd15bbb9e&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.426Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -796,19 +804,19 @@ Range:
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;smbg&quot;</span>,
     <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;manual&quot;</span>,
     <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
-    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">24.589813600331713</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">17.26282625215161</span>,
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
     <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T18:18:08.069Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:11.426Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-04-28T11:18:03&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;fdad17ab-836a-4430-99e4-b8066e882bda&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;0b7c669bc472412ea12ed414e1848f33&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-04-28T18:18:03.069Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:06&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b6c63b94-d2a1-40d6-9a25-dbda175f1aef&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;7a0ddcbe2e3a4b1e856ddca0132fbfc5&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:06.426Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -826,7 +834,7 @@ Range:
         <a href="../../device-data/types/pumpSettings.html" class="navigation navigation-prev " aria-label="Previous page: pumpSettings"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../device-data/types/wizard.html" class="navigation navigation-next " aria-label="Next page: wizard"><i class="fa fa-angle-right"></i></a>
+        <a href="../../device-data/types/upload.html" class="navigation navigation-next " aria-label="Next page: upload"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
