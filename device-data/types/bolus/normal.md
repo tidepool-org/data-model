@@ -57,7 +57,7 @@ This is the sub-type of `bolus` event that represents a bolus insulin dose deliv
 
 <!-- start normal -->
 
-The `normal` field encodes the numerical value of the dose of insulin delivered by an insulin pump. To avoid noise in the data (especially as some insulin pumps make it very easy to deliver "doses" of 0 units when no additional dose is recommended given the PWD's current blood glucose and insulin on board), we have chosen _not_ to allow the upload of boluses with a total delivered dose of 0 units; the value must be greater than 0.
+The `normal` field encodes the numerical value of the dose of insulin delivered by an insulin pump. To avoid noise in the data (especially as some insulin pumps make it very easy to deliver "doses" of 0 units when no additional dose is recommended given the PWD's current blood glucose and insulin on board), we have chosen _not_ to allow the upload of boluses with a total delivered dose of 0 units; the value must be greater than 0. Note that it is still possible for a [`dual/square`](dual-square.md) bolus that has been cancelled to have a total delivered dose of 0 units.
 
 Most, if not all, insulin pumps include a maximum bolus setting that a PWD can customize to his or her typical dosing in order to prevent accidental delivery of very large doses of insulin. However, we could not find any indication that insulin pumps typically set a default maximum dose; hence we have chosen 100 units as an arbitrarily large maximum dose that we can imagine someone with type 1 diabetes programming.
 

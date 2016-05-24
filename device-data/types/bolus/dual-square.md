@@ -60,7 +60,7 @@ We plan to migrate all Tidepool data to use `combo` as the value of this sub-typ
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start normal -->
@@ -106,7 +106,7 @@ Note that if a `dual/square` bolus is interrupted or canceled during the `normal
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start extended -->
