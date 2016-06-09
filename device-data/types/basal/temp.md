@@ -21,12 +21,6 @@
 
 <!-- start type -->
 
-This is the sub-type of `basal` event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates *both* by percentage and by manual specification at the user's choice; other insulin pumps only expose one of these interfaces.
-
-**Field co-occurrence requirements**: Note that when ingesting through the legacy jellyfish ingestion API, at least one of `percent` or `rate` must be provided on a `temp` basal. While each of these fields is marked as *optional*, one or the other **must** be present.
-
-In contrast, under the new platform APIs, `rate` is always *required*.
-
 <!-- end type -->
 
 * * * * *
@@ -41,6 +35,12 @@ In contrast, under the new platform APIs, `rate` is always *required*.
 		platform: yes
 
 <!-- start deliveryType -->
+
+This is the sub-type of `basal` event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates *both* by percentage and by manual specification at the user's choice; other insulin pumps only expose one of these interfaces.
+
+**Field co-occurrence requirements**: Note that when ingesting through the legacy jellyfish ingestion API, at least one of `percent` or `rate` must be provided on a `temp` basal. While each of these fields is marked as *optional*, one or the other **must** be present.
+
+In contrast, under the new platform APIs, `rate` is always *required*.
 
 <!-- end deliveryType -->
 

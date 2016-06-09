@@ -21,10 +21,6 @@
 
 <!-- start type -->
 
-This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to deliver part of the dose using the immediate delivery strategy (a `normal` bolus) and the remainder using the delivery spread evenly over a `duration` strategy (a `square` bolus). The data model is essentially just a combination of the models for [`normal`](normal.md) and [`square`](square.md) boluses.
-
-Most (and perhaps all) insulin pumps ask the user to divide the `normal` and `square` portions of a `dual/square` bolus by *percentage* of the total insulin dose. We do **not** encode this programmed percentage directly, but it is recoverable (for surfacing in a client application's UI) through computation using the appropriate combination of values from the `normal`, `extended`, `expectedNormal`, and `expectedExtended` fields and/or the appropriate sum of these.
-
 <!-- end type -->
 
 * * * * *
@@ -43,6 +39,10 @@ Most (and perhaps all) insulin pumps ask the user to divide the `normal` and `sq
 `_schemaVersion` ? (future): We plan to migrate from `dual/square` to `combo` in the future.
 
 <!-- start subType -->
+
+This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to deliver part of the dose using the immediate delivery strategy (a `normal` bolus) and the remainder using the delivery spread evenly over a `duration` strategy (a `square` bolus). The data model is essentially just a combination of the models for [`normal`](normal.md) and [`square`](square.md) boluses.
+
+Most (and perhaps all) insulin pumps ask the user to divide the `normal` and `square` portions of a `dual/square` bolus by *percentage* of the total insulin dose. We do **not** encode this programmed percentage directly, but it is recoverable (for surfacing in a client application's UI) through computation using the appropriate combination of values from the `normal`, `extended`, `expectedNormal`, and `expectedExtended` fields and/or the appropriate sum of these.
 
 We plan to migrate all Tidepool data to use `combo` as the value of this sub-type rather than `dual/square` in order to improve the transparency of the data model and avoid `/` in a `subType` string.
 

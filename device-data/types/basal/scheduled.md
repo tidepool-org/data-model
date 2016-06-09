@@ -21,8 +21,6 @@
 
 <!-- start type -->
 
-This is the sub-type of `basal` event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).
-
 <!-- end type -->
 
 * * * * *
@@ -37,6 +35,8 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 		platform: yes
 
 <!-- start deliveryType -->
+
+This is the sub-type of `basal` event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).
 
 <!-- end deliveryType -->
 

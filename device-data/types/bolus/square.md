@@ -21,8 +21,6 @@
 
 <!-- start type -->
 
-This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to be delivered spread evenly over a `duration` of time (typically fifteen minutes to several hours).
-
 <!-- end type -->
 
 * * * * *
@@ -41,6 +39,8 @@ This is the sub-type of `bolus` event that represents a bolus insulin dose progr
 `_schemaVersion` ? (future): We plan to migrate from `square` to `extended` in the future.
 
 <!-- start subType -->
+
+This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to be delivered spread evenly over a `duration` of time (typically fifteen minutes to several hours).
 
 We plan to migrate all Tidepool data to use `extended` as the value of this sub-type rather than `square` in order to improve the consistency of the data model. With `subType` containing `extended` and the `extended` field containing the value of the delivered insulin dose, this sub-type of `bolus` event will be parallel to `normal` boluses, where the `subType` is `normal` and the `normal` field contains the value of the delivered insulin dose.
 

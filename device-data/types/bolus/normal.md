@@ -21,8 +21,6 @@
 
 <!-- start type -->
 
-This is the sub-type of `bolus` event that represents a bolus insulin dose delivered more-or-less immediately (within a matter of seconds or a small number of minutes, depending on the insulin pump and the user's settings). At Tidepool we follow the common convention of representing `normal` boluses as point-in-time events since their durations are short enough to be negligible.
-
 <!-- end type -->
 
 * * * * *
@@ -37,7 +35,9 @@ This is the sub-type of `bolus` event that represents a bolus insulin dose deliv
 		platform: yes
 
 <!-- start subType -->
-<!-- TODO -->
+
+This is the sub-type of `bolus` event that represents a bolus insulin dose delivered more-or-less immediately (within a matter of seconds or a small number of minutes, depending on the insulin pump and the user's settings). At Tidepool we follow the common convention of representing `normal` boluses as point-in-time events since their durations are short enough to be negligible.
+
 <!-- end subType -->
 
 * * * * *

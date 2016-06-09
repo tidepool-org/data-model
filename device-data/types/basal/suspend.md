@@ -21,10 +21,6 @@
 
 <!-- start type -->
 
-This is the sub-type of `basal` event that represents the total suspension of insulin delivery on an insulin pump within the stream of `basal` events, which should in the vast majority of cases be contiguous—that is, without gaps or overlaps. The user's inputs to suspend (and, later, resume) insulin delivery are part of Tidepool's `deviceEvent` data type, as the sub-type [`status`](../deviceEvent/status.md). Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is *also* represented as a `suspend` basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.
-
-Note, however, that no `rate` field appears on `suspend` basal events. The `rate` is always zero, and so this redundant information is not specified.
-
 <!-- end type -->
 
 * * * * *
@@ -39,6 +35,10 @@ Note, however, that no `rate` field appears on `suspend` basal events. The `rate
 		platform: yes
 
 <!-- start deliveryType -->
+
+This is the sub-type of `basal` event that represents the total suspension of insulin delivery on an insulin pump within the stream of `basal` events, which should in the vast majority of cases be contiguous—that is, without gaps or overlaps. The user's inputs to suspend (and, later, resume) insulin delivery are part of Tidepool's `deviceEvent` data type, as the sub-type [`status`](../deviceEvent/status.md). Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is *also* represented as a `suspend` basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.
+
+Note, however, that no `rate` field appears on `suspend` basal events. The `rate` is always zero, and so this redundant information is not specified.
 
 <!-- end deliveryType -->
 
