@@ -1,3 +1,5 @@
+<!-- non-generated document! all areas editable -->
+
 ## Units
 
 In general, the Tidepool platform does not mutate data. Rather, data is read from diabetes devices (or other sources of diabetes device data) and stored in a form as close as possible to the original form while still achieving the translation into the standardized Tidepool data model(s).

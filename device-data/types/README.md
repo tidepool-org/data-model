@@ -1,12 +1,14 @@
+<!-- non-generated document! all areas editable -->
+
 ## Diabetes Data Types
 
- - [basal insulin](./basal/README.md)
- - [blood ketones](./bloodKetone.md)
- - [bolus insulin](./bolus/README.md)
- - [(bolus) calculator/"wizard" records](./wizard.md)
- - [continuous blood glucose (cbg)](./cbg.md)
- - [CGM settings](./cgmSettings.md)
- - [device events](./deviceEvent/README.md)
- - [insulin pump settings](./pumpSettings.md)
- - [self-monitored blood glucose (smbg)](./smbg.md)
- - [upload metadata](./upload.md)
+ - [`basal` for basal insulin](./basal/README.md)
+ - [`bloodKetone` for blood ketones](./bloodKetone.md)
+ - [`bolus` for bolus insulin](./bolus/README.md)
+ - [`wizard` for (bolus) calculator/"wizard" records](./wizard.md)
+ - [`cbg` for continuous blood glucose (cbg)](./cbg.md)
+ - [`cgmSettings` for CGM settings](./cgmSettings.md)
+ - [`deviceEvent` for miscellaneous other device events](./deviceEvent/README.md)
+ - [`pumpSettings` for insulin pump settings](./pumpSettings.md)
+ - [`smbg` for self-monitored blood glucose (smbg)](./smbg.md)
+ - [`upload` for upload metadata](./upload.md)

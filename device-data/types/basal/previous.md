@@ -1,3 +1,5 @@
+<!-- non-generated document! all areas editable -->
+
 ## Uploading sequences of `basal` events via jellyfish's `previous` field
 
 The legacy jellyfish data ingestion API was designed for *real-time* ingestion of diabetes device data. This posed a problem for ingesting events like `basal` events that are *not* point-in-time but rather represent intervals of time. There are a couple of obvious solutions to this problem:

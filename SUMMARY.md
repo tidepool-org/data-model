@@ -31,3 +31,6 @@
     * [smbg](device-data/types/smbg.md)
     * [upload](device-data/types/upload.md)
     * [wizard](device-data/types/wizard.md)
+* [tools](bin/README.md)
+  * [doc template generator](bin/docTemplateGenerator.md)
+  * [sample datum generator](bin/sampleDatumGenerator.md)

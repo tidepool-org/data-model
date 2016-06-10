@@ -8,7 +8,6 @@
     -c, --clipboard               copy resulting sample JSON to clipboard
     -d, --datetime <value>        ISO-formatted datetime for datum
     -f, --format <value>          data format of client, ingestion, storage
-    -m, --manufacturer <value>    manufacturer of diabetes device
     --subtype, --subType <value>  subType for this datum
 */
 
@@ -42,7 +41,6 @@ commander.usage('[options] <type>')
   .option('-c, --clipboard', 'copy resulting sample JSON to clipboard')
   .option('-d, --datetime <value>', 'ISO-formatted datetime for datum', new Date().toISOString())
   .option('-f, --format <value>', 'data format of client, ingestion, storage', /^(client|ingestion|storage)$/i, 'client')
-  .option('-m, --manufacturer <value>', 'manufacturer of diabetes device', null)
   .option('--subtype, --subType <value>', 'subType for this datum', null)
   .parse(process.argv);
 
@@ -99,9 +97,6 @@ console.log();
 console.log(chalk.gray('Type:'), type);
 if (commander.subType) {
   console.log(chalk.gray('Subtype:'), commander.subType);
-}
-if (commander.manufacturer) {
-  console.log(chalk.gray('Manufacturer:'), commander.manufacturer);
 }
 console.log(chalk.gray('Datetime:'), commander.datetime);
 console.log(chalk.gray('Data model format:'), commander.format);
