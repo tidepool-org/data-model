@@ -20,7 +20,7 @@
 		platform: yes
 
 <!-- start type -->
-<!-- TODO -->
+
 <!-- end type -->
 
 * * * * *
@@ -35,7 +35,9 @@
 		platform: yes
 
 <!-- start subType -->
-<!-- TODO -->
+
+The `prime` sub-type of `deviceEvent` represents a user's priming of either an insulin infusion line/tubing used with a traditional insulin pump or the priming of an insulin delivery cannula used in all insulin delivery devices (i.e., both traditional insulin pumps and tubeless patch pumps like the Insulet OmniPod insulin delivery system). To "prime" and infusion line or cannula is to fill it with insulin either while disconnected from the user or in preparation for insertion in order to ready the device to delivery programmed doses of insulin.
+
 <!-- end subType -->
 
 * * * * *
@@ -53,7 +55,11 @@
 		`tubing`
 
 <!-- start primeTarget -->
-<!-- TODO -->
+
+The `primeTarget` field identifies the object of the priming action - either `tubing` for an infusion line prime or `cannula` for a cannula prime.
+
+Most commonly, `tubing` and `cannula` prime events will occur as a pair separated only be seconds or minutes. Note, however, that many combinations of `prime` events may occur in a real user's data "in the wild." For example, no priming events will appear in the data of an Insulet OmniPod user, as the device's automatic cannula prime prior to pod activation is not logged. And among traditional insulin pump users, priming behavior varies considerably. Those who use steel cannulas must prime the cannula along with the tubing, as the steel cannula is not separable from the infusion line, and so only `tubing` primes will appear in the data. Other insulin pump users may change the infusion site without changing out the insulin reservoir and infusion line at the same time, in which case a `cannula` prime may appear independently of a `tubing` prime.
+
 <!-- end primeTarget -->
 
 * * * * *
@@ -79,7 +85,9 @@
 
 
 <!-- start volume -->
-<!-- TODO -->
+
+Where available in the data, the `volume` of a priming event should be included as a value in insulin of expended in the course of the priming action.
+
 <!-- end volume -->
 
 * * * * *
