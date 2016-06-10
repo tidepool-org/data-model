@@ -1,3 +1,5 @@
+<!-- auto-generated doc! most areas *not* editable -->
+
 ## Bolus subType: `square`
 
 **NB:** All fields are *required* unless otherwise noted.
@@ -19,9 +21,9 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start type -->
+<!-- start editable commentary on type -->
 
-<!-- end type -->
+<!-- end editable commentary on type -->
 
 * * * * *
 
@@ -38,13 +40,13 @@
 
 `_schemaVersion` ? (future): We plan to migrate from `square` to `extended` in the future.
 
-<!-- start subType -->
+<!-- start editable commentary on subType -->
 
 This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to be delivered spread evenly over a `duration` of time (typically fifteen minutes to several hours).
 
 We plan to migrate all Tidepool data to use `extended` as the value of this sub-type rather than `square` in order to improve the consistency of the data model. With `subType` containing `extended` and the `extended` field containing the value of the delivered insulin dose, this sub-type of `bolus` event will be parallel to `normal` boluses, where the `subType` is `normal` and the `normal` field contains the value of the delivered insulin dose.
 
-<!-- end subType -->
+<!-- end editable commentary on subType -->
 
 * * * * *
 
@@ -61,13 +63,13 @@ We plan to migrate all Tidepool data to use `extended` as the value of this sub-
 		min: >= 0.0
 		max: 100.0
 
-<!-- start extended -->
+<!-- start editable commentary on extended -->
 
 The `extended` field encodes the numerical value of the dose of insulin delivered over the `duration` by an insulin pump. As with `normal` boluses, we do not allow the upload of boluses with a total delivered dose of 0 units.
 
 Refer to the documentation for [`normal`](normal.md) boluses for an explanation of the range of this field.
 
-<!-- end extended -->
+<!-- end editable commentary on extended -->
 
 * * * * *
 
@@ -86,13 +88,13 @@ Refer to the documentation for [`normal`](normal.md) boluses for an explanation 
 		min: > `extended`
 		max: 100.0
 
-<!-- start expectedExtended -->
+<!-- start editable commentary on expectedExtended -->
 
 When a `square` bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedExtended` field is used to store the original value of the dose of insulin that the user programmed, while `extended` represents the value of the dose that was actually delivered.
 
 Refer to the documentation for [`normal`](normal.md) boluses for an explanation of the range of this field.
 
-<!-- end expectedExtended -->
+<!-- end editable commentary on expectedExtended -->
 
 * * * * *
 
@@ -109,7 +111,7 @@ Refer to the documentation for [`normal`](normal.md) boluses for an explanation 
 		min: 0
 		max: 86400000
 
-<!-- start duration -->
+<!-- start editable commentary on duration -->
 
 The `duration` field encodes the actual elapsed duration of time, in milliseconds, spent delivering the dose of insulin encoded in `extended`.
 
@@ -118,7 +120,7 @@ The user interface for some insulin pumps allows a user to program a `square` bo
 
 To the best of our knowledge, no insulin pump allows the programming of a `square` bolus with a duration longer than twenty-four hours, and so we have chosen this as the maximum value accepted by the new platform APIs.
 
-<!-- end duration -->
+<!-- end editable commentary on duration -->
 
 * * * * *
 
@@ -137,13 +139,13 @@ To the best of our knowledge, no insulin pump allows the programming of a `squar
 		min: >= `duration`
 		max: 86400000
 
-<!-- start expectedDuration -->
+<!-- start editable commentary on expectedDuration -->
 
 When a `square` bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedDuration` field is used to store the original duration of time that the user programmed for delivery of the dose of insulin encoded in `extended`. The `duration` field, in contrast, encodes the actual elapsed duration of dose delivery.
 
 The minimum value of `expectedDuration` is any value greater than or equal to that encoded under `duration` since any other value (i.e., less than `duration`) cannot obtain from interruption or cancellation of a bolus. Note that the `expectedDuration` can only be *equal* to the `duration` in the very rare and special case that the `duration` is 0. See above under [`duration`](#duration) for discussion of the minimum and maximum values for this field.
 
-<!-- end expectedDuration -->
+<!-- end editable commentary on expectedDuration -->
 
 * * * * *
 
@@ -151,9 +153,9 @@ The minimum value of `expectedDuration` is any value greater than or equal to th
 
 See [common fields](../../common.md).
 
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 
 * * * * *
 
@@ -161,9 +163,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 
 * * * * *
 
@@ -171,9 +173,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 
 * * * * *
 
@@ -181,9 +183,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 
 * * * * *
 
@@ -191,9 +193,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 
 * * * * *
 
@@ -201,9 +203,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 
 * * * * *
 
@@ -211,9 +213,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 
 * * * * *
 
@@ -221,9 +223,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 
 * * * * *
 
@@ -231,9 +233,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 
 * * * * *
 
@@ -241,9 +243,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 
 * * * * *
 
@@ -251,9 +253,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 
 * * * * *
 
@@ -261,9 +263,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 
 * * * * *
 
@@ -271,9 +273,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 
 * * * * *
 
@@ -281,9 +283,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 
 * * * * *
 

@@ -1,3 +1,5 @@
+<!-- auto-generated doc! most areas *not* editable -->
+
 ## Device event subType: `prime`
 
 **NB:** All fields are *required* unless otherwise noted.
@@ -19,9 +21,9 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start type -->
+<!-- start editable commentary on type -->
 
-<!-- end type -->
+<!-- end editable commentary on type -->
 
 * * * * *
 
@@ -34,11 +36,11 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start subType -->
+<!-- start editable commentary on subType -->
 
 The `prime` sub-type of `deviceEvent` represents a user's priming of either an insulin infusion line/tubing used with a traditional insulin pump or the priming of an insulin delivery cannula used in all insulin delivery devices (i.e., both traditional insulin pumps and tubeless patch pumps like the Insulet OmniPod insulin delivery system). To "prime" and infusion line or cannula is to fill it with insulin either while disconnected from the user or in preparation for insertion in order to ready the device to delivery programmed doses of insulin.
 
-<!-- end subType -->
+<!-- end editable commentary on subType -->
 
 * * * * *
 
@@ -54,13 +56,13 @@ The `prime` sub-type of `deviceEvent` represents a user's priming of either an i
 		`cannula`
 		`tubing`
 
-<!-- start primeTarget -->
+<!-- start editable commentary on primeTarget -->
 
 The `primeTarget` field identifies the object of the priming action - either `tubing` for an infusion line prime or `cannula` for a cannula prime.
 
 Most commonly, `tubing` and `cannula` prime events will occur as a pair separated only be seconds or minutes. Note, however, that many combinations of `prime` events may occur in a real user's data "in the wild." For example, no priming events will appear in the data of an Insulet OmniPod user, as the device's automatic cannula prime prior to pod activation is not logged. And among traditional insulin pump users, priming behavior varies considerably. Those who use steel cannulas must prime the cannula along with the tubing, as the steel cannula is not separable from the infusion line, and so only `tubing` primes will appear in the data. Other insulin pump users may change the infusion site without changing out the insulin reservoir and infusion line at the same time, in which case a `cannula` prime may appear independently of a `tubing` prime.
 
-<!-- end primeTarget -->
+<!-- end editable commentary on primeTarget -->
 
 * * * * *
 
@@ -84,11 +86,11 @@ Most commonly, `tubing` and `cannula` prime events will occur as a pair separate
 
 
 
-<!-- start volume -->
+<!-- start editable commentary on volume -->
 
 Where available in the data, the `volume` of a priming event should be included as a value in insulin of expended in the course of the priming action.
 
-<!-- end volume -->
+<!-- end editable commentary on volume -->
 
 * * * * *
 
@@ -96,9 +98,9 @@ Where available in the data, the `volume` of a priming event should be included 
 
 See [common fields](../../common.md).
 
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 
 * * * * *
 
@@ -106,9 +108,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 
 * * * * *
 
@@ -116,9 +118,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 
 * * * * *
 
@@ -126,9 +128,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 
 * * * * *
 
@@ -136,9 +138,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 
 * * * * *
 
@@ -146,9 +148,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 
 * * * * *
 
@@ -156,9 +158,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 
 * * * * *
 
@@ -166,9 +168,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 
 * * * * *
 
@@ -176,9 +178,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 
 * * * * *
 
@@ -186,9 +188,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 
 * * * * *
 
@@ -196,9 +198,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 
 * * * * *
 
@@ -206,9 +208,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 
 * * * * *
 
@@ -216,9 +218,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 
 * * * * *
 
@@ -226,9 +228,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 
 * * * * *
 

@@ -1,3 +1,5 @@
+<!-- auto-generated doc! most areas *not* editable -->
+
 ## Insulin pump settings (pumpSettings)
 
 **NB:** All fields are *required* unless otherwise noted.
@@ -19,9 +21,9 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start type -->
+<!-- start editable commentary on type -->
 <!-- TODO -->
-<!-- end type -->
+<!-- end editable commentary on type -->
 
 * * * * *
 
@@ -34,9 +36,9 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start activeSchedule -->
+<!-- start editable commentary on activeSchedule -->
 <!-- TODO -->
-<!-- end activeSchedule -->
+<!-- end editable commentary on activeSchedule -->
 
 * * * * *
 
@@ -79,9 +81,9 @@ Each basal schedule segment object within each array value contains the followin
 		min: 0
 		max: < 86400000
 
-<!-- start basalSchedules -->
+<!-- start editable commentary on basalSchedules -->
 <!-- TODO -->
-<!-- end basalSchedules -->
+<!-- end editable commentary on basalSchedules -->
 
 * * * * *
 
@@ -178,9 +180,9 @@ Each blood glucose target segment object in the array contains a subset of the f
 
 `_schemaVersion` 2: The nonexistent (in currently handled devices) `{low: [val], target: [val], high: [val], start: [milliseconds]}` schema was *removed*.
 
-<!-- start bgTarget -->
+<!-- start editable commentary on bgTarget -->
 <!-- TODO -->
-<!-- end bgTarget -->
+<!-- end editable commentary on bgTarget -->
 
 * * * * *
 
@@ -193,9 +195,9 @@ Each blood glucose target segment object in the array contains a subset of the f
 See [`bgTarget`](#bgtarget) above for documentation of the fields within each blood glucose segment object.
 
 
-<!-- start bgTargets -->
+<!-- start editable commentary on bgTargets -->
 <!-- TODO -->
-<!-- end bgTargets -->
+<!-- end editable commentary on bgTargets -->
 
 * * * * *
 
@@ -238,9 +240,9 @@ Each carb ratio segment object in the array contains the following properties:
 		min: 0
 		max: < 86400000
 
-<!-- start carbRatio -->
+<!-- start editable commentary on carbRatio -->
 <!-- TODO -->
-<!-- end carbRatio -->
+<!-- end editable commentary on carbRatio -->
 
 * * * * *
 
@@ -253,9 +255,9 @@ Each carb ratio segment object in the array contains the following properties:
 See [`carbRatio`](#carbratio) above for documentation of the fields within each carb ratio segment object.
 
 
-<!-- start carbRatios -->
+<!-- start editable commentary on carbRatios -->
 <!-- TODO -->
-<!-- end carbRatios -->
+<!-- end editable commentary on carbRatios -->
 
 * * * * *
 
@@ -308,9 +310,9 @@ Each insulin sensitivity segment object in the array contains the following prop
 		min: 0
 		max: < 86400000
 
-<!-- start insulinSensitivity -->
+<!-- start editable commentary on insulinSensitivity -->
 <!-- TODO -->
-<!-- end insulinSensitivity -->
+<!-- end editable commentary on insulinSensitivity -->
 
 * * * * *
 
@@ -323,9 +325,9 @@ Each insulin sensitivity segment object in the array contains the following prop
 See [`insulinSensitivity`](#insulinsensitivity) above for documentation of the fields within each insulin sensitivity segment object.
 
 
-<!-- start insulinSensitivities -->
+<!-- start editable commentary on insulinSensitivities -->
 <!-- TODO -->
-<!-- end insulinSensitivities -->
+<!-- end editable commentary on insulinSensitivities -->
 
 * * * * *
 
@@ -372,9 +374,9 @@ Contains the following properties:
 
 `_schemaVersion` ? (future): `exchanges` may be added as an accepted value for `units.carbs` in the future.
 
-<!-- start units -->
+<!-- start editable commentary on units -->
 <!-- TODO -->
-<!-- end units -->
+<!-- end editable commentary on units -->
 
 * * * * *
 
@@ -382,9 +384,9 @@ Contains the following properties:
 
 See [common fields](../common.md).
 
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 
 * * * * *
 
@@ -392,9 +394,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 
 * * * * *
 
@@ -402,9 +404,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 
 * * * * *
 
@@ -412,9 +414,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 
 * * * * *
 
@@ -422,9 +424,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 
 * * * * *
 
@@ -432,9 +434,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 
 * * * * *
 
@@ -442,9 +444,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 
 * * * * *
 
@@ -452,9 +454,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 
 * * * * *
 
@@ -462,9 +464,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 
 * * * * *
 
@@ -472,9 +474,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 
 * * * * *
 
@@ -482,9 +484,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 
 * * * * *
 
@@ -492,9 +494,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 
 * * * * *
 
@@ -502,9 +504,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 
 * * * * *
 
@@ -512,9 +514,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 
 * * * * *
 

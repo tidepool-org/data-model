@@ -1,3 +1,5 @@
+<!-- auto-generated doc! most areas *not* editable -->
+
 ## Basal deliveryType: `scheduled`
 
 **NB:** All fields are *required* unless otherwise noted.
@@ -19,9 +21,9 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start type -->
+<!-- start editable commentary on type -->
 
-<!-- end type -->
+<!-- end editable commentary on type -->
 
 * * * * *
 
@@ -34,11 +36,11 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start deliveryType -->
+<!-- start editable commentary on deliveryType -->
 
 This is the sub-type of `basal` event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).
 
-<!-- end deliveryType -->
+<!-- end editable commentary on deliveryType -->
 
 * * * * *
 
@@ -57,7 +59,7 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 		min: 0
 		max: 432000000
 
-<!-- start duration -->
+<!-- start editable commentary on duration -->
 
 When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](./previous.md) for details.
 
@@ -67,7 +69,7 @@ Note that for some insulin pumps, even for a scheduled basal *not* interrupted b
 
 The new platform APIs expect this value to be >= 0 and <= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.
 
-<!-- end duration -->
+<!-- end editable commentary on duration -->
 
 * * * * *
 
@@ -86,13 +88,13 @@ The new platform APIs expect this value to be >= 0 and <= 432000000 (the number 
 		min: > `duration`
 		max: 432000000
 
-<!-- start expectedDuration -->
+<!-- start editable commentary on expectedDuration -->
 
 On a scheduled basal ingested through the legacy jellyfish ingestion service, `expectedDuration` should *never* be included on a `scheduled` basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original `scheduled` basal; most commonly this new event is a `temp` or `suspend`, but it could be a `scheduled` if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples in [`previous`](./previous.md).
 
 In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the `expectedDuration` where available and relevant, but it will never be a required field. Because of how burdensome (or impossible) it is to calculate `expectedDuration` for `scheduled` basals, we do **not** expect the uploading client to calculate it, except in cases where the source data makes it easy to include.
 
-<!-- end expectedDuration -->
+<!-- end editable commentary on expectedDuration -->
 
 * * * * *
 
@@ -109,13 +111,13 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 		min: 0.0
 		max: 20.0
 
-<!-- start rate -->
+<!-- start editable commentary on rate -->
 
 Different insulin pump manufacturers offer the ability to program basal rates with different levels of precision in terms of significant digits on the `rate`. We endeavor to represent each `rate` as accurately as possible for each insulin pump; occasionally when values are stored to a falsely large number of floating point digits this means rounding the raw `rate` value found in a record from a pump in order to match the significant digits of precision advertised by the manufacturer. It is the burden of the uploading client to handle this rounding since the number of significant digits for `rate`s varies according to the pump manufacturer.
 
 Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.
 
-<!-- end rate -->
+<!-- end editable commentary on rate -->
 
 * * * * *
 
@@ -132,11 +134,11 @@ Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15
 		jellyfish: no (optional)
 		platform: nonexistent
 
-<!-- start previous -->
+<!-- start editable commentary on previous -->
 
 See [`previous`](./previous.md) for detailed documentation on this deprecated field.
 
-<!-- end previous -->
+<!-- end editable commentary on previous -->
 
 * * * * *
 
@@ -155,7 +157,7 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 
 `_schemaVersion` 2: `scheduleName` became **optional**.
 
-<!-- start scheduleName -->
+<!-- start editable commentary on scheduleName -->
 
 <!-- DRAFT: discuss with @jhbate -->
 
@@ -169,7 +171,7 @@ Prior to `_schemaVersion` 2, the `scheduleName` was *required* by the jellyfish 
 
 Going forward, now that `scheduleName` is an optional field, it should only be added to `basal` data when it is directly available in the raw data from an insulin pump or can be inferred with high confidence via lookup against a complete pump settings history.
 
-<!-- end scheduleName -->
+<!-- end editable commentary on scheduleName -->
 
 * * * * *
 
@@ -177,9 +179,9 @@ Going forward, now that `scheduleName` is an optional field, it should only be a
 
 See [common fields](../../common.md).
 
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 
 * * * * *
 
@@ -187,9 +189,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 
 * * * * *
 
@@ -197,9 +199,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 
 * * * * *
 
@@ -207,9 +209,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 
 * * * * *
 
@@ -217,9 +219,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 
 * * * * *
 
@@ -227,9 +229,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 
 * * * * *
 
@@ -237,9 +239,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 
 * * * * *
 
@@ -247,9 +249,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 
 * * * * *
 
@@ -257,9 +259,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 
 * * * * *
 
@@ -267,9 +269,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 
 * * * * *
 
@@ -277,9 +279,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 
 * * * * *
 
@@ -287,9 +289,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 
 * * * * *
 
@@ -297,9 +299,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 
 * * * * *
 
@@ -307,9 +309,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 
 * * * * *
 

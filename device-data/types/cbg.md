@@ -1,3 +1,5 @@
+<!-- auto-generated doc! most areas *not* editable -->
+
 ## Continuous Blood Glucose (cbg)
 
 **NB:** All fields are *required* unless otherwise noted.
@@ -19,13 +21,13 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start type -->
+<!-- start editable commentary on type -->
 
 This is the Tidepool data type for continuous glucose monitor (CGM) sensor data. `cbg` is an abbreviation of 'continuous blood glucose' and contrasts with `smbg`, abbreviating 'self-monitored blood glucose'. [`smbg`](smbg.md) is the Tidepool data type for traditional fingerstick blood glucose meter data.
 
 Note that [`deviceTime`](#devicetime) is **optional** for this data type alone of all diabetes device data types that Tidepool ingests. This is due to the fact that we are now ingesting Dexcom G5 data via integration with Apple's HealthKit; since this data originates with a cellular- and/or Internet-connected iPhone operating as the receiver for a Dexcom G5 sensor, the only stored timestamp *is* a UTC-anchored timestamp, and there is no notion of a "receiver display time" as there is with earlier generations of Dexcom devices.
 
-<!-- end type -->
+<!-- end editable commentary on type -->
 
 * * * * *
 
@@ -45,9 +47,9 @@ See [units](../units.md) for further explanation of blood glucose units.
 		`mg/dL`
 		`mmol/L`
 
-<!-- start units -->
+<!-- start editable commentary on units -->
 
-<!-- end units -->
+<!-- end editable commentary on units -->
 
 * * * * *
 
@@ -74,9 +76,9 @@ See [units](../units.md) for further explanation of blood glucose units.
 
 
 
-<!-- start value -->
+<!-- start editable commentary on value -->
 
-<!-- end value -->
+<!-- end editable commentary on value -->
 
 * * * * *
 
@@ -84,9 +86,9 @@ See [units](../units.md) for further explanation of blood glucose units.
 
 See [common fields](../common.md).
 
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 
 * * * * *
 
@@ -94,9 +96,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 
 * * * * *
 
@@ -104,9 +106,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 
 * * * * *
 
@@ -117,9 +119,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 
 * * * * *
 
@@ -127,9 +129,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 
 * * * * *
 
@@ -137,9 +139,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 
 * * * * *
 
@@ -147,9 +149,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 
 * * * * *
 
@@ -157,9 +159,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 
 * * * * *
 
@@ -167,9 +169,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 
 * * * * *
 
@@ -177,9 +179,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 
 * * * * *
 
@@ -187,9 +189,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 
 * * * * *
 
@@ -197,9 +199,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 
 * * * * *
 
@@ -207,9 +209,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 
 * * * * *
 
@@ -217,9 +219,9 @@ See [common fields](../common.md).
 
 See [common fields](../common.md).
 
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 
 * * * * *
 

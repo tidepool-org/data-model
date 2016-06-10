@@ -1,3 +1,5 @@
+<!-- auto-generated doc! most areas *not* editable -->
+
 ## Device event subType: `alarm`
 
 **NB:** All fields are *required* unless otherwise noted.
@@ -19,9 +21,9 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start type -->
+<!-- start editable commentary on type -->
 
-<!-- end type -->
+<!-- end editable commentary on type -->
 
 * * * * *
 
@@ -34,11 +36,11 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start subType -->
+<!-- start editable commentary on subType -->
 
 The `alarm` sub-type of `deviceEvent` describes alerts and alarms that are surfaced to the user by insulin pumps and continuous glucose monitors.
 
-<!-- end subType -->
+<!-- end editable commentary on subType -->
 
 * * * * *
 
@@ -61,7 +63,7 @@ The `alarm` sub-type of `deviceEvent` describes alerts and alarms that are surfa
 		`over_limit`
 		`other`
 
-<!-- start alarmType -->
+<!-- start editable commentary on alarmType -->
 
 The `alarmType`s built into the data model are all and only those alarms that are common to most, perhaps all, insulin pumps or continuous glucose monitors. At present, we have only modeled the set of alarms for insulin pumps, and this list is:
 
@@ -80,7 +82,7 @@ In addition, a `payload` object is *required* when `alarmType` is `other`, which
 
 For some devices, an alarm event (e.g., an occlusion alarm) is the **only** indication of a suspension of insulin delivery. In such a case, a [`status`](./status.md) event should also be uploaded to the platform and should be included (in its entirety) in the `status` field of the `alarm` event.
 
-<!-- end alarmType -->
+<!-- end editable commentary on alarmType -->
 
 * * * * *
 
@@ -95,9 +97,9 @@ For some devices, an alarm event (e.g., an occlusion alarm) is the **only** indi
 		jellyfish: no (optional)
 		platform: no (optional)
 
-<!-- start status -->
-<!-- TODO (discuss w/@gniezen first!) -->
-<!-- end status -->
+<!-- start editable commentary on status -->
+<!-- TODO -->
+<!-- end editable commentary on status -->
 
 * * * * *
 
@@ -105,9 +107,9 @@ For some devices, an alarm event (e.g., an occlusion alarm) is the **only** indi
 
 See [common fields](../../common.md).
 
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 
 * * * * *
 
@@ -115,9 +117,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 
 * * * * *
 
@@ -125,9 +127,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 
 * * * * *
 
@@ -135,9 +137,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 
 * * * * *
 
@@ -145,9 +147,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 
 * * * * *
 
@@ -155,9 +157,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 
 * * * * *
 
@@ -165,9 +167,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 
 * * * * *
 
@@ -175,9 +177,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 
 * * * * *
 
@@ -185,9 +187,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 
 * * * * *
 
@@ -195,9 +197,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 
 * * * * *
 
@@ -205,9 +207,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 
 * * * * *
 
@@ -215,9 +217,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 
 * * * * *
 
@@ -225,9 +227,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 
 * * * * *
 
@@ -235,9 +237,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 
 * * * * *
 

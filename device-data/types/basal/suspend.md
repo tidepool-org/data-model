@@ -1,3 +1,5 @@
+<!-- auto-generated doc! most areas *not* editable -->
+
 ## Basal deliveryType: `suspend`
 
 **NB:** All fields are *required* unless otherwise noted.
@@ -19,9 +21,9 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start type -->
+<!-- start editable commentary on type -->
 
-<!-- end type -->
+<!-- end editable commentary on type -->
 
 * * * * *
 
@@ -34,13 +36,13 @@
 		jellyfish: yes
 		platform: yes
 
-<!-- start deliveryType -->
+<!-- start editable commentary on deliveryType -->
 
 This is the sub-type of `basal` event that represents the total suspension of insulin delivery on an insulin pump within the stream of `basal` events, which should in the vast majority of cases be contiguous—that is, without gaps or overlaps. The user's inputs to suspend (and, later, resume) insulin delivery are part of Tidepool's `deviceEvent` data type, as the sub-type [`status`](../deviceEvent/status.md). Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is *also* represented as a `suspend` basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.
 
 Note, however, that no `rate` field appears on `suspend` basal events. The `rate` is always zero, and so this redundant information is not specified.
 
-<!-- end deliveryType -->
+<!-- end editable commentary on deliveryType -->
 
 * * * * *
 
@@ -59,7 +61,7 @@ Note, however, that no `rate` field appears on `suspend` basal events. The `rate
 		min: 0
 		max: 86400000
 
-<!-- start duration -->
+<!-- start editable commentary on duration -->
 
 Just like [`scheduled`](./scheduled.md) basals, when ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](./previous.md) for details.
 
@@ -67,7 +69,7 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 
 The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
 
-<!-- end duration -->
+<!-- end editable commentary on duration -->
 
 * * * * *
 
@@ -90,11 +92,11 @@ The new platform APIs expect this value to be >= 0 and <= 86400000 (the number o
 
 `_schemaVersion` ? (future): `expectedDuration` is implemented as described in this documentation. If the `_schemaVersion` listed here is "? (future)," all data up to and including the current `_schemaVersion` has **not** implemented `expectedDuration` as described.
 
-<!-- start expectedDuration -->
+<!-- start editable commentary on expectedDuration -->
 
 Refer to the discussion of [`expectedDuration`](./temp.md#expectedduration) in the `temp` basal documentation. The only case where we may be able to implement `expectedDuration` for `suspend` basals in the future is the rare case of insulin pumps that require setting a `duration` for a suspension of insulin delivery upfront instead of providing a simple toggle between `suspended` and `resumed` insulin delivery status on the pump.
 
-<!-- end expectedDuration -->
+<!-- end editable commentary on expectedDuration -->
 
 * * * * *
 
@@ -111,11 +113,11 @@ Refer to the discussion of [`expectedDuration`](./temp.md#expectedduration) in t
 		jellyfish: no (optional)
 		platform: nonexistent
 
-<!-- start previous -->
+<!-- start editable commentary on previous -->
 
 See [`previous`](./previous.md) for detailed documentation on this deprecated field.
 
-<!-- end previous -->
+<!-- end editable commentary on previous -->
 
 * * * * *
 
@@ -130,7 +132,7 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 		jellyfish: no (optional)
 		platform: no (optional)
 
-<!-- start suppressed -->
+<!-- start editable commentary on suppressed -->
 
 See the discussion of the [`suppressed`](./temp.md#suppressed) field on `temp` basals.
 
@@ -138,7 +140,7 @@ The only differences for `suspend` basals are that:
 - The `deliveryType` of the embedded `suppressed` basal may be either `temp` or `scheduled`.
 - The embedded `suppressed` basal may *itself* have an embedded `suppressed` basal event. This can happen in particular with insulin pumps integrated with continuous glucose monitors such that the following may happen: (a) the PWD blood glucose is falling, and he or she (or a caregiver) programs a `temp` basal (which embeds a `suppressed` scheduled basal) in an attempt to prevent hypoglycemia but (b) the PWD's blood glucose continues to fall, and the automatic low glucose suspend feature of the insulin pump suspends insulin delivery, creating a `suspend` basal that embeds the `temp` basal as *its* `suppressed`.
 
-<!-- end suppressed -->
+<!-- end editable commentary on suppressed -->
 
 * * * * *
 
@@ -146,9 +148,9 @@ The only differences for `suspend` basals are that:
 
 See [common fields](../../common.md).
 
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 
 * * * * *
 
@@ -156,9 +158,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 
 * * * * *
 
@@ -166,9 +168,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 
 * * * * *
 
@@ -176,9 +178,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 
 * * * * *
 
@@ -186,9 +188,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 
 * * * * *
 
@@ -196,9 +198,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 
 * * * * *
 
@@ -206,9 +208,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 
 * * * * *
 
@@ -216,9 +218,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 
 * * * * *
 
@@ -226,9 +228,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 
 * * * * *
 
@@ -236,9 +238,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 
 * * * * *
 
@@ -246,9 +248,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 
 * * * * *
 
@@ -256,9 +258,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 
 * * * * *
 
@@ -266,9 +268,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 
 * * * * *
 
@@ -276,9 +278,9 @@ See [common fields](../../common.md).
 
 See [common fields](../../common.md).
 
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 
 * * * * *
 
