@@ -63,7 +63,7 @@ We plan to migrate all Tidepool data to use `extended` as the value of this sub-
 
 <!-- start extended -->
 
-The `extended` field encodes the numerical value of the dose of insulin delivered over the `duration` by an insulin pump. As with `normal` boluses, we do not allow the upload of boluses with a total delivered dose of 0 units.
+The `extended` field encodes the numerical value of the dose of insulin delivered over the `duration` by an insulin pump. 
 
 Refer to the documentation for [`normal`](normal.md) boluses for an explanation of the range of this field.
 
