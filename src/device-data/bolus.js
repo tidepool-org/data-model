@@ -127,7 +127,7 @@ var schemas = {
         },
         numericalType: common.numericalTypes.INTEGER_MS,
         range: {
-          min: '> `duration`',
+          min: '>= `duration`',
           max: 86400000
         }
       }

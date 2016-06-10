@@ -296,7 +296,7 @@ May contain the following properties:
 		platform: no (optional)
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 #### correction
@@ -502,28 +502,29 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 27.920262394959032,
+	"bgInput": 31.195203709675898,
 	"bgTarget": {
-		"target": 6.383360189702364
+		"low": 4.440598392836427,
+		"high": 6.938434988806917
 	},
-	"bolus": "17f0097f7e71427dbb27e65905c332fb",
-	"carbInput": 108,
-	"insulinCarbRatio": 17,
-	"insulinOnBoard": 24.869,
-	"insulinSensitivity": 63,
+	"bolus": "d3317638a11e4ee58c3c01ea5274074e",
+	"carbInput": 27,
+	"insulinCarbRatio": 18,
+	"insulinOnBoard": 12.051,
+	"insulinSensitivity": 30,
 	"recommended": {
-		"carb": 6.25,
-		"correction": 0.5,
+		"carb": 1.5,
+		"correction": 0.75,
 		"net": 0
 	},
 	"units": "mmol/L",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:06",
-	"guid": "5d7afc51-7d9f-4504-ba79-6731d299f1a2",
-	"id": "3bd709477d564a3ebf099a59b545c044",
-	"time": "2016-05-04T08:18:06.629Z",
+	"deviceTime": "2016-06-09T19:58:46",
+	"guid": "b48777f0-7a64-4db9-994f-b89b673842d9",
+	"id": "3383f4d87a024d278cc4285ab4d7a625",
+	"time": "2016-06-10T02:58:46.722Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -534,28 +535,28 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 574,
+	"bgInput": 33,
 	"bgTarget": {
-		"target": 105,
-		"range": 10
+		"target": 100,
+		"high": 130
 	},
-	"bolus": "30c349186b7f4c1780538f9290ff0e7a",
-	"carbInput": 95,
-	"insulinCarbRatio": 13,
-	"insulinOnBoard": 12.881,
-	"insulinSensitivity": 71,
+	"bolus": "57b2aeb4d1d64ea398dbcaed849a756f",
+	"carbInput": 112,
+	"insulinCarbRatio": 16,
+	"insulinOnBoard": 2.27,
+	"insulinSensitivity": 48,
 	"recommended": {
-		"carb": 7.25,
-		"correction": 6.5,
-		"net": 0.75
+		"carb": 7,
+		"correction": 0.75,
+		"net": 5.5
 	},
 	"units": "mg/dL",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:06",
-	"guid": "a3b00d7b-b506-435e-b039-9237ed1e891d",
-	"time": "2016-05-04T08:18:06.630Z",
+	"deviceTime": "2016-06-09T19:58:46",
+	"guid": "3ba948a3-ea0b-4708-aeee-ce18e125a4c0",
+	"time": "2016-06-10T02:58:46.724Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -566,20 +567,19 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 31.306218669496808,
+	"bgInput": 3.7190011540005075,
 	"bgTarget": {
-		"target": 5.273210591493257,
-		"high": 6.66089758925464
+		"target": 5.550747991045533
 	},
-	"bolus": "f2f23ebc808e4c4396a7c59942dc290a",
-	"carbInput": 149,
-	"insulinCarbRatio": 14,
-	"insulinOnBoard": 21.778,
-	"insulinSensitivity": 77,
+	"bolus": "feed7099482a4e58b15a5b196b14d9fc",
+	"carbInput": 138,
+	"insulinCarbRatio": 8,
+	"insulinOnBoard": 16.632,
+	"insulinSensitivity": 91,
 	"recommended": {
-		"carb": 10.75,
-		"correction": 0.5,
-		"net": 0
+		"carb": 17.25,
+		"correction": 0,
+		"net": 0.5
 	},
 	"units": "mmol/L",
 	"_active": true,
@@ -588,12 +588,12 @@ See [common fields](../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:11.630Z",
+	"createdTime": "2016-06-10T02:58:51.724Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:06",
-	"guid": "2e180503-152a-4644-8683-e6d099537fd2",
-	"id": "e9974a6e87b54f10baf2b828a046dad9",
-	"time": "2016-05-04T08:18:06.630Z",
+	"deviceTime": "2016-06-09T19:58:46",
+	"guid": "ae227f03-d70d-444d-b14e-131c2da84ea1",
+	"id": "ff9e6201e5b547dfb3b3d3f8129dfda8",
+	"time": "2016-06-10T02:58:46.724Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

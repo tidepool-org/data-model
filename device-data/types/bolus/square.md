@@ -58,7 +58,7 @@ We plan to migrate all Tidepool data to use `extended` as the value of this sub-
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start extended -->
@@ -134,14 +134,14 @@ To the best of our knowledge, no insulin pump allows the programming of a `squar
 		platform: no (optional)
 	Numerical type: Integer value representing milliseconds.
 	Range:
-		min: > `duration`
+		min: >= `duration`
 		max: 86400000
 
 <!-- start expectedDuration -->
 
 When a `square` bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedDuration` field is used to store the original duration of time that the user programmed for delivery of the dose of insulin encoded in `extended`. The `duration` field, in contrast, encodes the actual elapsed duration of dose delivery.
 
-The minimum value of `expectedDuration` is any value greater than that encoded under `duration` since any other value (i.e., less than or equal to `duration`) cannot obtain from interruption or cancellation of a bolus. See above under [`duration`](#duration) for discussion of the maximum value for this field.
+The minimum value of `expectedDuration` is any value greater than or equal to that encoded under `duration` since any other value (i.e., less than `duration`) cannot obtain from interruption or cancellation of a bolus. Note that the `expectedDuration` can only be *equal* to the `duration` in the very rare and special case that the `duration` is 0. See above under [`duration`](#duration) for discussion of the minimum and maximum values for this field.
 
 <!-- end expectedDuration -->
 
@@ -293,17 +293,17 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "square",
-	"extended": 3.25,
-	"expectedExtended": 4.875,
-	"duration": 72000000,
-	"expectedDuration": 108000000,
+	"extended": 5.5,
+	"expectedExtended": 8.25,
+	"duration": 59400000,
+	"expectedDuration": 89100000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "1f7ff54d-72c6-4de1-ad50-dc942a03282c",
-	"id": "dbc18cf065a3432eb0eb9089bc5d107d",
-	"time": "2016-05-04T08:18:04.356Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "e0bf13b3-f1ae-4bea-a1e8-276926d6c0f2",
+	"id": "0df4a2701b184676b2d19ded8957eaf8",
+	"time": "2016-06-10T02:58:44.015Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -317,14 +317,14 @@ See [common fields](../../common.md).
 	"subType": "square",
 	"extended": 6,
 	"expectedExtended": 9,
-	"duration": 52200000,
-	"expectedDuration": 78300000,
+	"duration": 0,
+	"expectedDuration": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "f41e5328-d4da-4119-989c-1360b2752f9f",
-	"time": "2016-05-04T08:18:04.357Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "8c624416-3649-48d6-80ca-d779afd67938",
+	"time": "2016-06-10T02:58:44.016Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -338,20 +338,20 @@ See [common fields](../../common.md).
 	"subType": "square",
 	"extended": 4.5,
 	"expectedExtended": 6.75,
-	"duration": 32400000,
-	"expectedDuration": 48600000,
+	"duration": 28800000,
+	"expectedDuration": 43200000,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:09.357Z",
+	"createdTime": "2016-06-10T02:58:49.017Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "c6947e9b-c17d-4f1c-a864-428e53a8841b",
-	"id": "cc69b261d52d46d3a3386dfcd6440e43",
-	"time": "2016-05-04T08:18:04.357Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "3d08dc6e-0c57-4bfe-a6bb-5f8eeb221ada",
+	"id": "ffef9d307b754ebd91ac19cb8e65d59f",
+	"time": "2016-06-10T02:58:44.017Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

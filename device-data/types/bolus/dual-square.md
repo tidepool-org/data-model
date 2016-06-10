@@ -60,12 +60,14 @@ We plan to migrate all Tidepool data to use `combo` as the value of this sub-typ
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start normal -->
 
 See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
+
+Note that a 0 for `normal` is allowable in more circumstances for a combo bolus than for a simple `normal` bolus: as long as the `extended` is non-zero for the combo bolus, `normal` may have a value of 0 *without* the requirement that a non-zero `expectedNormal` also be present.
 
 <!-- end normal -->
 
@@ -90,7 +92,7 @@ See the explanation of this field in the documentation for [`normal`](normal.md)
 
 See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
 
-Note that if a `dual/square` bolus is interrupted or canceled during the `normal` portion of delivery, by definition the `extended` delivery should _not_ yet have begun, so the value of `extended` and `duration` should be 0 and `expectedExtended` and `expectedDuration` should have a values.
+Note that if a `dual/square` bolus is interrupted or canceled during the `normal` portion of delivery, by definition the `extended` delivery should _not_ yet have begun, so the value of `extended` and `duration` should be 0 and `expectedExtended` and `expectedDuration` should have values.
 
 <!-- end expectedNormal -->
 
@@ -106,7 +108,7 @@ Note that if a `dual/square` bolus is interrupted or canceled during the `normal
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start extended -->
@@ -159,6 +161,8 @@ Note that if a `dual/square` bolus is interrupted or canceled during the `extend
 
 See the explanation of this field in the documentation for [`square`](square.md) boluses.
 
+As with `square` boluses, the `duration` is the elapsed time for the `extended` portion of the bolus. While some insulin pumps that deliver `normal` insulin doses at a slower rate (minutes rather than seconds) for user comfort do include the duration of the `normal` delivery in the data, we do not currently include this information in our bolus data model(s). As with the `square` boluses, it is in theory possible for a user to input 0 `duration` for the `extended` portion of a `combo` bolus, effectively programming a `normal` bolus in a total amount equal to the `normal` and `extended` insulin values added together.
+
 <!-- end duration -->
 
 * * * * *
@@ -175,7 +179,7 @@ See the explanation of this field in the documentation for [`square`](square.md)
 		platform: no (optional)
 	Numerical type: Integer value representing milliseconds.
 	Range:
-		min: > `duration`
+		min: >= `duration`
 		max: 86400000
 
 <!-- start expectedDuration -->
@@ -332,18 +336,18 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 4.25,
-	"extended": 8,
-	"expectedExtended": 12,
-	"duration": 45000000,
-	"expectedDuration": 67500000,
+	"normal": 2.25,
+	"extended": 0.75,
+	"expectedExtended": 1.125,
+	"duration": 72000000,
+	"expectedDuration": 108000000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "fef0fafb-c21d-4af7-81cd-d77a303d359b",
-	"id": "ebca8f67626b4892af0c9ce2291b690b",
-	"time": "2016-05-04T08:18:04.530Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "6212ef20-e19a-4409-9b01-56f713123060",
+	"id": "1cd539f4199540219262b386e370f779",
+	"time": "2016-06-10T02:58:44.221Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -356,16 +360,16 @@ See [common fields](../../common.md).
 	"type": "bolus",
 	"subType": "dual/square",
 	"normal": 7.5,
-	"extended": 4.75,
-	"expectedExtended": 7.125,
-	"duration": 34200000,
-	"expectedDuration": 51300000,
+	"extended": 9.75,
+	"expectedExtended": 14.625,
+	"duration": 73800000,
+	"expectedDuration": 110700000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "67e197ad-8e36-4f08-bd89-3d889f7c6e36",
-	"time": "2016-05-04T08:18:04.531Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "f6ca5ca5-6cca-4cd0-81a5-f82b0b2908eb",
+	"time": "2016-06-10T02:58:44.222Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -377,23 +381,23 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 4.75,
-	"extended": 4.5,
-	"expectedExtended": 6.75,
-	"duration": 61200000,
-	"expectedDuration": 91800000,
+	"normal": 3.25,
+	"extended": 1.75,
+	"expectedExtended": 2.625,
+	"duration": 57600000,
+	"expectedDuration": 86400000,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:09.531Z",
+	"createdTime": "2016-06-10T02:58:49.222Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "c5bcf1f2-e7b1-48f1-b119-d67f7f9663af",
-	"id": "fffe9fa93ed440ecb19d31869bfb4a64",
-	"time": "2016-05-04T08:18:04.531Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "ad744264-52b2-4901-b166-9315d09e95ef",
+	"id": "b426390126c345d896be2d2791682662",
+	"time": "2016-06-10T02:58:44.222Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
