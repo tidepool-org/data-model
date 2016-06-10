@@ -60,7 +60,7 @@ We plan to migrate all Tidepool data to use `combo` as the value of this sub-typ
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start normal -->
@@ -106,7 +106,7 @@ Note that if a `dual/square` bolus is interrupted or canceled during the `normal
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start extended -->
@@ -334,18 +334,18 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 8.5,
-	"extended": 5,
-	"expectedExtended": 7.5,
-	"duration": 30600000,
-	"expectedDuration": 45900000,
+	"normal": 2.25,
+	"extended": 0.75,
+	"expectedExtended": 1.125,
+	"duration": 72000000,
+	"expectedDuration": 108000000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T12:38:01",
-	"guid": "2df2e4a7-3e19-4c34-9820-e83e8c1125af",
-	"id": "6d6a9695e6d54c949bfb8935d11ff74f",
-	"time": "2016-06-09T19:38:01.591Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "6212ef20-e19a-4409-9b01-56f713123060",
+	"id": "1cd539f4199540219262b386e370f779",
+	"time": "2016-06-10T02:58:44.221Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -357,17 +357,17 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 2.25,
-	"extended": 8,
-	"expectedExtended": 12,
-	"duration": 37800000,
-	"expectedDuration": 56700000,
+	"normal": 7.5,
+	"extended": 9.75,
+	"expectedExtended": 14.625,
+	"duration": 73800000,
+	"expectedDuration": 110700000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T12:38:01",
-	"guid": "452fd2fc-901e-49ac-9c29-507ef5e2e9f4",
-	"time": "2016-06-09T19:38:01.591Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "f6ca5ca5-6cca-4cd0-81a5-f82b0b2908eb",
+	"time": "2016-06-10T02:58:44.222Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -379,23 +379,23 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 2.5,
-	"extended": 9.5,
-	"expectedExtended": 14.25,
-	"duration": 72000000,
-	"expectedDuration": 108000000,
+	"normal": 3.25,
+	"extended": 1.75,
+	"expectedExtended": 2.625,
+	"duration": 57600000,
+	"expectedDuration": 86400000,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-09T19:38:06.592Z",
+	"createdTime": "2016-06-10T02:58:49.222Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T12:38:01",
-	"guid": "523cfc1c-6b8c-4062-a644-7a7dcb17d53b",
-	"id": "08cb5111e53d46cfa75a6d9aa6e9978e",
-	"time": "2016-06-09T19:38:01.592Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "ad744264-52b2-4901-b166-9315d09e95ef",
+	"id": "b426390126c345d896be2d2791682662",
+	"time": "2016-06-10T02:58:44.222Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

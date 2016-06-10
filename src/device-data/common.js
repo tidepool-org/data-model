@@ -363,7 +363,7 @@ module.bolusInsulinSummary = {
   },
   numericalType: module.numericalTypes.FLOATING_POINT_DEVICE_SIG_FIGS,
   range: {
-    min: '> 0.0',
+    min: '>= 0.0',
     max: '100.0'
   }
 };

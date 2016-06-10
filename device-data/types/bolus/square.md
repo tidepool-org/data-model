@@ -58,7 +58,7 @@ We plan to migrate all Tidepool data to use `extended` as the value of this sub-
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start extended -->
@@ -293,17 +293,17 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "square",
-	"extended": 3.5,
-	"expectedExtended": 5.25,
-	"duration": 3600000,
-	"expectedDuration": 5400000,
+	"extended": 5.5,
+	"expectedExtended": 8.25,
+	"duration": 59400000,
+	"expectedDuration": 89100000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T12:36:25",
-	"guid": "9955131d-4e4d-442c-b02a-7c7aabf2e620",
-	"id": "dd0b07bee0424ff9ac933cb43a534bc5",
-	"time": "2016-06-09T19:36:25.093Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "e0bf13b3-f1ae-4bea-a1e8-276926d6c0f2",
+	"id": "0df4a2701b184676b2d19ded8957eaf8",
+	"time": "2016-06-10T02:58:44.015Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -315,16 +315,16 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "square",
-	"extended": 4,
-	"expectedExtended": 6,
-	"duration": 75600000,
-	"expectedDuration": 113400000,
+	"extended": 6,
+	"expectedExtended": 9,
+	"duration": 0,
+	"expectedDuration": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T12:36:25",
-	"guid": "c284e67d-36f7-4176-8e43-1442a0bbd25d",
-	"time": "2016-06-09T19:36:25.094Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "8c624416-3649-48d6-80ca-d779afd67938",
+	"time": "2016-06-10T02:58:44.016Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -336,22 +336,22 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "square",
-	"extended": 8.75,
-	"expectedExtended": 13.125,
-	"duration": 32400000,
-	"expectedDuration": 48600000,
+	"extended": 4.5,
+	"expectedExtended": 6.75,
+	"duration": 28800000,
+	"expectedDuration": 43200000,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-09T19:36:30.094Z",
+	"createdTime": "2016-06-10T02:58:49.017Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T12:36:25",
-	"guid": "cce2e0d6-f40c-4280-a407-bff3a90ffa8a",
-	"id": "3ba0317b3eb54a0f80644e70aef1059e",
-	"time": "2016-06-09T19:36:25.094Z",
+	"deviceTime": "2016-06-09T19:58:44",
+	"guid": "3d08dc6e-0c57-4bfe-a6bb-5f8eeb221ada",
+	"id": "ffef9d307b754ebd91ac19cb8e65d59f",
+	"time": "2016-06-10T02:58:44.017Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

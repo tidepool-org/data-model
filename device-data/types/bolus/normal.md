@@ -52,7 +52,7 @@ This is the sub-type of `bolus` event that represents a bolus insulin dose deliv
 		platform: yes
 	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
 	Range:
-		min: > 0.0
+		min: >= 0.0
 		max: 100.0
 
 <!-- start normal -->
@@ -238,15 +238,15 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 2.75,
-	"expectedNormal": 3.3,
+	"normal": 3.5,
+	"expectedNormal": 4.2,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "ef51a1d2-cb4a-485c-9e63-3410c89b7cb2",
-	"id": "d0f85d7a9bc0417e81f6afdbc6b17bc5",
-	"time": "2016-05-04T08:18:04.184Z",
+	"deviceTime": "2016-06-09T19:58:43",
+	"guid": "b0508432-b54e-432f-9562-560dd18fba7c",
+	"id": "ed9d2b7c683942d4b48af93fcb66d127",
+	"time": "2016-06-10T02:58:43.798Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -258,14 +258,14 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 3.25,
-	"expectedNormal": 3.9,
+	"normal": 9.75,
+	"expectedNormal": 11.7,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "5d19f724-2e75-4a69-8311-3276c6758c4b",
-	"time": "2016-05-04T08:18:04.184Z",
+	"deviceTime": "2016-06-09T19:58:43",
+	"guid": "6b1a502e-3d65-4a95-9c8b-0f660099812f",
+	"time": "2016-06-10T02:58:43.799Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -277,20 +277,20 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 7.5,
-	"expectedNormal": 9,
+	"normal": 3.75,
+	"expectedNormal": 4.5,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:09.184Z",
+	"createdTime": "2016-06-10T02:58:48.799Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "64e3ccd6-b167-407a-b29f-6c8560a64713",
-	"id": "45e3619f03e04d58b2c0515a822b7146",
-	"time": "2016-05-04T08:18:04.184Z",
+	"deviceTime": "2016-06-09T19:58:43",
+	"guid": "ee92e0e3-ccdf-4f13-99cb-3aaa655d45e1",
+	"id": "ca6829ac311b46058a64ef39fe7c8788",
+	"time": "2016-06-10T02:58:43.799Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
