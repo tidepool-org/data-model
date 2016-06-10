@@ -134,14 +134,14 @@ To the best of our knowledge, no insulin pump allows the programming of a `squar
 		platform: no (optional)
 	Numerical type: Integer value representing milliseconds.
 	Range:
-		min: > `duration`
+		min: >= `duration`
 		max: 86400000
 
 <!-- start expectedDuration -->
 
 When a `square` bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the `expectedDuration` field is used to store the original duration of time that the user programmed for delivery of the dose of insulin encoded in `extended`. The `duration` field, in contrast, encodes the actual elapsed duration of dose delivery.
 
-The minimum value of `expectedDuration` is any value greater than that encoded under `duration` since any other value (i.e., less than or equal to `duration`) cannot obtain from interruption or cancellation of a bolus. See above under [`duration`](#duration) for discussion of the maximum value for this field.
+The minimum value of `expectedDuration` is any value greater than or equal to that encoded under `duration` since any other value (i.e., less than `duration`) cannot obtain from interruption or cancellation of a bolus. Note that the `expectedDuration` can only be *equal* to the `duration` in the very rare and special case that the `duration` is 0. See above under [`duration`](#duration) for discussion of the minimum and maximum values for this field.
 
 <!-- end expectedDuration -->
 
@@ -293,17 +293,17 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "square",
-	"extended": 3.25,
-	"expectedExtended": 4.875,
-	"duration": 72000000,
-	"expectedDuration": 108000000,
+	"extended": 3.5,
+	"expectedExtended": 5.25,
+	"duration": 3600000,
+	"expectedDuration": 5400000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "1f7ff54d-72c6-4de1-ad50-dc942a03282c",
-	"id": "dbc18cf065a3432eb0eb9089bc5d107d",
-	"time": "2016-05-04T08:18:04.356Z",
+	"deviceTime": "2016-06-09T12:36:25",
+	"guid": "9955131d-4e4d-442c-b02a-7c7aabf2e620",
+	"id": "dd0b07bee0424ff9ac933cb43a534bc5",
+	"time": "2016-06-09T19:36:25.093Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -315,16 +315,16 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "square",
-	"extended": 6,
-	"expectedExtended": 9,
-	"duration": 52200000,
-	"expectedDuration": 78300000,
+	"extended": 4,
+	"expectedExtended": 6,
+	"duration": 75600000,
+	"expectedDuration": 113400000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "f41e5328-d4da-4119-989c-1360b2752f9f",
-	"time": "2016-05-04T08:18:04.357Z",
+	"deviceTime": "2016-06-09T12:36:25",
+	"guid": "c284e67d-36f7-4176-8e43-1442a0bbd25d",
+	"time": "2016-06-09T19:36:25.094Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -336,8 +336,8 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "square",
-	"extended": 4.5,
-	"expectedExtended": 6.75,
+	"extended": 8.75,
+	"expectedExtended": 13.125,
 	"duration": 32400000,
 	"expectedDuration": 48600000,
 	"_active": true,
@@ -346,12 +346,12 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:09.357Z",
+	"createdTime": "2016-06-09T19:36:30.094Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "c6947e9b-c17d-4f1c-a864-428e53a8841b",
-	"id": "cc69b261d52d46d3a3386dfcd6440e43",
-	"time": "2016-05-04T08:18:04.357Z",
+	"deviceTime": "2016-06-09T12:36:25",
+	"guid": "cce2e0d6-f40c-4280-a407-bff3a90ffa8a",
+	"id": "3ba0317b3eb54a0f80644e70aef1059e",
+	"time": "2016-06-09T19:36:25.094Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

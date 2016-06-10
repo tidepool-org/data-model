@@ -177,7 +177,7 @@ As with `square` boluses, the `duration` is the elapsed time for the `extended` 
 		platform: no (optional)
 	Numerical type: Integer value representing milliseconds.
 	Range:
-		min: > `duration`
+		min: >= `duration`
 		max: 86400000
 
 <!-- start expectedDuration -->
@@ -334,18 +334,18 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 4.25,
-	"extended": 8,
-	"expectedExtended": 12,
-	"duration": 45000000,
-	"expectedDuration": 67500000,
+	"normal": 8.5,
+	"extended": 5,
+	"expectedExtended": 7.5,
+	"duration": 30600000,
+	"expectedDuration": 45900000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "fef0fafb-c21d-4af7-81cd-d77a303d359b",
-	"id": "ebca8f67626b4892af0c9ce2291b690b",
-	"time": "2016-05-04T08:18:04.530Z",
+	"deviceTime": "2016-06-09T12:38:01",
+	"guid": "2df2e4a7-3e19-4c34-9820-e83e8c1125af",
+	"id": "6d6a9695e6d54c949bfb8935d11ff74f",
+	"time": "2016-06-09T19:38:01.591Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -357,17 +357,17 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 7.5,
-	"extended": 4.75,
-	"expectedExtended": 7.125,
-	"duration": 34200000,
-	"expectedDuration": 51300000,
+	"normal": 2.25,
+	"extended": 8,
+	"expectedExtended": 12,
+	"duration": 37800000,
+	"expectedDuration": 56700000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "67e197ad-8e36-4f08-bd89-3d889f7c6e36",
-	"time": "2016-05-04T08:18:04.531Z",
+	"deviceTime": "2016-06-09T12:38:01",
+	"guid": "452fd2fc-901e-49ac-9c29-507ef5e2e9f4",
+	"time": "2016-06-09T19:38:01.591Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -379,23 +379,23 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 4.75,
-	"extended": 4.5,
-	"expectedExtended": 6.75,
-	"duration": 61200000,
-	"expectedDuration": 91800000,
+	"normal": 2.5,
+	"extended": 9.5,
+	"expectedExtended": 14.25,
+	"duration": 72000000,
+	"expectedDuration": 108000000,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:09.531Z",
+	"createdTime": "2016-06-09T19:38:06.592Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "c5bcf1f2-e7b1-48f1-b119-d67f7f9663af",
-	"id": "fffe9fa93ed440ecb19d31869bfb4a64",
-	"time": "2016-05-04T08:18:04.531Z",
+	"deviceTime": "2016-06-09T12:38:01",
+	"guid": "523cfc1c-6b8c-4062-a644-7a7dcb17d53b",
+	"id": "08cb5111e53d46cfa75a6d9aa6e9978e",
+	"time": "2016-06-09T19:38:01.592Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
