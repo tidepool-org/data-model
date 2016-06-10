@@ -221,7 +221,7 @@ var schemas = {
         return STATUSES[0];
       },
       summary: {
-        description: '[ingestion, storage, client] String value encoding insulin pump status as `suspended` or `resumed`.',
+        description: '[ingestion] String value encoding insulin pump status as `suspended` or `resumed`.\n\n[storage, client] The string `suspended`.',
         required: {
           jellyfish: true,
           platform: true

@@ -44,7 +44,9 @@
 
 ### status
 
-[ingestion, storage, client] String value encoding insulin pump status as `suspended` or `resumed`.
+[ingestion] String value encoding insulin pump status as `suspended` or `resumed`.
+
+[storage, client] The string `suspended`.
 
 	QUICK SUMMARY
 	Required:
