@@ -20,7 +20,7 @@
 		platform: yes
 
 <!-- start type -->
-<!-- TODO -->
+
 <!-- end type -->
 
 * * * * *
@@ -35,7 +35,9 @@
 		platform: yes
 
 <!-- start subType -->
-<!-- TODO -->
+
+The `calibration` sub-type of `deviceEvent` represents a user's manual entry of an [`smbg`](../smbg.md) value to calibrate a continuous glucose monitoring (CGM) device.
+
 <!-- end subType -->
 
 * * * * *
@@ -57,7 +59,7 @@ See [units](../../units.md) for further explanation of blood glucose units.
 		`mmol/L`
 
 <!-- start units -->
-<!-- TODO -->
+
 <!-- end units -->
 
 * * * * *
@@ -86,7 +88,7 @@ See [units](../../units.md) for further explanation of blood glucose units.
 
 
 <!-- start value -->
-<!-- TODO -->
+
 <!-- end value -->
 
 * * * * *
