@@ -53,7 +53,7 @@
         data-chapter-title="temp"
         data-filepath="device-data/types/basal/temp.md"
         data-basepath="../../.."
-        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
+        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -577,6 +577,57 @@
             
         </li>
     
+        <li class="chapter " data-level="2" data-path="bin/index.html">
+            
+                
+                    <a href="../../../bin/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        tools
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="bin/docTemplateGenerator.html">
+            
+                
+                    <a href="../../../bin/docTemplateGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        doc template generator
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="bin/sampleDatumGenerator.html">
+            
+                
+                    <a href="../../../bin/sampleDatumGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        sample datum generator
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
 
             
@@ -627,9 +678,6 @@ Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start type -->
-<p>This is the sub-type of <code>basal</code> event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates <em>both</em> by percentage and by manual specification at the user&apos;s choice; other insulin pumps only expose one of these interfaces.</p>
-<p><strong>Field co-occurrence requirements</strong>: Note that when ingesting through the legacy jellyfish ingestion API, at least one of <code>percent</code> or <code>rate</code> must be provided on a <code>temp</code> basal. While each of these fields is marked as <em>optional</em>, one or the other <strong>must</strong> be present.</p>
-<p>In contrast, under the new platform APIs, <code>rate</code> is always <em>required</em>.</p>
 <!-- end type -->
 <hr>
 <h3 id="deliverytype">deliveryType</h3>
@@ -639,6 +687,9 @@ Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start deliveryType -->
+<p>This is the sub-type of <code>basal</code> event that represents temporary intervals of basal insulin delivery requested by the user. Insulin pumps allow the request of a temporary basal insulin rate for a period of time up to twenty-four hours as a percentage of the current active rate or as a rate specified by the user. Some insulin pumps allow the user to set temporary basal rates <em>both</em> by percentage and by manual specification at the user&apos;s choice; other insulin pumps only expose one of these interfaces.</p>
+<p><strong>Field co-occurrence requirements</strong>: Note that when ingesting through the legacy jellyfish ingestion API, at least one of <code>percent</code> or <code>rate</code> must be provided on a <code>temp</code> basal. While each of these fields is marked as <em>optional</em>, one or the other <strong>must</strong> be present.</p>
+<p>In contrast, under the new platform APIs, <code>rate</code> is always <em>required</em>.</p>
 <!-- end deliveryType -->
 <hr>
 <h3 id="duration">duration</h3>

@@ -53,7 +53,7 @@
         data-chapter-title="square"
         data-filepath="device-data/types/bolus/square.md"
         data-basepath="../../.."
-        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
+        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -577,6 +577,57 @@
             
         </li>
     
+        <li class="chapter " data-level="2" data-path="bin/index.html">
+            
+                
+                    <a href="../../../bin/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        tools
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="bin/docTemplateGenerator.html">
+            
+                
+                    <a href="../../../bin/docTemplateGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        doc template generator
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="bin/sampleDatumGenerator.html">
+            
+                
+                    <a href="../../../bin/sampleDatumGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        sample datum generator
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
 
             
@@ -627,7 +678,6 @@ Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start type -->
-<p>This is the sub-type of <code>bolus</code> event that represents a bolus insulin dose programmed to be delivered spread evenly over a <code>duration</code> of time (typically fifteen minutes to several hours).</p>
 <!-- end type -->
 <hr>
 <h3 id="subtype">subType</h3>
@@ -639,6 +689,7 @@ Required:
 </code></pre><h4 id="changelog-for-subtype">Changelog for <code>subType</code></h4>
 <p><code>_schemaVersion</code> ? (future): We plan to migrate from <code>square</code> to <code>extended</code> in the future.</p>
 <!-- start subType -->
+<p>This is the sub-type of <code>bolus</code> event that represents a bolus insulin dose programmed to be delivered spread evenly over a <code>duration</code> of time (typically fifteen minutes to several hours).</p>
 <p>We plan to migrate all Tidepool data to use <code>extended</code> as the value of this sub-type rather than <code>square</code> in order to improve the consistency of the data model. With <code>subType</code> containing <code>extended</code> and the <code>extended</code> field containing the value of the delivered insulin dose, this sub-type of <code>bolus</code> event will be parallel to <code>normal</code> boluses, where the <code>subType</code> is <code>normal</code> and the <code>normal</code> field contains the value of the delivered insulin dose.</p>
 <!-- end subType -->
 <hr>

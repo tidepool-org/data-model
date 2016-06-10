@@ -53,7 +53,7 @@
         data-chapter-title="dual/square"
         data-filepath="device-data/types/bolus/dual-square.md"
         data-basepath="../../.."
-        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
+        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -577,6 +577,57 @@
             
         </li>
     
+        <li class="chapter " data-level="2" data-path="bin/index.html">
+            
+                
+                    <a href="../../../bin/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        tools
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="bin/docTemplateGenerator.html">
+            
+                
+                    <a href="../../../bin/docTemplateGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        doc template generator
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="bin/sampleDatumGenerator.html">
+            
+                
+                    <a href="../../../bin/sampleDatumGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        sample datum generator
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
 
             
@@ -627,8 +678,6 @@ Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start type -->
-<p>This is the sub-type of <code>bolus</code> event that represents a bolus insulin dose programmed to deliver part of the dose using the immediate delivery strategy (a <code>normal</code> bolus) and the remainder using the delivery spread evenly over a <code>duration</code> strategy (a <code>square</code> bolus). The data model is essentially just a combination of the models for <a href="normal.html"><code>normal</code></a> and <a href="square.html"><code>square</code></a> boluses.</p>
-<p>Most (and perhaps all) insulin pumps ask the user to divide the <code>normal</code> and <code>square</code> portions of a <code>dual/square</code> bolus by <em>percentage</em> of the total insulin dose. We do <strong>not</strong> encode this programmed percentage directly, but it is recoverable (for surfacing in a client application&apos;s UI) through computation using the appropriate combination of values from the <code>normal</code>, <code>extended</code>, <code>expectedNormal</code>, and <code>expectedExtended</code> fields and/or the appropriate sum of these.</p>
 <!-- end type -->
 <hr>
 <h3 id="subtype">subType</h3>
@@ -640,6 +689,8 @@ Required:
 </code></pre><h4 id="changelog-for-subtype">Changelog for <code>subType</code></h4>
 <p><code>_schemaVersion</code> ? (future): We plan to migrate from <code>dual/square</code> to <code>combo</code> in the future.</p>
 <!-- start subType -->
+<p>This is the sub-type of <code>bolus</code> event that represents a bolus insulin dose programmed to deliver part of the dose using the immediate delivery strategy (a <code>normal</code> bolus) and the remainder using the delivery spread evenly over a <code>duration</code> strategy (a <code>square</code> bolus). The data model is essentially just a combination of the models for <a href="normal.html"><code>normal</code></a> and <a href="square.html"><code>square</code></a> boluses.</p>
+<p>Most (and perhaps all) insulin pumps ask the user to divide the <code>normal</code> and <code>square</code> portions of a <code>dual/square</code> bolus by <em>percentage</em> of the total insulin dose. We do <strong>not</strong> encode this programmed percentage directly, but it is recoverable (for surfacing in a client application&apos;s UI) through computation using the appropriate combination of values from the <code>normal</code>, <code>extended</code>, <code>expectedNormal</code>, and <code>expectedExtended</code> fields and/or the appropriate sum of these.</p>
 <p>We plan to migrate all Tidepool data to use <code>combo</code> as the value of this sub-type rather than <code>dual/square</code> in order to improve the transparency of the data model and avoid <code>/</code> in a <code>subType</code> string.</p>
 <!-- end subType -->
 <hr>

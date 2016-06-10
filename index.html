@@ -51,7 +51,7 @@
         data-chapter-title="Introduction"
         data-filepath="README.md"
         data-basepath="."
-        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
+        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -575,6 +575,57 @@
             
         </li>
     
+        <li class="chapter " data-level="2" data-path="bin/index.html">
+            
+                
+                    <a href="./bin/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        tools
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="bin/docTemplateGenerator.html">
+            
+                
+                    <a href="./bin/docTemplateGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        doc template generator
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="bin/sampleDatumGenerator.html">
+            
+                
+                    <a href="./bin/sampleDatumGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        sample datum generator
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
 
             
@@ -611,18 +662,51 @@
                         <h1 id="datamodel">data-model</h1>
 <p><strong>This documentation is actively under construction and not yet endorsed by the Tidepool team!</strong></p>
 <p>Documentation for Tidepool&apos;s data models.</p>
-<blockquote>
-<p>(This and all Markdown documents in <a href="https://github.com/tidepool-org/data-model" title="Tidepool on GitHub: data-model" target="_blank">this repository</a> are used to generate <a href="http://developer.tidepool.io/data-model/" title="Tidepool data model documentation" target="_blank">the Tidepool data model documentation website</a> via <a href="https://github.com/GitbookIO/gitbook" title="GitHub: GitBook" target="_blank">GitBook</a>.</p>
-<p>If you want to serve yourself the documentation locally, after cloning this repository, you can:</p>
-<ol>
-<li>install the GitBook CLI with the command <code>npm install -g gitbook-cli</code></li>
-<li>then run <code>gitbook serve</code> to serve the docs at <a href="http://localhost:4000" target="_blank">http://localhost:4000</a>.)</li>
-</ol>
-</blockquote>
 <p>Jump to...</p>
 <ul>
 <li><a href="device-data/index.html" title="Diabetes device data">diabetes device data</a></li>
 </ul>
+<h2 id="metadocumentation-documentation-for-this-documentation-toolset">meta-documentation (documentation for this documentation toolset)</h2>
+<blockquote>
+<p>(This and all Markdown documents in <a href="https://github.com/tidepool-org/data-model" title="Tidepool on GitHub: data-model" target="_blank">this repository</a> are used to generate <a href="http://developer.tidepool.io/data-model/" title="Tidepool data model documentation" target="_blank">the Tidepool data model documentation website</a> via <a href="https://github.com/GitbookIO/gitbook" title="GitHub: GitBook" target="_blank">GitBook</a>.</p>
+</blockquote>
+<p>The developer microsite has <a href="http://developer.tidepool.io/docs/" title="Tidepool Developer Portal: Docs" target="_blank">more information on Tidepool&apos;s use of GitBook for documentation and recommended workflows</a>.</p>
+<p>After downloading or cloning this repository, if you want to serve yourself the documentation locally, first install the required dependencies with <code>npm install</code> (assuming you have <a href="https://nodejs.org/en/" title="Node.js" target="_blank">Node.js</a>) and <a href="https://www.npmjs.com/" title="npm homepage" target="_blank">the node package manager (<code>npm</code>)</a> installed already). After installing the required dependencies, you may use either <code>npm start</code> or <code>npm run serve-docs</code> to serve the docs at <a href="http://localhost:4000" target="_blank">http://localhost:4000</a>.</p>
+<h3 id="editing-documents">editing documents</h3>
+<p>Only certain sections of most of the Markdown files in this repository should be edited <em>directly</em>. Most of the content for the data model documentation here is generated through the JavaScript code found in the <code>src/</code> directory.</p>
+<p>Specifically, each .md document or directory of .md documents under <code>device-data/</code> is generated automatically unless marked with <code>&lt;!-- non-generated document! all areas editable --&gt;</code> at the top.</p>
+<p>In the automatically-generated docs, the following three areas should <strong>not</strong> be edited, as any changes will be steamrolled the next time that the doc is regenerated using the <a href="bin/docTemplateGenerator.html">document template generator</a>.</p>
+<p>1) The title, note about required fields, and links to jump to example JSON. For example:</p>
+<pre><code>## Coffee (coffee)
+
+**NB:** All fields are *required* unless otherwise noted.
+
+
+&gt; Jump to example JSON:
+
+&gt;  - [client example](#example-client)
+&gt;  - [ingestion example](#example-ingestion)
+&gt;  - [storage example](#example-storage)
+</code></pre><p>2) The sub-header for each field through to the starting comment for &quot;color commentary,&quot; including the &quot;quick summary&quot;. For example:</p>
+<pre><code>### type
+
+[ingestion, storage, client] The string `coffee`.
+
+  QUICK SUMMARY
+  Required:
+    jellyfish: yes
+    platform: yes
+
+&lt;!-- start type --&gt;
+</code></pre><p>3) The JSON examples at the bottom of the document, starting with the first header for these&#x2014;<code>### example (client)</code>.</p>
+<p><em>The <strong>only</strong> area that can (and should!) be edited by hand is the &quot;color commentary&quot; space between the <code>&lt;!-- start $FIELD --&gt;</code> and <code>&lt;!-- end $FIELD --&gt;</code> comments within the section for each field. On initial generation of the documentation template, this space will contain a <code>&lt;!-- TODO --&gt;</code> comment that <strong>must</strong> be deleted in order for other changes in this space to be preserved. (The lack of the <code>&lt;!-- TODO --&gt;</code> comment is what signals the script to look for and preserve the content between the <code>&lt;!-- start $FIELD --&gt;</code> and <code>&lt;!-- end $FIELD --&gt;</code> comments.)</em></p>
+<p>For data types with sub-types, the README in the directory for the type is also an automatically generated document. Only the space between the header and the <code>&lt;!-- end intro --&gt;</code> comment should be edited by hand. See <a href="https://raw.githubusercontent.com/tidepool-org/data-model/master/device-data/types/bolus/README.md" target="_blank">the introduction to the <code>bolus</code> type</a> for an example.</p>
+<h3 id="regenerating-documents">(re)generating documents</h3>
+<p>There is a bash script in this repository to generate new and regenerate old or regenerate (after updates to the source) all of the data model documents.</p>
+<p>The script is intended to be run from the root of this repository, and it requires no arguments, simply:</p>
+<pre><code class="lang-bash">$ ./regenerate-all-docs.sh
+</code></pre>
+<p>When you regenerate docs that have been generated before, there will <em>always</em> be changes in the resulting Markdown document because the JSON examples in various formats for each data type are regenerated on every run. This is <em>intentional</em>: the doc generation script cannot tell if anything has changed in the source code that generates the examples, and we want to ensure that the examples get updated if something has! (If a field or value has been renamed, to give a simple example.) It is recommended to use a workflow like <code>git add -p</code> (to review &quot;chunks&quot; of the <code>git diff</code> and stage them for commitment interactively) after regenerating all of the docs in order to discard unneeded updates (like updates to the JSON examples if you&apos;re <em>absolutely</em> certain they are unnecessary) while keeping those that are needed. After committing, use <code>git checkout -- path/to/docs/</code> to clear the changes you felt were superfluous.</p>
 
                     
                     </section>

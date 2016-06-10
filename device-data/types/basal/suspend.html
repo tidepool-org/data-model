@@ -53,7 +53,7 @@
         data-chapter-title="suspend"
         data-filepath="device-data/types/basal/suspend.md"
         data-basepath="../../.."
-        data-revision="Wed May 04 2016 01:43:44 GMT-0700 (PDT)"
+        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -577,6 +577,57 @@
             
         </li>
     
+        <li class="chapter " data-level="2" data-path="bin/index.html">
+            
+                
+                    <a href="../../../bin/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        tools
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="bin/docTemplateGenerator.html">
+            
+                
+                    <a href="../../../bin/docTemplateGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        doc template generator
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="bin/sampleDatumGenerator.html">
+            
+                
+                    <a href="../../../bin/sampleDatumGenerator.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        sample datum generator
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
 
             
@@ -627,8 +678,6 @@ Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start type -->
-<p>This is the sub-type of <code>basal</code> event that represents the total suspension of insulin delivery on an insulin pump within the stream of <code>basal</code> events, which should in the vast majority of cases be contiguous&#x2014;that is, without gaps or overlaps. The user&apos;s inputs to suspend (and, later, resume) insulin delivery are part of Tidepool&apos;s <code>deviceEvent</code> data type, as the sub-type <a href="../deviceEvent/status.html"><code>status</code></a>. Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is <em>also</em> represented as a <code>suspend</code> basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.</p>
-<p>Note, however, that no <code>rate</code> field appears on <code>suspend</code> basal events. The <code>rate</code> is always zero, and so this redundant information is not specified.</p>
 <!-- end type -->
 <hr>
 <h3 id="deliverytype">deliveryType</h3>
@@ -638,6 +687,8 @@ Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start deliveryType -->
+<p>This is the sub-type of <code>basal</code> event that represents the total suspension of insulin delivery on an insulin pump within the stream of <code>basal</code> events, which should in the vast majority of cases be contiguous&#x2014;that is, without gaps or overlaps. The user&apos;s inputs to suspend (and, later, resume) insulin delivery are part of Tidepool&apos;s <code>deviceEvent</code> data type, as the sub-type <a href="../deviceEvent/status.html"><code>status</code></a>. Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is <em>also</em> represented as a <code>suspend</code> basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.</p>
+<p>Note, however, that no <code>rate</code> field appears on <code>suspend</code> basal events. The <code>rate</code> is always zero, and so this redundant information is not specified.</p>
 <!-- end deliveryType -->
 <hr>
 <h3 id="duration">duration</h3>
