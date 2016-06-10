@@ -159,6 +159,8 @@ Note that if a `dual/square` bolus is interrupted or canceled during the `extend
 
 See the explanation of this field in the documentation for [`square`](square.md) boluses.
 
+As with `square` boluses, the `duration` is the elapsed time for the `extended` portion of the bolus. While some insulin pumps that deliver `normal` insulin doses at a slower rate (minutes rather than seconds) for user comfort do include the duration of the `normal` delivery in the data, we do not currently include this information in our bolus data model(s). As with the `square` boluses, it is in theory possible for a user to input 0 `duration` for the `extended` portion of a `combo` bolus, effectively programming a `normal` bolus in a total amount equal to the `normal` and `extended` insulin values added together.
+
 <!-- end duration -->
 
 * * * * *
