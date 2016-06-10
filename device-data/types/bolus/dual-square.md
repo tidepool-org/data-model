@@ -67,6 +67,8 @@ We plan to migrate all Tidepool data to use `combo` as the value of this sub-typ
 
 See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
 
+Note that a 0 for `normal` is allowable in more circumstances for a combo bolus than for a simple `normal` bolus: as long as the `extended` is non-zero for the combo bolus, `normal` may have a value of 0 *without* the requirement that a non-zero `expectedNormal` also be present.
+
 <!-- end normal -->
 
 * * * * *
@@ -90,7 +92,7 @@ See the explanation of this field in the documentation for [`normal`](normal.md)
 
 See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
 
-Note that if a `dual/square` bolus is interrupted or canceled during the `normal` portion of delivery, by definition the `extended` delivery should _not_ yet have begun, so the value of `extended` and `duration` should be 0 and `expectedExtended` and `expectedDuration` should have a values.
+Note that if a `dual/square` bolus is interrupted or canceled during the `normal` portion of delivery, by definition the `extended` delivery should _not_ yet have begun, so the value of `extended` and `duration` should be 0 and `expectedExtended` and `expectedDuration` should have values.
 
 <!-- end expectedNormal -->
 
