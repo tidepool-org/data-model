@@ -53,7 +53,7 @@
         data-chapter-title="reservoirChange"
         data-filepath="device-data/types/deviceEvent/reservoirChange.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -661,7 +661,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="device-event-subtype-reservoirchange">Device event subType: <code>reservoirChange</code></h2>
+                        <!-- auto-generated doc! most areas *not* editable -->
+<h2 id="device-event-subtype-reservoirchange">Device event subType: <code>reservoirChange</code></h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
 <blockquote>
 <p>Jump to example JSON:</p>
@@ -677,9 +678,8 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
-<!-- TODO -->
-<!-- end type -->
+</code></pre><!-- start editable commentary on type -->
+<!-- end editable commentary on type -->
 <hr>
 <h3 id="subtype">subType</h3>
 <p>[ingestion, storage, client] The string <code>reservoirChange</code>.</p>
@@ -687,9 +687,11 @@ Required:
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start subType -->
-<!-- TODO -->
-<!-- end subType -->
+</code></pre><!-- start editable commentary on subType -->
+<p>A <code>reservoirChange</code> event represents any event in an insulin delivery system that implies a return to a device state not yet ready to deliver insulin. This varies depending on the type of insulin delivery device. For conventional insulin pumps with syringe-like reservoirs, this will be a rewind event. For an Insulet OmniPod system, it is a pod deactivation event.</p>
+<p>This event often implies a suspension of insulin delivery; in the case that the device data includes an event that fits into this <code>reservoirChange</code> data model but <em>does not</em> include a separate indication of insulin delivery suspension, a <a href="status.html"><code>status</code></a> event should also be uploaded to the platform to record the suspension of insulin delivery and should be included (in its entirety) in the <code>status</code> field.</p>
+<p>The optional <code>payload</code> embedded object may be included in order to expose the specifics of the event type that is being interpreted more generally as a <code>reservoirChange</code>, along with any other device-specific information that may be desirable for auditing user and device behavior and performance.</p>
+<!-- end editable commentary on subType -->
 <hr>
 <h3 id="status">status</h3>
 <blockquote>
@@ -700,93 +702,93 @@ Required:
 Required:
     jellyfish: no (optional)
     platform: no (optional)
-</code></pre><!-- start status -->
+</code></pre><!-- start editable commentary on status -->
 <!-- TODO -->
-<!-- end status -->
+<!-- end editable commentary on status -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 <hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 <hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 <hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 <hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 <hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 <hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 <hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 <hr>
 <h3 id="active">_active</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 <hr>
 <h3 id="groupid">_groupId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 <hr>
 <h3 id="schemaversion">_schemaVersion</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 <hr>
 <h3 id="version">_version</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 <hr>
 <h3 id="createdtime">createdTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 <hr>
 <h3 id="id">id</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{

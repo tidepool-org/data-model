@@ -53,7 +53,7 @@
         data-chapter-title="square"
         data-filepath="device-data/types/bolus/square.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -661,7 +661,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="bolus-subtype-square">Bolus subType: <code>square</code></h2>
+                        <!-- auto-generated doc! most areas *not* editable -->
+<h2 id="bolus-subtype-square">Bolus subType: <code>square</code></h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
 <blockquote>
 <p>Jump to example JSON:</p>
@@ -677,8 +678,8 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
-<!-- end type -->
+</code></pre><!-- start editable commentary on type -->
+<!-- end editable commentary on type -->
 <hr>
 <h3 id="subtype">subType</h3>
 <p>[ingestion, storage, client] The string <code>square</code>.</p>
@@ -688,10 +689,10 @@ Required:
     platform: yes
 </code></pre><h4 id="changelog-for-subtype">Changelog for <code>subType</code></h4>
 <p><code>_schemaVersion</code> ? (future): We plan to migrate from <code>square</code> to <code>extended</code> in the future.</p>
-<!-- start subType -->
+<!-- start editable commentary on subType -->
 <p>This is the sub-type of <code>bolus</code> event that represents a bolus insulin dose programmed to be delivered spread evenly over a <code>duration</code> of time (typically fifteen minutes to several hours).</p>
 <p>We plan to migrate all Tidepool data to use <code>extended</code> as the value of this sub-type rather than <code>square</code> in order to improve the consistency of the data model. With <code>subType</code> containing <code>extended</code> and the <code>extended</code> field containing the value of the delivered insulin dose, this sub-type of <code>bolus</code> event will be parallel to <code>normal</code> boluses, where the <code>subType</code> is <code>normal</code> and the <code>normal</code> field contains the value of the delivered insulin dose.</p>
-<!-- end subType -->
+<!-- end editable commentary on subType -->
 <hr>
 <h3 id="extended">extended</h3>
 <p>[ingestion, storage, client] A floating point value representing units of insulin.</p>
@@ -701,12 +702,12 @@ Required:
     platform: yes
 Numerical type: Floating point value rounded to the appropriate significant figures for the device&apos;s precision.
 Range:
-    min: &gt; 0.0
+    min: &gt;= 0.0
     max: 100.0
-</code></pre><!-- start extended -->
+</code></pre><!-- start editable commentary on extended -->
 <p>The <code>extended</code> field encodes the numerical value of the dose of insulin delivered over the <code>duration</code> by an insulin pump. As with <code>normal</code> boluses, we do not allow the upload of boluses with a total delivered dose of 0 units.</p>
 <p>Refer to the documentation for <a href="normal.html"><code>normal</code></a> boluses for an explanation of the range of this field.</p>
-<!-- end extended -->
+<!-- end editable commentary on extended -->
 <hr>
 <h3 id="expectedextended">expectedExtended</h3>
 <blockquote>
@@ -721,10 +722,10 @@ Numerical type: Floating point value rounded to the appropriate significant figu
 Range:
     min: &gt; `extended`
     max: 100.0
-</code></pre><!-- start expectedExtended -->
+</code></pre><!-- start editable commentary on expectedExtended -->
 <p>When a <code>square</code> bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the <code>expectedExtended</code> field is used to store the original value of the dose of insulin that the user programmed, while <code>extended</code> represents the value of the dose that was actually delivered.</p>
 <p>Refer to the documentation for <a href="normal.html"><code>normal</code></a> boluses for an explanation of the range of this field.</p>
-<!-- end expectedExtended -->
+<!-- end editable commentary on expectedExtended -->
 <hr>
 <h3 id="duration">duration</h3>
 <p>[ingestion, storage, client] An integer value representing a duration of time in milliseconds.</p>
@@ -736,12 +737,12 @@ Numerical type: Integer value representing milliseconds.
 Range:
     min: 0
     max: 86400000
-</code></pre><!-- start duration -->
+</code></pre><!-- start editable commentary on duration -->
 <p>The <code>duration</code> field encodes the actual elapsed duration of time, in milliseconds, spent delivering the dose of insulin encoded in <code>extended</code>.</p>
 <!-- DRAFT: discuss with Gerrit -->
 <p>The user interface for some insulin pumps allows a user to program a <code>square</code> bolus with a 0 duration; this is logically equivalent to a <code>normal</code> bolus but in order to expose device data with the highest level of fidelity possible, we preserve the record as a sub-type <code>square</code> and allow the upload of the event with a value of 0 for <code>duration</code>.</p>
 <p>To the best of our knowledge, no insulin pump allows the programming of a <code>square</code> bolus with a duration longer than twenty-four hours, and so we have chosen this as the maximum value accepted by the new platform APIs.</p>
-<!-- end duration -->
+<!-- end editable commentary on duration -->
 <hr>
 <h3 id="expectedduration">expectedDuration</h3>
 <blockquote>
@@ -754,112 +755,112 @@ Required:
     platform: no (optional)
 Numerical type: Integer value representing milliseconds.
 Range:
-    min: &gt; `duration`
+    min: &gt;= `duration`
     max: 86400000
-</code></pre><!-- start expectedDuration -->
+</code></pre><!-- start editable commentary on expectedDuration -->
 <p>When a <code>square</code> bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the <code>expectedDuration</code> field is used to store the original duration of time that the user programmed for delivery of the dose of insulin encoded in <code>extended</code>. The <code>duration</code> field, in contrast, encodes the actual elapsed duration of dose delivery.</p>
-<p>The minimum value of <code>expectedDuration</code> is any value greater than that encoded under <code>duration</code> since any other value (i.e., less than or equal to <code>duration</code>) cannot obtain from interruption or cancellation of a bolus. See above under <a href="#duration"><code>duration</code></a> for discussion of the maximum value for this field.</p>
-<!-- end expectedDuration -->
+<p>The minimum value of <code>expectedDuration</code> is any value greater than or equal to that encoded under <code>duration</code> since any other value (i.e., less than <code>duration</code>) cannot obtain from interruption or cancellation of a bolus. Note that the <code>expectedDuration</code> can only be <em>equal</em> to the <code>duration</code> in the very rare and special case that the <code>duration</code> is 0. See above under <a href="#duration"><code>duration</code></a> for discussion of the minimum and maximum values for this field.</p>
+<!-- end editable commentary on expectedDuration -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 <hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 <hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 <hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 <hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 <hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 <hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 <hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 <hr>
 <h3 id="active">_active</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 <hr>
 <h3 id="groupid">_groupId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 <hr>
 <h3 id="schemaversion">_schemaVersion</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 <hr>
 <h3 id="version">_version</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 <hr>
 <h3 id="createdtime">createdTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 <hr>
 <h3 id="id">id</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bolus&quot;</span>,
     <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;square&quot;</span>,
-    <span class="hljs-string">&quot;extended&quot;</span>: <span class="hljs-number">3.25</span>,
-    <span class="hljs-string">&quot;expectedExtended&quot;</span>: <span class="hljs-number">4.875</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">72000000</span>,
-    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">108000000</span>,
+    <span class="hljs-string">&quot;extended&quot;</span>: <span class="hljs-number">5.5</span>,
+    <span class="hljs-string">&quot;expectedExtended&quot;</span>: <span class="hljs-number">8.25</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">59400000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">89100000</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:04&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;1f7ff54d-72c6-4de1-ad50-dc942a03282c&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;dbc18cf065a3432eb0eb9089bc5d107d&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:04.356Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-09T19:58:44&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;e0bf13b3-f1ae-4bea-a1e8-276926d6c0f2&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;0df4a2701b184676b2d19ded8957eaf8&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-10T02:58:44.015Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -870,14 +871,14 @@ Range:
     <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;square&quot;</span>,
     <span class="hljs-string">&quot;extended&quot;</span>: <span class="hljs-number">6</span>,
     <span class="hljs-string">&quot;expectedExtended&quot;</span>: <span class="hljs-number">9</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">52200000</span>,
-    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">78300000</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:04&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;f41e5328-d4da-4119-989c-1360b2752f9f&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:04.357Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-09T19:58:44&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;8c624416-3649-48d6-80ca-d779afd67938&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-10T02:58:44.016Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -888,20 +889,20 @@ Range:
     <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;square&quot;</span>,
     <span class="hljs-string">&quot;extended&quot;</span>: <span class="hljs-number">4.5</span>,
     <span class="hljs-string">&quot;expectedExtended&quot;</span>: <span class="hljs-number">6.75</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">32400000</span>,
-    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">48600000</span>,
+    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">28800000</span>,
+    <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">43200000</span>,
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
     <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:09.357Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-06-10T02:58:49.017Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:04&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;c6947e9b-c17d-4f1c-a864-428e53a8841b&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;cc69b261d52d46d3a3386dfcd6440e43&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:04.357Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-09T19:58:44&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;3d08dc6e-0c57-4bfe-a6bb-5f8eeb221ada&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;ffef9d307b754ebd91ac19cb8e65d59f&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-10T02:58:44.017Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }

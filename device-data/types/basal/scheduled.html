@@ -53,7 +53,7 @@
         data-chapter-title="scheduled"
         data-filepath="device-data/types/basal/scheduled.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -661,7 +661,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="basal-deliverytype-scheduled">Basal deliveryType: <code>scheduled</code></h2>
+                        <!-- auto-generated doc! most areas *not* editable -->
+<h2 id="basal-deliverytype-scheduled">Basal deliveryType: <code>scheduled</code></h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
 <blockquote>
 <p>Jump to example JSON:</p>
@@ -677,8 +678,8 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
-<!-- end type -->
+</code></pre><!-- start editable commentary on type -->
+<!-- end editable commentary on type -->
 <hr>
 <h3 id="deliverytype">deliveryType</h3>
 <p>[ingestion, storage, client] The string <code>scheduled</code>.</p>
@@ -686,9 +687,9 @@ Required:
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start deliveryType -->
+</code></pre><!-- start editable commentary on deliveryType -->
 <p>This is the sub-type of <code>basal</code> event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).</p>
-<!-- end deliveryType -->
+<!-- end editable commentary on deliveryType -->
 <hr>
 <h3 id="duration">duration</h3>
 <blockquote>
@@ -703,12 +704,12 @@ Numerical type: Integer value representing milliseconds.
 Range:
     min: 0
     max: 432000000
-</code></pre><!-- start duration -->
+</code></pre><!-- start editable commentary on duration -->
 <p>When ingesting through the legacy jellyfish ingestion service, <code>duration</code> is optional because jellyfish also uses the <em>sequence</em> of basal events to determine their durations - see <a href="previous.html"><code>previous</code></a> for details.</p>
 <p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the <code>duration</code> field will be required on all <code>basal</code>s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of <code>basal</code>s based on the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).</p>
 <p>Note that for some insulin pumps, even for a scheduled basal <em>not</em> interrupted by another event like a <code>suspend</code> or <code>temp</code>, the <code>duration</code> may not be the nice round numbers of milliseconds that might be expected given the schedule in the <code>pumpSettings</code>&#x2014;e.g., 3600000 for a <code>basal</code> event lasting an hour. This is because of how some pumps schedule the small pulses of insulin delivery fulfilling the scheduled <code>rate</code>; depending on how the pulses are scheduled, the actual duration of the <code>basal</code> may be a bit over or under the scheduled <code>duration</code>.</p>
 <p>The new platform APIs expect this value to be &gt;= 0 and &lt;= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.</p>
-<!-- end duration -->
+<!-- end editable commentary on duration -->
 <hr>
 <h3 id="expectedduration">expectedDuration</h3>
 <blockquote>
@@ -723,10 +724,10 @@ Numerical type: Integer value representing milliseconds.
 Range:
     min: &gt; `duration`
     max: 432000000
-</code></pre><!-- start expectedDuration -->
+</code></pre><!-- start editable commentary on expectedDuration -->
 <p>On a scheduled basal ingested through the legacy jellyfish ingestion service, <code>expectedDuration</code> should <em>never</em> be included on a <code>scheduled</code> basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original <code>scheduled</code> basal; most commonly this new event is a <code>temp</code> or <code>suspend</code>, but it could be a <code>scheduled</code> if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples in <a href="previous.html"><code>previous</code></a>.</p>
 <p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the <code>expectedDuration</code> where available and relevant, but it will never be a required field. Because of how burdensome (or impossible) it is to calculate <code>expectedDuration</code> for <code>scheduled</code> basals, we do <strong>not</strong> expect the uploading client to calculate it, except in cases where the source data makes it easy to include.</p>
-<!-- end expectedDuration -->
+<!-- end editable commentary on expectedDuration -->
 <hr>
 <h3 id="rate">rate</h3>
 <p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
@@ -738,10 +739,10 @@ Numerical type: Floating point value rounded to the appropriate significant figu
 Range:
     min: 0.0
     max: 20.0
-</code></pre><!-- start rate -->
+</code></pre><!-- start editable commentary on rate -->
 <p>Different insulin pump manufacturers offer the ability to program basal rates with different levels of precision in terms of significant digits on the <code>rate</code>. We endeavor to represent each <code>rate</code> as accurately as possible for each insulin pump; occasionally when values are stored to a falsely large number of floating point digits this means rounding the raw <code>rate</code> value found in a record from a pump in order to match the significant digits of precision advertised by the manufacturer. It is the burden of the uploading client to handle this rounding since the number of significant digits for <code>rate</code>s varies according to the pump manufacturer.</p>
 <p>Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.</p>
-<!-- end rate -->
+<!-- end editable commentary on rate -->
 <hr>
 <h3 id="previous">previous</h3>
 <blockquote>
@@ -753,9 +754,9 @@ Range:
 Required:
     jellyfish: no (optional)
     platform: nonexistent
-</code></pre><!-- start previous -->
+</code></pre><!-- start editable commentary on previous -->
 <p>See <a href="previous.html"><code>previous</code></a> for detailed documentation on this deprecated field.</p>
-<!-- end previous -->
+<!-- end editable commentary on previous -->
 <hr>
 <h3 id="schedulename">scheduleName</h3>
 <blockquote>
@@ -768,98 +769,98 @@ Required:
     platform: no (optional)
 </code></pre><h4 id="changelog-for-schedulename">Changelog for <code>scheduleName</code></h4>
 <p><code>_schemaVersion</code> 2: <code>scheduleName</code> became <strong>optional</strong>.</p>
-<!-- start scheduleName -->
+<!-- start editable commentary on scheduleName -->
 <!-- DRAFT: discuss with @jhbate -->
 <p>Note that <code>.</code> and <code>$</code> are illegal characters in object keys for MongoDB&apos;s serialized JSON (BSON). These characters can, however, appear in basal schedule names for some insulin pump manufacturers. At present, we are dealing with this in at least one client-side &quot;driver&quot; for retrieving and processing insulin pump data prior to upload<sup><a href="#fn_a" id="reffn_a">a</a></sup>, but we may decide to deal with this on the server side as part of our validation step in the new platform APIs.</p>
 <p>In an ideal world, we at Tidepool would love to be able to surface to any user of <code>basal</code> data the name of the schedule that generated a particular <code>scheduled</code> basal event. Unfortunately, most of the manufacturers of insulin pumps do <em>not</em> provide the name of the basal schedule on each basal rate change event reported when the pump switches from one segment of a basal schedule to the next (or switches from a suspended state or temporary basal rate back to the active schedule).</p>
 <p>For some manufacturers, we are able to build a complete history of the pump&apos;s settings, and thus we are able to infer the active schedule name by looking up the active pump settings at the time of a particular <code>basal</code> event. However, again due to how some manufacturers do (or <em>do not</em>) record pump settings changes, we are not always able to build this complete history, and so this lookup strategy is also in many cases not possible.</p>
 <p>Prior to <code>_schemaVersion</code> 2, the <code>scheduleName</code> was <em>required</em> by the jellyfish data ingestion service, and as a result for some of the manufacturers we were providing the name of the currently active (as of time of upload) basal schedule, which is only correct for the final <code>basal</code> event in any upload. Thus, the <code>scheduleName</code> field should <strong>not</strong> be used for any computation of statistics or surfaced to the user for any <code>_schemaVersion</code> 1 data.</p>
 <p>Going forward, now that <code>scheduleName</code> is an optional field, it should only be added to <code>basal</code> data when it is directly available in the raw data from an insulin pump or can be inferred with high confidence via lookup against a complete pump settings history.</p>
-<!-- end scheduleName -->
+<!-- end editable commentary on scheduleName -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 <hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 <hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 <hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 <hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 <hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 <hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 <hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 <hr>
 <h3 id="active">_active</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 <hr>
 <h3 id="groupid">_groupId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 <hr>
 <h3 id="schemaversion">_schemaVersion</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 <hr>
 <h3 id="version">_version</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 <hr>
 <h3 id="createdtime">createdTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 <hr>
 <h3 id="id">id</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{

@@ -53,7 +53,7 @@
         data-chapter-title="deviceEvent"
         data-filepath="device-data/types/deviceEvent/README.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -662,8 +662,10 @@
                     <section class="normal" id="section-">
                     
                         <h2 id="device-events">Device Events</h2>
-<!-- TODO -->
-<!-- end intro -->
+<p>This is the Tidepool data type for a variety of events that can occur on diabetes devices, including both insulin pumps and continuous glucose monitors. As a type it is essentially a &quot;grab bag&quot; of miscellaneous sub-types, where each sub-type has its own data model that often differs widely from sub-type to sub-type.</p>
+<p>Note that prior to Tidepool&apos;s release of <a href="http://developer.tidepool.io/chrome-uploader/docs/BootstrappingToUTC.html" title="Bootstrapping to UTC" target="_blank">&quot;bootstrapping to UTC&quot; (BtUTC)</a>, this data type had <code>deviceMeta</code> as the value of its <code>type</code> field. Along with the release of BtUTC, we changed this value to <code>deviceEvent</code> to more accurately reflect the fact that this group of sub-types models various miscellaneous events that are either user-initiated or surfaced to the user and not device metadata that may be more-or-less user-invisible (or at least irrelevant to the user most of the time) such as device model and serial numbers, etc.</p>
+<p>Each of the <code>subType</code>s is documented on one of the following pages:
+<!-- end intro --></p>
 <ul>
 <li><a href="alarm.html">alarm</a></li>
 <li><a href="calibration.html">calibration</a></li>

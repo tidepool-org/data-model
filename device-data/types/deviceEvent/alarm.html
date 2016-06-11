@@ -53,7 +53,7 @@
         data-chapter-title="alarm"
         data-filepath="device-data/types/deviceEvent/alarm.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -661,7 +661,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="device-event-subtype-alarm">Device event subType: <code>alarm</code></h2>
+                        <!-- auto-generated doc! most areas *not* editable -->
+<h2 id="device-event-subtype-alarm">Device event subType: <code>alarm</code></h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
 <blockquote>
 <p>Jump to example JSON:</p>
@@ -677,9 +678,8 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
-<!-- TODO -->
-<!-- end type -->
+</code></pre><!-- start editable commentary on type -->
+<!-- end editable commentary on type -->
 <hr>
 <h3 id="subtype">subType</h3>
 <p>[ingestion, storage, client] The string <code>alarm</code>.</p>
@@ -687,9 +687,9 @@ Required:
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start subType -->
-<!-- TODO -->
-<!-- end subType -->
+</code></pre><!-- start editable commentary on subType -->
+<p>The <code>alarm</code> sub-type of <code>deviceEvent</code> describes alerts and alarms that are surfaced to the user by insulin pumps and continuous glucose monitors.</p>
+<!-- end editable commentary on subType -->
 <hr>
 <h3 id="alarmtype">alarmType</h3>
 <p>[ingestion, storage, client] String value encoding the type of alarm, with <code>other</code> as the catch-all/default category.</p>
@@ -707,9 +707,22 @@ Range: Must be one of:
     `auto_off`
     `over_limit`
     `other`
-</code></pre><!-- start alarmType -->
-<!-- TODO -->
-<!-- end alarmType -->
+</code></pre><!-- start editable commentary on alarmType -->
+<p>The <code>alarmType</code>s built into the data model are all and only those alarms that are common to most, perhaps all, insulin pumps or continuous glucose monitors. At present, we have only modeled the set of alarms for insulin pumps, and this list is:</p>
+<ul>
+<li><code>low_insulin</code> for low insulin reservoir alerts and alarms</li>
+<li><code>no_insulin</code> for empty insulin reservoir alarms</li>
+<li><code>low_power</code> for low battery or alerts and alarms</li>
+<li><code>no_power</code> for dead battery alarms</li>
+<li><code>occlusion</code> for alarms regarding the blockage of insulin infusion lines or sites</li>
+<li><code>no_delivery</code> for alarms signaling any other stoppage of insulin delivery not due to empty reservoir, dead battery, or occlusion</li>
+<li><code>auto_off</code> for when an insulin pump stops all insulin delivery due to inactivity for a duration over the user&apos;s programmed threshold, if any</li>
+<li><code>over_limit</code> for when insulin delivery has surpassed any of a user&apos;s programmed maximum bolus, basal, or hourly delivery thresholds</li>
+</ul>
+<p>Many if not all <code>alarm</code> events will include <code>payload</code> object with more information about the alarm that is device-specific. For example, a <code>low_insulin</code> alarm may have a <code>units_left</code> field in its <code>payload</code> to record the number of units of insulin that were remaining in the insulin pump&apos;s reservoir at the time of the alarm.</p>
+<p>In addition, a <code>payload</code> object is <em>required</em> when <code>alarmType</code> is <code>other</code>, which is the <code>alarmType</code> value used to capture all alarms that are device-specific. For example, a pod expiration alarm is specific to the Insulet OmniPod insulin delivery system. The <code>payload</code> object should include all information that could be relevant to anyone wishing to audit the history and performance of the insulin pump in question.</p>
+<p>For some devices, an alarm event (e.g., an occlusion alarm) is the <strong>only</strong> indication of a suspension of insulin delivery. In such a case, a <a href="status.html"><code>status</code></a> event should also be uploaded to the platform and should be included (in its entirety) in the <code>status</code> field of the <code>alarm</code> event.</p>
+<!-- end editable commentary on alarmType -->
 <hr>
 <h3 id="status">status</h3>
 <blockquote>
@@ -720,93 +733,93 @@ Range: Must be one of:
 Required:
     jellyfish: no (optional)
     platform: no (optional)
-</code></pre><!-- start status -->
+</code></pre><!-- start editable commentary on status -->
 <!-- TODO -->
-<!-- end status -->
+<!-- end editable commentary on status -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 <hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 <hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 <hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 <hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 <hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 <hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 <hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 <hr>
 <h3 id="active">_active</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 <hr>
 <h3 id="groupid">_groupId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 <hr>
 <h3 id="schemaversion">_schemaVersion</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 <hr>
 <h3 id="version">_version</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 <hr>
 <h3 id="createdtime">createdTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 <hr>
 <h3 id="id">id</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{

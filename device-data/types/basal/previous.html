@@ -53,7 +53,7 @@
         data-chapter-title="the &quot;previous&quot; field"
         data-filepath="device-data/types/basal/previous.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -670,7 +670,7 @@
 </ol>
 <p>Partly because insulin pumps tend to report <code>basal</code> events <em>without</em> durations&#x2014;most pumps simply report &quot;basal rate change&quot; events when the pump switches from delivering one rate to another&#x2014;the second strategy, which does not require the inclusion of a <code>duration</code> on each <code>basal</code> event, was chosen as the strategy implemented in jellyfish. For a deep dive into the details of how the legacy jellyfish ingestion API processed sequenced <code>basal</code> events with a <code>previous</code>, see the following section.</p>
 <p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), <code>previous</code> will no longer be an allowed field on <code>basal</code> events, and all <code>basal</code> events are expected to be uploaded with a <code>duration</code>. Essentially, we are now placing the burden on the client to process the sequence of raw basal (rate change) events coming from an insulin pump and determine the <code>duration</code> of each interval <code>basal</code> event prior to upload. Since the challenge of determining the <code>duration</code> for <code>basal</code> events has proven to be slightly different given each manufacturer&apos;s raw data model, we believe that it makes the most sense for determining the <code>duration</code> of <code>basal</code> events to fall within the uploading client&apos;s responsibilities.</p>
-<h4 id="uploading-sequences-of-scheduled-basal-rate-change-events">Uploading sequences of <code>scheduled</code> basal (rate change) events</h4>
+<h3 id="uploading-sequences-of-scheduled-basal-rate-change-events">Uploading sequences of <code>scheduled</code> basal (rate change) events</h3>
 <p>We start with a basal with no previous:</p>
 <pre><code class="lang-json">{
   <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,

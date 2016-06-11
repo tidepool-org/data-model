@@ -53,7 +53,7 @@
         data-chapter-title="normal"
         data-filepath="device-data/types/bolus/normal.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -661,7 +661,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="bolus-subtype-normal">Bolus subType: <code>normal</code></h2>
+                        <!-- auto-generated doc! most areas *not* editable -->
+<h2 id="bolus-subtype-normal">Bolus subType: <code>normal</code></h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
 <blockquote>
 <p>Jump to example JSON:</p>
@@ -677,8 +678,8 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
-<!-- end type -->
+</code></pre><!-- start editable commentary on type -->
+<!-- end editable commentary on type -->
 <hr>
 <h3 id="subtype">subType</h3>
 <p>[ingestion, storage, client] The string <code>normal</code>.</p>
@@ -686,9 +687,9 @@ Required:
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start subType -->
+</code></pre><!-- start editable commentary on subType -->
 <p>This is the sub-type of <code>bolus</code> event that represents a bolus insulin dose delivered more-or-less immediately (within a matter of seconds or a small number of minutes, depending on the insulin pump and the user&apos;s settings). At Tidepool we follow the common convention of representing <code>normal</code> boluses as point-in-time events since their durations are short enough to be negligible.</p>
-<!-- end subType -->
+<!-- end editable commentary on subType -->
 <hr>
 <h3 id="normal">normal</h3>
 <p>[ingestion, storage, client] A floating point value representing units of insulin.</p>
@@ -698,12 +699,13 @@ Required:
     platform: yes
 Numerical type: Floating point value rounded to the appropriate significant figures for the device&apos;s precision.
 Range:
-    min: &gt; 0.0
+    min: &gt;= 0.0
     max: 100.0
-</code></pre><!-- start normal -->
-<p>The <code>normal</code> field encodes the numerical value of the dose of insulin delivered by an insulin pump. To avoid noise in the data (especially as some insulin pumps make it very easy to deliver &quot;doses&quot; of 0 units when no additional dose is recommended given the PWD&apos;s current blood glucose and insulin on board), we have chosen <em>not</em> to allow the upload of boluses with a total delivered dose of 0 units; the value must be greater than 0.</p>
+</code></pre><!-- start editable commentary on normal -->
+<p>The <code>normal</code> field encodes the numerical value of the dose of insulin delivered by an insulin pump. To avoid noise in the data (especially as some insulin pumps make it very easy to deliver &quot;doses&quot; of 0 units when no additional dose is recommended given the PWD&apos;s current blood glucose and insulin on board), we have chosen in most cases <em>not</em> to allow the upload of boluses with a total delivered dose of 0 units; the value must be greater than 0.</p>
+<p>The <em>only</em> exception to this is when a user programs a bolus of greater than 0 units of insulin but cancels the delivery of this bolus before <em>any</em> of the insulin has been successfully delivered, resulting in a <code>normal</code> of 0 units but an <a href="#expectednormal"><code>expectedNormal</code></a> reflecting the value of the original programmed dose. In other words: a bolus of with a <code>normal</code> of 0 units may only be uploaded through the new platform APIs if the <code>expectedNormal</code> field is also present with a value greater than 0.</p>
 <p>Most, if not all, insulin pumps include a maximum bolus setting that a PWD can customize to his or her typical dosing in order to prevent accidental delivery of very large doses of insulin. However, we could not find any indication that insulin pumps typically set a default maximum dose; hence we have chosen 100 units as an arbitrarily large maximum dose that we can imagine someone with type 1 diabetes programming.</p>
-<!-- end normal -->
+<!-- end editable commentary on normal -->
 <hr>
 <h3 id="expectednormal">expectedNormal</h3>
 <blockquote>
@@ -718,108 +720,108 @@ Numerical type: Floating point value rounded to the appropriate significant figu
 Range:
     min: &gt; `normal`
     max: 100.0
-</code></pre><!-- start expectedNormal -->
+</code></pre><!-- start editable commentary on expectedNormal -->
 <p>When a bolus is interrupted (for example, by an occlusion or pump malfunction) or canceled by the user, the <code>expectedNormal</code> field is used to store the original value of the dose of insulin that the user programmed, while <code>normal</code> represents the value of the dose that was actually delivered.</p>
 <p>The minimum value of <code>expectedNormal</code> is any value greater than that encoded under <code>normal</code> since any other value (i.e., less than or equal to <code>normal</code>) cannot obtain from interruption or cancellation of a bolus. See above in <a href="#normal"><code>normal</code></a> for discussion of the maximum value for this field.</p>
-<!-- end expectedNormal -->
+<!-- end editable commentary on expectedNormal -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 <hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 <hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 <hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 <hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 <hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 <hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 <hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 <hr>
 <h3 id="active">_active</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 <hr>
 <h3 id="groupid">_groupId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 <hr>
 <h3 id="schemaversion">_schemaVersion</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 <hr>
 <h3 id="version">_version</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 <hr>
 <h3 id="createdtime">createdTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 <hr>
 <h3 id="id">id</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bolus&quot;</span>,
     <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;normal&quot;</span>,
-    <span class="hljs-string">&quot;normal&quot;</span>: <span class="hljs-number">2.75</span>,
-    <span class="hljs-string">&quot;expectedNormal&quot;</span>: <span class="hljs-number">3.3</span>,
+    <span class="hljs-string">&quot;normal&quot;</span>: <span class="hljs-number">3.5</span>,
+    <span class="hljs-string">&quot;expectedNormal&quot;</span>: <span class="hljs-number">4.2</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:04&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;ef51a1d2-cb4a-485c-9e63-3410c89b7cb2&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;d0f85d7a9bc0417e81f6afdbc6b17bc5&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:04.184Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-09T19:58:43&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;b0508432-b54e-432f-9562-560dd18fba7c&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;ed9d2b7c683942d4b48af93fcb66d127&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-10T02:58:43.798Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -828,14 +830,14 @@ Range:
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bolus&quot;</span>,
     <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;normal&quot;</span>,
-    <span class="hljs-string">&quot;normal&quot;</span>: <span class="hljs-number">3.25</span>,
-    <span class="hljs-string">&quot;expectedNormal&quot;</span>: <span class="hljs-number">3.9</span>,
+    <span class="hljs-string">&quot;normal&quot;</span>: <span class="hljs-number">9.75</span>,
+    <span class="hljs-string">&quot;expectedNormal&quot;</span>: <span class="hljs-number">11.7</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:04&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;5d19f724-2e75-4a69-8311-3276c6758c4b&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:04.184Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-09T19:58:43&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;6b1a502e-3d65-4a95-9c8b-0f660099812f&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-10T02:58:43.799Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
@@ -844,20 +846,20 @@ Range:
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bolus&quot;</span>,
     <span class="hljs-string">&quot;subType&quot;</span>: <span class="hljs-string">&quot;normal&quot;</span>,
-    <span class="hljs-string">&quot;normal&quot;</span>: <span class="hljs-number">7.5</span>,
-    <span class="hljs-string">&quot;expectedNormal&quot;</span>: <span class="hljs-number">9</span>,
+    <span class="hljs-string">&quot;normal&quot;</span>: <span class="hljs-number">3.75</span>,
+    <span class="hljs-string">&quot;expectedNormal&quot;</span>: <span class="hljs-number">4.5</span>,
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
     <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:09.184Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-06-10T02:58:48.799Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-05-04T01:18:04&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;64e3ccd6-b167-407a-b29f-6c8560a64713&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;45e3619f03e04d58b2c0515a822b7146&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-05-04T08:18:04.184Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-09T19:58:43&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;ee92e0e3-ccdf-4f13-99cb-3aaa655d45e1&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;ca6829ac311b46058a64ef39fe7c8788&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-10T02:58:43.799Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }

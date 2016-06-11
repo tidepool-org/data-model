@@ -53,7 +53,7 @@
         data-chapter-title="status"
         data-filepath="device-data/types/deviceEvent/status.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -661,7 +661,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="device-event-subtype-status">Device event subType: <code>status</code></h2>
+                        <!-- auto-generated doc! most areas *not* editable -->
+<h2 id="device-event-subtype-status">Device event subType: <code>status</code></h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
 <blockquote>
 <p>Jump to example JSON:</p>
@@ -677,9 +678,8 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
-<!-- TODO -->
-<!-- end type -->
+</code></pre><!-- start editable commentary on type -->
+<!-- end editable commentary on type -->
 <hr>
 <h3 id="subtype">subType</h3>
 <p>[ingestion, storage, client] The string <code>status</code>.</p>
@@ -687,12 +687,14 @@ Required:
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start subType -->
-<!-- TODO -->
-<!-- end subType -->
+</code></pre><!-- start editable commentary on subType -->
+<p>This is the Tidepool data type for an insulin pump&apos;s insulin delivery status, basically only used to represent suspensions of insulin delivery&#x2014;intervals of time when neither bolus or basal insulin was delivered by an insulin pump. When a user suspends an insulin pump or, alternatively, when the pump suspends itself for some reason automatically, any bolus currently in progress is terminated, resulting in a partially delivered bolus<sup><a href="#fn_a" id="reffn_a">a</a></sup>, and the basal constant drip of background insulin is also stopped.</p>
+<p>In the same way that suspensions of insulin delivery can be either manual (programmed by the user) or automatic, the resumption of insulin delivery can be the result of user action or automatic.</p>
+<!-- end editable commentary on subType -->
 <hr>
 <h3 id="status">status</h3>
-<p>[ingestion, storage, client] String value encoding insulin pump status as <code>suspended</code> or <code>resumed</code>.</p>
+<p>[ingestion] String value encoding insulin pump status as <code>suspended</code> or <code>resumed</code>.</p>
+<p>[storage, client] The string <code>suspended</code>.</p>
 <pre><code>QUICK SUMMARY
 Required:
     jellyfish: yes
@@ -702,9 +704,11 @@ Range:
         `suspended`
         `resumed`
     platform: The string `suspended`.
-</code></pre><!-- start status -->
-<!-- TODO -->
-<!-- end status -->
+</code></pre><!-- start editable commentary on status -->
+<p>An insulin pump can only be in one of two insulin delivery states: normal operation or <code>suspended</code>.</p>
+<p>The legacy jellyfish ingestion service accepted data with two possible values for <code>status</code>: <code>suspended</code> or <code>resumed</code>. The service then looked for tuples of events starting with a <code>suspended</code> and concluding with a <code>resumed</code>, merging each tuple into a single <code>suspended</code> event with a duration calculated from the timestamps of all included events. Events were chained together by embedding the immediately preceding <code>status</code> event inside each new <code>status</code> event in a <code>previous</code> field. See <a href="previous.html">this document on the <code>previous</code> field</a> on status events for a detailed explanation of this soon-to-be-deprecated system.</p>
+<p>In Tidepool&apos;s new platform APIs under construction at the time of the drafting of this documentation in June, 2016, the only accepted value for the <code>status</code> field is <code>suspended</code>.</p>
+<!-- end editable commentary on status -->
 <hr>
 <h3 id="duration">duration</h3>
 <blockquote>
@@ -719,9 +723,11 @@ Numerical type: Integer value representing milliseconds.
 Range:
     min: 0
     max: &lt; &#x221E;
-</code></pre><!-- start duration -->
-<!-- TODO -->
-<!-- end duration -->
+</code></pre><!-- start editable commentary on duration -->
+<p>When ingesting data through the legacy jellyfish data ingestion service, <code>duration</code> is optional because jellyfish also uses the <em>sequence</em> of pump status events to determine their durations (in particular the duration of suspensions) - see <a href="previous.html"><code>previous</code></a> for details.</p>
+<p>In Tidepool&apos;s new platform APIs (under active development as of June, 2016 at the time of the initial drafting of this document), the <code>duration</code> field will be required on all <code>status</code> events. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of suspensions of insulin delivery based on the sequence of suspend and resume events.</p>
+<p>There is no upper bound on the value of the <code>duration</code> for suspensions of insulin delivery because there is no upper bound on this value in reality: a user may switch between different insulin delivery devices or go on a &quot;pump vacation&quot; and thus leave a particular device in the suspended mode for an arbitrary duration of time counted in days, weeks, or even months.</p>
+<!-- end editable commentary on duration -->
 <hr>
 <h3 id="expectedduration">expectedDuration</h3>
 <blockquote>
@@ -736,9 +742,10 @@ Numerical type: Integer value representing milliseconds.
 Range:
     min: &gt; `duration`
     max: &lt; &#x221E;
-</code></pre><!-- start expectedDuration -->
-<!-- TODO -->
-<!-- end expectedDuration -->
+</code></pre><!-- start editable commentary on expectedDuration -->
+<p>The majority of insulin delivery devices do <em>not</em> provide an interface for scheduling suspensions of insulin delivery such that the insulin pump will automatically resume at the conclusion of the scheduled time period. However, the Insulet OmniPod insulin delivery system does provide an interface of this kind. It is thus only for an OmniPod system that it is possible - though still optional - for an <code>expectedDuration</code> field to appear. When this field is present, the value of <code>expectedDuration</code> is the original user-programmed duration for the suspension of insulin delivery, and the <code>duration</code> of the event will have a smaller value representing the <em>actual</em> elapsed time of the suspension, which must have been canceled by the user prior to its scheduled conclusion.</p>
+<p>Note that there is one common workflow that will result in the early cancellation of a scheduled suspension of insulin delivery for OmniPod users: in order to change the device&apos;s display date &amp; time on an OmniPod system, it is necessary to suspend the device (by scheduling a suspension of insulin delivery).</p>
+<!-- end editable commentary on expectedDuration -->
 <hr>
 <h3 id="reason">reason</h3>
 <p>[ingestion, storage, client] An object with two key-value pairs encoding the cause of a <code>suspended</code> or <code>resumed</code> event as <code>manual</code> (user-initiated) or <code>automatic</code> (pump-initiated).</p>
@@ -749,93 +756,129 @@ Required:
 Range: Must be one of:
     `manual`
     `automatic`
-</code></pre><!-- start reason -->
-<!-- TODO -->
-<!-- end reason -->
+</code></pre><!-- start editable commentary on reason -->
+<p>The <code>reason</code> is a simplified indication of why the pump delivery status changed, both on suspension of insulin delivery and on resumption. In the legacy jellyfish system (described in detail in <a href="previous.html"><code>previous</code></a>), <code>reason</code> is an object with one key-value pair, either a key <code>suspended</code> with possible values <code>manual</code> or <code>automatic</code> or <code>resumed</code> with the sample possible values. As part of the ingestion process, jellyfish will collect the <code>reason</code>s for suspension and resumption into a single <code>reason</code> object with both key-value pairs in the final form of the event stored in the database.</p>
+<p>On the other hand, when pushing up data through the new platform APIs, the <code>reason</code> object should include both the <code>suspended</code> and <code>resumed</code> keys with possible values of <code>manual</code> and <code>automatic</code> for each.</p>
+<p>We define <code>manual</code> suspension or resumption as any user-initiated method of effecting these states, and we define <code>automatic</code> as anything <em>not</em> user-initiated. One type of <code>automatic</code> suspension (and potentially also later resumption) occurs on insulin pumps that include a low-glucose suspend feature whereby the pump, when &quot;listening&quot; to data from a blood glucose sensor (i.e., <a href="../cbg.html"><code>cbg</code></a> data), suspends insulin delivery if the blood glucose values in the data stream either drop below a certain threshold or are predicted to soon drop below the threshold. The insulin delivery device may also automatically resume from the suspended state in response to rising blood glucose values or after a certain amount of time has elapsed.</p>
+<p>By convention, we also include more device-specific information about the cause of suspensions and resumptions, if available, in the optional <code>payload</code> embedded object on the event. For example, in the case of the Medtronic 530G insulin pumps with the low-glucose suspend (LGS) feature, there is a distinction between circumstances<sup><a href="#fn_a" id="reffn_a">a</a></sup> in which the pump resumes from an LGS suspension automatically after two hours depending on whether the user interacted with any of the LGS alarms during the duration of the suspension. We represent this distinction on the event in the payload as follows (specifically in the <code>user_intervention</code> key under <code>resumed</code>):</p>
+<pre><code class="lang-json">{
+    ...
+    <span class="hljs-string">&quot;reason&quot;</span>: {
+        <span class="hljs-string">&quot;suspended&quot;</span>: <span class="hljs-string">&quot;automatic&quot;</span>,
+        <span class="hljs-string">&quot;resumed&quot;</span>: <span class="hljs-string">&quot;automatic&quot;</span>
+    },
+    <span class="hljs-string">&quot;payload&quot;</span>: {
+        <span class="hljs-string">&quot;suspended&quot;</span>: {
+            <span class="hljs-string">&quot;cause&quot;</span>: <span class="hljs-string">&quot;low_glucose&quot;</span>,
+            <span class="hljs-string">&quot;threshold&quot;</span>: <span class="hljs-number">80</span>
+        },
+        <span class="hljs-string">&quot;resumed&quot;</span>: {
+            <span class="hljs-string">&quot;cause&quot;</span>: <span class="hljs-string">&quot;timed_out&quot;</span>,
+            <span class="hljs-string">&quot;user_intervention&quot;</span>: <span class="hljs-string">&quot;ignored&quot;</span>
+        }
+    }
+    ...
+}
+</code></pre>
+<!-- end editable commentary on reason -->
+<hr>
+<h3 id="previous">previous</h3>
+<blockquote>
+<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.</p>
+</blockquote>
+<p>[ingestion] An object representing the <code>status</code> event just prior to this event or, equivalently, just the <code>id</code> of said object.</p>
+<p>[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: nonexistent
+</code></pre><!-- start editable commentary on previous -->
+<p>See <a href="previous.html"><code>previous</code></a> for detailed documentation on this deprecated field.</p>
+<!-- end editable commentary on previous -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 <hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 <hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 <hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 <hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 <hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 <hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 <hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 <hr>
 <h3 id="active">_active</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 <hr>
 <h3 id="groupid">_groupId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 <hr>
 <h3 id="schemaversion">_schemaVersion</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 <hr>
 <h3 id="version">_version</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 <hr>
 <h3 id="createdtime">createdTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 <hr>
 <h3 id="id">id</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
@@ -907,6 +950,9 @@ Range: Must be one of:
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
+<blockquote id="fn_a">
+<sup>a</sup>. Specifically determining whether or not a temp basal that was in effect before the automatic suspension is resumed or not (assuming it&apos;s programmed duration would have it still be in effect). If the user did not interact with any of the alerts during the automatic suspension, the temp basal is <em>not</em> resumed. If the user did acknowledge the automatic suspension, however, a temp basal that would still be in effect <em>is</em> resumed at the conclusion of two hours of suspension. This is explained on pages 124-125 of <a href="http://www.accessdata.fda.gov/cdrh_docs/pdf12/p120010c.pdf" title="Medtronic 530G user manual" target="_blank">the Medtronic 530G user manual</a>.<a href="#reffn_a" title="Jump back to footnote [a] in the text."> &#x21A9;</a>
+</blockquote>
 
                     
                     </section>

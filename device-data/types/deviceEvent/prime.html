@@ -53,7 +53,7 @@
         data-chapter-title="prime"
         data-filepath="device-data/types/deviceEvent/prime.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -661,7 +661,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="device-event-subtype-prime">Device event subType: <code>prime</code></h2>
+                        <!-- auto-generated doc! most areas *not* editable -->
+<h2 id="device-event-subtype-prime">Device event subType: <code>prime</code></h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
 <blockquote>
 <p>Jump to example JSON:</p>
@@ -677,9 +678,8 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
-<!-- TODO -->
-<!-- end type -->
+</code></pre><!-- start editable commentary on type -->
+<!-- end editable commentary on type -->
 <hr>
 <h3 id="subtype">subType</h3>
 <p>[ingestion, storage, client] The string <code>prime</code>.</p>
@@ -687,9 +687,9 @@ Required:
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start subType -->
-<!-- TODO -->
-<!-- end subType -->
+</code></pre><!-- start editable commentary on subType -->
+<p>The <code>prime</code> sub-type of <code>deviceEvent</code> represents a user&apos;s priming of either an insulin infusion line/tubing used with a traditional insulin pump or the priming of an insulin delivery cannula used in all insulin delivery devices (i.e., both traditional insulin pumps and tubeless patch pumps like the Insulet OmniPod insulin delivery system). To &quot;prime&quot; and infusion line or cannula is to fill it with insulin either while disconnected from the user or in preparation for insertion in order to ready the device to delivery programmed doses of insulin.</p>
+<!-- end editable commentary on subType -->
 <hr>
 <h3 id="primetarget">primeTarget</h3>
 <p>[ingestion, storage, client] String encoding the target of the priming action.</p>
@@ -700,9 +700,10 @@ Required:
 Range: Must be one of:
     `cannula`
     `tubing`
-</code></pre><!-- start primeTarget -->
-<!-- TODO -->
-<!-- end primeTarget -->
+</code></pre><!-- start editable commentary on primeTarget -->
+<p>The <code>primeTarget</code> field identifies the object of the priming action - either <code>tubing</code> for an infusion line prime or <code>cannula</code> for a cannula prime.</p>
+<p>Most commonly, <code>tubing</code> and <code>cannula</code> prime events will occur as a pair separated only be seconds or minutes. Note, however, that many combinations of <code>prime</code> events may occur in a real user&apos;s data &quot;in the wild.&quot; For example, no priming events will appear in the data of an Insulet OmniPod user, as the device&apos;s automatic cannula prime prior to pod activation is not logged. And among traditional insulin pump users, priming behavior varies considerably. Those who use steel cannulas must prime the cannula along with the tubing, as the steel cannula is not separable from the infusion line, and so only <code>tubing</code> primes will appear in the data. Other insulin pump users may change the infusion site without changing out the insulin reservoir and infusion line at the same time, in which case a <code>cannula</code> prime may appear independently of a <code>tubing</code> prime.</p>
+<!-- end editable commentary on primeTarget -->
 <hr>
 <h3 id="volume">volume</h3>
 <blockquote>
@@ -720,93 +721,93 @@ Range:
     tubing:
         min: 0.0
         max: 100.0
-</code></pre><!-- start volume -->
-<!-- TODO -->
-<!-- end volume -->
+</code></pre><!-- start editable commentary on volume -->
+<p>Where available in the data, the <code>volume</code> of a priming event should be included as a value in insulin of expended in the course of the priming action.</p>
+<!-- end editable commentary on volume -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 <hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 <hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 <hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 <hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 <hr>
 <h3 id="time">time</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 <hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 <hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 <hr>
 <h3 id="active">_active</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 <hr>
 <h3 id="groupid">_groupId</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 <hr>
 <h3 id="schemaversion">_schemaVersion</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 <hr>
 <h3 id="version">_version</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 <hr>
 <h3 id="createdtime">createdTime</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 <hr>
 <h3 id="id">id</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{

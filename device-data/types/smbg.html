@@ -53,7 +53,7 @@
         data-chapter-title="smbg"
         data-filepath="device-data/types/smbg.md"
         data-basepath="../.."
-        data-revision="Thu Jun 09 2016 19:27:51 GMT-0700 (PDT)"
+        data-revision="Fri Jun 10 2016 17:48:40 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -661,7 +661,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="selfmonitored-blood-glucose-smbg">Self-Monitored Blood Glucose (smbg)</h2>
+                        <!-- auto-generated doc! most areas *not* editable -->
+<h2 id="selfmonitored-blood-glucose-smbg">Self-Monitored Blood Glucose (smbg)</h2>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
 <blockquote>
 <p>Jump to example JSON:</p>
@@ -677,9 +678,9 @@
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start type -->
+</code></pre><!-- start editable commentary on type -->
 <p>This is the Tidepool data type for traditional fingerstick blood glucose meter data. <code>smbg</code> is an abbreviation of &apos;self-monitored blood glucose&apos; and contrasts with <code>cbg</code>, abbreviating &apos;continuous blood glucose&apos;. <a href="cbg.html"><code>cbg</code></a> is the Tidepool data type for continuous glucose monitor (CGM) sensor data.</p>
-<!-- end type -->
+<!-- end editable commentary on type -->
 <hr>
 <h3 id="subtype">subType</h3>
 <blockquote>
@@ -693,11 +694,11 @@ Required:
 Range: Must be one of:
     `manual`
     `linked`
-</code></pre><!-- start subType -->
+</code></pre><!-- start editable commentary on subType -->
 <p><code>subType</code> appears on blood glucose values that are <em>not</em> being read directly from a traditional fingerstick blood glucose meter, but rather from another data source such as an insulin pump.</p>
 <p>The value <code>manual</code> indicates that the blood glucose value was manually entered by a user (and is thus, of course, subject to human error).</p>
 <p>The value <code>linked</code> indicates that the blood glucose value was transferred from a blood glucose meter to the pump directly via some sort of data transfer or pairing mechanism. If the blood glucose meter in question is also supported by the Tidepool uploader, duplicate records may exist: both read directly from the meter and pulled in as <code>subType: &apos;linked&apos;</code> records from the insulin pump.</p>
-<!-- end subType -->
+<!-- end editable commentary on subType -->
 <hr>
 <h3 id="units">units</h3>
 <p>[ingestion] One of two string values: <code>mg/dL</code> or <code>mmol/L</code>.</p>
@@ -710,8 +711,8 @@ Required:
 Range: Must be one of:
     `mg/dL`
     `mmol/L`
-</code></pre><!-- start units -->
-<!-- end units -->
+</code></pre><!-- start editable commentary on units -->
+<!-- end editable commentary on units -->
 <hr>
 <h3 id="value">value</h3>
 <p>[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching <code>units</code> field.</p>
@@ -730,92 +731,92 @@ Range:
     mmol/L:
         min: 0.0
         max: 55.0
-</code></pre><!-- start value -->
-<!-- end value -->
+</code></pre><!-- start editable commentary on value -->
+<!-- end editable commentary on value -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start clockDriftOffset -->
+<!-- start editable commentary on clockDriftOffset -->
 <!-- TODO -->
-<!-- end clockDriftOffset -->
+<!-- end editable commentary on clockDriftOffset -->
 <hr>
 <h3 id="conversionoffset">conversionOffset</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start conversionOffset -->
+<!-- start editable commentary on conversionOffset -->
 <!-- TODO -->
-<!-- end conversionOffset -->
+<!-- end editable commentary on conversionOffset -->
 <hr>
 <h3 id="deviceid">deviceId</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start deviceId -->
+<!-- start editable commentary on deviceId -->
 <!-- TODO -->
-<!-- end deviceId -->
+<!-- end editable commentary on deviceId -->
 <hr>
 <h3 id="devicetime">deviceTime</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start deviceTime -->
+<!-- start editable commentary on deviceTime -->
 <!-- TODO -->
-<!-- end deviceTime -->
+<!-- end editable commentary on deviceTime -->
 <hr>
 <h3 id="guid">guid</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start guid -->
+<!-- start editable commentary on guid -->
 <!-- TODO -->
-<!-- end guid -->
+<!-- end editable commentary on guid -->
 <hr>
 <h3 id="time">time</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start time -->
+<!-- start editable commentary on time -->
 <!-- TODO -->
-<!-- end time -->
+<!-- end editable commentary on time -->
 <hr>
 <h3 id="timezoneoffset">timezoneOffset</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start timezoneOffset -->
+<!-- start editable commentary on timezoneOffset -->
 <!-- TODO -->
-<!-- end timezoneOffset -->
+<!-- end editable commentary on timezoneOffset -->
 <hr>
 <h3 id="uploadid">uploadId</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start uploadId -->
+<!-- start editable commentary on uploadId -->
 <!-- TODO -->
-<!-- end uploadId -->
+<!-- end editable commentary on uploadId -->
 <hr>
 <h3 id="active">_active</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start _active -->
+<!-- start editable commentary on _active -->
 <!-- TODO -->
-<!-- end _active -->
+<!-- end editable commentary on _active -->
 <hr>
 <h3 id="groupid">_groupId</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start _groupId -->
+<!-- start editable commentary on _groupId -->
 <!-- TODO -->
-<!-- end _groupId -->
+<!-- end editable commentary on _groupId -->
 <hr>
 <h3 id="schemaversion">_schemaVersion</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start _schemaVersion -->
+<!-- start editable commentary on _schemaVersion -->
 <!-- TODO -->
-<!-- end _schemaVersion -->
+<!-- end editable commentary on _schemaVersion -->
 <hr>
 <h3 id="version">_version</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start _version -->
+<!-- start editable commentary on _version -->
 <!-- TODO -->
-<!-- end _version -->
+<!-- end editable commentary on _version -->
 <hr>
 <h3 id="createdtime">createdTime</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start createdTime -->
+<!-- start editable commentary on createdTime -->
 <!-- TODO -->
-<!-- end createdTime -->
+<!-- end editable commentary on createdTime -->
 <hr>
 <h3 id="id">id</h3>
 <p>See <a href="../common.html">common fields</a>.</p>
-<!-- start id -->
+<!-- start editable commentary on id -->
 <!-- TODO -->
-<!-- end id -->
+<!-- end editable commentary on id -->
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
