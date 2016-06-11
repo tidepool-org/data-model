@@ -10,7 +10,7 @@ Partly because insulin pumps tend to report `basal` events *without* durationsâ€
 
 In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), `previous` will no longer be an allowed field on `basal` events, and all `basal` events are expected to be uploaded with a `duration`. Essentially, we are now placing the burden on the client to process the sequence of raw basal (rate change) events coming from an insulin pump and determine the `duration` of each interval `basal` event prior to upload. Since the challenge of determining the `duration` for `basal` events has proven to be slightly different given each manufacturer's raw data model, we believe that it makes the most sense for determining the `duration` of `basal` events to fall within the uploading client's responsibilities.
 
-#### Uploading sequences of `scheduled` basal (rate change) events
+### Uploading sequences of `scheduled` basal (rate change) events
 
 We start with a basal with no previous:
 
