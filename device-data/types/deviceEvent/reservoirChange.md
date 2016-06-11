@@ -22,7 +22,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-<!-- TODO -->
+
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -37,7 +37,13 @@
 		platform: yes
 
 <!-- start editable commentary on subType -->
-<!-- TODO -->
+
+A `reservoirChange` event represents any event in an insulin delivery system that implies a return to a device state not yet ready to deliver insulin. This varies depending on the type of insulin delivery device. For conventional insulin pumps with syringe-like reservoirs, this will be a rewind event. For an Insulet OmniPod system, it is a pod deactivation event.
+
+This event often implies a suspension of insulin delivery; in the case that the device data includes an event that fits into this `reservoirChange` data model but *does not* include a separate indication of insulin delivery suspension, a [`status`](./status.md) event should also be uploaded to the platform to record the suspension of insulin delivery and should be included (in its entirety) in the `status` field.
+
+The optional `payload` embedded object may be included in order to expose the specifics of the event type that is being interpreted more generally as a `reservoirChange`, along with any other device-specific information that may be desirable for auditing user and device behavior and performance.
+
 <!-- end editable commentary on subType -->
 
 * * * * *
