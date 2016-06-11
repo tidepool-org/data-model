@@ -60,6 +60,7 @@ var TIME_CHANGE_REASONS = [
   'correction',
   'other'
 ];
+var PREVIOUS = '[ingestion] An object representing the `status` event just prior to this event or, equivalently, just the `id` of said object.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
 
 var schemas = {
   base: {
@@ -277,6 +278,16 @@ var schemas = {
         },
         range: common.propTypes.oneOfStringOptions(AGENTS)
       }
+    },
+    previous: {
+      instance: {},
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_NONEXISTENT + PREVIOUS,
+        required: {
+          jellyfish: false,
+          platform: null
+        }
+      }
     }
   },
   timeChange: {
@@ -398,6 +409,7 @@ module.generate = function(opts) {
   if (opts.subType === 'status') {
     deviceEvent.expectedDuration = 1.2 * deviceEvent.duration;
   }
+  delete deviceEvent.previous;
 
   return deviceEvent;
 };

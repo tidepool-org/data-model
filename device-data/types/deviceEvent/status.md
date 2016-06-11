@@ -173,6 +173,27 @@ By convention, we also include more device-specific information about the cause 
 
 * * * * *
 
+### previous
+
+> This field is **optional** when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.
+
+[ingestion] An object representing the `status` event just prior to this event or, equivalently, just the `id` of said object.
+
+[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: nonexistent
+
+<!-- start editable commentary on previous -->
+
+See [`previous`](./previous.md) for detailed documentation on this deprecated field.
+
+<!-- end editable commentary on previous -->
+
+* * * * *
+
 ### clockDriftOffset
 
 See [common fields](../../common.md).

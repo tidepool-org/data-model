@@ -85,7 +85,7 @@ We then submit a `resumed` event that includes the first `suspended` as its `pre
     "time": "2016-06-10T19:00:00.000Z",
     "timezoneOffset": -420,
     "uploadId": "SampleUploadId"
-    },
+  },
   "clockDriftOffset": 0,
   "conversionOffset": 0,
   "deviceId": "DevId0987654321",
@@ -98,7 +98,8 @@ We then submit a `resumed` event that includes the first `suspended` as its `pre
 ```
 
 This will result in the jellyfish API modifying the previously stored and annotated `suspended` event as follows:
-```
+
+```json
 {
   "type": "deviceEvent",
   "subType": "status",
@@ -183,7 +184,7 @@ Then we submit a `resumed` with a `previous` that is *not* the first `suspended`
 
 This will result in the jellyfish API storing the following to the Tidepool cloud:
 
-```
+```json
 [{
   "type": "deviceEvent",
   "subType": "status",
