@@ -14,6 +14,8 @@ cd bin/
 
 ./docTemplateGenerator.js cbg
 
+./docTemplateGenerator.js common
+
 ./docTemplateGenerator.js deviceEvent --subType alarm
 ./docTemplateGenerator.js deviceEvent --subType calibration
 ./docTemplateGenerator.js deviceEvent --subType prime
