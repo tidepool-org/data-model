@@ -53,13 +53,6 @@ var CAN_SUSPEND = [
 var PRIME_TARGETS = ['cannula', 'tubing'];
 var STATUSES = ['suspended', 'resumed'];
 var AGENTS = ['manual', 'automatic'];
-var TIME_CHANGE_REASONS = [
-  'from_daylight_savings',
-  'to_daylight_savings',
-  'travel',
-  'correction',
-  'other'
-];
 var PREVIOUS = '[ingestion] An object representing the `status` event just prior to this event or, equivalently, just the `id` of said object.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
 
 var schemas = {
@@ -308,9 +301,7 @@ var schemas = {
         return {
           from: from.toISOString().slice(0,-5),
           to: to.toISOString().slice(0,-5),
-          agent: 'manual',
-          reasons: ['travel', 'correction'],
-          timezone: chance.pickone(common.timeConstants.TIMEZONES)
+          agent: 'manual'
         };
       },
       summary: {
@@ -352,26 +343,6 @@ var schemas = {
                 platform: true
               },
               range: common.propTypes.oneOfStringOptions(AGENTS)
-            }
-          },
-          reasons: {
-            summary: {
-              description: common.propTypes.OPTIONAL + '[ingestion, storage, client] An array of tags describing the reason(s) for the diabetes device display time change.',
-              required: {
-                jellyfish: false,
-                platform: false
-              },
-              range: common.propTypes.oneOrMoreOfStringOptions(TIME_CHANGE_REASONS)
-            }
-          },
-          timezone: {
-            summary: {
-              description: common.propTypes.OPTIONAL + '[ingestion, storage, client] The name of the timezone that applies to the result of this diabetes device display time change.',
-              required: {
-                jellyfish: false,
-                platform: false
-              },
-              range: 'Must be a string timezone name from the IANA Timezone Database.'
             }
           }
         },

@@ -22,7 +22,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-<!-- TODO -->
+
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -37,7 +37,11 @@
 		platform: yes
 
 <!-- start editable commentary on subType -->
-<!-- TODO -->
+
+A `timeChange` event represents an instance when a diabetes device user changed the display date and/or time settings on the device. Having an accurate history of `timeChange` events is crucial to Tidepool's "bootstrapping to UTC" (BtUTC) procedure which, to summarize *very* briefly, uses the set of `timeChange` events from a device in combination with the raw log indices of the device's records and the user's selection (from an interface in the Tidepool uploader) of the timezone that aligns with the most recent data on the device to translate the *relative* (local time) timestamps of the device records into UTC timestamps so that all device records from many different diabetes devices can be aligned on the same timeline. For further information, please see [the technical documentation for BtUTC](http://developer.tidepool.io/chrome-uploader/docs/BootstrappingToUTC.html 'Tidepool Docs: BtUTC').
+
+All the relevant data from the `timeChange` event is stored in various fields on an embedded `change` object, documented in the next section.
+
 <!-- end editable commentary on subType -->
 
 * * * * *
@@ -55,12 +59,10 @@ Contains the following properties:
  * from
  * to
  * agent
- * reasons
- * timezone
 
 #### from
 
-[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-05-04T08:18:06`.
+[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-06-13T19:29:38`.
 
 	QUICK SUMMARY
 	Required:
@@ -72,7 +74,7 @@ Contains the following properties:
 
 #### to
 
-[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-05-04T08:18:06`.
+[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-06-13T19:29:38`.
 
 	QUICK SUMMARY
 	Required:
@@ -94,37 +96,12 @@ Contains the following properties:
 		`manual`
 		`automatic`
 
-#### reasons
-
-> This field is **optional**.
-
-[ingestion, storage, client] An array of tags describing the reason(s) for the diabetes device display time change.
-
-	QUICK SUMMARY
-	Required:
-		jellyfish: no (optional)
-		platform: no (optional)
-	Range: One or more of:
-		`from_daylight_savings`
-		`to_daylight_savings`
-		`travel`
-		`correction`
-		`other`
-
-#### timezone
-
-> This field is **optional**.
-
-[ingestion, storage, client] The name of the timezone that applies to the result of this diabetes device display time change.
-
-	QUICK SUMMARY
-	Required:
-		jellyfish: no (optional)
-		platform: no (optional)
-	Range: Must be a string timezone name from the IANA Timezone Database.
-
 <!-- start editable commentary on change -->
-<!-- TODO -->
+
+Within the `change` embedded object on a `timeChange` event, the date & time displayed on the device *before* the user changed it is stored in the `from` field, while the date & time resulting from the change is stored in the `to` field. Both the `from` and `to` properties are formatted as ISO 8601 timestamps without any offset from UTC specified; this is the exact same "relative" timestamp format used for `deviceTime` and documented on [the section for `deviceTime`](../../common.md#devicetime) on the page for common fields.
+
+The `agent` field on the `change` object describes the source of the change as either `manual` (the user) or `automatic` (the device). This field is required. At present, we know of no devices that include a timezone in the device settings and automatically change to and from daylight saving(s) time, but we expect (and hope!) that this may happen in the near future as Bluetooth-communicating devices that are continuously connected to timezone-locatable mobile phones enter the market.
+
 <!-- end editable commentary on change -->
 
 * * * * *
@@ -276,22 +253,17 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "timeChange",
 	"change": {
-		"from": "2016-05-04T08:18:06",
-		"to": "2016-05-04T07:21:31",
-		"agent": "manual",
-		"reasons": [
-			"travel",
-			"correction"
-		],
-		"timezone": "US/Central"
+		"from": "2016-06-13T19:29:38",
+		"to": "2016-06-13T18:33:03",
+		"agent": "manual"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:06",
-	"guid": "e99d9828-d412-4e53-8645-a11cf21caee7",
-	"id": "f547c206c2ce4361b28b2a95ff3b6d1b",
-	"time": "2016-05-04T08:18:06.023Z",
+	"deviceTime": "2016-06-13T12:29:38",
+	"guid": "df38f41a-41be-48f5-9b75-eef9b1e31d97",
+	"id": "106b88925fa849568c0bde7af1adc1c4",
+	"time": "2016-06-13T19:29:38.505Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -304,21 +276,16 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "timeChange",
 	"change": {
-		"from": "2016-05-04T08:18:06",
-		"to": "2016-05-04T07:21:31",
-		"agent": "manual",
-		"reasons": [
-			"travel",
-			"correction"
-		],
-		"timezone": "Europe/London"
+		"from": "2016-06-13T19:29:38",
+		"to": "2016-06-13T18:33:03",
+		"agent": "manual"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:06",
-	"guid": "d86f4881-9eb5-4638-9f06-afad83caa52b",
-	"time": "2016-05-04T08:18:06.024Z",
+	"deviceTime": "2016-06-13T12:29:38",
+	"guid": "80fb49d5-29ea-44b3-a47a-5be495661ce4",
+	"time": "2016-06-13T19:29:38.505Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -331,14 +298,9 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "timeChange",
 	"change": {
-		"from": "2016-05-04T08:18:06",
-		"to": "2016-05-04T07:21:31",
-		"agent": "manual",
-		"reasons": [
-			"travel",
-			"correction"
-		],
-		"timezone": "US/Mountain"
+		"from": "2016-06-13T19:29:38",
+		"to": "2016-06-13T18:33:03",
+		"agent": "manual"
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -346,12 +308,12 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:11.024Z",
+	"createdTime": "2016-06-13T19:29:43.506Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:06",
-	"guid": "6b285d97-c5fc-483a-9c08-67713a0e2775",
-	"id": "c1288c03e9d4473daef65685178a5cab",
-	"time": "2016-05-04T08:18:06.024Z",
+	"deviceTime": "2016-06-13T12:29:38",
+	"guid": "a079a81a-be17-4325-8437-3d5d743a3ebf",
+	"id": "a403238202dc48c0bc9248c2f6b07303",
+	"time": "2016-06-13T19:29:38.506Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

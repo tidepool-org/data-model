@@ -382,16 +382,7 @@ module.startSummary = {
 };
 
 module.timeConstants = {
-  MIN_DEVICE_TIME: '2007-01-01T00:00:00',
-  TIMEZONES: [
-    'US/Pacific',
-    'Pacific/Auckland',
-    'Europe/Budapest',
-    'US/Eastern',
-    'US/Mountain',
-    'US/Central',
-    'Europe/London'
-  ]
+  MIN_DEVICE_TIME: '2007-01-01T00:00:00'
 };
 
 module.PUMP_MANUFACTURERS = ['animas', 'insulet', 'medtronic', 'tandem'];
