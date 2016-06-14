@@ -211,14 +211,14 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "cd254b2b75d049a5898141e4dc9b1240",
+	"status": "921bab64eb1a492ca8af11ab4f24a832",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"guid": "c7793678-1420-4825-9ca7-fb1d8e89e869",
-	"id": "763f83bf1eb24baa85b6b6ee96d877f2",
-	"time": "2016-06-14T02:05:45.079Z",
+	"deviceTime": "2016-06-13T19:22:56",
+	"guid": "14ac812f-96f2-45e6-9a20-aa5d6d8acd26",
+	"id": "d14ed2262335498193154dbebf3ed0a7",
+	"time": "2016-06-14T02:22:56.459Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -230,12 +230,29 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "3ea3c7d72bcc4811917733d12ff3ebb7",
+	"status": {
+		"type": "deviceEvent",
+		"subType": "status",
+		"status": "suspended",
+		"duration": 30600000,
+		"expectedDuration": 36720000,
+		"reason": {
+			"suspended": "automatic",
+			"resumed": "automatic"
+		},
+		"clockDriftOffset": 0,
+		"conversionOffset": 0,
+		"deviceId": "DevId0987654321",
+		"deviceTime": "2016-06-13T19:22:56",
+		"time": "2016-06-14T02:22:56.461Z",
+		"timezoneOffset": -420,
+		"uploadId": "SampleUploadId"
+	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"time": "2016-06-14T02:05:45.080Z",
+	"deviceTime": "2016-06-13T19:22:56",
+	"time": "2016-06-14T02:22:56.460Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -247,19 +264,19 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "06c81b089b8f41dc99c98beb8405e38e",
+	"status": "fe26e772de0b4472919349c12820fda4",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:50.080Z",
+	"createdTime": "2016-06-14T02:23:01.461Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"guid": "5c245e81-122f-4d2a-83a9-137a187c6c54",
-	"id": "d9d6b1f4d699478bbb1f1a748d5994ac",
-	"time": "2016-06-14T02:05:45.080Z",
+	"deviceTime": "2016-06-13T19:22:56",
+	"guid": "fa849fa5-6ece-43a0-a7b1-2aadbfab469a",
+	"id": "4b8be50c2d5d441399c7495128231f97",
+	"time": "2016-06-14T02:22:56.461Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

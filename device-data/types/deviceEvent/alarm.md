@@ -249,14 +249,15 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "alarm",
-	"alarmType": "other",
+	"alarmType": "no_insulin",
+	"status": "72a1d78fcfaf42e2bd9acf6b7f6a9d5e",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:44",
-	"guid": "c202144f-d670-4d76-bae7-695f2ecb94e5",
-	"id": "ecad06eaf4814502953e3528180f5e26",
-	"time": "2016-06-14T02:05:44.450Z",
+	"deviceTime": "2016-06-13T19:22:53",
+	"guid": "8de2f14e-3c7e-4383-b340-1b03611176aa",
+	"id": "b99f679a41b446cb96f42ba464f38fa1",
+	"time": "2016-06-14T02:22:53.389Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -268,13 +269,30 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "alarm",
-	"alarmType": "occlusion",
-	"status": "9fa6aa8221ff414ca12bffabe04e41cd",
+	"alarmType": "no_power",
+	"status": {
+		"type": "deviceEvent",
+		"subType": "status",
+		"status": "suspended",
+		"duration": 36000000,
+		"expectedDuration": 43200000,
+		"reason": {
+			"suspended": "automatic",
+			"resumed": "automatic"
+		},
+		"clockDriftOffset": 0,
+		"conversionOffset": 0,
+		"deviceId": "DevId0987654321",
+		"deviceTime": "2016-06-13T19:22:53",
+		"time": "2016-06-14T02:22:53.390Z",
+		"timezoneOffset": -420,
+		"uploadId": "SampleUploadId"
+	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:44",
-	"time": "2016-06-14T02:05:44.451Z",
+	"deviceTime": "2016-06-13T19:22:53",
+	"time": "2016-06-14T02:22:53.390Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -293,12 +311,12 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:49.451Z",
+	"createdTime": "2016-06-14T02:22:58.390Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:44",
-	"guid": "2c5cabba-9c0c-4fed-8919-e757773f1fe6",
-	"id": "e78d5b5cd6ec41a18d22d66920afe27e",
-	"time": "2016-06-14T02:05:44.451Z",
+	"deviceTime": "2016-06-13T19:22:53",
+	"guid": "1d38f044-d55d-4eee-ba75-1a205e0b0b1b",
+	"id": "5f8976330df5477cafabfce0a397992b",
+	"time": "2016-06-14T02:22:53.390Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

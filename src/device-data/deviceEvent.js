@@ -55,6 +55,15 @@ var STATUSES = ['suspended', 'resumed'];
 var AGENTS = ['manual', 'automatic'];
 var PREVIOUS = '[ingestion] An object representing the `status` event just prior to this event or, equivalently, just the `id` of said object.\n\n[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.';
 
+function embeddedStatus() {
+  var aSuspend = module.generate({
+    format: 'ingestion',
+    timestamp: new Date().toISOString(),
+    subType: 'status'
+  });
+  return aSuspend;
+}
+
 var schemas = {
   base: {
     type: {
@@ -91,9 +100,7 @@ var schemas = {
       }
     },
     status: {
-      instance: function() {
-        return uuid.v4().replace(/-/g, '');
-      },
+      instance: embeddedStatus,
       summary: {
         description: common.propTypes.OPTIONAL + '[ingestion, storage, client] String `id` (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type `deviceEvent`, subType `status` object that is logically connected to this alarm.',
         required: {
@@ -187,9 +194,7 @@ var schemas = {
       }
     },
     status: {
-      instance: function() {
-        return uuid.v4().replace(/-/g, '');
-      },
+      instance: embeddedStatus,
       summary: {
         description: common.propTypes.OPTIONAL + '[ingestion, storage, client] String `id` (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type `deviceEvent`, subType `status` object that is logically connected to this reservoirChange.',
         required: {
@@ -379,6 +384,12 @@ module.generate = function(opts) {
   }
   if (opts.subType === 'status') {
     deviceEvent.expectedDuration = 1.2 * deviceEvent.duration;
+  }
+
+  if (_.includes(['client', 'storage'], opts.format)) {
+    if (opts.subType !== 'status' && deviceEvent.status) {
+      deviceEvent.status = common.makeId();
+    }
   }
   delete deviceEvent.previous;
 
