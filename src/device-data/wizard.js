@@ -30,6 +30,8 @@ var boundDesc = function(bound) {
   return '[ingestion, storage, client] An integer encoding the ' + bound + ' bound of a PWD\'s blood glucose target.';
 };
 
+var BOLUS_INGESTION = '[ingestion] The `bolus` event resulting from this `wizard` event, or—for the legacy jellyfish data ingestion service *only*—optionally the `id` of the `bolus` event instead of the event itself.\n\n';
+
 var recommendedInsulinSummary = {
   description: common.propTypes.OPTIONAL + common.propTypes.insulinUnits(),
   required: {
@@ -132,7 +134,7 @@ var schema = {
       return aBolus.id;
     },
     summary: {
-      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + '[ingestion] The `id` of the bolus resulting from this `wizard` event, or—for the legacy jellyfish ingestion service *only*—the object itself.\n\n[storage, client] The `id` of the bolus resulting from this `wizard` event.',
+      description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + BOLUS_INGESTION + '[storage, client] The `id` of the bolus resulting from this `wizard` event.',
       required: {
         jellyfish: false,
         platform: true

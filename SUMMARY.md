@@ -2,6 +2,7 @@
 
 * [diabetes device data](device-data/README.md)
   * [common fields](device-data/common.md)
+  * [linking events](device-data/linking-events.md)
   * [units](device-data/units.md)
   * [annotations](device-data/annotations.md)
   * [out of range values](device-data/out-of-range.md)

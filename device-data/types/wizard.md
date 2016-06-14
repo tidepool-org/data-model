@@ -26,7 +26,11 @@
 `_schemaVersion` ? (future): We plan to migrate from `wizard` to `calculator` in the future.
 
 <!-- start editable commentary on type -->
-<!-- TODO -->
+
+The Tidepool `wizard` event - in the future, to be renamed `calculator` - models user interactions with a bolus calculator (on some pumps called the bolus "wizard"). The `wizard` event is intended to contain the values that were input into the wizard, as well as any recommendations that the calculator may have made. This event on its own does not record explicitly whether the recommendations made were followed; it is the responsibility of client software to determine this by comparison with the resulting `bolus` event.
+
+Some insulin pumps record *every* user interaction with the bolus calculator, regardless of whether a bolus resulted from the interaction or not. To avoid noise in the data from user interactions that do not have any direct clinical relevance, only user interactions with the bolus calculator that actually result in a [`bolus`](./bolus/README.md) event should be uploaded to the Tidepool platform. The resulting `bolus` should also be included *on* the `wizard` event: see [linking events](../linking-events.md) for details.
+
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -57,7 +61,9 @@
 
 
 <!-- start editable commentary on bgInput -->
-<!-- TODO -->
+
+Like all blood glucose-related fields, the `bgInput` should be uploaded in either `mg/dL` or `mmol/L` as appropriate to how the data is retrieved from the device, but all values will be converted to `mmol/L` on ingestion.
+
 <!-- end editable commentary on bgInput -->
 
 * * * * *
@@ -152,7 +158,18 @@ Contains a subset of the following properties:
 `_schemaVersion` 2: The nonexistent (in currently handled devices) `{low: [val], target: [val], high: [val]}` schema was *removed*.
 
 <!-- start editable commentary on bgTarget -->
-<!-- TODO -->
+
+The embedded `bgTarget` object models the target blood glucose that was in operation for the given bolus calculation. Like all blood glucose-related fields, the `bgTarget` should be uploaded in either `mg/dL` or `mmol/L` as appropriate to how the data is retrieved from the device, but all values will be converted to `mmol/L` on ingestion.
+
+The representation of `bgTarget` varies across insulin delivery device manufacturers as follows:
+
+- Animas represents the PWD's blood glucose target as a `target` blood glucose and a `range` encoded as a single value such that any blood glucose value +`range` or -`range` from the `target` is considered "in range" for Animas' bolus recommendation calculations.
+- Insulet represents the PWD's blood glucose target as a `target` blood glucose and a `high` threshold. Insulet's correction bolus calculations aim for the `target` but do not calculate a bolus at all if the [`bgInput`](#bginput) is *not* higher than the `high` threshold.
+- Medtronic represents the PWD's blood glucose target as a range defined by a `low` and a `high` value.
+- Tandem represents the PWD's blood glucose target simply as a single `target` blood glucose value.
+
+We have decided to use a common range for all blood glucose-related fields. As a result of this, the range of values that will be accepted for `low`, `high`, and `target` values within the `bgTarget` object is much larger than the range that is *logically* acceptable since the range of *target* values for blood glucose must necessarily be much narrower than the range of *possible* values, but we place the burden on uploading clients to ensure that the uploaded values are correct.
+
 <!-- end editable commentary on bgTarget -->
 
 * * * * *
@@ -161,7 +178,7 @@ Contains a subset of the following properties:
 
 > This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.
 
-[ingestion] The `id` of the bolus resulting from this `wizard` event, or—for the legacy jellyfish ingestion service *only*—the object itself.
+[ingestion] The `bolus` event resulting from this `wizard` event, or—for the legacy jellyfish data ingestion service *only*—optionally the `id` of the `bolus` event instead of the event itself.
 
 [storage, client] The `id` of the bolus resulting from this `wizard` event.
 
@@ -171,7 +188,15 @@ Contains a subset of the following properties:
 		platform: yes
 
 <!-- start editable commentary on bolus -->
-<!-- TODO -->
+
+As mentioned [above](#type), only bolus calculator events that result in a bolus should be uploaded to the Tidepool platform.
+
+When uploading through the legacy jellyfish ingestion API, a `bolus` resulting from a bolus calculation should be uploaded as part of the array of all `bolus` events (including also those programmed without the use of the bolus calculator) as well as embedded within the `wizard` event that programmed it.
+
+On the other hand, when uploading through the new platform APIs (under construction at the time of the drafting of this documentation in June, 2016), the `bolus` should *only* be submitted embedded within the appropriate `wizard` event.
+
+See [linking events](../linking-events.md) for more details on how events of different `type`s are linked in the Tidepool platform.
+
 <!-- end editable commentary on bolus -->
 
 * * * * *
@@ -192,7 +217,11 @@ Contains a subset of the following properties:
 		max: 1000
 
 <!-- start editable commentary on carbInput -->
-<!-- TODO -->
+
+Not every use of an insulin pump's bolus calculator involves the input of carbohydrates; a user may be using the calculator to program a correction bolus only. Accordingly, the `carbInput` field is optional. Some devices split their bolus calculator functionality into more than one menu depending on whether the user intends to enter a carbohydrate value. On such devices, Tidepool omits the `carbInput` field altogether if the data shows that the user did not choose to enter a carbohydrate value. On other devices where the carbohydrate option is always part of the calculator, there is no difference between a value of 0 and the user declining to input a value; in these cases, we upload a `carbInput` of 0.
+
+Note also that `carbInput` does not *necessarily* map directly to carbohydrates consumed by the PWD. A PWD may consume carbohydrates that are not recorded through the bolus calculator either if the PWD chooses to program a manual or quick bolus (i.e., without using the calculator) to "cover" carbohydrates ingested or if the PWD consumes carbohydrates for which no bolus is judged necessary (e.g., a snack in preparation for exercise or carbohydrates consumed to treat hypoglycemia).
+
 <!-- end editable commentary on carbInput -->
 
 * * * * *
@@ -213,7 +242,11 @@ Contains a subset of the following properties:
 		max: 250
 
 <!-- start editable commentary on insulinCarbRatio -->
-<!-- TODO -->
+
+The insulin-to-carb (I:C) ratio is part of a PWD's insulin pump settings. A user may program one I:C ratio to be used no matter the time of day, or the user may program particular ratios on a schedule per each twenty-four hour day. For Tidepool's data model of these persistent I:C ratios, see [`pumpSettings`](./pumpSettings.md).
+
+On bolus calculation events, the `insulinCarbRatio` records the I:C ratio employed in the calculation. Note that on some (perhaps all) insulin pumps, it is possible to change the insulin-to-carb (I:C) ratio for the bolus currently being calculated *without* persisting this change to the insulin pump's settings, so the `insulinCarbRatio` value on a bolus calculation may not always match the expected ratio given the user's insulin pump settings at the time of the calculation.
+
 <!-- end editable commentary on insulinCarbRatio -->
 
 * * * * *
@@ -234,7 +267,9 @@ Contains a subset of the following properties:
 		max: 250.0
 
 <!-- start editable commentary on insulinOnBoard -->
-<!-- TODO -->
+
+The `insulinOnBoard` (IOB) field on a bolus calculation event encodes the insulin pump's estimate of how much insulin is currently still metabolically active in the PWD's system from boluses prior to the one being programmed. Some insulin pumps use a simple linear function for estimating the metabolic uptake and consumption of insulin while others use more complex functions. It is commonly held that one of the key benefits of using an insulin pump is the ability to track IOB in order to avoid "stacking" boluses—that is, taking more insulin on top of a dose that is still active, possibly resulting in hypoglycemia. In order to audit bolusing behavior, therefore, it is important to include `insulinOnBoard` in the data. On many insulin pumps, `insulinOnBoard` is also taken into account for the calculation of the [`net` bolus recommendation](#recommended).
+
 <!-- end editable commentary on insulinOnBoard -->
 
 * * * * *
@@ -265,7 +300,13 @@ Contains a subset of the following properties:
 
 
 <!-- start editable commentary on insulinSensitivity -->
-<!-- TODO -->
+
+The insulin sensitivity factor (ISF, sometimes simply "sensitivity factor") is part of a PWD's insulin pump settings. A user may program one ISF to be used no matter the time of day, or the user may program particular ISFs on a schedule per each twenty-four hour day. For Tidepool's data model of these persistent ISFs, see [`pumpSettings`](./pumpSettings.md).
+
+On bolus calculation events, the `insulinSensitivity` records the ISF employed in the calculation. Note than on some (perhaps all) insulin pumps, it is possible to change the ISF for the bolus currently being calculated *without* persisting this change to the insulin pump's settings, so the `insulinSensitivity` value on a bolus calculation may not always match the expected ISF given the user's insulin pump settings at the time of the calculation.
+
+Like all blood glucose-related fields, the `insulinSensitivity` should be uploaded in either `mg/dL` or `mmol/L`[^a] as appropriate to how the data is retrieved from the device, but all values will be converted to `mmol/L` on ingestion.
+
 <!-- end editable commentary on insulinSensitivity -->
 
 * * * * *
@@ -332,7 +373,13 @@ May contain the following properties:
 		max: 100.0
 
 <!-- start editable commentary on recommended -->
-<!-- TODO -->
+
+The embedded object `recommended` encodes an insulin delivery device's recommendations for insulin dosing across three fields: `carb`, `correction`, and `net`.
+
+- `carb` encodes the units of insulin recommended by the device to "cover" the total grams of carbohydrate input ([`carbInput`](#carbinput)) by the user (if any) into the bolus calculator. The value for `carb` may be >= 0, as not all boluses involve the ingestion of carbohydrates and thus not all include a recommended insulin dose to cover carbohydrates about to be ingested.
+- `correction` encodes the units of insulin recommended by the device to bring the PWD to their target blood glucose or into their target blood glucose range given the input blood glucose ([`bgInput`](#bginput)). On some pumps, or depending on user preference on some pumps, this value may be *negative*. A negative recommendation for `correction` indicates that given the user's current blood glucose and [`insulinOnBoard`](#insulinonboard), low blood glucose is predicted and a reduction in insulin dosing (e.g., via a temporary basal rate) may be required in order to main blood glucose at or within the target.
+- `net` is the net number of units of insulin that the bolus calculator recommended given the user's inputs. Generally, this `net` recommendation takes at least two and perhaps all three of `recommended.carb`, `recommended.correction`, and `insulinOnBoard` into account, but all insulin delivery devices currently on the market perform this calculation slightly differently and so we have chosen to store the *result* of the calculation rather than leave this calculation as the responsibility of client applications.
+
 <!-- end editable commentary on recommended -->
 
 * * * * *
@@ -354,7 +401,7 @@ See [units](../units.md) for further explanation of blood glucose units.
 		`mmol/L`
 
 <!-- start editable commentary on units -->
-<!-- TODO -->
+
 <!-- end editable commentary on units -->
 
 * * * * *
@@ -504,29 +551,28 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 31.195203709675898,
+	"bgInput": 9.88033142406105,
 	"bgTarget": {
-		"low": 4.440598392836427,
-		"high": 6.938434988806917
+		"target": 5.82828539059781
 	},
-	"bolus": "d3317638a11e4ee58c3c01ea5274074e",
-	"carbInput": 27,
-	"insulinCarbRatio": 18,
-	"insulinOnBoard": 12.051,
-	"insulinSensitivity": 30,
+	"bolus": "f2867257ae894436b56af7393c85201d",
+	"carbInput": 132,
+	"insulinCarbRatio": 15,
+	"insulinOnBoard": 21.266,
+	"insulinSensitivity": 5,
 	"recommended": {
-		"carb": 1.5,
-		"correction": 0.75,
+		"carb": 8.75,
+		"correction": 2,
 		"net": 0
 	},
 	"units": "mmol/L",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:46",
-	"guid": "b48777f0-7a64-4db9-994f-b89b673842d9",
-	"id": "3383f4d87a024d278cc4285ab4d7a625",
-	"time": "2016-06-10T02:58:46.722Z",
+	"deviceTime": "2016-06-13T17:35:38",
+	"guid": "db69338f-4e8f-4dc9-94ec-b49105ac7117",
+	"id": "e6e0ddbdcfcc4c038643955e23d25421",
+	"time": "2016-06-14T00:35:38.023Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -537,28 +583,27 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 33,
+	"bgInput": 139,
 	"bgTarget": {
-		"target": 100,
-		"high": 130
+		"target": 105
 	},
-	"bolus": "57b2aeb4d1d64ea398dbcaed849a756f",
-	"carbInput": 112,
-	"insulinCarbRatio": 16,
-	"insulinOnBoard": 2.27,
-	"insulinSensitivity": 48,
+	"bolus": "0f04442624ad491ea8f80d3779b622f2",
+	"carbInput": 47,
+	"insulinCarbRatio": 7,
+	"insulinOnBoard": 13.173,
+	"insulinSensitivity": 34,
 	"recommended": {
-		"carb": 7,
-		"correction": 0.75,
-		"net": 5.5
+		"carb": 6.75,
+		"correction": 4,
+		"net": 0
 	},
 	"units": "mg/dL",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:46",
-	"guid": "3ba948a3-ea0b-4708-aeee-ce18e125a4c0",
-	"time": "2016-06-10T02:58:46.724Z",
+	"deviceTime": "2016-06-13T17:35:38",
+	"guid": "acbd46bd-7b9b-4a75-8248-4fd5cad7fed6",
+	"time": "2016-06-14T00:35:38.024Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -569,19 +614,20 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 3.7190011540005075,
+	"bgInput": 27.198665156123113,
 	"bgTarget": {
-		"target": 5.550747991045533
+		"target": 5.273210591493257,
+		"range": 0.83261219865683
 	},
-	"bolus": "feed7099482a4e58b15a5b196b14d9fc",
-	"carbInput": 138,
-	"insulinCarbRatio": 8,
-	"insulinOnBoard": 16.632,
-	"insulinSensitivity": 91,
+	"bolus": "172fba918c6a4d0ba68eff6fdb09e91f",
+	"carbInput": 93,
+	"insulinCarbRatio": 16,
+	"insulinOnBoard": 24.717,
+	"insulinSensitivity": 37,
 	"recommended": {
-		"carb": 17.25,
-		"correction": 0,
-		"net": 0.5
+		"carb": 5.75,
+		"correction": 0.5,
+		"net": 0
 	},
 	"units": "mmol/L",
 	"_active": true,
@@ -590,13 +636,15 @@ See [common fields](../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-10T02:58:51.724Z",
+	"createdTime": "2016-06-14T00:35:43.025Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:46",
-	"guid": "ae227f03-d70d-444d-b14e-131c2da84ea1",
-	"id": "ff9e6201e5b547dfb3b3d3f8129dfda8",
-	"time": "2016-06-10T02:58:46.724Z",
+	"deviceTime": "2016-06-13T17:35:38",
+	"guid": "1241137e-764f-4909-9b59-d3eb34152f5d",
+	"id": "6eb8b97688224f68bbcb03e149b5b405",
+	"time": "2016-06-14T00:35:38.025Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
 ```
+
+[^a]: If one wishes to be pedantic, the units for `insulinSensitivity` are technically `md/dL/u` or `mmol/L/u` since ISF is a ratio of "points" of blood glucose *per unit* of insulin.
