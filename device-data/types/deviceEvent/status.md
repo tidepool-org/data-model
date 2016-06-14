@@ -234,16 +234,6 @@ See [common fields](../../common.md).
 
 * * * * *
 
-### guid
-
-See [common fields](../../common.md).
-
-<!-- start editable commentary on guid -->
-<!-- TODO -->
-<!-- end editable commentary on guid -->
-
-* * * * *
-
 ### time
 
 See [common fields](../../common.md).
@@ -324,6 +314,16 @@ See [common fields](../../common.md).
 
 * * * * *
 
+### guid
+
+See [common fields](../../common.md).
+
+<!-- start editable commentary on guid -->
+<!-- TODO -->
+<!-- end editable commentary on guid -->
+
+* * * * *
+
 ### id
 
 See [common fields](../../common.md).
@@ -341,19 +341,19 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 64800000,
-	"expectedDuration": 77760000,
+	"duration": 3600000,
+	"expectedDuration": 4320000,
 	"reason": {
-		"suspended": "manual",
+		"suspended": "automatic",
 		"resumed": "automatic"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "c6167608-a489-42db-98af-ccf3e9251d9a",
-	"id": "961dd4e8b3d54ae19088964141f55f8f",
-	"time": "2016-05-04T08:18:05.836Z",
+	"deviceTime": "2016-06-13T19:05:45",
+	"guid": "08aa9d8f-d9df-4263-a178-68fbcdd066ef",
+	"id": "0380cf9a82ea4fe2b044e71a9f086382",
+	"time": "2016-06-14T02:05:45.320Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -366,18 +366,17 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 37800000,
-	"expectedDuration": 45360000,
+	"duration": 48600000,
+	"expectedDuration": 58320000,
 	"reason": {
 		"suspended": "manual",
-		"resumed": "automatic"
+		"resumed": "manual"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "252abbf0-4a11-4dcf-8f55-dd1519d71cda",
-	"time": "2016-05-04T08:18:05.837Z",
+	"deviceTime": "2016-06-13T19:05:45",
+	"time": "2016-06-14T02:05:45.321Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -390,10 +389,10 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 19800000,
-	"expectedDuration": 23760000,
+	"duration": 32400000,
+	"expectedDuration": 38880000,
 	"reason": {
-		"suspended": "manual",
+		"suspended": "automatic",
 		"resumed": "manual"
 	},
 	"_active": true,
@@ -402,12 +401,12 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:10.837Z",
+	"createdTime": "2016-06-14T02:05:50.321Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "468168ab-a4f9-46e2-a6f9-81a38782ce45",
-	"id": "d40e0dcf7df543f2be93aa53b35cd9df",
-	"time": "2016-05-04T08:18:05.837Z",
+	"deviceTime": "2016-06-13T19:05:45",
+	"guid": "ec271750-46cc-429d-85c3-0488304945ad",
+	"id": "71845a4f9f1a4cb188552836286238c1",
+	"time": "2016-06-14T02:05:45.321Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

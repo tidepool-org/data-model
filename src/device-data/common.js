@@ -157,6 +157,7 @@ module.generate = function(schema, utc, format, manufacturer) {
       '_schemaVersion',
       '_version',
       'createdTime',
+      'guid',
       'id'
     ];
     return _.omit(obj, excluded);
@@ -202,7 +203,7 @@ module.generate = function(schema, utc, format, manufacturer) {
     deviceTime: moment.utc(Date.parse(utc))
       .subtract(tzOffset, 'minutes').toISOString().slice(0, -5),
     guid: uuid.v4(),
-    id: uuid.v4().replace(/-/g, ''),
+    id: module.makeId(),
     time: utc,
     timezoneOffset: -tzOffset,
     uploadId: 'SampleUploadId'
@@ -221,6 +222,10 @@ module.generate = function(schema, utc, format, manufacturer) {
   }
 
   return _.assign({}, schemaObj, commonFields);
+};
+
+module.makeId = function() {
+  return uuid.v4().replace(/-/g, '');
 };
 
 module.propTypes = {

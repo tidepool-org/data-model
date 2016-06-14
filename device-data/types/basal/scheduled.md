@@ -215,16 +215,6 @@ See [common fields](../../common.md).
 
 * * * * *
 
-### guid
-
-See [common fields](../../common.md).
-
-<!-- start editable commentary on guid -->
-<!-- TODO -->
-<!-- end editable commentary on guid -->
-
-* * * * *
-
 ### time
 
 See [common fields](../../common.md).
@@ -305,6 +295,16 @@ See [common fields](../../common.md).
 
 * * * * *
 
+### guid
+
+See [common fields](../../common.md).
+
+<!-- start editable commentary on guid -->
+<!-- TODO -->
+<!-- end editable commentary on guid -->
+
+* * * * *
+
 ### id
 
 See [common fields](../../common.md).
@@ -321,16 +321,16 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 77400000,
-	"rate": 0.475,
-	"scheduleName": "Weekday",
+	"duration": 61200000,
+	"rate": 0.95,
+	"scheduleName": "Weekend",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:00:00",
-	"guid": "7cb11df0-080c-41b0-843f-4a2e94ad4a7b",
-	"id": "c6b7baa17d514bc1a653020a363fdbe5",
-	"time": "2016-05-04T08:00:00.000Z",
+	"deviceTime": "2016-06-13T19:00:00",
+	"guid": "3483ef73-2eb1-40d0-accd-0fae2d812ebf",
+	"id": "dafca36d61394a5b93e5975ac6e6ba29",
+	"time": "2016-06-14T02:00:00.000Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -342,30 +342,14 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 37800000,
-	"rate": 0.725,
-	"previous": {
-		"type": "basal",
-		"deliveryType": "scheduled",
-		"duration": 3600000,
-		"rate": 1.05,
-		"scheduleName": "Weekday",
-		"clockDriftOffset": 0,
-		"conversionOffset": 0,
-		"deviceId": "DevId0987654321",
-		"deviceTime": "2016-05-04T00:00:00",
-		"guid": "0e33ec17-efeb-435a-bfd0-339ed0cb222c",
-		"time": "2016-05-04T07:00:00.000Z",
-		"timezoneOffset": -420,
-		"uploadId": "SampleUploadId"
-	},
-	"scheduleName": "Very Active",
+	"duration": 61200000,
+	"rate": 0.45,
+	"scheduleName": "Stress",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:00:00",
-	"guid": "9484d55e-b717-4ac6-b3e8-e0bd0fb9c308",
-	"time": "2016-05-04T08:00:00.000Z",
+	"deviceTime": "2016-06-13T19:00:00",
+	"time": "2016-06-14T02:00:00.000Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -377,21 +361,21 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 16200000,
-	"rate": 1,
-	"scheduleName": "Weekday",
+	"duration": 7200000,
+	"rate": 1.8,
+	"scheduleName": "Vacation",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:00:05.000Z",
+	"createdTime": "2016-06-14T02:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:00:00",
-	"guid": "822bb2bd-a236-4658-a3cc-0f1fb029a49f",
-	"id": "e3f2a0df58e24d348dc52c98623ab817",
-	"time": "2016-05-04T08:00:00.000Z",
+	"deviceTime": "2016-06-13T19:00:00",
+	"guid": "d829dab2-46e8-4977-bca3-de2a28269f2c",
+	"id": "e499052181d94f3c9353822453be0d1f",
+	"time": "2016-06-14T02:00:00.000Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

@@ -105,16 +105,6 @@ See [common fields](../common.md).
 
 * * * * *
 
-### guid
-
-See [common fields](../common.md).
-
-<!-- start editable commentary on guid -->
-<!-- TODO -->
-<!-- end editable commentary on guid -->
-
-* * * * *
-
 ### time
 
 See [common fields](../common.md).
@@ -195,6 +185,16 @@ See [common fields](../common.md).
 
 * * * * *
 
+### guid
+
+See [common fields](../common.md).
+
+<!-- start editable commentary on guid -->
+<!-- TODO -->
+<!-- end editable commentary on guid -->
+
+* * * * *
+
 ### id
 
 See [common fields](../common.md).
@@ -211,14 +211,14 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 5,
+	"value": 0.8,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "2fb03c7f-4040-4e2f-a3a0-43474d4e20d9",
-	"id": "d46136b10e964d308d3853b5fa7db708",
-	"time": "2016-05-04T08:18:04.704Z",
+	"deviceTime": "2016-06-13T19:05:43",
+	"guid": "ae40651d-b8e7-428e-840f-bbb3e1132569",
+	"id": "55346384504b4b76b24c60a236448012",
+	"time": "2016-06-14T02:05:43.500Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -230,13 +230,12 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 4.3,
+	"value": 0.3,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "a46d3df5-48d6-49ad-b9b9-4a7c6c816b5d",
-	"time": "2016-05-04T08:18:04.704Z",
+	"deviceTime": "2016-06-13T19:05:43",
+	"time": "2016-06-14T02:05:43.501Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -248,19 +247,19 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 0.9,
+	"value": 3.2,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:09.705Z",
+	"createdTime": "2016-06-14T02:05:48.502Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:04",
-	"guid": "8fb6f783-0a32-4b42-b0cf-444f2477d30d",
-	"id": "bb579528b60f4ee9b9c76fa696340eaa",
-	"time": "2016-05-04T08:18:04.705Z",
+	"deviceTime": "2016-06-13T19:05:43",
+	"guid": "6d1ab0af-b3c5-4d3c-a491-b85fcd70b101",
+	"id": "4642d3bb62cc46ad825564f28d2f2c26",
+	"time": "2016-06-14T02:05:43.502Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

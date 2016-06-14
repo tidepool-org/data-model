@@ -446,16 +446,6 @@ See [common fields](../common.md).
 
 * * * * *
 
-### guid
-
-See [common fields](../common.md).
-
-<!-- start editable commentary on guid -->
-<!-- TODO -->
-<!-- end editable commentary on guid -->
-
-* * * * *
-
 ### time
 
 See [common fields](../common.md).
@@ -536,6 +526,16 @@ See [common fields](../common.md).
 
 * * * * *
 
+### guid
+
+See [common fields](../common.md).
+
+<!-- start editable commentary on guid -->
+<!-- TODO -->
+<!-- end editable commentary on guid -->
+
+* * * * *
+
 ### id
 
 See [common fields](../common.md).
@@ -551,28 +551,28 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 9.88033142406105,
+	"bgInput": 2.442329116060035,
 	"bgTarget": {
-		"target": 5.82828539059781
+		"target": 5.550747991045533
 	},
-	"bolus": "f2867257ae894436b56af7393c85201d",
-	"carbInput": 132,
-	"insulinCarbRatio": 15,
-	"insulinOnBoard": 21.266,
-	"insulinSensitivity": 5,
+	"bolus": "6b58fe5558c54e86aea17eba01e52271",
+	"carbInput": 100,
+	"insulinCarbRatio": 24,
+	"insulinOnBoard": 19.156,
+	"insulinSensitivity": 45,
 	"recommended": {
-		"carb": 8.75,
-		"correction": 2,
+		"carb": 4.25,
+		"correction": 0,
 		"net": 0
 	},
 	"units": "mmol/L",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T17:35:38",
-	"guid": "db69338f-4e8f-4dc9-94ec-b49105ac7117",
-	"id": "e6e0ddbdcfcc4c038643955e23d25421",
-	"time": "2016-06-14T00:35:38.023Z",
+	"deviceTime": "2016-06-13T19:05:46",
+	"guid": "a2225d0d-d81b-4a2b-8bfb-5a079ffdf3ef",
+	"id": "10d8f3811d3b4835b4bacbdc92ca951c",
+	"time": "2016-06-14T02:05:46.171Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -583,27 +583,42 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 139,
+	"bgInput": 376,
 	"bgTarget": {
-		"target": 105
+		"target": 95,
+		"range": 25
 	},
-	"bolus": "0f04442624ad491ea8f80d3779b622f2",
-	"carbInput": 47,
-	"insulinCarbRatio": 7,
-	"insulinOnBoard": 13.173,
-	"insulinSensitivity": 34,
+	"bolus": {
+		"type": "bolus",
+		"subType": "dual/square",
+		"normal": 4,
+		"extended": 5.5,
+		"expectedExtended": 8.25,
+		"duration": 68400000,
+		"expectedDuration": 102600000,
+		"clockDriftOffset": 0,
+		"conversionOffset": 0,
+		"deviceId": "DevId0987654321",
+		"deviceTime": "2016-06-13T19:05:46",
+		"time": "2016-06-14T02:05:46.173Z",
+		"timezoneOffset": -420,
+		"uploadId": "SampleUploadId"
+	},
+	"carbInput": 46,
+	"insulinCarbRatio": 15,
+	"insulinOnBoard": 22.525,
+	"insulinSensitivity": 61,
 	"recommended": {
-		"carb": 6.75,
-		"correction": 4,
+		"carb": 3,
+		"correction": 4.25,
 		"net": 0
 	},
 	"units": "mg/dL",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T17:35:38",
-	"guid": "acbd46bd-7b9b-4a75-8248-4fd5cad7fed6",
-	"time": "2016-06-14T00:35:38.024Z",
+	"deviceTime": "2016-06-13T19:05:46",
+	"time": "2016-06-14T02:05:46.173Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -614,20 +629,19 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 27.198665156123113,
+	"bgInput": 11.157003462001523,
 	"bgTarget": {
-		"target": 5.273210591493257,
-		"range": 0.83261219865683
+		"target": 6.383360189702364
 	},
-	"bolus": "172fba918c6a4d0ba68eff6fdb09e91f",
-	"carbInput": 93,
-	"insulinCarbRatio": 16,
-	"insulinOnBoard": 24.717,
-	"insulinSensitivity": 37,
+	"bolus": "37b840b5f2f64a34bfd2e94140cf1709",
+	"carbInput": 115,
+	"insulinCarbRatio": 22,
+	"insulinOnBoard": 4.952,
+	"insulinSensitivity": 40,
 	"recommended": {
-		"carb": 5.75,
-		"correction": 0.5,
-		"net": 0
+		"carb": 5.25,
+		"correction": 0.25,
+		"net": 0.5
 	},
 	"units": "mmol/L",
 	"_active": true,
@@ -636,12 +650,12 @@ See [common fields](../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T00:35:43.025Z",
+	"createdTime": "2016-06-14T02:05:51.174Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T17:35:38",
-	"guid": "1241137e-764f-4909-9b59-d3eb34152f5d",
-	"id": "6eb8b97688224f68bbcb03e149b5b405",
-	"time": "2016-06-14T00:35:38.025Z",
+	"deviceTime": "2016-06-13T19:05:46",
+	"guid": "26798a81-12db-4878-8bb2-274bcc7576f1",
+	"id": "2586a20c573f4f7eb71c5a6ecda9f740",
+	"time": "2016-06-14T02:05:46.174Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

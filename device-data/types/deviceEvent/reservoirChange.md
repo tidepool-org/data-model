@@ -105,16 +105,6 @@ See [common fields](../../common.md).
 
 * * * * *
 
-### guid
-
-See [common fields](../../common.md).
-
-<!-- start editable commentary on guid -->
-<!-- TODO -->
-<!-- end editable commentary on guid -->
-
-* * * * *
-
 ### time
 
 See [common fields](../../common.md).
@@ -195,6 +185,16 @@ See [common fields](../../common.md).
 
 * * * * *
 
+### guid
+
+See [common fields](../../common.md).
+
+<!-- start editable commentary on guid -->
+<!-- TODO -->
+<!-- end editable commentary on guid -->
+
+* * * * *
+
 ### id
 
 See [common fields](../../common.md).
@@ -211,14 +211,14 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "2e66a40bbab74780b9959cd38fbebb3f",
+	"status": "cd254b2b75d049a5898141e4dc9b1240",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "5603ddc5-3a0b-4e67-963a-8ca7e3e5eefb",
-	"id": "09f071b87ad34213a4c8271325bc7e2f",
-	"time": "2016-05-04T08:18:05.646Z",
+	"deviceTime": "2016-06-13T19:05:45",
+	"guid": "c7793678-1420-4825-9ca7-fb1d8e89e869",
+	"id": "763f83bf1eb24baa85b6b6ee96d877f2",
+	"time": "2016-06-14T02:05:45.079Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -230,13 +230,12 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "9245bff336f548a6a0512b77a09bbff1",
+	"status": "3ea3c7d72bcc4811917733d12ff3ebb7",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "10ecfdd7-6b28-4b4d-9bc4-892f4e1537a7",
-	"time": "2016-05-04T08:18:05.647Z",
+	"deviceTime": "2016-06-13T19:05:45",
+	"time": "2016-06-14T02:05:45.080Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -248,19 +247,19 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "a7fa19b17e324dbdba797adf22ac7883",
+	"status": "06c81b089b8f41dc99c98beb8405e38e",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:10.647Z",
+	"createdTime": "2016-06-14T02:05:50.080Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "0b0c5ab9-22fb-4919-96fe-9db7e539856b",
-	"id": "db0726abd919430ea719683f8bb6afbf",
-	"time": "2016-05-04T08:18:05.647Z",
+	"deviceTime": "2016-06-13T19:05:45",
+	"guid": "5c245e81-122f-4d2a-83a9-137a187c6c54",
+	"id": "d9d6b1f4d699478bbb1f1a748d5994ac",
+	"time": "2016-06-14T02:05:45.080Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

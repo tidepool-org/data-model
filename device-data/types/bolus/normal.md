@@ -134,16 +134,6 @@ See [common fields](../../common.md).
 
 * * * * *
 
-### guid
-
-See [common fields](../../common.md).
-
-<!-- start editable commentary on guid -->
-<!-- TODO -->
-<!-- end editable commentary on guid -->
-
-* * * * *
-
 ### time
 
 See [common fields](../../common.md).
@@ -224,6 +214,16 @@ See [common fields](../../common.md).
 
 * * * * *
 
+### guid
+
+See [common fields](../../common.md).
+
+<!-- start editable commentary on guid -->
+<!-- TODO -->
+<!-- end editable commentary on guid -->
+
+* * * * *
+
 ### id
 
 See [common fields](../../common.md).
@@ -240,15 +240,15 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 3.5,
-	"expectedNormal": 4.2,
+	"normal": 1.5,
+	"expectedNormal": 1.8,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:43",
-	"guid": "b0508432-b54e-432f-9562-560dd18fba7c",
-	"id": "ed9d2b7c683942d4b48af93fcb66d127",
-	"time": "2016-06-10T02:58:43.798Z",
+	"deviceTime": "2016-06-13T19:05:42",
+	"guid": "6082c713-15b9-4e42-99b8-84d8e7f18077",
+	"id": "bc29346b184d4d26aaf6d2c113430214",
+	"time": "2016-06-14T02:05:42.696Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -260,14 +260,13 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 9.75,
-	"expectedNormal": 11.7,
+	"normal": 3,
+	"expectedNormal": 3.6,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:43",
-	"guid": "6b1a502e-3d65-4a95-9c8b-0f660099812f",
-	"time": "2016-06-10T02:58:43.799Z",
+	"deviceTime": "2016-06-13T19:05:42",
+	"time": "2016-06-14T02:05:42.697Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -279,20 +278,20 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 3.75,
-	"expectedNormal": 4.5,
+	"normal": 2.25,
+	"expectedNormal": 2.7,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-10T02:58:48.799Z",
+	"createdTime": "2016-06-14T02:05:47.697Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:43",
-	"guid": "ee92e0e3-ccdf-4f13-99cb-3aaa655d45e1",
-	"id": "ca6829ac311b46058a64ef39fe7c8788",
-	"time": "2016-06-10T02:58:43.799Z",
+	"deviceTime": "2016-06-13T19:05:42",
+	"guid": "3b6caef1-40f9-4e97-b360-d6459d2a35c4",
+	"id": "f0c0b6b37f0743da99278a49abcde303",
+	"time": "2016-06-14T02:05:42.697Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

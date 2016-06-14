@@ -128,10 +128,11 @@ var schema = {
   bolus: {
     instance: function() {
       var aBolus = bolus.generate({
+        format: 'ingestion',
         timestamp: new Date().toISOString(),
         subType: chance.pickone(bolus.subTypes)
       });
-      return aBolus.id;
+      return aBolus;
     },
     summary: {
       description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + BOLUS_INGESTION + '[storage, client] The `id` of the bolus resulting from this `wizard` event.',
@@ -269,6 +270,9 @@ module.generate = function(utc, format) {
   wizard.recommended.net = Math.round((wizard.recommended.carb + wizard.recommended.correction - wizard.insulinOnBoard)*4)/4;
   if (wizard.recommended.net < 0) {
     wizard.recommended.net = 0;
+  }
+  if (_.includes(['client', 'storage'], format)) {
+    wizard.bolus = common.makeId();
   }
 
   return wizard;

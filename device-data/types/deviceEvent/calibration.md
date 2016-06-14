@@ -135,16 +135,6 @@ See [common fields](../../common.md).
 
 * * * * *
 
-### guid
-
-See [common fields](../../common.md).
-
-<!-- start editable commentary on guid -->
-<!-- TODO -->
-<!-- end editable commentary on guid -->
-
-* * * * *
-
 ### time
 
 See [common fields](../../common.md).
@@ -225,6 +215,16 @@ See [common fields](../../common.md).
 
 * * * * *
 
+### guid
+
+See [common fields](../../common.md).
+
+<!-- start editable commentary on guid -->
+<!-- TODO -->
+<!-- end editable commentary on guid -->
+
+* * * * *
+
 ### id
 
 See [common fields](../../common.md).
@@ -242,14 +242,14 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "calibration",
 	"units": "mmol/L",
-	"value": 13.266287698598825,
+	"value": 19.982692767763922,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "d72f6d82-8f1d-4412-bc76-1694640f5b5f",
-	"id": "0292702fa88a413a92a63167aa57987d",
-	"time": "2016-05-04T08:18:05.278Z",
+	"deviceTime": "2016-06-13T19:05:44",
+	"guid": "19c681d0-dd75-4430-8bce-aefb0da60006",
+	"id": "78c20060b36e4ca8b4be38a2b2fb90d3",
+	"time": "2016-06-14T02:05:44.655Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -262,13 +262,12 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "calibration",
 	"units": "mg/dL",
-	"value": 102,
+	"value": 463,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "b0db49ba-bbc2-476c-b2c0-27fad020c4c4",
-	"time": "2016-05-04T08:18:05.278Z",
+	"deviceTime": "2016-06-13T19:05:44",
+	"time": "2016-06-14T02:05:44.656Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -281,19 +280,19 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "calibration",
 	"units": "mmol/L",
-	"value": 20.537767566868474,
+	"value": 6.882927508896461,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-05-04T08:18:10.278Z",
+	"createdTime": "2016-06-14T02:05:49.656Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-05-04T01:18:05",
-	"guid": "2a2ca51a-e15f-47f1-8c77-053c277fcdc9",
-	"id": "5432f65bbe5c4b76af5c7a5d5db76b49",
-	"time": "2016-05-04T08:18:05.278Z",
+	"deviceTime": "2016-06-13T19:05:44",
+	"guid": "5a13f09f-96bd-4baa-989a-34263e6a802f",
+	"id": "c9b7cd3520b347f39c3f8cb8ce1bd634",
+	"time": "2016-06-14T02:05:44.656Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

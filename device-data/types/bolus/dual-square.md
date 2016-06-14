@@ -232,16 +232,6 @@ See [common fields](../../common.md).
 
 * * * * *
 
-### guid
-
-See [common fields](../../common.md).
-
-<!-- start editable commentary on guid -->
-<!-- TODO -->
-<!-- end editable commentary on guid -->
-
-* * * * *
-
 ### time
 
 See [common fields](../../common.md).
@@ -322,6 +312,16 @@ See [common fields](../../common.md).
 
 * * * * *
 
+### guid
+
+See [common fields](../../common.md).
+
+<!-- start editable commentary on guid -->
+<!-- TODO -->
+<!-- end editable commentary on guid -->
+
+* * * * *
+
 ### id
 
 See [common fields](../../common.md).
@@ -338,18 +338,18 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 2.25,
-	"extended": 0.75,
-	"expectedExtended": 1.125,
-	"duration": 72000000,
-	"expectedDuration": 108000000,
+	"normal": 4.25,
+	"extended": 3,
+	"expectedExtended": 4.5,
+	"duration": 81000000,
+	"expectedDuration": 121500000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:44",
-	"guid": "6212ef20-e19a-4409-9b01-56f713123060",
-	"id": "1cd539f4199540219262b386e370f779",
-	"time": "2016-06-10T02:58:44.221Z",
+	"deviceTime": "2016-06-13T19:05:43",
+	"guid": "c3648d03-d0a6-40f6-87fe-d928027742b5",
+	"id": "f7e7e21815614a389d9760c79ee57e23",
+	"time": "2016-06-14T02:05:43.091Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -361,17 +361,16 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 7.5,
-	"extended": 9.75,
-	"expectedExtended": 14.625,
-	"duration": 73800000,
-	"expectedDuration": 110700000,
+	"normal": 4.75,
+	"extended": 8,
+	"expectedExtended": 12,
+	"duration": 77400000,
+	"expectedDuration": 116100000,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:44",
-	"guid": "f6ca5ca5-6cca-4cd0-81a5-f82b0b2908eb",
-	"time": "2016-06-10T02:58:44.222Z",
+	"deviceTime": "2016-06-13T19:05:43",
+	"time": "2016-06-14T02:05:43.092Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -383,23 +382,23 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "dual/square",
-	"normal": 3.25,
-	"extended": 1.75,
-	"expectedExtended": 2.625,
-	"duration": 57600000,
-	"expectedDuration": 86400000,
+	"normal": 9.5,
+	"extended": 2.25,
+	"expectedExtended": 3.375,
+	"duration": 59400000,
+	"expectedDuration": 89100000,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-10T02:58:49.222Z",
+	"createdTime": "2016-06-14T02:05:48.093Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-09T19:58:44",
-	"guid": "ad744264-52b2-4901-b166-9315d09e95ef",
-	"id": "b426390126c345d896be2d2791682662",
-	"time": "2016-06-10T02:58:44.222Z",
+	"deviceTime": "2016-06-13T19:05:43",
+	"guid": "aa18ba7f-fb4b-49db-a684-6652ff0bcda4",
+	"id": "c8365e1aab834b5594f995adb3953c76",
+	"time": "2016-06-14T02:05:43.093Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

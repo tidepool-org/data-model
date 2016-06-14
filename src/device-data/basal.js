@@ -282,23 +282,12 @@ module.generate = function(opts) {
     process.exit();
   }
   var roundedTimestamp = moment(opts.timestamp).startOf('hour');
-  var previous = common.generate(
-    _.assign({}, schemas.base, schemas.scheduled),
-    moment(roundedTimestamp).subtract(1, 'hour').toISOString(),
-    'ingestion'
-  );
-  previous.duration = 36e5;
   var basal = common.generate(
     _.assign({}, schemas.base, schemas[opts.subType]),
     roundedTimestamp.toISOString(),
     opts.format
   );
-  if (opts.format === 'ingestion') {
-    basal.previous = _.omit(previous, ['expectedDuration', 'previous']);
-  }
-  else {
-    delete basal.previous;
-  }
+  delete basal.previous;
   if (_.includes(['temp', 'suspend'], opts.subType)) {
     var suppressed = common.generate(
       _.assign({}, schemas.base, schemas.scheduled),
