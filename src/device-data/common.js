@@ -245,6 +245,9 @@ module.propTypes = {
     var elsewhere = '[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.';
     return ingestion + elsewhere;
   },
+  boolean: function() {
+    return '[ingestion, storage, client] A Boolean value: `true` or `false`.';
+  },
   deviceTime: function() {
     return '[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `' + new Date().toISOString().slice(0, -5) + '`.';
   },
@@ -387,10 +390,14 @@ module.startSummary = {
 };
 
 module.timeConstants = {
-  MIN_DEVICE_TIME: '2007-01-01T00:00:00'
+  MIN_DEVICE_TIME: '2007-01-01T00:00:00',
+  MS_IN_24_HOURS: 864e5
 };
 
 module.PUMP_MANUFACTURERS = ['animas', 'insulet', 'medtronic', 'tandem'];
 module.SCHEDULE_NAMES = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
+
+// we don't upload 'medtronic' CGM settings yet
+module.CGM_MANUFACTURERS = ['dexcom'];
 
 module.exports = module;
