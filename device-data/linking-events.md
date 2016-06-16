@@ -182,7 +182,7 @@ To demonstrate with the same example data as above, the data for ingestion via t
 }]
 ```
 
-And the resulting data is nearly exactly the same, the only difference being that the `id`s on each object are [RFC 4122](https://tools.ietf.org/html/rfc4122 'RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace') version 4 UUIDs with all `-`s stripped:
+And the resulting data is nearly exactly the same as the data resulting from ingestion through the legacy jellyfish API, the only difference being that the `id`s on each object are [RFC 4122](https://tools.ietf.org/html/rfc4122 'RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace') version 4 GUIDs with all `-`s stripped:
 
 ```json
 [{
