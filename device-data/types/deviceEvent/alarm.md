@@ -90,7 +90,9 @@ For some devices, an alarm event (e.g., an occlusion alarm) is the **only** indi
 
 > This field is **optional**.
 
-[ingestion, storage, client] String `id` (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type `deviceEvent`, subType `status` object that is logically connected to this alarm.
+[ingestion] The `status` event logically connected with this event, or—for the legacy jellyfish data ingestion service *only*—optionally the `id` of the `status` event instead of the event itself.
+
+[storage, client] The `id` of the `status` event logically connected with this event.
 
 	QUICK SUMMARY
 	Required:
@@ -98,7 +100,19 @@ For some devices, an alarm event (e.g., an occlusion alarm) is the **only** indi
 		platform: no (optional)
 
 <!-- start editable commentary on status -->
-<!-- TODO -->
+
+Some `alarmType`s are correlated with a stoppage of insulin delivery. Specifically, we assume that all of the following alarms correspond to a period of no insulin delivery on the insulin pump—that is, a period of time when the pump's delivery status is "suspended":
+
+- `no_insulin`
+- `no_power`
+- `occlusion`
+- `no_delivery`
+- `auto_off`
+
+Some insulin pumps do include in their data protocols a separate indication of this stoppage of insulin delivery elsewhere than just the `alarm` event. Some insulin pumps, however, do not separately indicate the change in the pump's insulin delivery status. For such devices, a `status` event should be *fabricated* using the relevant information from the `alarm` event (timestamp, log index, etc.). In order to provide an audit trail of the user's processed and standardized data, we then embed this `status` event in the originating `alarm` to preserve the close connection between the events.
+
+See [linking events](../../linking-events.md) for additional details regarding inter-event linking in the Tidepool platform.
+
 <!-- end editable commentary on status -->
 
 * * * * *

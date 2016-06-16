@@ -52,7 +52,9 @@ The optional `payload` embedded object may be included in order to expose the sp
 
 > This field is **optional**.
 
-[ingestion, storage, client] String `id` (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type `deviceEvent`, subType `status` object that is logically connected to this reservoirChange.
+[ingestion] The `status` event logically connected with this event, or—for the legacy jellyfish data ingestion service *only*—optionally the `id` of the `status` event instead of the event itself.
+
+[storage, client] The `id` of the `status` event logically connected with this event.
 
 	QUICK SUMMARY
 	Required:
@@ -60,7 +62,11 @@ The optional `payload` embedded object may be included in order to expose the sp
 		platform: no (optional)
 
 <!-- start editable commentary on status -->
-<!-- TODO -->
+
+As mentioned [above](#type), a `reservoirChange` event implies a stoppage of insulin delivery. On some insulin delivery devices, the data includes an explicit indication of this suspended state, but on devices where the event interpreted as a `reservoirChange` (whether that's a rewind of a syringe-style pump or a pod deactivation in the case of a patch-style pump, etc.) is the only event yielding information regarding the pump's insulin delivery status, a `status` event should be *fabricated* using the relevant information from the `reservoirChange` event (timestamp, log index, etc.) and embedded within the `reservoirChange` event in order to provide an audit trail of the user's data and preserve the close connection between the stored events.
+
+See [linking events](../../linking-events.md) for additional details regarding inter-event linking in the Tidepool platform.
+
 <!-- end editable commentary on status -->
 
 * * * * *

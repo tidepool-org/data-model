@@ -64,6 +64,9 @@ function embeddedStatus() {
   return aSuspend;
 }
 
+var LINKED_INGESTION = '[ingestion] The `status` event logically connected with this event, or—for the legacy jellyfish data ingestion service *only*—optionally the `id` of the `status` event instead of the event itself.\n\n';
+var LINKED_OTHER = '[storage, client] The `id` of the `status` event logically connected with this event.';
+
 var schemas = {
   base: {
     type: {
@@ -102,7 +105,7 @@ var schemas = {
     status: {
       instance: embeddedStatus,
       summary: {
-        description: common.propTypes.OPTIONAL + '[ingestion, storage, client] String `id` (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type `deviceEvent`, subType `status` object that is logically connected to this alarm.',
+        description: common.propTypes.OPTIONAL + LINKED_INGESTION + LINKED_OTHER,
         required: {
           jellyfish: false,
           platform: false
@@ -196,7 +199,7 @@ var schemas = {
     status: {
       instance: embeddedStatus,
       summary: {
-        description: common.propTypes.OPTIONAL + '[ingestion, storage, client] String `id` (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type `deviceEvent`, subType `status` object that is logically connected to this reservoirChange.',
+        description: common.propTypes.OPTIONAL + LINKED_INGESTION + LINKED_OTHER,
         required: {
           jellyfish: false,
           platform: false
