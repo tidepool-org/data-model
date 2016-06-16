@@ -36,6 +36,29 @@ var booleanRange = '`true`, `false`';
 
 var SNOOZE_DESC = '[ingestion, storage, client] An integer value representing minimum time between alerts in milliseconds.';
 
+var enabledSummary = {
+  summary: {
+    description: common.propTypes.boolean,
+    required: {
+      jellyfish: true,
+      platform: true
+    },
+    range: booleanRange,
+  }
+};
+
+function convertBGRelatedIfNeeded(val, units, isIngestion) {
+  if (units === 'mmol/L') {
+    if (isIngestion) {
+      val = common.transformToMmolLInput(val);
+    }
+    else {
+      val = common.transformToMmolLStorage(val)
+    }
+  }
+  return val;
+}
+
 var schemas = {
   base: {
     type: {
@@ -51,10 +74,11 @@ var schemas = {
   },
   dexcom: {
     highAlerts: {
-      instance: function() {
+      instance: function(units, isIngestion) {
+        var level = Math.round(chance.natural({min: 180, max: 240})/5)*5;
         return {
           enabled: chance.bool(),
-          level: Math.round(chance.natural({min: 180, max: 240})/5)*5,
+          level: convertBGRelatedIfNeeded(level, units, isIngestion),
           snooze: 15*60*1000 * chance.natural({min: 3, max: 6})
         };
       },
@@ -67,16 +91,7 @@ var schemas = {
         nested: true,
         nestedPropertiesIntro: 'Contains the following properties',
         keys: {
-          enabled: {
-            summary: {
-              description: common.propTypes.boolean,
-              required: {
-                jellyfish: true,
-                platform: true
-              },
-              range: booleanRange,
-            }
-          },
+          enabled: enabledSummary,
           level: {
             summary: common.bgValueSummary
           },
@@ -98,10 +113,11 @@ var schemas = {
       },
     },
     lowAlerts: {
-      instance: function() {
+      instance: function(units, isIngestion) {
+        var level = Math.round(chance.natural({min: 60, max: 90})/5)*5;
         return {
           enabled: chance.bool(),
-          level: Math.round(chance.natural({min: 60, max: 90})/5)*5,
+          level: convertBGRelatedIfNeeded(level, units, isIngestion),
           snooze: 15*60*1000 * chance.natural({min: 1, max: 4})
         };
       },
@@ -114,17 +130,10 @@ var schemas = {
         nested: true,
         nestedPropertiesIntro: 'Contains the following properties',
         keys: {
-          enabled: {
-            summary: {
-              description: common.propTypes.boolean,
-              required: {
-                jellyfish: true,
-                platform: true
-              },
-              range: booleanRange,
-            }
+          enabled: enabledSummary,
+          level: {
+            summary: common.bgValueSummary
           },
-          level: common.bgValueSummary,
           snooze: {
             summary: {
               description: SNOOZE_DESC,
@@ -140,6 +149,91 @@ var schemas = {
           }
         }
       },
+    },
+    outOfRangeAlerts: {
+      instance: function() {
+        return {
+          enabled: chance.bool(),
+          snooze: 15*60*1000 * chance.natural({min: 1, max: 4})
+        }
+      },
+      summary: {
+        description: '[ingestion, storage, client] An object representing an out-of-range alert setting.',
+        required: {
+          jellyfish: true,
+          platform: true
+        },
+        nested: true,
+        nestedPropertiesIntro: 'Contains the following properties',
+        keys: {
+          enabled: enabledSummary,
+          snooze: {
+            summary: {
+              description: '[ingestion, storage, client] An integer value representing a minimum threshold of time (in milliseconds) the user\'s transmitter must be out-of-range of the receiving device before alerting.',
+              required: {
+                jellyfish: true,
+                platform: true
+              },
+              numericalType: common.numericalTypes.INTEGER_MS,
+              range: {
+                min: 0,
+                max: common.timeConstants.MS_IN_24_HOURS
+              }
+            }
+          }
+        }
+      }
+    },
+    rateOfChangeAlerts: {
+      instance: function(units, isIngestion) {
+        var fallRate = chance.integer({min: -3, max: -1});
+        var riseRate = chance.integer({min: 1, max: 3});
+        return {
+          fallRate: {
+            enabled: chance.bool(),
+            rate: convertBGRelatedIfNeeded(fallRate, units, isIngestion)
+          },
+          riseRate: {
+            enabled: chance.bool(),
+            rate: convertBGRelatedIfNeeded(riseRate, units, isIngestion)
+          }
+        }
+      },
+      summary: {
+        description: ingestionAlert('rate of change', 'rate') + otherAlert('rate of change', 'rate'),
+        required: {
+          jellyfish: true,
+          platform: true
+        },
+        nested: true,
+        nestedPropertiesIntro: 'Each of two embedded objects—`fallRate` and `riseRate`—contains the following properties',
+        keys: {
+          enabled: enabledSummary,
+          rate: {
+            summary: {
+              description: '[ingestion] A rate of blood glucose value change in either mg/dL/min (integer) or mmol/L/min (float), with appropriately matching `units` field.\n\n[storage, client] A rate of blood glucose value change in mmol/L (float, potentially unrounded), with appropriately matching `units` field.',
+              required: {
+                jellyfish: true,
+                platform: true
+              },
+              numericalType: {
+                'mg/dL': common.numericalTypes.INTEGER_MGDL,
+                'mmol/L': common.numericalTypes.FLOATING_POINT_MMOL
+              },
+              range: {
+                'mg/dL': {
+                  min: '-10 if `fallRate`, > 0 if `riseRate`',
+                  max: '< 0 if `fallRate`, 10 if `riseRate`'
+                },
+                'mmol/L': {
+                  min: '-0.55 if `fallRate`, > 0 if `riseRate`',
+                  max: '< 0 if `fallRate`, 0.55 if `riseRate`'
+                }
+              }
+            }
+          }
+        }
+      }
     },
     transmitterId: {
       instance: function() {
