@@ -7,7 +7,7 @@
  - [`bolus` for bolus insulin](./bolus/README.md)
  - [`wizard` for (bolus) calculator/"wizard" records](./wizard.md)
  - [`cbg` for continuous blood glucose (cbg)](./cbg.md)
- - [`cgmSettings` for CGM settings](./cgmSettings.md)
+ - [`cgmSettings` for CGM settings](./cgmSettings/README.md)
  - [`deviceEvent` for miscellaneous other device events](./deviceEvent/README.md)
  - [`pumpSettings` for insulin pump settings](./pumpSettings.md)
  - [`smbg` for self-monitored blood glucose (smbg)](./smbg.md)

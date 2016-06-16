@@ -65,6 +65,13 @@ module.exports = {
     type: 'cbg'
   },
   cgmSettings: {
+    generator: cgmSettings.generate,
+    summary: cgmSettings.summary,
+    changeLog: cgmSettings.changeLog,
+    title: 'Continuous Glucose Monitor Settings',
+    subtitle: 'Manufacturer',
+    subTypes: common.CGM_MANUFACTURERS,
+    type: 'cgmSettings'
   },
   common: {
     generator: require('./device-data/common').generate.bind(null, {}),
