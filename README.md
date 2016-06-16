@@ -20,7 +20,7 @@ After downloading or cloning this repository, if you want to serve yourself the 
 
 Only certain sections of most of the Markdown files in this repository should be edited *directly*. Most of the content for the data model documentation here is generated through the JavaScript code found in the `src/` directory.
 
-Specifically, each .md document or directory of .md documents under `device-data/` is generated automatically unless marked with `<!-- non-generated document! all areas editable -->` at the top.
+Specifically, each .md document or directory of .md documents under `device-data/` is generated automatically unless marked with `<!-- non-generated document! all areas editable -->` at the top. Auto-generated docs are also marked themselves with the comment `<!-- auto-generated doc! most areas *not* editable -->` at the top.
 
 In the automatically-generated docs, the following three areas should **not** be edited, as any changes will be steamrolled the next time that the doc is regenerated using the [document template generator](./bin/docTemplateGenerator.md).
 
@@ -51,12 +51,12 @@ In the automatically-generated docs, the following three areas should **not** be
     jellyfish: yes
     platform: yes
 
-<!-- start type -->
+<!-- start editable commentary on type -->
 ```
 
 3) The JSON examples at the bottom of the document, starting with the first header for these—`### example (client)`.
 
-*The **only** area that can (and should!) be edited by hand is the "color commentary" space between the `<!-- start $FIELD -->` and `<!-- end $FIELD -->` comments within the section for each field. On initial generation of the documentation template, this space will contain a `<!-- TODO -->` comment that **must** be deleted in order for other changes in this space to be preserved. (The lack of the `<!-- TODO -->` comment is what signals the script to look for and preserve the content between the `<!-- start $FIELD -->` and `<!-- end $FIELD -->` comments.)*
+*The **only** area that can (and should!) be edited by hand is the "color commentary" space between the `<!-- start editable commentary on $FIELD -->` and `<!-- end editable commentary on $FIELD -->` comments within the section for each field. On initial generation of the documentation template, this space will contain a `<!-- TODO -->` comment that **must** be deleted in order for other changes in this space to be preserved. (The lack of the `<!-- TODO -->` comment is what signals the script to look for and preserve the content between the `<!-- start editable commentary on $FIELD -->` and `<!-- end editable commentary on $FIELD -->` comments.)*
 
 For data types with sub-types, the README in the directory for the type is also an automatically generated document. Only the space between the header and the `<!-- end intro -->` comment should be edited by hand. See [the introduction to the `bolus` type](https://raw.githubusercontent.com/tidepool-org/data-model/master/device-data/types/bolus/README.md) for an example.
 
