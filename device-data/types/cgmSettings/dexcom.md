@@ -33,7 +33,9 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-<!-- TODO -->
+
+This is the Tidepool data type to represent CGM settings at a given point in time, usually the time of an upload of data from the device. Most CGM-receiving devices do **not**, unfortunately, keep a historical record of all CGM settings whenever a settings change is made, with the exception of Dexcom dedicated hardware receivers. The safest assumption is that the `time` on each `cgmSettings` object simply represents *a (single)* time when the settings were effective, not the first moment when the settings became effective.
+
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -101,7 +103,9 @@ Contains the following properties:
 		max: 86400000
 
 <!-- start editable commentary on highAlerts -->
-<!-- TODO -->
+
+The `highAlerts` object on a `cgmSettings` event encodes the user's preferences for receiving alerts about high blood glucose events (hyperglycemia). The `level` gives the threshold for high BG alerts in the appropriate blood glucose units (either mg/dL or mmol/L on ingestion but converted to mmol/L upon ingestion, like all other blood glucose-related values in the Tidepool data model(s)). The `snooze` value allows the user to configure how often the alert should repeat (after an initial user-acknowledgment) if the PWD's blood glucose remains above the threshold value. This is useful since high blood glucose cannot be corrected immediately; a typical value for a `snooze` on a high blood glucose alert might be two hours, for example, since it takes about 90 minutes for an insulin dose (taken to correct the high blood glucose) to reach its peak (in terms of metabolic activity).
+
 <!-- end editable commentary on highAlerts -->
 
 * * * * *
@@ -168,7 +172,9 @@ Contains the following properties:
 		max: 86400000
 
 <!-- start editable commentary on lowAlerts -->
-<!-- TODO -->
+
+The `lowAlerts` object on a `cgmSettings` event encodes the user's preferences for receiving alerts about low blood glucose events (hypoglycemia). The `level` gives the threshold for low BG alerts in the appropriate blood glucose units (either mg/dL or mmol/L on ingested but converted to mmol/L upon ingestion, like all other blood glucose-related values in the Tidepool data model(s)). The `snooze` value allows the user to configure how often the alert should repeat (after an initial user-acknowledgment) if the PWD's blood glucose remains below the threshold value. This is useful since low blood glucose cannot be corrected immediately; a typical value for a `snooze` on a low blood glucose alert might be fifteen minutes, for example, since that is the typical time recommended by diabetes health care providers to wait before retesting a PWD's blood glucose after treating hypoglycemia (by ingesting some form of glucose, whether soda, juice, glucose tablets, etc.).
+
 <!-- end editable commentary on lowAlerts -->
 
 * * * * *
@@ -214,7 +220,9 @@ Contains the following properties:
 `_schemaVersion` ? (future): We plan to migrate from `outOfRangeAlerts.snooze` to `outOfRangeAlerts.threshold` in the future.
 
 <!-- start editable commentary on outOfRangeAlerts -->
-<!-- TODO -->
+
+The `outOfRangeAlerts` object on a `cgmSettings` event encodes the user's settings for receiving alerts from the receiver if the connection between the transmitter and the receiver has been disrupted (typically due to the transmitter being situated physically out of range of the receiver). We have erroneously labeled the time value on this object `snooze`: this value is **not** like the `snooze` on `highAlerts` and `lowAlerts`. More specifically, the time value in an `outOfRangeAlerts` object is *not* a setting for time between alerts but rather a setting for elapsed time before the *initial* alert—that is, the amount of time (counted by the receiver), that the receiver's data connection with the transmitter has been broken. We plan to rename the field for this value to `threshold` in an upcoming `_schemaVersion`.
+
 <!-- end editable commentary on outOfRangeAlerts -->
 
 * * * * *
@@ -268,7 +276,9 @@ Each of two embedded objects—`fallRate` and `riseRate`—contains the followin
 
 
 <!-- start editable commentary on rateOfChangeAlerts -->
-<!-- TODO -->
+
+The `rateOfChangeAlerts` object on a `cgmSettings` event encodes the user's preferences for receiving alerts when the PWD's blood glucose is changing rapidly—either rising or falling. Each of `fallRate` and `riseRate` is an object inside of the `rateOfChangeAlerts` object with two key-value pairs for whether the alert is `enabled` and the `rate` of change to trigger the alert. For the `fallRate`, note that the `rate` of change must be specified as a *negative* value. Like all blood glucose-related values in the Tidepool data model(s), both `fallRate.rate` and `riseRate.rate` may be specified in either mg/dL or mmol/L for ingestion, but will be stored and returned to client applications in mmol/L.
+
 <!-- end editable commentary on rateOfChangeAlerts -->
 
 * * * * *
@@ -283,7 +293,7 @@ Each of two embedded objects—`fallRate` and `riseRate`—contains the followin
 		platform: yes
 
 <!-- start editable commentary on transmitterId -->
-<!-- TODO -->
+
 <!-- end editable commentary on transmitterId -->
 
 * * * * *
@@ -305,7 +315,7 @@ See [units](../../units.md) for further explanation of blood glucose units.
 		`mmol/L`
 
 <!-- start editable commentary on units -->
-<!-- TODO -->
+
 <!-- end editable commentary on units -->
 
 * * * * *
