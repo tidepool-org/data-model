@@ -208,6 +208,8 @@ Each blood glucose target segment object in the array contains a subset of the f
 
 <!-- start editable commentary on bgTarget -->
 
+A blood glucose target value is used in combination with an insulin sensitivity factor in an insulin pump's bolus calculator to calculate a recommended dose of insulin to bring the PWD to the target.
+
 The `bgTarget` array on a `pumpSettings` event represents a single schedule of target blood glucose values. A common use case for scheduling more than one blood glucose target is to schedule a more conservative (higher) target during the night-time hours in order to help prevent nocturnal hypoglycemia.
 
 Each segment in a `bgTarget` schedule is an object with a `start` - an integer value representing the time into a twenty-four hour day in milliseconds (see [above under `basalSchedules` for a fuller explanation](#basalschedules)). The remainder of the keys on each object in a `bgTarget` array vary according to the manufacturer of the insulin pump but will be a subset of `low`, `high`, `target`, and `range`. See [the documentation for the `wizard` type](./wizard.md) for a breakdown of which insulin pump manufacturers use which of these fields to represent a blood glucose target.
@@ -269,6 +271,8 @@ Each carb ratio segment object in the array contains the following properties:
 		max: < 86400000
 
 <!-- start editable commentary on carbRatio -->
+
+An insulin-to-carb ratio value is used in an insulin pump's bolus calculator in combination with a carbohydrate value input by the user to calculate a recommended dose of insulin to "cover" the carbohydrates about to be consumed by the PWD.
 
 The `carbRatio` array on a `pumpSettings` event represents a single schedule of insulin-to-carb ratio values. A common use case for scheduling more than one carb ratio is to schedule a more aggressive I:C ratio during the morning hours (for breakfast), as due to the [Dawn Phenomenon](https://en.wikipedia.org/wiki/Dawn_phenomenon 'Wikipedia: Dawn phenomenon') many PWDs need more insulin to "cover" a given number of grams of carbohydrates ingested at this time of day.
 
@@ -341,7 +345,13 @@ Each insulin sensitivity segment object in the array contains the following prop
 		max: < 86400000
 
 <!-- start editable commentary on insulinSensitivity -->
-<!-- TODO -->
+
+An insulin sensitivity factor is used in combination with a blood glucose target in an insulin pump's bolus calculator to calculate a recommended dose of insulin to bring the PWD to the target.
+
+The `insulinSensitivity` array on a `pumpSettings` event represents a single schedule of insulin sensitivity factors (ISFs). A common use case for scheduling more than one ISF is to dose more aggressively to bring down hyperglycemia in the morning hours, when the [Dawn Phenomenon](https://en.wikipedia.org/wiki/Dawn_phenomenon 'Wikipedia: Dawn phenomenon') reduces insulin sensitivity for many PWDs.
+
+Each segment in an `insulinSensitivity` schedule is an object with a `start` and an `amount`.  The `start` is an integer value representing the time into a twenty-four hour day in milliseconds (see [above under `basalSchedules` for a fuller explanation](#basalschedules)). The `amount` is an integer or floating-point value (depending on whether the blood glucose units are mg/dL or mmol/L) representing the expected drop in blood glucose for each single unit of insulin dosed.
+
 <!-- end editable commentary on insulinSensitivity -->
 
 * * * * *
@@ -405,7 +415,13 @@ Contains the following properties:
 `_schemaVersion` ? (future): `exchanges` may be added as an accepted value for `units.carbs` in the future.
 
 <!-- start editable commentary on units -->
-<!-- TODO -->
+
+The `units` object on a `pumpSettings` event represents all the relevant units for the included settings.
+
+For `carbs`, the only currently allowed value is `grams`, but some insulin pumps allow the use of the now-outdated ["exchange" scheme](https://en.wikipedia.org/wiki/Diabetic_diet#Exchange_scheme 'Wikipedia: exchange scheme') for counting carbohydrates, where one exchange is ~15g of carbohydrate. We may add support for this in the future, although we will likely only allow `exchanges` as the `units.carbs` (and for carb-related values like `carbRatio`) on ingestion, then convert to `grams` based on the 1:15 ratio similar to how all mg/dL blood glucose(-related) values are converted to mmol/L on ingestion.
+
+For `bg`, the value may be `mg/dL` or `mmol/L` on ingestion, but in the storage and client data formats all blood glucose and related values are converted to mmol/L, and the value of `units.bg` is updated to `mmol/L`. See [units](../units.md) for further explanation of blood glucose units.
+
 <!-- end editable commentary on units -->
 
 * * * * *
