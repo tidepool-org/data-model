@@ -2,6 +2,14 @@
 
 ## Device event subType: `alarm`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [subType](#subtype)
+>  - [alarmType](#alarmtype)
+>  - [status](#status)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

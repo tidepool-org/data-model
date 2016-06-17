@@ -2,6 +2,17 @@
 
 ## Manufacturer: `dexcom`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [highAlerts](#highalerts)
+>  - [lowAlerts](#lowalerts)
+>  - [outOfRangeAlerts](#outofrangealerts)
+>  - [rateOfChangeAlerts](#rateofchangealerts)
+>  - [transmitterId](#transmitterid)
+>  - [units](#units)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

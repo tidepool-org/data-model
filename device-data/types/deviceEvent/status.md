@@ -2,6 +2,17 @@
 
 ## Device event subType: `status`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [subType](#subtype)
+>  - [status](#status)
+>  - [duration](#duration)
+>  - [expectedDuration](#expectedduration)
+>  - [reason](#reason)
+>  - [previous](#previous)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

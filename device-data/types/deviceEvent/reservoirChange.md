@@ -2,6 +2,13 @@
 
 ## Device event subType: `reservoirChange`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [subType](#subtype)
+>  - [status](#status)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

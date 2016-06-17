@@ -2,6 +2,14 @@
 
 ## Device event subType: `prime`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [subType](#subtype)
+>  - [primeTarget](#primetarget)
+>  - [volume](#volume)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

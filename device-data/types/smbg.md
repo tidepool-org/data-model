@@ -2,6 +2,14 @@
 
 ## Self-Monitored Blood Glucose (`smbg`)
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [subType](#subtype)
+>  - [units](#units)
+>  - [value](#value)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

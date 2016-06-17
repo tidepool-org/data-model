@@ -2,6 +2,13 @@
 
 ## Continuous Blood Glucose (`cbg`)
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [units](#units)
+>  - [value](#value)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

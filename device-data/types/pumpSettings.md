@@ -2,6 +2,20 @@
 
 ## Insulin pump settings (`pumpSettings`)
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [activeSchedule](#activeschedule)
+>  - [basalSchedules](#basalschedules)
+>  - [bgTarget](#bgtarget)
+>  - [bgTargets](#bgtargets)
+>  - [carbRatio](#carbratio)
+>  - [carbRatios](#carbratios)
+>  - [insulinSensitivity](#insulinsensitivity)
+>  - [insulinSensitivities](#insulinsensitivities)
+>  - [units](#units)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

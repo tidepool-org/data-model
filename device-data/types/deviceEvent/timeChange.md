@@ -2,6 +2,13 @@
 
 ## Device event subType: `timeChange`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [subType](#subtype)
+>  - [change](#change)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 
