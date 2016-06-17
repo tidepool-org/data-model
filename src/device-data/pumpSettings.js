@@ -72,7 +72,7 @@ var bgTargets = {
     return bgTargets;
   },
   summary: {
-    description: common.propTypes.eitherOr('bgTargets', 'bgTarget', TYPE) +  '[ingestion, storage, client] A set of key-value pairs encoding the PWD\'s programmed blood glucose target schedules, where each key is a schedule name and each value is an array of blood glucose target segment objects.\n\nSee [`bgTarget`](#bgtarget) above for documentation of the fields within each blood glucose segment object.'
+    description: common.propTypes.eitherOr('bgTargets', 'bgTarget', TYPE) +  '[ingestion, storage, client] A set of key-value pairs encoding the PWD\'s programmed blood glucose target schedules, where each key is a schedule name and each value is an array of blood glucose target segment objects.\n\nSee [`bgTarget`](#bgtarget) above for documentation of the fields within each blood glucose target segment object.'
   }
 };
 
@@ -91,7 +91,15 @@ var carbRatio = {
     nestedPropertiesIntro: 'Each carb ratio segment object in the array contains the following properties',
     keys: {
       amount: {
-        summary: wizard.summary.insulinCarbRatio
+        summary: {
+          description: wizard.IC_RATIO_DESC,
+          required: {
+            jellyfish: true,
+            platform: true
+          },
+          numericalType: wizard.summary.insulinCarbRatio.numericalType,
+          range: wizard.summary.insulinCarbRatio.range
+        }
       },
       start: {
         summary: common.startSummary
@@ -134,7 +142,15 @@ var insulinSensitivity = {
     nestedPropertiesIntro: 'Each insulin sensitivity segment object in the array contains the following properties',
     keys: {
       amount: {
-        summary: wizard.summary.insulinSensitivity
+        summary: {
+          description: wizard.ISF_DESC,
+          required: {
+            jellyfish: true,
+            platform: true
+          },
+          numericalType: wizard.summary.insulinSensitivity.numericalType,
+          range: wizard.summary.insulinSensitivity.range
+        }
       },
       start: {
         summary: common.startSummary

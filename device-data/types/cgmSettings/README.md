@@ -1,4 +1,4 @@
-## Continuous Glucose Monitor Settings
+## Continuous Glucose Monitor Settings (`cgmSettings`)
 
 <!-- TODO -->
 <!-- end intro -->

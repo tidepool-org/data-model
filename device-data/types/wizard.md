@@ -1,6 +1,6 @@
 <!-- auto-generated doc! most areas *not* editable -->
 
-## Bolus Calculator Records (wizard)
+## Bolus Calculator Records (`wizard`)
 
 **NB:** All fields are *required* unless otherwise noted.
 

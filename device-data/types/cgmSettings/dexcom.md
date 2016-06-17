@@ -198,6 +198,10 @@ Contains the following properties:
 		min: 0
 		max: 86400000
 
+#### Changelog for `outOfRangeAlerts`
+
+`_schemaVersion` ? (future): We plan to migrate from `outOfRangeAlerts.snooze` to `outOfRangeAlerts.threshold` in the future.
+
 <!-- start editable commentary on outOfRangeAlerts -->
 <!-- TODO -->
 <!-- end editable commentary on outOfRangeAlerts -->

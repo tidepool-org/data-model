@@ -1,6 +1,6 @@
 <!-- auto-generated doc! most areas *not* editable -->
 
-## Self-Monitored Blood Glucose (smbg)
+## Self-Monitored Blood Glucose (`smbg`)
 
 **NB:** All fields are *required* unless otherwise noted.
 

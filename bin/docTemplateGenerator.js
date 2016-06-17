@@ -125,7 +125,7 @@ function getDocPath(base) {
     return base + type + '.md';
   }
   if (hasSubtypes) {
-    var indexDoc = [util.format('## %s\n', generators[type].title)];
+    var indexDoc = [util.format('## %s (`%s`)\n', generators[type].title, type)];
     var existingReadme = '';
     try {
       existingReadme = fs.readFileSync(base + 'types/' + type + '/README.md', 'utf8');
@@ -410,7 +410,7 @@ else {
     doc.push(util.format('## %s: `%s`\n', generators[type].subtitle, commander.subType));
   }
   else {
-    doc.push(util.format('## %s (%s)\n', generators[type].title, type));
+    doc.push(util.format('## %s (`%s`)\n', generators[type].title, type));
   }
   doc.push('**NB:** All fields are *required* unless otherwise noted.\n');
   doc.push('\n> Jump to example JSON:\n');

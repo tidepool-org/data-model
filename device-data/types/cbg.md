@@ -1,6 +1,6 @@
 <!-- auto-generated doc! most areas *not* editable -->
 
-## Continuous Blood Glucose (cbg)
+## Continuous Blood Glucose (`cbg`)
 
 **NB:** All fields are *required* unless otherwise noted.
 

@@ -1,6 +1,6 @@
 <!-- auto-generated doc! most areas *not* editable -->
 
-## Insulin pump settings (pumpSettings)
+## Insulin pump settings (`pumpSettings`)
 
 **NB:** All fields are *required* unless otherwise noted.
 
@@ -22,7 +22,11 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-<!-- TODO -->
+
+This is the Tidepool data type to represent insulin pump settings at a given point in time, usually the time of an upload of data from the device. Most insulin delivery devices do **not**, unfortunately, keep a historical record of all insulin pump settings whenever a settings change is made. When ingesting data from Medtronic pumps through the CareLink cloud service, we have been able to build up the full insulin pump settings history from a combination of records of current pump settings (at the time of each upload to CareLink) and records of changes to particular settings. Thus, for data originating from CareLink, the `time` on a `pumpSettings` object should represent the time at which the settings *became* effective. For all other devices, however, the `time` on each `pumpSettings` object simply represents *a (single)* time when the settings were effective, not the first moment when the settings became effective.
+
+In general, the functionality available across the various insulin pumps on the market is remarkably similar, making the task of standardization to a common data model quite simple. The only major difference between pumps is *how many* alternative settings the pump provides an interface to store. In particular, the majority of pumps only allow the storage of one "schedule" for `bgTarget`, `carbRatio`, and `insulinSensitivity`. Historically, Tidepool worked on integrating data from devices of this type first, and as a result our data model assumed a single schedule for each of these settings. When we started integrating data from Tandem insulin pumps that allow the storage of several schedules (in parallel fashion to how all insulin pumps allow the storage of several `basalSchedules`), we decided to simply add alternate pluralized fields—`bgTargets`, `carbRatios`, and `insulinSensitivities`—structured as a set of key-value pairs, with the schedule names as the keys and the schedules as the values. Thus, either the singular version of the field (e.g., `bgTarget`) or the plural version (e.g., `bgTargets`) must be present for a `pumpSettings` event to be valid. In practice, all `pumpSettings` objects should have all singular versions of these fields, or all plural versions. There are no devices currently on the market (at least not that we at Tidepool know of) that would be best modeled with plural `bgTargets` but singular `carbRatio` and `insulinSensitivity`, for example.
+
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -37,7 +41,9 @@
 		platform: yes
 
 <!-- start editable commentary on activeSchedule -->
-<!-- TODO -->
+
+Note that for Tandem `pumpSettings`, the `activeSchedule` will allow a client application to identify not only which of the `basalSchedules` is active but also the other settings that fall under Tandem's notion of a "personal profile"—i.e., `bgTargets`, `carbRatios`, and `insulinSensitivities`.
+
 <!-- end editable commentary on activeSchedule -->
 
 * * * * *
@@ -82,7 +88,13 @@ Each basal schedule segment object within each array value contains the followin
 		max: < 86400000
 
 <!-- start editable commentary on basalSchedules -->
-<!-- TODO -->
+
+Different insulin pump manufacturers use different terminology for the set of (pre-)programmed and timed basal rates, one of which is generally active and running in the background (without any user intervention) during normal device operation. Tidepool has adopted the term "schedule" to refer to the rates covering a twenty-four hour day. There must be at least one rate in a schedule; if the schedule has *only* one rate, we often call this a "flat-rate" schedule since the same rate will always be in effect, [temp basals](./basal/temp.md) and [suspensions](./basal/suspend.md) aside.
+
+The `basalSchedules` object encodes all of a PWD's programmed basal schedules, where the keys on the object are the basal schedule names (user-customizable on some pumps; manufacturer-preset on others) and each value is a basal schedule.
+
+A basal schedule, in the Tidepool data model, is an array of objects, where each object has a `start` and a `rate`. (We sometimes refer to each of these objects that compose a schedule as a "segment" of the schedule.) The `rate` is a typical basal rate value, in units of insulin per hour. The `start` is an integer value representing the milliseconds into a twenty-four hour day when the `rate` should go into effect. Thus, the first object in the schedule must *always* have a `start` of 0 representing the start of the day at midnight. If there is more than one rate in the schedule, then subsequent `start` will be positive and non-zero; for example, `21600000` would be the `start` for a basal rate scheduled to go into effect at 6 a.m. each day when the schedule is active. Each `start` must be < 86400000, the number of milliseconds in twenty-four hours, as such a value would be equivalent to 0 (midnight).
+
 <!-- end editable commentary on basalSchedules -->
 
 * * * * *
@@ -181,7 +193,11 @@ Each blood glucose target segment object in the array contains a subset of the f
 `_schemaVersion` 2: The nonexistent (in currently handled devices) `{low: [val], target: [val], high: [val], start: [milliseconds]}` schema was *removed*.
 
 <!-- start editable commentary on bgTarget -->
-<!-- TODO -->
+
+The `bgTarget` array on a `pumpSettings` event represents a single schedule of target blood glucose values. A common use case for scheduling more than one blood glucose target is to schedule a more conservative (higher) target during the night-time hours in order to help prevent nocturnal hypoglycemia.
+
+Each segment in a `bgTarget` schedule is an object with a `start` - an integer value representing the time into a twenty-four hour day in milliseconds (see [above under `basalSchedules` for a fuller explanation](#basalschedules)). The remainder of the keys on each object in a `bgTarget` array vary according to the manufacturer of the insulin pump but will be a subset of `low`, `high`, `target`, and `range`. See [the documentation for the `wizard` type](./wizard.md) for a breakdown of which insulin pump manufacturers use which of these fields to represent a blood glucose target.
+
 <!-- end editable commentary on bgTarget -->
 
 * * * * *
@@ -192,7 +208,7 @@ Each blood glucose target segment object in the array contains a subset of the f
 
 [ingestion, storage, client] A set of key-value pairs encoding the PWD's programmed blood glucose target schedules, where each key is a schedule name and each value is an array of blood glucose target segment objects.
 
-See [`bgTarget`](#bgtarget) above for documentation of the fields within each blood glucose segment object.
+See [`bgTarget`](#bgtarget) above for documentation of the fields within each blood glucose target segment object.
 
 
 <!-- start editable commentary on bgTargets -->
@@ -214,14 +230,12 @@ Each carb ratio segment object in the array contains the following properties:
 
 #### amount
 
-> This field is **optional**.
-
 [ingestion, storage, client] An integer encoding the grams of carbohydrate "covered" by one unit of insulin for the PWD.
 
 	QUICK SUMMARY
 	Required:
-		jellyfish: no (optional)
-		platform: no (optional)
+		jellyfish: yes
+		platform: yes
 	Numerical type: Integer value representing grams of carbohydrate per unit of insulin.
 	Range:
 		min: 0
@@ -241,7 +255,11 @@ Each carb ratio segment object in the array contains the following properties:
 		max: < 86400000
 
 <!-- start editable commentary on carbRatio -->
-<!-- TODO -->
+
+The `carbRatio` array on a `pumpSettings` event represents a single schedule of insulin-to-carb ratio values. A common use case for scheduling more than one carb ratio is to schedule a more aggressive I:C ratio during the morning hours (for breakfast), as due to the [Dawn Phenomenon](https://en.wikipedia.org/wiki/Dawn_phenomenon 'Wikipedia: Dawn phenomenon') many PWDs need more insulin to "cover" a given number of grams of carbohydrates ingested at this time of day.
+
+Each segment in a `carbRatio` schedule is an object with a `start` and an `amount`. The `start` is an integer value representing the time into a twenty-four hour day in milliseconds (see [above under `basalSchedules` for a fuller explanation](#basalschedules)). The `amount` is an I:C ratio in grams of carbohydrate per unit of insulin.
+
 <!-- end editable commentary on carbRatio -->
 
 * * * * *
@@ -274,16 +292,14 @@ Each insulin sensitivity segment object in the array contains the following prop
 
 #### amount
 
-> This field is **optional**.
-
 [ingestion] A numerical representation of the estimation of blood glucose value drop per unit of insulin delivered in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.
 
 [storage, client] A numerical representation of the estimation of blood glucose value drop in mmol/L (float, potentially unrounded), with appropriately matching `units` field.
 
 	QUICK SUMMARY
 	Required:
-		jellyfish: no (optional)
-		platform: no (optional)
+		jellyfish: yes
+		platform: yes
 	Numerical type:
 		mg/dL: Integer value representing a `mg/dL` value.
 		mmol/L: Floating point value representing a `mmol/L` value.

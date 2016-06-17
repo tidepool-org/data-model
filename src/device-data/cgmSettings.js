@@ -182,7 +182,8 @@ var schemas = {
             }
           }
         }
-      }
+      },
+      changelog: [common.changeLog.plannedChange('outOfRangeAlerts.snooze', 'outOfRangeAlerts.threshold')]
     },
     rateOfChangeAlerts: {
       instance: function(units, isIngestion) {
