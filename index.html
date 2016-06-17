@@ -51,7 +51,7 @@
         data-chapter-title="Introduction"
         data-filepath="README.md"
         data-basepath="."
-        data-revision="Mon Jun 13 2016 19:25:17 GMT-0700 (PDT)"
+        data-revision="Thu Jun 16 2016 18:20:23 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -379,10 +379,10 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.5" data-path="device-data/types/cgmSettings.html">
+        <li class="chapter " data-level="1.6.5" data-path="device-data/types/cgmSettings/index.html">
             
                 
-                    <a href="./device-data/types/cgmSettings.html">
+                    <a href="./device-data/types/cgmSettings/index.html">
                 
                         <i class="fa fa-check"></i>
                         
@@ -391,6 +391,27 @@
                         cgmSettings
                     </a>
             
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.5.1" data-path="device-data/types/cgmSettings/dexcom.html">
+            
+                
+                    <a href="./device-data/types/cgmSettings/dexcom.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.6.5.1.</b>
+                        
+                        Dexcom
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -689,7 +710,7 @@
 <p>After downloading or cloning this repository, if you want to serve yourself the documentation locally, first install the required dependencies with <code>npm install</code> (assuming you have <a href="https://nodejs.org/en/" title="Node.js" target="_blank">Node.js</a>) and <a href="https://www.npmjs.com/" title="npm homepage" target="_blank">the node package manager (<code>npm</code>)</a> installed already). After installing the required dependencies, you may use either <code>npm start</code> or <code>npm run serve-docs</code> to serve the docs at <a href="http://localhost:4000" target="_blank">http://localhost:4000</a>.</p>
 <h3 id="editing-documents">editing documents</h3>
 <p>Only certain sections of most of the Markdown files in this repository should be edited <em>directly</em>. Most of the content for the data model documentation here is generated through the JavaScript code found in the <code>src/</code> directory.</p>
-<p>Specifically, each .md document or directory of .md documents under <code>device-data/</code> is generated automatically unless marked with <code>&lt;!-- non-generated document! all areas editable --&gt;</code> at the top.</p>
+<p>Specifically, each .md document or directory of .md documents under <code>device-data/</code> is generated automatically unless marked with <code>&lt;!-- non-generated document! all areas editable --&gt;</code> at the top. Auto-generated docs are also marked themselves with the comment <code>&lt;!-- auto-generated doc! most areas *not* editable --&gt;</code> at the top.</p>
 <p>In the automatically-generated docs, the following three areas should <strong>not</strong> be edited, as any changes will be steamrolled the next time that the doc is regenerated using the <a href="bin/docTemplateGenerator.html">document template generator</a>.</p>
 <p>1) The title, note about required fields, and links to jump to example JSON. For example:</p>
 <pre><code>## Coffee (coffee)
@@ -712,9 +733,9 @@
     jellyfish: yes
     platform: yes
 
-&lt;!-- start type --&gt;
+&lt;!-- start editable commentary on type --&gt;
 </code></pre><p>3) The JSON examples at the bottom of the document, starting with the first header for these&#x2014;<code>### example (client)</code>.</p>
-<p><em>The <strong>only</strong> area that can (and should!) be edited by hand is the &quot;color commentary&quot; space between the <code>&lt;!-- start $FIELD --&gt;</code> and <code>&lt;!-- end $FIELD --&gt;</code> comments within the section for each field. On initial generation of the documentation template, this space will contain a <code>&lt;!-- TODO --&gt;</code> comment that <strong>must</strong> be deleted in order for other changes in this space to be preserved. (The lack of the <code>&lt;!-- TODO --&gt;</code> comment is what signals the script to look for and preserve the content between the <code>&lt;!-- start $FIELD --&gt;</code> and <code>&lt;!-- end $FIELD --&gt;</code> comments.)</em></p>
+<p><em>The <strong>only</strong> area that can (and should!) be edited by hand is the &quot;color commentary&quot; space between the <code>&lt;!-- start editable commentary on $FIELD --&gt;</code> and <code>&lt;!-- end editable commentary on $FIELD --&gt;</code> comments within the section for each field. On initial generation of the documentation template, this space will contain a <code>&lt;!-- TODO --&gt;</code> comment that <strong>must</strong> be deleted in order for other changes in this space to be preserved. (The lack of the <code>&lt;!-- TODO --&gt;</code> comment is what signals the script to look for and preserve the content between the <code>&lt;!-- start editable commentary on $FIELD --&gt;</code> and <code>&lt;!-- end editable commentary on $FIELD --&gt;</code> comments.)</em></p>
 <p>For data types with sub-types, the README in the directory for the type is also an automatically generated document. Only the space between the header and the <code>&lt;!-- end intro --&gt;</code> comment should be edited by hand. See <a href="https://raw.githubusercontent.com/tidepool-org/data-model/master/device-data/types/bolus/README.md" target="_blank">the introduction to the <code>bolus</code> type</a> for an example.</p>
 <h3 id="regenerating-documents">(re)generating documents</h3>
 <p>There is a bash script in this repository to generate new and regenerate old or regenerate (after updates to the source) all of the data model documents.</p>

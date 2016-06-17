@@ -40,7 +40,7 @@
     <link rel="next" href="../../../device-data/types/deviceEvent/alarm.html" />
     
     
-    <link rel="prev" href="../../../device-data/types/cgmSettings.html" />
+    <link rel="prev" href="../../../device-data/types/cgmSettings/dexcom.html" />
     
 
         
@@ -53,7 +53,7 @@
         data-chapter-title="deviceEvent"
         data-filepath="device-data/types/deviceEvent/README.md"
         data-basepath="../../.."
-        data-revision="Mon Jun 13 2016 19:25:17 GMT-0700 (PDT)"
+        data-revision="Thu Jun 16 2016 18:20:23 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -381,10 +381,10 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.5" data-path="device-data/types/cgmSettings.html">
+        <li class="chapter " data-level="1.6.5" data-path="device-data/types/cgmSettings/index.html">
             
                 
-                    <a href="../../../device-data/types/cgmSettings.html">
+                    <a href="../../../device-data/types/cgmSettings/index.html">
                 
                         <i class="fa fa-check"></i>
                         
@@ -393,6 +393,27 @@
                         cgmSettings
                     </a>
             
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.5.1" data-path="device-data/types/cgmSettings/dexcom.html">
+            
+                
+                    <a href="../../../device-data/types/cgmSettings/dexcom.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.6.5.1.</b>
+                        
+                        Dexcom
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -676,7 +697,7 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="device-events">Device Events</h2>
+                        <h2 id="device-events-deviceevent">Device Events (<code>deviceEvent</code>)</h2>
 <p>This is the Tidepool data type for a variety of events that can occur on diabetes devices, including both insulin pumps and continuous glucose monitors. As a type it is essentially a &quot;grab bag&quot; of miscellaneous sub-types, where each sub-type has its own data model that often differs widely from sub-type to sub-type.</p>
 <p>Note that prior to Tidepool&apos;s release of <a href="http://developer.tidepool.io/chrome-uploader/docs/BootstrappingToUTC.html" title="Bootstrapping to UTC" target="_blank">&quot;bootstrapping to UTC&quot; (BtUTC)</a>, this data type had <code>deviceMeta</code> as the value of its <code>type</code> field. Along with the release of BtUTC, we changed this value to <code>deviceEvent</code> to more accurately reflect the fact that this group of sub-types models various miscellaneous events that are either user-initiated or surfaced to the user and not device metadata that may be more-or-less user-invisible (or at least irrelevant to the user most of the time) such as device model and serial numbers, etc.</p>
 <p>Each of the <code>subType</code>s is documented on one of the following pages:
@@ -699,7 +720,7 @@
         </div>
 
         
-        <a href="../../../device-data/types/cgmSettings.html" class="navigation navigation-prev " aria-label="Previous page: cgmSettings"><i class="fa fa-angle-left"></i></a>
+        <a href="../../../device-data/types/cgmSettings/dexcom.html" class="navigation navigation-prev " aria-label="Previous page: Dexcom"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../../../device-data/types/deviceEvent/alarm.html" class="navigation navigation-next " aria-label="Next page: alarm"><i class="fa fa-angle-right"></i></a>

@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>scheduled | data-model</title>
+        <title>Dexcom | data-model</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="../../../device-data/types/basal/temp.html" />
+    <link rel="next" href="../../../device-data/types/deviceEvent/index.html" />
     
     
-    <link rel="prev" href="../../../device-data/types/basal/index.html" />
+    <link rel="prev" href="../../../device-data/types/cgmSettings/index.html" />
     
 
         
@@ -49,9 +49,9 @@
         
         
     <div class="book"
-        data-level="1.6.1.1"
-        data-chapter-title="scheduled"
-        data-filepath="device-data/types/basal/scheduled.md"
+        data-level="1.6.5.1"
+        data-chapter-title="Dexcom"
+        data-filepath="device-data/types/cgmSettings/dexcom.md"
         data-basepath="../../.."
         data-revision="Thu Jun 16 2016 18:20:23 GMT-0700 (PDT)"
         data-innerlanguage="">
@@ -205,7 +205,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.6.1.1" data-path="device-data/types/basal/scheduled.html">
+        <li class="chapter " data-level="1.6.1.1" data-path="device-data/types/basal/scheduled.html">
             
                 
                     <a href="../../../device-data/types/basal/scheduled.html">
@@ -397,7 +397,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.5.1" data-path="device-data/types/cgmSettings/dexcom.html">
+        <li class="chapter active" data-level="1.6.5.1" data-path="device-data/types/cgmSettings/dexcom.html">
             
                 
                     <a href="../../../device-data/types/cgmSettings/dexcom.html">
@@ -698,17 +698,17 @@
                     <section class="normal" id="section-">
                     
                         <!-- auto-generated doc! most areas *not* editable -->
-<h2 id="basal-deliverytype-scheduled">Basal deliveryType: <code>scheduled</code></h2>
+<h2 id="manufacturer-dexcom">Manufacturer: <code>dexcom</code></h2>
 <blockquote>
 <p>Jump to...(notable fields on this type)</p>
 <ul>
 <li><a href="#type">type</a></li>
-<li><a href="#deliverytype">deliveryType</a></li>
-<li><a href="#duration">duration</a></li>
-<li><a href="#expectedduration">expectedDuration</a></li>
-<li><a href="#rate">rate</a></li>
-<li><a href="#previous">previous</a></li>
-<li><a href="#schedulename">scheduleName</a></li>
+<li><a href="#highalerts">highAlerts</a></li>
+<li><a href="#lowalerts">lowAlerts</a></li>
+<li><a href="#outofrangealerts">outOfRangeAlerts</a></li>
+<li><a href="#rateofchangealerts">rateOfChangeAlerts</a></li>
+<li><a href="#transmitterid">transmitterId</a></li>
+<li><a href="#units">units</a></li>
 </ul>
 </blockquote>
 <p><strong>NB:</strong> All fields are <em>required</em> unless otherwise noted.</p>
@@ -721,110 +721,214 @@
 </ul>
 </blockquote>
 <h3 id="type">type</h3>
-<p>[ingestion, storage, client] The string <code>basal</code>.</p>
+<p>[ingestion, storage, client] The string <code>cgmSettings</code>.</p>
 <pre><code>QUICK SUMMARY
 Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start editable commentary on type -->
+<!-- TODO -->
 <!-- end editable commentary on type -->
 <hr>
-<h3 id="deliverytype">deliveryType</h3>
-<p>[ingestion, storage, client] The string <code>scheduled</code>.</p>
+<h3 id="highalerts">highAlerts</h3>
+<p>[ingestion] An object representing a high glucose alert setting, with <code>level</code> in mg/dL (integer) or mmol/L (float) and the appropriately matching <code>units</code> value.</p>
+<p>[storage, client] An object representing a high glucose alert setting, with <code>level</code> in mmol/L (float, potentially unrounded) and the appropriately matching <code>units</code> value.</p>
 <pre><code>QUICK SUMMARY
 Required:
     jellyfish: yes
     platform: yes
-</code></pre><!-- start editable commentary on deliveryType -->
-<p>This is the sub-type of <code>basal</code> event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).</p>
-<!-- end editable commentary on deliveryType -->
-<hr>
-<h3 id="duration">duration</h3>
-<blockquote>
-<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
-</blockquote>
-<p>[ingestion, storage, client] An integer value representing a duration of time in milliseconds.</p>
+</code></pre><p>Contains the following properties:</p>
+<ul>
+<li>enabled</li>
+<li>level</li>
+<li>snooze</li>
+</ul>
+<h4 id="enabled">enabled</h4>
+<p>[ingestion, storage, client] A Boolean value: <code>true</code> or <code>false</code>.</p>
 <pre><code>QUICK SUMMARY
 Required:
-    jellyfish: no (optional)
+    jellyfish: yes
+    platform: yes
+Range: `true`, `false`
+</code></pre><h4 id="level">level</h4>
+<p>[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching <code>units</code> field.</p>
+<p>[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching <code>units</code> field.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type:
+    mg/dL: Integer value representing a `mg/dL` value.
+    mmol/L: Floating point value representing a `mmol/L` value.
+Range:
+    mg/dL:
+        min: 0
+        max: 1000
+    mmol/L:
+        min: 0.0
+        max: 55.0
+</code></pre><h4 id="snooze">snooze</h4>
+<p>[ingestion, storage, client] An integer value representing minimum time between alerts in milliseconds.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
     platform: yes
 Numerical type: Integer value representing milliseconds.
 Range:
     min: 0
-    max: 432000000
-</code></pre><!-- start editable commentary on duration -->
-<p>When ingesting through the legacy jellyfish ingestion service, <code>duration</code> is optional because jellyfish also uses the <em>sequence</em> of basal events to determine their durations - see <a href="previous.html"><code>previous</code></a> for details.</p>
-<p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the <code>duration</code> field will be required on all <code>basal</code>s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of <code>basal</code>s based on the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).</p>
-<p>Note that for some insulin pumps, even for a scheduled basal <em>not</em> interrupted by another event like a <code>suspend</code> or <code>temp</code>, the <code>duration</code> may not be the nice round numbers of milliseconds that might be expected given the schedule in the <code>pumpSettings</code>&#x2014;e.g., 3600000 for a <code>basal</code> event lasting an hour. This is because of how some pumps schedule the small pulses of insulin delivery fulfilling the scheduled <code>rate</code>; depending on how the pulses are scheduled, the actual duration of the <code>basal</code> may be a bit over or under the scheduled <code>duration</code>.</p>
-<p>The new platform APIs expect this value to be &gt;= 0 and &lt;= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.</p>
-<!-- end editable commentary on duration -->
+    max: 86400000
+</code></pre><!-- start editable commentary on highAlerts -->
+<!-- TODO -->
+<!-- end editable commentary on highAlerts -->
 <hr>
-<h3 id="expectedduration">expectedDuration</h3>
-<blockquote>
-<p>This field is <strong>optional</strong>. At present, it is <strong>only</strong> added by the jellyfish data ingestion service.</p>
-</blockquote>
-<p>[storage, client] An integer value representing an original programmed duration of time in milliseconds, copied from the <code>duration</code> field on ingestion when a following event has resulted in truncation of the original programmed duration.</p>
-<pre><code>QUICK SUMMARY
-Required:
-    jellyfish: no (optional)
-    platform: no (optional)
-Numerical type: Integer value representing milliseconds.
-Range:
-    min: &gt; `duration`
-    max: 432000000
-</code></pre><!-- start editable commentary on expectedDuration -->
-<p>On a scheduled basal ingested through the legacy jellyfish ingestion service, <code>expectedDuration</code> should <em>never</em> be included on a <code>scheduled</code> basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original <code>scheduled</code> basal; most commonly this new event is a <code>temp</code> or <code>suspend</code>, but it could be a <code>scheduled</code> if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples in <a href="previous.html"><code>previous</code></a>.</p>
-<p>In Tidepool&apos;s new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the <code>expectedDuration</code> where available and relevant, but it will never be a required field. Because of how burdensome (or impossible) it is to calculate <code>expectedDuration</code> for <code>scheduled</code> basals, we do <strong>not</strong> expect the uploading client to calculate it, except in cases where the source data makes it easy to include.</p>
-<!-- end editable commentary on expectedDuration -->
-<hr>
-<h3 id="rate">rate</h3>
-<p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
+<h3 id="lowalerts">lowAlerts</h3>
+<p>[ingestion] An object representing a low glucose alert setting, with <code>level</code> in mg/dL (integer) or mmol/L (float) and the appropriately matching <code>units</code> value.</p>
+<p>[storage, client] An object representing a low glucose alert setting, with <code>level</code> in mmol/L (float, potentially unrounded) and the appropriately matching <code>units</code> value.</p>
 <pre><code>QUICK SUMMARY
 Required:
     jellyfish: yes
     platform: yes
-Numerical type: Floating point value rounded to the appropriate significant figures for the device&apos;s precision.
+</code></pre><p>Contains the following properties:</p>
+<ul>
+<li>enabled</li>
+<li>level</li>
+<li>snooze</li>
+</ul>
+<h4 id="enabled">enabled</h4>
+<p>[ingestion, storage, client] A Boolean value: <code>true</code> or <code>false</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Range: `true`, `false`
+</code></pre><h4 id="level">level</h4>
+<p>[ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching <code>units</code> field.</p>
+<p>[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching <code>units</code> field.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type:
+    mg/dL: Integer value representing a `mg/dL` value.
+    mmol/L: Floating point value representing a `mmol/L` value.
 Range:
-    min: 0.0
-    max: 20.0
-</code></pre><!-- start editable commentary on rate -->
-<p>Different insulin pump manufacturers offer the ability to program basal rates with different levels of precision in terms of significant digits on the <code>rate</code>. We endeavor to represent each <code>rate</code> as accurately as possible for each insulin pump; occasionally when values are stored to a falsely large number of floating point digits this means rounding the raw <code>rate</code> value found in a record from a pump in order to match the significant digits of precision advertised by the manufacturer. It is the burden of the uploading client to handle this rounding since the number of significant digits for <code>rate</code>s varies according to the pump manufacturer.</p>
-<p>Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.</p>
-<!-- end editable commentary on rate -->
-<hr>
-<h3 id="previous">previous</h3>
-<blockquote>
-<p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but will no longer exist when ingesting data through the new platform APIs.</p>
-</blockquote>
-<p>[ingestion] An object representing the <code>basal</code> event just prior to this event or, equivalently, just the <code>id</code> of said object.</p>
-<p>[storage, client] This field does not appear, as it is only used in processing during ingestion and not stored.</p>
+    mg/dL:
+        min: 0
+        max: 1000
+    mmol/L:
+        min: 0.0
+        max: 55.0
+</code></pre><h4 id="snooze">snooze</h4>
+<p>[ingestion, storage, client] An integer value representing minimum time between alerts in milliseconds.</p>
 <pre><code>QUICK SUMMARY
 Required:
-    jellyfish: no (optional)
-    platform: nonexistent
-</code></pre><!-- start editable commentary on previous -->
-<p>See <a href="previous.html"><code>previous</code></a> for detailed documentation on this deprecated field.</p>
-<!-- end editable commentary on previous -->
+    jellyfish: yes
+    platform: yes
+Range:
+    min: 0
+    max: 86400000
+</code></pre><!-- start editable commentary on lowAlerts -->
+<!-- TODO -->
+<!-- end editable commentary on lowAlerts -->
 <hr>
-<h3 id="schedulename">scheduleName</h3>
-<blockquote>
-<p>This field is <strong>optional</strong>.</p>
-</blockquote>
-<p>[ingestion, storage, client] A string: the name of the basal schedule.</p>
+<h3 id="outofrangealerts">outOfRangeAlerts</h3>
+<p>[ingestion, storage, client] An object representing an out-of-range alert setting.</p>
 <pre><code>QUICK SUMMARY
 Required:
-    jellyfish: no (optional)
-    platform: no (optional)
-</code></pre><h4 id="changelog-for-schedulename">Changelog for <code>scheduleName</code></h4>
-<p><code>_schemaVersion</code> 2: <code>scheduleName</code> became <strong>optional</strong>.</p>
-<!-- start editable commentary on scheduleName -->
-<!-- DRAFT: discuss with @jhbate -->
-<p>Note that <code>.</code> and <code>$</code> are illegal characters in object keys for MongoDB&apos;s serialized JSON (BSON). These characters can, however, appear in basal schedule names for some insulin pump manufacturers. At present, we are dealing with this in at least one client-side &quot;driver&quot; for retrieving and processing insulin pump data prior to upload<sup><a href="#fn_a" id="reffn_a">a</a></sup>, but we may decide to deal with this on the server side as part of our validation step in the new platform APIs.</p>
-<p>In an ideal world, we at Tidepool would love to be able to surface to any user of <code>basal</code> data the name of the schedule that generated a particular <code>scheduled</code> basal event. Unfortunately, most of the manufacturers of insulin pumps do <em>not</em> provide the name of the basal schedule on each basal rate change event reported when the pump switches from one segment of a basal schedule to the next (or switches from a suspended state or temporary basal rate back to the active schedule).</p>
-<p>For some manufacturers, we are able to build a complete history of the pump&apos;s settings, and thus we are able to infer the active schedule name by looking up the active pump settings at the time of a particular <code>basal</code> event. However, again due to how some manufacturers do (or <em>do not</em>) record pump settings changes, we are not always able to build this complete history, and so this lookup strategy is also in many cases not possible.</p>
-<p>Prior to <code>_schemaVersion</code> 2, the <code>scheduleName</code> was <em>required</em> by the jellyfish data ingestion service, and as a result for some of the manufacturers we were providing the name of the currently active (as of time of upload) basal schedule, which is only correct for the final <code>basal</code> event in any upload. Thus, the <code>scheduleName</code> field should <strong>not</strong> be used for any computation of statistics or surfaced to the user for any <code>_schemaVersion</code> 1 data.</p>
-<p>Going forward, now that <code>scheduleName</code> is an optional field, it should only be added to <code>basal</code> data when it is directly available in the raw data from an insulin pump or can be inferred with high confidence via lookup against a complete pump settings history.</p>
-<!-- end editable commentary on scheduleName -->
+    jellyfish: yes
+    platform: yes
+</code></pre><p>Contains the following properties:</p>
+<ul>
+<li>enabled</li>
+<li>snooze</li>
+</ul>
+<h4 id="enabled">enabled</h4>
+<p>[ingestion, storage, client] A Boolean value: <code>true</code> or <code>false</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Range: `true`, `false`
+</code></pre><h4 id="snooze">snooze</h4>
+<p>[ingestion, storage, client] An integer value representing a minimum threshold of time (in milliseconds) the user&apos;s transmitter must be out-of-range of the receiving device before alerting.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Integer value representing milliseconds.
+Range:
+    min: 0
+    max: 86400000
+</code></pre><h4 id="changelog-for-outofrangealerts">Changelog for <code>outOfRangeAlerts</code></h4>
+<p><code>_schemaVersion</code> ? (future): We plan to migrate from <code>outOfRangeAlerts.snooze</code> to <code>outOfRangeAlerts.threshold</code> in the future.</p>
+<!-- start editable commentary on outOfRangeAlerts -->
+<!-- TODO -->
+<!-- end editable commentary on outOfRangeAlerts -->
+<hr>
+<h3 id="rateofchangealerts">rateOfChangeAlerts</h3>
+<p>[ingestion] An object representing a rate of change alert setting, with <code>rate</code> in mg/dL (integer) or mmol/L (float) and the appropriately matching <code>units</code> value.</p>
+<p>[storage, client] An object representing a rate of change alert setting, with <code>rate</code> in mmol/L (float, potentially unrounded) and the appropriately matching <code>units</code> value.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><p>Each of two embedded objects&#x2014;<code>fallRate</code> and <code>riseRate</code>&#x2014;contains the following properties:</p>
+<ul>
+<li>enabled</li>
+<li>rate</li>
+</ul>
+<h4 id="enabled">enabled</h4>
+<p>[ingestion, storage, client] A Boolean value: <code>true</code> or <code>false</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Range: `true`, `false`
+</code></pre><h4 id="rate">rate</h4>
+<p>[ingestion] A rate of blood glucose value change in either mg/dL/min (integer) or mmol/L/min (float), with appropriately matching <code>units</code> field.</p>
+<p>[storage, client] A rate of blood glucose value change in mmol/L (float, potentially unrounded), with appropriately matching <code>units</code> field.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type:
+    mg/dL: Integer value representing a `mg/dL` value.
+    mmol/L: Floating point value representing a `mmol/L` value.
+Range:
+    mg/dL:
+        min: -10 if `fallRate`, &gt; 0 if `riseRate`
+        max: &lt; 0 if `fallRate`, 10 if `riseRate`
+    mmol/L:
+        min: -0.55 if `fallRate`, &gt; 0 if `riseRate`
+        max: &lt; 0 if `fallRate`, 0.55 if `riseRate`
+</code></pre><!-- start editable commentary on rateOfChangeAlerts -->
+<!-- TODO -->
+<!-- end editable commentary on rateOfChangeAlerts -->
+<hr>
+<h3 id="transmitterid">transmitterId</h3>
+<p>[ingestion, storage, client] A string transmitter ID.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+</code></pre><!-- start editable commentary on transmitterId -->
+<!-- TODO -->
+<!-- end editable commentary on transmitterId -->
+<hr>
+<h3 id="units">units</h3>
+<p>[ingestion] One of two string values: <code>mg/dL</code> or <code>mmol/L</code>.</p>
+<p>[storage, client] The string <code>mmol/L</code>.</p>
+<p>See <a href="../../units.html">units</a> for further explanation of blood glucose units.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Range: Must be one of:
+    `mg/dL`
+    `mmol/L`
+</code></pre><!-- start editable commentary on units -->
+<!-- TODO -->
+<!-- end editable commentary on units -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
 <p>See <a href="../../common.html">common fields</a>.</p>
@@ -912,64 +1016,127 @@ Required:
 <hr>
 <h3 id="example-client">example (client)</h3>
 <pre><code class="lang-json">{
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
-    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">61200000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.95</span>,
-    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cgmSettings&quot;</span>,
+    <span class="hljs-string">&quot;highAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">12.489182979852451</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">4500000</span>
+    },
+    <span class="hljs-string">&quot;lowAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">4.440598392836427</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">3600000</span>
+    },
+    <span class="hljs-string">&quot;outOfRangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
+    },
+    <span class="hljs-string">&quot;rateOfChangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;fallRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: -<span class="hljs-number">0.055507479910455335</span>
+        },
+        <span class="hljs-string">&quot;riseRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.11101495982091067</span>
+        }
+    },
+    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;6C8A7&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-13T19:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;3483ef73-2eb1-40d0-accd-0fae2d812ebf&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;dafca36d61394a5b93e5975ac6e6ba29&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-14T02:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-16T11:53:19&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;6590a33c-7fbe-4341-8b65-15742409a4bd&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;ffb4e03b854b432aa7464822efd2ec84&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-16T18:53:19.226Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
 <h3 id="example-ingestion">example (ingestion)</h3>
 <pre><code class="lang-json">{
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
-    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">61200000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.45</span>,
-    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Stress&quot;</span>,
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cgmSettings&quot;</span>,
+    <span class="hljs-string">&quot;highAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">235</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">3600000</span>
+    },
+    <span class="hljs-string">&quot;lowAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">75</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
+    },
+    <span class="hljs-string">&quot;outOfRangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
+    },
+    <span class="hljs-string">&quot;rateOfChangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;fallRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: -<span class="hljs-number">1</span>
+        },
+        <span class="hljs-string">&quot;riseRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1</span>
+        }
+    },
+    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;1596D&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-13T19:00:00&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-14T02:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-16T11:53:19&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-16T18:53:19.227Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
 <h3 id="example-storage">example (storage)</h3>
 <pre><code class="lang-json">{
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
-    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
-    <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">7200000</span>,
-    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.8</span>,
-    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Vacation&quot;</span>,
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cgmSettings&quot;</span>,
+    <span class="hljs-string">&quot;highAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">10.82395858253879</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">5400000</span>
+    },
+    <span class="hljs-string">&quot;lowAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">4.440598392836427</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
+    },
+    <span class="hljs-string">&quot;outOfRangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">3600000</span>
+    },
+    <span class="hljs-string">&quot;rateOfChangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;fallRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: -<span class="hljs-number">0.055507479910455335</span>
+        },
+        <span class="hljs-string">&quot;riseRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.055507479910455335</span>
+        }
+    },
+    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;8A46E&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
     <span class="hljs-string">&quot;_schemaVersion&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-06-14T02:00:05.000Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-06-16T18:53:24.228Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-13T19:00:00&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;d829dab2-46e8-4977-bca3-de2a28269f2c&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;e499052181d94f3c9353822453be0d1f&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-14T02:00:00.000Z&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-16T11:53:19&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;473c3768-3b3a-40dc-acea-84bcede94bba&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;854ba9ffbcfc4c759c32b40f01dec3f4&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-16T18:53:19.228Z&quot;</span>,
     <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
-<blockquote id="fn_a">
-<sup>a</sup>. See, for example, <a href="https://github.com/tidepool-org/chrome-uploader/pull/95/commits/2c2bcf2db3e609c703a65967399784dcd47e49af" title="GitHub: chrome-uploader" target="_blank">this chrome-uploader commit</a>.<a href="#reffn_a" title="Jump back to footnote [a] in the text."> &#x21A9;</a>
-</blockquote>
 
                     
                     </section>
@@ -980,10 +1147,10 @@ Required:
         </div>
 
         
-        <a href="../../../device-data/types/basal/index.html" class="navigation navigation-prev " aria-label="Previous page: basal"><i class="fa fa-angle-left"></i></a>
+        <a href="../../../device-data/types/cgmSettings/index.html" class="navigation navigation-prev " aria-label="Previous page: cgmSettings"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../../device-data/types/basal/temp.html" class="navigation navigation-next " aria-label="Next page: temp"><i class="fa fa-angle-right"></i></a>
+        <a href="../../../device-data/types/deviceEvent/index.html" class="navigation navigation-next " aria-label="Next page: deviceEvent"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
