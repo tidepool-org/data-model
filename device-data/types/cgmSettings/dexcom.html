@@ -53,7 +53,7 @@
         data-chapter-title="Dexcom"
         data-filepath="device-data/types/cgmSettings/dexcom.md"
         data-basepath="../../.."
-        data-revision="Thu Jun 16 2016 18:20:23 GMT-0700 (PDT)"
+        data-revision="Tue Jun 28 2016 20:38:18 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -727,7 +727,7 @@ Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start editable commentary on type -->
-<!-- TODO -->
+<p>This is the Tidepool data type to represent CGM settings at a given point in time, usually the time of an upload of data from the device. Most CGM-receiving devices do <strong>not</strong>, unfortunately, keep a historical record of all CGM settings whenever a settings change is made, with the exception of Dexcom dedicated hardware receivers. The safest assumption is that the <code>time</code> on each <code>cgmSettings</code> object simply represents <em>a (single)</em> time when the settings were effective, not the first moment when the settings became effective.</p>
 <!-- end editable commentary on type -->
 <hr>
 <h3 id="highalerts">highAlerts</h3>
@@ -778,7 +778,7 @@ Range:
     min: 0
     max: 86400000
 </code></pre><!-- start editable commentary on highAlerts -->
-<!-- TODO -->
+<p>The <code>highAlerts</code> object on a <code>cgmSettings</code> event encodes the user&apos;s preferences for receiving alerts about high blood glucose events (hyperglycemia). The <code>level</code> gives the threshold for high BG alerts in the appropriate blood glucose units (either mg/dL or mmol/L on ingestion but converted to mmol/L upon ingestion, like all other blood glucose-related values in the Tidepool data model(s)). The <code>snooze</code> value allows the user to configure how often the alert should repeat (after an initial user-acknowledgment) if the PWD&apos;s blood glucose remains above the threshold value. This is useful since high blood glucose cannot be corrected immediately; a typical value for a <code>snooze</code> on a high blood glucose alert might be two hours, for example, since it takes about 90 minutes for an insulin dose (taken to correct the high blood glucose) to reach its peak (in terms of metabolic activity).</p>
 <!-- end editable commentary on highAlerts -->
 <hr>
 <h3 id="lowalerts">lowAlerts</h3>
@@ -828,7 +828,7 @@ Range:
     min: 0
     max: 86400000
 </code></pre><!-- start editable commentary on lowAlerts -->
-<!-- TODO -->
+<p>The <code>lowAlerts</code> object on a <code>cgmSettings</code> event encodes the user&apos;s preferences for receiving alerts about low blood glucose events (hypoglycemia). The <code>level</code> gives the threshold for low BG alerts in the appropriate blood glucose units (either mg/dL or mmol/L on ingested but converted to mmol/L upon ingestion, like all other blood glucose-related values in the Tidepool data model(s)). The <code>snooze</code> value allows the user to configure how often the alert should repeat (after an initial user-acknowledgment) if the PWD&apos;s blood glucose remains below the threshold value. This is useful since low blood glucose cannot be corrected immediately; a typical value for a <code>snooze</code> on a low blood glucose alert might be fifteen minutes, for example, since that is the typical time recommended by diabetes health care providers to wait before retesting a PWD&apos;s blood glucose after treating hypoglycemia (by ingesting some form of glucose, whether soda, juice, glucose tablets, etc.).</p>
 <!-- end editable commentary on lowAlerts -->
 <hr>
 <h3 id="outofrangealerts">outOfRangeAlerts</h3>
@@ -862,7 +862,7 @@ Range:
 </code></pre><h4 id="changelog-for-outofrangealerts">Changelog for <code>outOfRangeAlerts</code></h4>
 <p><code>_schemaVersion</code> ? (future): We plan to migrate from <code>outOfRangeAlerts.snooze</code> to <code>outOfRangeAlerts.threshold</code> in the future.</p>
 <!-- start editable commentary on outOfRangeAlerts -->
-<!-- TODO -->
+<p>The <code>outOfRangeAlerts</code> object on a <code>cgmSettings</code> event encodes the user&apos;s settings for receiving alerts from the receiver if the connection between the transmitter and the receiver has been disrupted (typically due to the transmitter being situated physically out of range of the receiver). We have erroneously labeled the time value on this object <code>snooze</code>: this value is <strong>not</strong> like the <code>snooze</code> on <code>highAlerts</code> and <code>lowAlerts</code>. More specifically, the time value in an <code>outOfRangeAlerts</code> object is <em>not</em> a setting for time between alerts but rather a setting for elapsed time before the <em>initial</em> alert&#x2014;that is, the amount of time (counted by the receiver), that the receiver&apos;s data connection with the transmitter has been broken. We plan to rename the field for this value to <code>threshold</code> in an upcoming <code>_schemaVersion</code>.</p>
 <!-- end editable commentary on outOfRangeAlerts -->
 <hr>
 <h3 id="rateofchangealerts">rateOfChangeAlerts</h3>
@@ -902,7 +902,7 @@ Range:
         min: -0.55 if `fallRate`, &gt; 0 if `riseRate`
         max: &lt; 0 if `fallRate`, 0.55 if `riseRate`
 </code></pre><!-- start editable commentary on rateOfChangeAlerts -->
-<!-- TODO -->
+<p>The <code>rateOfChangeAlerts</code> object on a <code>cgmSettings</code> event encodes the user&apos;s preferences for receiving alerts when the PWD&apos;s blood glucose is changing rapidly&#x2014;either rising or falling. Each of <code>fallRate</code> and <code>riseRate</code> is an object inside of the <code>rateOfChangeAlerts</code> object with two key-value pairs for whether the alert is <code>enabled</code> and the <code>rate</code> of change to trigger the alert. For the <code>fallRate</code>, note that the <code>rate</code> of change must be specified as a <em>negative</em> value. Like all blood glucose-related values in the Tidepool data model(s), both <code>fallRate.rate</code> and <code>riseRate.rate</code> may be specified in either mg/dL or mmol/L for ingestion, but will be stored and returned to client applications in mmol/L.</p>
 <!-- end editable commentary on rateOfChangeAlerts -->
 <hr>
 <h3 id="transmitterid">transmitterId</h3>
@@ -912,7 +912,6 @@ Required:
     jellyfish: yes
     platform: yes
 </code></pre><!-- start editable commentary on transmitterId -->
-<!-- TODO -->
 <!-- end editable commentary on transmitterId -->
 <hr>
 <h3 id="units">units</h3>
@@ -927,7 +926,6 @@ Range: Must be one of:
     `mg/dL`
     `mmol/L`
 </code></pre><!-- start editable commentary on units -->
-<!-- TODO -->
 <!-- end editable commentary on units -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
