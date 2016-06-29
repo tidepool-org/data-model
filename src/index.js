@@ -103,6 +103,11 @@ module.exports = {
     type: 'smbg'
   },
   upload: {
+    generator: upload.generate,
+    summary: upload.summary,
+    changeLog: upload.changeLog,
+    title: 'Upload Metadata',
+    type: 'upload'
   },
   wizard: {
     generator: wizard.generate,

@@ -266,6 +266,9 @@ module.propTypes = {
   insulinUnits: function() {
     return '[ingestion, storage, client] A floating point value representing units of insulin.';
   },
+  maybeEmptyString: function() {
+    return 'Must be a string value, and **may** be an empty string.';
+  },
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);
   },
