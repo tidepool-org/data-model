@@ -1,7 +1,5 @@
 # data-model
 
-**This documentation is actively under construction and not yet endorsed by the Tidepool team!**
-
 Documentation for Tidepool's data models.
 
 Jump to...
