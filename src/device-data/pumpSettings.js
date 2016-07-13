@@ -65,7 +65,7 @@ var bgTargets = {
     var bgTargets = {};
     _.each(TANDEM_SCHEDULES, function(scheduleName) {
       bgTargets[scheduleName] = _.map(getStarts(), function(aStart) {
-        _.assign({start: aStart}, common.bgTarget(units, isIngestion, 'tandem'));
+        return _.assign({start: aStart}, common.bgTarget(units, isIngestion, 'tandem'));
       });
     });
 
@@ -128,10 +128,10 @@ var carbRatios = {
 };
 
 var insulinSensitivity = {
-  instance: function() {
+  instance: function(units, isIngestion) {
     return _.map(getStarts(), function(aStart) {
       return {
-        amount: common.insulinSensitivity(),
+        amount: common.insulinSensitivity(units, isIngestion),
         start: aStart
       };
     });
@@ -160,12 +160,12 @@ var insulinSensitivity = {
 };
 
 var insulinSensitivities = {
-  instance: function() {
+  instance: function(units, isIngestion) {
     var insulinSensitivities = {};
     _.each(TANDEM_SCHEDULES, function(scheduleName) {
       insulinSensitivities[scheduleName] = _.map(getStarts(), function(aStart) {
         return {
-          amount: common.insulinSensitivity(),
+          amount: common.insulinSensitivity(units, isIngestion),
           start: aStart
         };
       });

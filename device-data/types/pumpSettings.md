@@ -576,7 +576,25 @@ See [common fields](../common.md).
 		"Normal": [
 			{
 				"start": 0,
-				"rate": 1.45
+				"rate": 0.35
+			},
+			{
+				"start": 12600000,
+				"rate": 0.225
+			},
+			{
+				"start": 36000000,
+				"rate": 1.075
+			},
+			{
+				"start": 72000000,
+				"rate": 0.625
+			}
+		],
+		"Weekday": [
+			{
+				"start": 0,
+				"rate": 1.15
 			}
 		]
 	},
@@ -587,52 +605,51 @@ See [common fields](../common.md).
 	"bgTarget": [
 		{
 			"start": 0,
-			"target": 6.1058227901500866,
+			"target": 5.82828539059781,
+			"high": 8.3261219865683
+		},
+		{
+			"start": 59400000,
+			"target": 5.82828539059781,
 			"high": 8.048584587016023
 		},
 		{
-			"start": 3600000,
-			"target": 5.550747991045533,
-			"high": 6.938434988806917
-		},
-		{
-			"start": 37800000,
-			"target": 4.9956731919409805,
-			"high": 7.2159723883591935
-		},
-		{
-			"start": 79200000,
-			"target": 5.550747991045533,
-			"high": 7.771047187463747
+			"start": 84600000,
+			"target": 6.1058227901500866,
+			"high": 7.49350978791147
 		}
 	],
 	"carbRatio": [
 		{
-			"amount": 6,
+			"amount": 15,
 			"start": 0
 		}
 	],
 	"insulinSensitivity": [
 		{
-			"amount": 21,
+			"amount": 2.164791716507758,
 			"start": 0
 		},
 		{
-			"amount": 89,
-			"start": 16200000
+			"amount": 4.88465823212007,
+			"start": 1800000
 		},
 		{
-			"amount": 66,
-			"start": 36000000
+			"amount": 0.4440598392836427,
+			"start": 27000000
+		},
+		{
+			"amount": 0.6105822790150087,
+			"start": 52200000
 		}
 	],
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"guid": "3931f815-46fe-41cc-a428-2cd8f2cfec7b",
-	"id": "024d7f588b0c433390bfbb3d96bce666",
-	"time": "2016-06-14T02:05:45.752Z",
+	"deviceTime": "2016-07-12T23:52:47",
+	"guid": "419de528-ad19-43ae-8a8f-7c29f0d2e029",
+	"id": "bd22a1c34fbc4c2aa2b99d40ee1bb28d",
+	"time": "2016-07-13T06:52:47.949Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -648,35 +665,29 @@ See [common fields](../common.md).
 		"Normal": [
 			{
 				"start": 0,
-				"rate": 1.725
-			},
-			{
-				"start": 19800000,
-				"rate": 0.15
-			},
-			{
-				"start": 68400000,
-				"rate": 1.65
-			},
-			{
-				"start": 81000000,
-				"rate": 0.45
-			}
-		],
-		"Stress": [
-			{
-				"start": 0,
-				"rate": 1.95
+				"rate": 0.575
 			},
 			{
 				"start": 28800000,
-				"rate": 0.85
+				"rate": 0.25
+			},
+			{
+				"start": 45000000,
+				"rate": 0.925
+			},
+			{
+				"start": 46800000,
+				"rate": 1.675
+			},
+			{
+				"start": 75600000,
+				"rate": 0.5
 			}
 		],
-		"Very Active": [
+		"Sick": [
 			{
 				"start": 0,
-				"rate": 0.875
+				"rate": 0.725
 			}
 		]
 	},
@@ -684,42 +695,65 @@ See [common fields](../common.md).
 		"carbs": "grams",
 		"bg": "mg/dL"
 	},
-	"bgTarget": [
-		{
-			"start": 0,
-			"target": 100,
-			"range": 20
-		}
-	],
-	"carbRatio": [
-		{
-			"amount": 18,
-			"start": 0
-		}
-	],
-	"insulinSensitivity": [
-		{
-			"amount": 43,
-			"start": 0
-		},
-		{
-			"amount": 17,
-			"start": 7200000
-		},
-		{
-			"amount": 19,
-			"start": 10800000
-		},
-		{
-			"amount": 25,
-			"start": 18000000
-		}
-	],
+	"bgTargets": {
+		"Normal": [
+			{
+				"start": 0,
+				"target": 90
+			}
+		],
+		"Sick": [
+			{
+				"start": 0,
+				"target": 110
+			}
+		]
+	},
+	"carbRatios": {
+		"Normal": [
+			{
+				"amount": 11,
+				"start": 0
+			}
+		],
+		"Sick": [
+			{
+				"amount": 19,
+				"start": 0
+			},
+			{
+				"amount": 21,
+				"start": 55800000
+			},
+			{
+				"amount": 15,
+				"start": 79200000
+			},
+			{
+				"amount": 12,
+				"start": 84600000
+			}
+		]
+	},
+	"insulinSensitivities": {
+		"Normal": [
+			{
+				"amount": 89,
+				"start": 0
+			}
+		],
+		"Sick": [
+			{
+				"amount": 86,
+				"start": 0
+			}
+		]
+	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"time": "2016-06-14T02:05:45.756Z",
+	"deviceTime": "2016-07-12T23:52:47",
+	"time": "2016-07-13T06:52:47.950Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }
@@ -735,27 +769,29 @@ See [common fields](../common.md).
 		"Normal": [
 			{
 				"start": 0,
-				"rate": 0.675
+				"rate": 0.4
 			}
 		],
-		"Stress": [
+		"Sick": [
 			{
 				"start": 0,
-				"rate": 0.85
-			}
-		],
-		"Vacation": [
-			{
-				"start": 0,
-				"rate": 1.475
+				"rate": 0.125
 			},
 			{
-				"start": 19800000,
-				"rate": 1.9
+				"start": 50400000,
+				"rate": 1.65
+			},
+			{
+				"start": 52200000,
+				"rate": 0.725
+			},
+			{
+				"start": 59400000,
+				"rate": 0.775
 			},
 			{
 				"start": 84600000,
-				"rate": 0.85
+				"rate": 0.95
 			}
 		]
 	},
@@ -763,37 +799,88 @@ See [common fields](../common.md).
 		"carbs": "grams",
 		"bg": "mmol/L"
 	},
-	"bgTarget": [
-		{
-			"start": 0,
-			"target": 5.550747991045533,
-			"high": 7.2159723883591935
-		}
-	],
-	"carbRatio": [
-		{
-			"amount": 18,
-			"start": 0
-		}
-	],
-	"insulinSensitivity": [
-		{
-			"amount": 49,
-			"start": 0
-		}
-	],
+	"bgTargets": {
+		"Normal": [
+			{
+				"start": 0,
+				"target": 4.9956731919409805
+			},
+			{
+				"start": 9000000,
+				"target": 6.1058227901500866
+			},
+			{
+				"start": 14400000,
+				"target": 6.1058227901500866
+			},
+			{
+				"start": 73800000,
+				"target": 4.718135792388703
+			},
+			{
+				"start": 75600000,
+				"target": 4.9956731919409805
+			}
+		],
+		"Sick": [
+			{
+				"start": 0,
+				"target": 5.273210591493257
+			},
+			{
+				"start": 21600000,
+				"target": 5.273210591493257
+			},
+			{
+				"start": 23400000,
+				"target": 6.1058227901500866
+			},
+			{
+				"start": 73800000,
+				"target": 4.9956731919409805
+			}
+		]
+	},
+	"carbRatios": {
+		"Normal": [
+			{
+				"amount": 12,
+				"start": 0
+			}
+		],
+		"Sick": [
+			{
+				"amount": 22,
+				"start": 0
+			}
+		]
+	},
+	"insulinSensitivities": {
+		"Normal": [
+			{
+				"amount": 2.0537767566868474,
+				"start": 0
+			}
+		],
+		"Sick": [
+			{
+				"amount": 2.5533440758809456,
+				"start": 0
+			}
+		]
+	},
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:50.757Z",
+	"createdTime": "2016-07-13T06:52:52.953Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"guid": "72967b4c-0a5a-4325-baa7-7df4205b8c85",
-	"id": "aedc87ab47684b2a80cd914c65fdbd70",
-	"time": "2016-06-14T02:05:45.757Z",
+	"deviceTime": "2016-07-12T23:52:47",
+	"guid": "5edaaa22-f3f5-44a2-8024-d07281a42525",
+	"id": "ec7113f874344569b45eec601170b3cd",
+	"time": "2016-07-13T06:52:47.953Z",
 	"timezoneOffset": -420,
 	"uploadId": "SampleUploadId"
 }

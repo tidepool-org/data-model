@@ -103,8 +103,17 @@ module.insulinCarbRatio = function() {
   return chance.natural({min: 5, max: 25});
 };
 
-module.insulinSensitivity = function() {
-  return chance.natural({min: 5, max: 100});
+module.insulinSensitivity = function(units, ingestion) {
+  var value = chance.natural({min: 5, max: 100});
+  if (units === 'mg/dL') {
+    return value;
+  }
+  else if (units === 'mmol/L' && ingestion) {
+    return module.transformToMmolLInput(value);
+  }
+  else {
+    return module.transformToMmolLStorage(value);
+  }
 };
 
 module.transformToMmolLInput = function(value) {
