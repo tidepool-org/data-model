@@ -30,7 +30,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-
+<!-- TODO -->
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -84,7 +84,7 @@ The `alarmType`s built into the data model are all and only those alarms that ar
 - `auto_off` for when an insulin pump stops all insulin delivery due to inactivity for a duration over the user's programmed threshold, if any
 - `over_limit` for when insulin delivery has surpassed any of a user's programmed maximum bolus, basal, or hourly delivery thresholds
 
-Many if not all `alarm` events will include `payload` object with more information about the alarm that is device-specific. For example, a `low_insulin` alarm may have a `units_left` field in its `payload` to record the number of units of insulin that were remaining in the insulin pump's reservoir at the time of the alarm.
+Many, if not all, `alarm` events will include a `payload` object with more<!-- Edit by Eden -->, device-specific, information about the alarm. For example, a `low_insulin` alarm may have a `units_left` field in its `payload` to record the number of units of insulin that were remaining in the insulin pump's reservoir at the time of the alarm.
 
 In addition, a `payload` object is *required* when `alarmType` is `other`, which is the `alarmType` value used to capture all alarms that are device-specific. For example, a pod expiration alarm is specific to the Insulet OmniPod insulin delivery system. The `payload` object should include all information that could be relevant to anyone wishing to audit the history and performance of the insulin pump in question.
 

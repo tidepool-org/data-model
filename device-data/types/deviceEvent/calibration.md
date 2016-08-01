@@ -30,7 +30,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-
+<!-- Added by Eden: TODO -->
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -46,7 +46,7 @@
 
 <!-- start editable commentary on subType -->
 
-The `calibration` sub-type of `deviceEvent` represents a user's manual entry of an [`smbg`](../smbg.md) value to calibrate a continuous glucose monitoring (CGM) device.
+The `calibration` sub-type of `deviceEvent` represents a user's manual entry of an [`smbg`](../smbg.md) value to calibrate a continuous glucose monitoring (CGM) device. <!-- Edit by Eden: Explain: e.g. Calibrations are currently required by CGM devices in order to maintain accurate readings. -->
 
 <!-- end editable commentary on subType -->
 

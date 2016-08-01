@@ -32,7 +32,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-
+<!-- Edit by Eden: TODO? -->
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -54,7 +54,7 @@
 
 This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to be delivered spread evenly over a `duration` of time (typically fifteen minutes to several hours).
 
-We plan to migrate all Tidepool data to use `extended` as the value of this sub-type rather than `square` in order to improve the consistency of the data model. With `subType` containing `extended` and the `extended` field containing the value of the delivered insulin dose, this sub-type of `bolus` event will be parallel to `normal` boluses, where the `subType` is `normal` and the `normal` field contains the value of the delivered insulin dose.
+We plan to migrate all Tidepool data to use `extended` as the value of this sub-type rather than `square` in order to improve the consistency of the data model. With `subType` containing `extended` and the `extended` field containing the value of the delivered insulin dose, this sub-type of `bolus` event <!-- Edit by Eden -->is parallel to `normal` boluses, where the `subType` is `normal` and the `normal` field contains the value of the delivered insulin dose.
 
 <!-- end editable commentary on subType -->
 
@@ -126,7 +126,7 @@ Refer to the documentation for [`normal`](normal.md) boluses for an explanation 
 The `duration` field encodes the actual elapsed duration of time, in milliseconds, spent delivering the dose of insulin encoded in `extended`.
 
 <!-- DRAFT: discuss with Gerrit -->
-The user interface for some insulin pumps allows a user to program a `square` bolus with a 0 duration; this is logically equivalent to a `normal` bolus but in order to expose device data with the highest level of fidelity possible, we preserve the record as a sub-type `square` and allow the upload of the event with a value of 0 for `duration`.
+The user interface for some insulin pumps allows a user to program a `square` bolus with a 0 duration; this is logically equivalent to a `normal` bolus, but in order to expose device data with the highest level of fidelity possible, we preserve the record as a sub-type `square` and allow the upload of the event with a value of 0 for `duration`.
 
 To the best of our knowledge, no insulin pump allows the programming of a `square` bolus with a duration longer than twenty-four hours, and so we have chosen this as the maximum value accepted by the new platform APIs.
 

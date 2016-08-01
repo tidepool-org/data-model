@@ -55,7 +55,7 @@ This is the Tidepool data type for traditional fingerstick blood glucose meter d
 
 `subType` appears on blood glucose values that are *not* being read directly from a traditional fingerstick blood glucose meter, but rather from another data source such as an insulin pump.
 
-The value `manual` indicates that the blood glucose value was manually entered by a user (and is thus, of course, subject to human error).
+The value `manual` indicates that the blood glucose value was manually entered <!-- Edit by Eden -->into the data source by a user (and is thus, of course, subject to human error).
 
 The value `linked` indicates that the blood glucose value was transferred from a blood glucose meter to the pump directly via some sort of data transfer or pairing mechanism. If the blood glucose meter in question is also supported by the Tidepool uploader, duplicate records may exist: both read directly from the meter and pulled in as `subType: 'linked'` records from the insulin pump.
 

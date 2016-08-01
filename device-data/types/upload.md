@@ -72,9 +72,9 @@ The `byUser` field is provided for data-auditing purposes. Since Tidepool provid
 
 <!-- start editable commentary on computerTime -->
 
-The `computerTime` field encodes the *local* time at upload with no timezone offset information since we are storing `timezone` separately. We store this field in order to be able to audit and/or detect the correspondence between the user's browser time and the timezone they selected at the time of upload. If the user selected the timezone that was actually in effect for their browser at the time of upload, then applying the stored `timezone` to the UTC Zulu `time` field will match `computerTime`. If, on the other hand, the user selected a *different* timezone from that effective in their browser at the time of upload, applying the `timezone` to `time` will *not* match `computerTime`.
+The `computerTime` field encodes the *local* time at upload. <!-- Edit by Eden --> There is no timezone offset information since we are storing `timezone` separately. We store this field in order to be able to audit and/or detect the correspondence between the user's browser time and the timezone they selected at the time of upload. If the user selected the timezone that was actually in effect for their browser at the time of upload, then applying the stored `timezone` to the UTC Zulu `time` field will match `computerTime`. If, on the other hand, the user selected a *different* timezone from that effective in their browser at the time of upload, applying the `timezone` to `time` will *not* match `computerTime`.
 
-There are some use cases when it is perfectly justified to select a timezone that does *not* reflect the browser's current timezone. For example, some insulin pump users do not change the time on their devices when traveling for short periods of time across many timezones, but when uploading a device a user should always choose the timezone that aligns with the most recent data on the device and thus that will *not* match the local browser timezone.
+There are some use cases when it is perfectly justified to select a timezone that does *not* reflect the browser's current timezone. For example, some insulin pump users do not change the time on their devices when traveling for short periods of time across many timezones, but when uploading a device a user should always choose the timezone that aligns with the most recent data on the device and thus that <!-- Edit by Eden --> may *not* match the local browser timezone.
 
 <!-- end editable commentary on computerTime -->
 
@@ -119,7 +119,7 @@ In order to avoid confusion resulting from referring to a single manufacturer wi
 
 <!-- start editable commentary on deviceModel -->
 
-The `deviceModel` is a non-empty string that encodes the model of device. We endeavor to match each manufacturer's standard for how they represent model name in terms of casing, whether parts of the name are represented as one word or two, etc.
+The `deviceModel` is a non-empty string that encodes the model of device. We endeavor to match each manufacturer's standard for how they represent model name<!-- Edit by Eden-->: in terms of casing, whether parts of the name are represented as one word or two, etc.
 
 <!-- end editable commentary on deviceModel -->
 
@@ -181,7 +181,7 @@ The `deviceTags` array should be fairly self-explanatory as an array of tags ind
 
 <!-- start editable commentary on timeProcessing -->
 
-For data auditing purposes, we store a string encoding the type of algorithm used to generate the `time`, `timezoneOffset`, and other related fields from the local `deviceTime`. At present, there are only three options for this value:
+For data auditing purposes, we store a string encoding the type of algorithm used to generate the `time`, `timezoneOffset`, and other related fields from the local `deviceTime`. At present, there are only three options for this <!--Suggestion by Eden-->string:
 - `across-the-board-timezone` for devices (all BGMs, for example) that cannot have their `deviceTime` values ["bootstrapped" to a UTC `time` value](http://developer.tidepool.io/chrome-uploader/docs/BootstrappingToUTC.html 'Bootstrapping to UTC'); in such cases, we apply a single user-selected timezone to every `deviceTime` "across the board" to generate the `time` value.
 - `utc-bootstrapping` for devices (most insulin pumps and CGMs) where we use a combination of the user-selected timezone at time of upload, the most recent timestamp on device, and the history of display time changes on the device to infer the correct `time` value for each record.
 - `none` for data sources that already include a UTC-anchored `time` value. At present, the *only* data source for which this is true is Dexcom G5 data coming through Apple's iOS HealthKit integration.
@@ -201,9 +201,9 @@ For data auditing purposes, we store a string encoding the type of algorithm use
 
 <!-- start editable commentary on timezone -->
 
-The `timezone` is the timezone *selected* by the user manually in the Chrome uploader at the time of upload, or (in the case of Dexcom G5 data from HealthKit), the timezone reported by the mobile device at the time of upload.
+The `timezone` is the timezone *selected* by the user manually in the Chrome uploader at the time of upload, or (<!-- Edit by Eden --> at present, only in the case of Dexcom G5 data from HealthKit), the timezone reported by the mobile device at the time of upload.
 
-Note that we use the [Moment Timezone](http://momentjs.com/timezone/ 'Moment Timezone') library for the implementation of both [bootstrapping to UTC](http://developer.tidepool.io/chrome-uploader/docs/BootstrappingToUTC.html 'Bootstrapping to UTC') (in the Chrome uploader) and in Tidepool's client web application, blip. Moment Timezone in turn includes a copy of the IANA timezone database. Moment Timezone is updated frequently to include updates to the IANA database, but we do not always update *our* dependencies very often, so in reality the possible values of this field are limited to the string timezone names recognized by the IANA timezone database *included in our current version of Moment Timezone*.
+Note that we use the [Moment Timezone](http://momentjs.com/timezone/ 'Moment Timezone') library for the implementation of both [bootstrapping to UTC](http://developer.tidepool.io/chrome-uploader/docs/BootstrappingToUTC.html 'Bootstrapping to UTC') (in the Chrome uploader) and<!-- Edit by Eden --> Tidepool's client web application, blip. Moment Timezone in turn includes a copy of the IANA timezone database. Moment Timezone is updated frequently to include updates to the IANA database, but we do not always update *our* dependencies very often, so in reality the possible values of this field are limited to the string timezone names recognized by the IANA timezone database *included in our current version of Moment Timezone*.
 
 <!-- end editable commentary on timezone -->
 
@@ -217,7 +217,7 @@ See [common fields](../common.md).
 
 The `uploadId` is a string ID generated by hashing various pieces of information about the upload and prefixed with `upid_`. It is included on the upload metadata as well as on *every datum* uploaded in one upload "session". In the Chrome uploader, an upload "session" is defined as the batch of data resulting from connecting a single device, reading the data from it, and transforming the response into the Tidepool data model.
 
-Unfortunately, it is becoming increasingly difficult to define what an upload "session" is now that Tidepool is uploading Dexcom G5 through integration with Apple iOS HealthKit nearly continuously. At present, we recommend producing an upload metadata record no more frequently than every 100 records when data is being uploaded continuously.
+Unfortunately, it is becoming increasingly difficult to define what an upload "session" is now that Tidepool is uploading Dexcom G5 through integration with Apple iOS HealthKit nearly continuously. At present, we recommend producing an upload metadata record no more frequently than every 100 <!-- Question by Eden: Is a record the same as a datum? -->records when data is being uploaded continuously.
 
 <!-- end editable commentary on uploadId -->
 

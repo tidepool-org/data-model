@@ -33,7 +33,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-
+<!-- Added by Eden: TODO? -->
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -48,7 +48,7 @@
 		platform: yes
 
 <!-- start editable commentary on deliveryType -->
-
+<!-- Note by Eden: This is a really long sentence, maybe restructure? -->
 This is the sub-type of `basal` event that represents intervals of basal insulin delivery that were triggered not by manual user entry but rather by the pump itself according to the active basal schedule programmed by the user (or clinician).
 
 <!-- end editable commentary on deliveryType -->
@@ -74,9 +74,9 @@ This is the sub-type of `basal` event that represents intervals of basal insulin
 
 When ingesting through the legacy jellyfish ingestion service, `duration` is optional because jellyfish also uses the *sequence* of basal events to determine their durations - see [`previous`](./previous.md) for details.
 
-In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the `duration` field will be required on all `basal`s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of `basal`s based on the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).
+In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the `duration` field will be required on all `basal`s. In essence, we are moving to a system that places the burden on the client uploading data to determine the duration of `basal`s based on <!-- Suggestion by Eden: Take a look. Maybe 'the changes in basal rate' instead of 'the sequence of basal rate change events'? I had to read this through multiple times -->the sequence of basal rate change events (or directly reported in the data from the device, in the less common case).
 
-Note that for some insulin pumps, even for a scheduled basal *not* interrupted by another event like a `suspend` or `temp`, the `duration` may not be the nice round numbers of milliseconds that might be expected given the schedule in the `pumpSettings`—e.g., 3600000 for a `basal` event lasting an hour. This is because of how some pumps schedule the small pulses of insulin delivery fulfilling the scheduled `rate`; depending on how the pulses are scheduled, the actual duration of the `basal` may be a bit over or under the scheduled `duration`.
+Note that for some insulin pumps, even for a scheduled basal *not* interrupted by another event like a `suspend` or `temp`, the `duration` may not be the nice round number of milliseconds that might be expected given the schedule in the `pumpSettings`—e.g., 3600000 for a `basal` event lasting an hour. <!-- Edit by Eden --> Because of how some pumps schedule the small pulses of insulin delivery fulfilling the scheduled `rate`, the actual duration of the `basal` may be a bit over or under the scheduled `duration`, depending on how the pulses are scheduled. 
 
 The new platform APIs expect this value to be >= 0 and <= 432000000 (the number of milliseconds in five days), as we assume that any single basal interval, even for a user running a flat-rate basal schedule, is broken up by a suspension of delivery in order to change the infusion site and/or insulin reservoir at least every five days.
 
@@ -101,7 +101,7 @@ The new platform APIs expect this value to be >= 0 and <= 432000000 (the number 
 
 <!-- start editable commentary on expectedDuration -->
 
-On a scheduled basal ingested through the legacy jellyfish ingestion service, `expectedDuration` should *never* be included on a `scheduled` basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original `scheduled` basal; most commonly this new event is a `temp` or `suspend`, but it could be a `scheduled` if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples in [`previous`](./previous.md).
+On a scheduled basal ingested through the legacy jellyfish ingestion service, `expectedDuration` should *never* be included on a `scheduled` basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original `scheduled` basal; most commonly this new event is a `temp` or `suspend`, but it could be a `scheduled` if a user is, for example, <!-- Suggestion by Eden: -->changing active basal schedules. See the examples in [`previous`](./previous.md). 
 
 In Tidepool's new platform APIs (under active development as of April, 2016 at the time of the initial drafting of this document), the burden will be on the client to provide the `expectedDuration` where available and relevant, but it will never be a required field. Because of how burdensome (or impossible) it is to calculate `expectedDuration` for `scheduled` basals, we do **not** expect the uploading client to calculate it, except in cases where the source data makes it easy to include.
 
@@ -123,7 +123,7 @@ In Tidepool's new platform APIs (under active development as of April, 2016 at t
 		max: 20.0
 
 <!-- start editable commentary on rate -->
-
+<!-- Note by Eden: Take a look at the paragraph below. Took multiple read throughs to understand. -->
 Different insulin pump manufacturers offer the ability to program basal rates with different levels of precision in terms of significant digits on the `rate`. We endeavor to represent each `rate` as accurately as possible for each insulin pump; occasionally when values are stored to a falsely large number of floating point digits this means rounding the raw `rate` value found in a record from a pump in order to match the significant digits of precision advertised by the manufacturer. It is the burden of the uploading client to handle this rounding since the number of significant digits for `rate`s varies according to the pump manufacturer.
 
 Many insulin pump manufacturers do not allow a basal rate higher than 10.0 or 15.0 units per hour; our new platform APIs will reject any value higher than 20.0 units per hour.
