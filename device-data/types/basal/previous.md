@@ -2,7 +2,7 @@
 
 ## Uploading sequences of `basal` events via jellyfish's `previous` field
 
-<!--The legacy jellyfish data ingestion API was designed for *real-time* ingestion of diabetes device data. This posed a problem for ingesting events like `basal` events that are *not* point-in-time but rather represent intervals of time. There are a couple of obvious solutions to this problem:-->
+The legacy jellyfish data ingestion API was designed for *real-time* ingestion of diabetes device data. This posed a problem for ingesting events like `basal` events that are *not* point-in-time but rather represent intervals of time. There are a couple of obvious solutions to this problem:
 1. At the start `time` of a `basal` event, upload the `basal` and include the expected `duration` but update it later if it turns out to be incorrect when the next `basal` event is ingested.
 1. At the start `time` of a `basal` event, upload the `basal`; when the next `basal` interval starts, upload it with a reference to the *first* basal. Keep including a reference to the previous basal on each `basal` event and use the actual sequence of `basal`s to determine the actual `duration` of each.
 
