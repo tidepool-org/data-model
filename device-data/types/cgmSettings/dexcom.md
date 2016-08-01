@@ -34,7 +34,7 @@
 
 <!-- start editable commentary on type -->
 
-This is the Tidepool data type to represent CGM settings at a given point in time, usually the time of an upload of data from the device. Most CGM-receiving devices do **not**, unfortunately, keep a historical record of all CGM settings <!-- Edit by Eden -->when a change in settings is made, with the exception of Dexcom dedicated hardware receivers. The safest assumption is that the `time` on each `cgmSettings` object simply represents *a (single)* time when the settings were <!-- Edit by Eden -->in effect, not the first moment when the settings were <!-- Edit by Eden -->put into effect.
+This is the Tidepool data type to represent CGM settings at a given point in time, usually the time of an upload of data from the device. Most CGM-receiving devices do **not**, unfortunately, keep a historical record of all CGM settings when a change in settings is made, with the exception of Dexcom dedicated hardware receivers. The safest assumption is that the `time` on each `cgmSettings` object simply represents *a (single)* time when the settings were in effect, not the first moment when the settings were put into effect.
 
 <!-- end editable commentary on type -->
 
@@ -221,7 +221,7 @@ Contains the following properties:
 
 <!-- start editable commentary on outOfRangeAlerts -->
 
-The `outOfRangeAlerts` object on a `cgmSettings` event encodes the user's settings for receiving alerts from the receiver if the connection between the transmitter and the receiver <!-- Edit by Eden --> becomes disrupted (typically due to the transmitter being physically out of range of the receiver). We have erroneously labeled the time value on this object `snooze`: this value is **not** like the `snooze` on `highAlerts` and `lowAlerts`. <!-- Suggestion by Eden: Take a look at the following sentence -->More specifically, the time value in an `outOfRangeAlerts` object is *not* a setting for time between alerts but rather a setting for elapsed time before the *initial* alert—that is, the amount of time, as counted by the receiver, that the receiver's data connection with the transmitter has been broken. We plan to rename the field for this value to `threshold` in an upcoming `_schemaVersion`.
+The `outOfRangeAlerts` object on a `cgmSettings` event encodes the user's settings for receiving alerts from the receiver if the connection between the transmitter and the receiver becomes disrupted (typically due to the transmitter being physically out of range of the receiver). We have erroneously labeled the time value on this object `snooze`: this value is **not** like the `snooze` on `highAlerts` and `lowAlerts`. <!-- Suggestion by Eden: Take a look at the following sentence -->More specifically, the time value in an `outOfRangeAlerts` object is *not* a setting for time between alerts but rather a setting for elapsed time before the *initial* alert—that is, the amount of time, as counted by the receiver, that the receiver's data connection with the transmitter has been broken. We plan to rename the field for this value to `threshold` in an upcoming `_schemaVersion`.
 
 <!-- end editable commentary on outOfRangeAlerts -->
 
@@ -277,7 +277,7 @@ Each of two embedded objects—`fallRate` and `riseRate`—contains the followin
 
 <!-- start editable commentary on rateOfChangeAlerts -->
 
-The `rateOfChangeAlerts` object on a `cgmSettings` event encodes the user's preferences for receiving alerts when the PWD's blood glucose is changing rapidly—either rising or falling. Each of `fallRate` and `riseRate` is an object inside of the `rateOfChangeAlerts` object with two key-value pairs<!-- Edit by Eden -->: whether the alert is `enabled`, and the `rate` of change to trigger the alert. For the `fallRate`, note that the `rate` of change must be specified as a *negative* value. Like all blood glucose-related values in the Tidepool data model(s), both `fallRate.rate` and `riseRate.rate` may be specified in either mg/dL or mmol/L for ingestion, but will be stored and returned to client applications in mmol/L.
+The `rateOfChangeAlerts` object on a `cgmSettings` event encodes the user's preferences for receiving alerts when the PWD's blood glucose is changing rapidly—either rising or falling. Each of `fallRate` and `riseRate` is an object inside of the `rateOfChangeAlerts` object with two key-value pairs: whether the alert is `enabled`, and the `rate` of change to trigger the alert. For the `fallRate`, note that the `rate` of change must be specified as a *negative* value. Like all blood glucose-related values in the Tidepool data model(s), both `fallRate.rate` and `riseRate.rate` may be specified in either mg/dL or mmol/L for ingestion, but will be stored and returned to client applications in mmol/L.
 
 <!-- end editable commentary on rateOfChangeAlerts -->
 

@@ -41,7 +41,7 @@
 
 <!-- start editable commentary on type -->
 
-The Tidepool `wizard` event - <!-- Edit by Eden -->to be renamed `calculator` in the future - models user interactions with a bolus calculator (on some pumps called the bolus "wizard"). The `wizard` event is intended to contain the values that were input into the wizard, as well as any recommendations that the calculator may have made. This event on its own does not record explicitly whether the recommendations made were followed; it is the responsibility of client software to determine this by comparison with the resulting `bolus` event.
+The Tidepool `wizard` event - to be renamed `calculator` in the future - models user interactions with a bolus calculator (on some pumps called the bolus "wizard"). The `wizard` event is intended to contain the values that were input into the wizard, as well as any recommendations that the calculator may have made. This event on its own does not record explicitly whether the recommendations made were followed; it is the responsibility of client software to determine this by comparison with the resulting `bolus` event.
 
 Some insulin pumps record *every* user interaction with the bolus calculator, regardless of whether a bolus resulted from the interaction or not. To avoid noise in the data from user interactions that do not have any direct clinical relevance, only user interactions with the bolus calculator that actually result in a [`bolus`](./bolus/README.md) event should be uploaded to the Tidepool platform. <!-- Suggestion by Eden: For those not familiar with Type 1, maybe provide an explanation of why this is useful? -->The resulting `bolus` should also be included *on* the `wizard` event: see [linking events](../linking-events.md) for details.
 
@@ -175,10 +175,10 @@ Contains a subset of the following properties:
 
 The embedded `bgTarget` object models the target blood glucose that was in operation for the given bolus calculation. Like all blood glucose-related fields, the `bgTarget` should be uploaded in either `mg/dL` or `mmol/L` as appropriate to how the data is retrieved from the device, but all values will be converted to `mmol/L` on ingestion.
 
-The representation of `bgTarget` varies across insulin <!-- Edit by Eden -->pump manufacturers as follows:
+The representation of `bgTarget` varies across insulin pump manufacturers as follows:
 
 - Animas represents the PWD's blood glucose target as a `target` blood glucose and a `range` encoded as a single value such that any blood glucose value +`range` or -`range` from the `target` is considered "in range" for Animas' bolus recommendation calculations.
-- Insulet represents the PWD's blood glucose target as a `target` blood glucose and a `high` threshold. Insulet's correction bolus calculations aim for the `target` but do not calculate a <!-- Edit by Eden -->correction bolus at all if the [`bgInput`](#bginput) is *not* higher than the `high` threshold.
+- Insulet represents the PWD's blood glucose target as a `target` blood glucose and a `high` threshold. Insulet's correction bolus calculations aim for the `target` but do not calculate a correction bolus at all if the [`bgInput`](#bginput) is *not* higher than the `high` threshold.
 - Medtronic represents the PWD's blood glucose target as a range defined by a `low` and a `high` value.
 - Tandem represents the PWD's blood glucose target simply as a single `target` blood glucose value.
 
@@ -282,7 +282,7 @@ On bolus calculation events, the `insulinCarbRatio` records the I:C ratio employ
 
 <!-- start editable commentary on insulinOnBoard -->
 
-The `insulinOnBoard` (IOB) field in a bolus calculation event encodes the insulin pump's estimate of how much insulin is currently still metabolically active in the PWD's system from boluses prior to the one being programmed. Some insulin pumps use a simple linear function for estimating the metabolic uptake and consumption of insulin while others use more complex functions. It is commonly held that one of the key benefits of using an insulin pump is the ability to track IOB in order to avoid "stacking" boluses—that is, taking more insulin on top of a dose that is still active, <!-- Edit by Eden -->which can possibly result in hypoglycemia. In order to audit bolusing behavior, therefore, it is important to include `insulinOnBoard` in the data. On many insulin pumps, `insulinOnBoard` is also taken into account for the calculation of the [`net` bolus recommendation](#recommended).
+The `insulinOnBoard` (IOB) field in a bolus calculation event encodes the insulin pump's estimate of how much insulin is currently still metabolically active in the PWD's system from boluses prior to the one being programmed. Some insulin pumps use a simple linear function for estimating the metabolic uptake and consumption of insulin while others use more complex functions. It is commonly held that one of the key benefits of using an insulin pump is the ability to track IOB in order to avoid "stacking" boluses—that is, taking more insulin on top of a dose that is still active, which can possibly result in hypoglycemia. In order to audit bolusing behavior, therefore, it is important to include `insulinOnBoard` in the data. On many insulin pumps, `insulinOnBoard` is also taken into account for the calculation of the [`net` bolus recommendation](#recommended).
 
 <!-- end editable commentary on insulinOnBoard -->
 
@@ -317,7 +317,7 @@ The `insulinOnBoard` (IOB) field in a bolus calculation event encodes the insuli
 
 The insulin sensitivity factor (ISF, sometimes simply "sensitivity factor") is part of a PWD's insulin pump settings. A user may program one ISF to be used no matter the time of day, or the user may program particular ISFs on a schedule per each twenty-four hour day. For Tidepool's data model of these persistent ISFs, see [`pumpSettings`](./pumpSettings.md).
 
-On bolus calculation events, the `insulinSensitivity` records the ISF employed in the calculation. Note that on some <!-- Edit by Eden --> insulin pumps, it is possible to change the ISF for the bolus currently being calculated *without* persisting this change to the insulin pump's settings, so the `insulinSensitivity` value on a bolus calculation may not always match the expected ISF given the user's insulin pump settings at the time of the calculation.
+On bolus calculation events, the `insulinSensitivity` records the ISF employed in the calculation. Note that on some insulin pumps, it is possible to change the ISF for the bolus currently being calculated *without* persisting this change to the insulin pump's settings, so the `insulinSensitivity` value on a bolus calculation may not always match the expected ISF given the user's insulin pump settings at the time of the calculation.
 
 Like all blood glucose-related fields, the `insulinSensitivity` should be uploaded in either `mg/dL` or `mmol/L`[^a] as appropriate to how the data is retrieved from the device, but all values will be converted to `mmol/L` on ingestion.
 
@@ -391,8 +391,8 @@ May contain the following properties:
 The embedded object `recommended` encodes an insulin delivery device's recommendations for insulin dosing across three fields: `carb`, `correction`, and `net`.
 
 - `carb` encodes the units of insulin recommended by the device to "cover" the total grams of carbohydrate input ([`carbInput`](#carbinput)) by the user (if any) into the bolus calculator. The value for `carb` may be >= 0, as not all boluses involve the ingestion of carbohydrates and thus not all include a recommended insulin dose to cover carbohydrates about to be ingested.
-- `correction` encodes the units of insulin recommended by the device to bring the PWD to their target blood glucose or into their target blood glucose range given the input blood glucose ([`bgInput`](#bginput)). On some pumps, or depending on user preference on some pumps, this value may be *negative*. A negative recommendation for `correction` indicates that given the user's current blood glucose and [`insulinOnBoard`](#insulinonboard), low blood glucose is predicted and a reduction in insulin dosing (e.g., via a temporary basal rate <!-- Suggestion by Eden: add 'or a reduction of the net bolus amount' -->) may be required in order to main blood glucose at or within the target.
-- `net` is the net number of units of insulin that the bolus calculator recommended given the user's inputs. Generally, this `net` recommendation takes at least two and perhaps all three of `recommended.carb`, `recommended.correction`, and `insulinOnBoard` into account, but all <!-- Edit by Eden -->insulin pumps currently on the market perform this calculation slightly differently and so we have chosen to store the *result* of the calculation rather than leave this calculation as the responsibility of client applications.
+- `correction` encodes the units of insulin recommended by the device to bring the PWD to their target blood glucose or into their target blood glucose range given the input blood glucose ([`bgInput`](#bginput)). On some pumps, or depending on user preference on some pumps, this value may be *negative*. A negative recommendation for `correction` indicates that given the user's current blood glucose and [`insulinOnBoard`](#insulinonboard), low blood glucose is predicted and a reduction in insulin dosing (e.g., via a temporary basal rate <!-- Suggestion by Eden: 'or a reduction of the total bolus amount' -->) may be required in order to main blood glucose at or within the target.
+- `net` is the net number of units of insulin that the bolus calculator recommended given the user's inputs. Generally, this `net` recommendation takes at least two and perhaps all three of `recommended.carb`, `recommended.correction`, and `insulinOnBoard` into account, but all insulin pumps currently on the market perform this calculation slightly differently and so we have chosen to store the *result* of the calculation rather than leave this calculation as the responsibility of client applications.
 
 <!-- end editable commentary on recommended -->
 

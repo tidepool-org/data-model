@@ -46,7 +46,7 @@
 
 <!-- start editable commentary on subType -->
 
-The `prime` sub-type of `deviceEvent` represents a user's priming of either an insulin infusion line/tubing, used with a traditional insulin pump, or the priming of an insulin delivery cannula, used in all insulin delivery devices (i.e., both traditional insulin pumps and tubeless patch pumps like the Insulet OmniPod insulin delivery system). To "prime" an infusion line or cannula is to fill it with insulin <!-- Edit by Eden -->in order to ready the device to deliver programmed doses of insulin, either while disconnected from the user or in preparation for insertion.
+The `prime` sub-type of `deviceEvent` represents a user's priming of either an insulin infusion line/tubing, used with a traditional insulin pump, or the priming of an insulin delivery cannula, used in all insulin delivery devices (i.e., both traditional insulin pumps and tubeless patch pumps like the Insulet OmniPod insulin delivery system). To "prime" an infusion line or cannula is to fill it with insulin in order to ready the device to deliver programmed doses of insulin, either while disconnected from the user or in preparation for insertion.
 
 <!-- end editable commentary on subType -->
 

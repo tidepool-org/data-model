@@ -49,7 +49,7 @@ A `reservoirChange` event represents any event in an insulin delivery system tha
 
 This event often implies a suspension of insulin delivery; in the case that the device data includes an event that fits into this `reservoirChange` data model but *does not* include a separate indication of insulin delivery suspension, a [`status`](./status.md) event should also be uploaded to the platform to record the suspension of insulin delivery and should be included (in its entirety) in the `status` field.
 
-The optional `payload` embedded object may be included in order to expose the specifics of the event type that <!-- Edit by Eden -->is generally interpreted as a `reservoirChange`, along with any other device-specific information that may be desirable for auditing user and device behavior and performance.
+The optional `payload` embedded object may be included in order to expose the specifics of the event type that is generally interpreted as a `reservoirChange`, along with any other device-specific information that may be desirable for auditing user and device behavior and performance.
 
 <!-- end editable commentary on subType -->
 

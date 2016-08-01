@@ -77,7 +77,7 @@ In contrast, under the new platform APIs, `rate` is always *required*.
 
 <!-- start editable commentary on duration -->
 
-Unlike [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingestion API and the new platform APIs *require* a `duration` on every `temp` basal since an insulin pump user is always required to program a duration for a temporary basal rate interval <!-- Edit by Eden -->as well as the desired temporary rate (or percentage of active rate) itself.
+Unlike [`scheduled`](./scheduled.md) basals, both the legacy jellyfish ingestion API and the new platform APIs *require* a `duration` on every `temp` basal since an insulin pump user is always required to program a duration for a temporary basal rate interval as well as the desired temporary rate (or percentage of active rate) itself.
 
 The new platform APIs expect this value to be >= 0 and <= 86400000 (the number of milliseconds in twenty-four hours), as no pump manufacturer that we know of currently allows the programming of a temporary basal rate for longer than twenty-four hours.
 

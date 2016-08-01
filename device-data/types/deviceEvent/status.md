@@ -49,7 +49,7 @@
 
 <!-- start editable commentary on subType -->
 
-This is the Tidepool data type for an insulin pump's insulin delivery status, <!-- Suggestion by Eden: --> essentially only used to represent suspensions of insulin delivery—intervals of time when neither bolus or basal insulin was delivered by an insulin pump. When a user suspends an insulin pump or, alternatively, when the pump suspends itself for some reason automatically, any bolus currently in progress is terminated, resulting in a partially delivered bolus[^a], and the constant drip of <!-- Edit by Eden -->background basal insulin is also stopped.
+This is the Tidepool data type for an insulin pump's insulin delivery status, essentially only used to represent suspensions of insulin delivery—intervals of time when neither bolus or basal insulin was delivered by an insulin pump. When a user suspends an insulin pump or, alternatively, when the pump suspends itself for some reason automatically, any bolus currently in progress is terminated, resulting in a partially delivered bolus[^a], and the constant drip of background basal insulin is also stopped.
 
 In the same way that suspensions of insulin delivery can be either manual (programmed by the user) or automatic, the resumption of insulin delivery can be the result of user action or automatic.
 
@@ -157,7 +157,7 @@ On the other hand, when pushing up data through the new platform APIs, the `reas
 
 We define `manual` suspension or resumption as any user-initiated method of effecting these states, and we define `automatic` as anything *not* user-initiated. One type of `automatic` suspension (and potentially also later resumption) occurs on insulin pumps that include a low-glucose suspend feature whereby the pump, when "listening" to data from a blood glucose sensor (i.e., [`cbg`](../cbg.md) data), suspends insulin delivery if the blood glucose values in the data stream either drop below a certain threshold or are predicted to soon drop below the threshold. The insulin delivery device may also automatically resume from the suspended state in response to rising blood glucose values or after a certain amount of time has elapsed.
 
-By convention, we also include more device-specific information about the cause of suspensions and resumptions, if available, in the optional `payload` embedded object on the event. For example, in the case of the Medtronic 530G insulin pumps with the low-glucose suspend (LGS) feature, there is a distinction between circumstances[^a] in which the pump resumes from an LGS suspension automatically after two hours depending on whether the user interacted with any of the LGS alarms <!-- Suggestion by Eden -->throughout the suspension. We represent this distinction on the event in the payload as follows (specifically in the `user_intervention` key under `resumed`):
+By convention, we also include more device-specific information about the cause of suspensions and resumptions, if available, in the optional `payload` embedded object on the event. For example, in the case of the Medtronic 530G insulin pumps with the low-glucose suspend (LGS) feature, there is a distinction between circumstances[^a] in which the pump resumes from an LGS suspension automatically after two hours depending on whether the user interacted with any of the LGS alarms throughout the suspension. We represent this distinction on the event in the payload as follows (specifically in the `user_intervention` key under `resumed`):
 
 ```json
 {

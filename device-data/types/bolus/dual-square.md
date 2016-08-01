@@ -54,7 +54,7 @@
 
 <!-- start editable commentary on subType -->
 
-This is the sub-type of `bolus` event that represents a bolus insulin dose which is programmed to deliver part of the dose using the immediate delivery strategy (a `normal` bolus) and the remainder using a <!-- Edit by Eden -->delivery strategy spread evenly over a `duration` (a `square` bolus). The data model is essentially just a combination of the models for [`normal`](normal.md) and [`square`](square.md) boluses.
+This is the sub-type of `bolus` event that represents a bolus insulin dose which is programmed to deliver part of the dose using the immediate delivery strategy (a `normal` bolus) and the remainder using a delivery strategy spread evenly over a `duration` (a `square` bolus). The data model is essentially just a combination of the models for [`normal`](normal.md) and [`square`](square.md) boluses.
 
 Most (and perhaps all) insulin pumps ask the user to divide the `normal` and `square` portions of a `dual/square` bolus by *percentage* of the total insulin dose. We do **not** encode this programmed percentage directly, but it is recoverable (for surfacing in a client application's UI) through computation using the appropriate combination of values from the `normal`, `extended`, `expectedNormal`, and `expectedExtended` fields and/or the appropriate sum of these.
 
