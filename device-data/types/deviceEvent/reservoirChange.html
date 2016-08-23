@@ -53,7 +53,7 @@
         data-chapter-title="reservoirChange"
         data-filepath="device-data/types/deviceEvent/reservoirChange.md"
         data-basepath="../../.."
-        data-revision="Tue Jul 12 2016 23:55:33 GMT-0700 (PDT)"
+        data-revision="Mon Aug 22 2016 17:15:22 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -741,13 +741,15 @@ Required:
 <blockquote>
 <p>This field is <strong>optional</strong>.</p>
 </blockquote>
-<p>[ingestion, storage, client] String <code>id</code> (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type <code>deviceEvent</code>, subType <code>status</code> object that is logically connected to this reservoirChange.</p>
+<p>[ingestion] The <code>status</code> event logically connected with this event, or&#x2014;for the legacy jellyfish data ingestion service <em>only</em>&#x2014;optionally the <code>id</code> of the <code>status</code> event instead of the event itself.</p>
+<p>[storage, client] The <code>id</code> of the <code>status</code> event logically connected with this event.</p>
 <pre><code>QUICK SUMMARY
 Required:
     jellyfish: no (optional)
     platform: no (optional)
 </code></pre><!-- start editable commentary on status -->
-<!-- TODO -->
+<p>As mentioned <a href="#type">above</a>, a <code>reservoirChange</code> event implies a stoppage of insulin delivery. On some insulin delivery devices, the data includes an explicit indication of this suspended state, but on devices where the event interpreted as a <code>reservoirChange</code> (whether that&apos;s a rewind of a syringe-style pump or a pod deactivation in the case of a patch-style pump, etc.) is the only event yielding information regarding the pump&apos;s insulin delivery status, a <code>status</code> event should be <em>fabricated</em> using the relevant information from the <code>reservoirChange</code> event (timestamp, log index, etc.) and embedded within the <code>reservoirChange</code> event in order to provide an audit trail of the user&apos;s data and preserve the close connection between the stored events.</p>
+<p>See <a href="../../linking-events.html">linking events</a> for additional details regarding inter-event linking in the Tidepool platform.</p>
 <!-- end editable commentary on status -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>

@@ -53,7 +53,7 @@
         data-chapter-title="alarm"
         data-filepath="device-data/types/deviceEvent/alarm.md"
         data-basepath="../../.."
-        data-revision="Tue Jul 12 2016 23:55:33 GMT-0700 (PDT)"
+        data-revision="Mon Aug 22 2016 17:15:22 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -773,13 +773,23 @@ Range: Must be one of:
 <blockquote>
 <p>This field is <strong>optional</strong>.</p>
 </blockquote>
-<p>[ingestion, storage, client] String <code>id</code> (or, equivalently, but just for the legacy jellyfish ingestion service, the object itself) of a type <code>deviceEvent</code>, subType <code>status</code> object that is logically connected to this alarm.</p>
+<p>[ingestion] The <code>status</code> event logically connected with this event, or&#x2014;for the legacy jellyfish data ingestion service <em>only</em>&#x2014;optionally the <code>id</code> of the <code>status</code> event instead of the event itself.</p>
+<p>[storage, client] The <code>id</code> of the <code>status</code> event logically connected with this event.</p>
 <pre><code>QUICK SUMMARY
 Required:
     jellyfish: no (optional)
     platform: no (optional)
 </code></pre><!-- start editable commentary on status -->
-<!-- TODO -->
+<p>Some <code>alarmType</code>s are correlated with a stoppage of insulin delivery. Specifically, we assume that all of the following alarms correspond to a period of no insulin delivery on the insulin pump&#x2014;that is, a period of time when the pump&apos;s delivery status is &quot;suspended&quot;:</p>
+<ul>
+<li><code>no_insulin</code></li>
+<li><code>no_power</code></li>
+<li><code>occlusion</code></li>
+<li><code>no_delivery</code></li>
+<li><code>auto_off</code></li>
+</ul>
+<p>Some insulin pumps do include in their data protocols a separate indication of this stoppage of insulin delivery elsewhere than just the <code>alarm</code> event. Some insulin pumps, however, do not separately indicate the change in the pump&apos;s insulin delivery status. For such devices, a <code>status</code> event should be <em>fabricated</em> using the relevant information from the <code>alarm</code> event (timestamp, log index, etc.). In order to provide an audit trail of the user&apos;s processed and standardized data, we then embed this <code>status</code> event in the originating <code>alarm</code> to preserve the close connection between the events.</p>
+<p>See <a href="../../linking-events.html">linking events</a> for additional details regarding inter-event linking in the Tidepool platform.</p>
 <!-- end editable commentary on status -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
