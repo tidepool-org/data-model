@@ -14,6 +14,8 @@ cd bin/
 
 ./docTemplateGenerator.js cbg
 
+./docTemplateGenerator.js cgmSettings --subType dexcom
+
 ./docTemplateGenerator.js common
 
 ./docTemplateGenerator.js deviceEvent --subType alarm

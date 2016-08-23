@@ -2,6 +2,14 @@
 
 ## Bolus subType: `normal`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [subType](#subtype)
+>  - [normal](#normal)
+>  - [expectedNormal](#expectednormal)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

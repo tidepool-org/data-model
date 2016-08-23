@@ -1,6 +1,6 @@
 {
-  "name": "tidepool-data-model",
-  "version": "0.0.0",
+  "name": "@tidepool/data-model",
+  "version": "0.1.0",
   "description": "Documentation and sample datum generators for Tidepool's data models.",
   "homepage": "https://github.com/tidepool-org/data-model",
   "main": "src/index.js",

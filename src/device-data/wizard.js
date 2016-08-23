@@ -32,6 +32,9 @@ var boundDesc = function(bound) {
 
 var BOLUS_INGESTION = '[ingestion] The `bolus` event resulting from this `wizard` event, or—for the legacy jellyfish data ingestion service *only*—optionally the `id` of the `bolus` event instead of the event itself.\n\n';
 
+module.IC_RATIO_DESC = '[ingestion, storage, client] An integer encoding the grams of carbohydrate "covered" by one unit of insulin for the PWD.';
+module.ISF_DESC = '[ingestion] A numerical representation of the estimation of blood glucose value drop per unit of insulin delivered in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.\n\n[storage, client] A numerical representation of the estimation of blood glucose value drop in mmol/L (float, potentially unrounded), with appropriately matching `units` field.';
+
 var recommendedInsulinSummary = {
   description: common.propTypes.OPTIONAL + common.propTypes.insulinUnits(),
   required: {
@@ -162,7 +165,7 @@ var schema = {
   insulinCarbRatio: {
     instance: common.insulinCarbRatio,
     summary: {
-      description: common.propTypes.OPTIONAL + '[ingestion, storage, client] An integer encoding the grams of carbohydrate "covered" by one unit of insulin for the PWD.',
+      description: common.propTypes.OPTIONAL + module.IC_RATIO_DESC,
       required: {
         jellyfish: false,
         platform: false
@@ -194,7 +197,7 @@ var schema = {
   insulinSensitivity: {
     instance: common.insulinSensitivity,
     summary: {
-      description: common.propTypes.OPTIONAL + '[ingestion] A numerical representation of the estimation of blood glucose value drop per unit of insulin delivered in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.\n\n[storage, client] A numerical representation of the estimation of blood glucose value drop in mmol/L (float, potentially unrounded), with appropriately matching `units` field.',
+      description: common.propTypes.OPTIONAL + module.ISF_DESC,
       required: {
         jellyfish: false,
         platform: false

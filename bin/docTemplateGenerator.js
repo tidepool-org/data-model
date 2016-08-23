@@ -125,7 +125,7 @@ function getDocPath(base) {
     return base + type + '.md';
   }
   if (hasSubtypes) {
-    var indexDoc = [util.format('## %s\n', generators[type].title)];
+    var indexDoc = [util.format('## %s (`%s`)\n', generators[type].title, type)];
     var existingReadme = '';
     try {
       existingReadme = fs.readFileSync(base + 'types/' + type + '/README.md', 'utf8');
@@ -406,24 +406,28 @@ if (type === 'common') {
 }
 else {
   var doc;
-  if (hasSubtypes) {
-    doc.push(util.format('## %s: `%s`\n', generators[type].subtitle, commander.subType));
-  }
-  else {
-    doc.push(util.format('## %s (%s)\n', generators[type].title, type));
-  }
-  doc.push('**NB:** All fields are *required* unless otherwise noted.\n');
-  doc.push('\n> Jump to example JSON:\n');
-  ['client', 'ingestion', 'storage'].map(function(exampleType) {
-    doc.push(util.format('>  - [%s example](#example-%s)', exampleType, exampleType));
-  })
-  doc.push('\n');
   var schemaFields = hasSubtypes ? generators[type].summary[commander.subType] : generators[type].summary;
   var allFields = Object.keys(_.merge(
     _.cloneDeep(schemaFields),
     exampleObject(type, 'ingestion'),
     exampleObject(type, 'storage')
   ));
+  if (hasSubtypes) {
+    doc.push(util.format('## %s: `%s`\n', generators[type].subtitle, commander.subType));
+  }
+  else {
+    doc.push(util.format('## %s (`%s`)\n', generators[type].title, type));
+  }
+  doc.push('\n> Jump to...(notable fields on this type)\n');
+  doc = doc.concat(Object.keys(schemaFields).map(function(field) {
+    return util.format('>  - [%s](#%s)', field, field.toLowerCase());
+  }));
+  doc.push('\n**NB:** All fields are *required* unless otherwise noted.\n');
+  doc.push('\n> Jump to example JSON:\n');
+  ['client', 'ingestion', 'storage'].map(function(exampleType) {
+    doc.push(util.format('>  - [%s example](#example-%s)', exampleType, exampleType));
+  })
+  doc.push('\n');
   doc = doc.concat(_.flatten(allFields.map(function(field) {
     var existingSection = existing.match(
       new RegExp(getFieldSectionRegExp(field))

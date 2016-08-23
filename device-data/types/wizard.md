@@ -1,6 +1,20 @@
 <!-- auto-generated doc! most areas *not* editable -->
 
-## Bolus Calculator Records (wizard)
+## Bolus Calculator Records (`wizard`)
+
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [bgInput](#bginput)
+>  - [bgTarget](#bgtarget)
+>  - [bolus](#bolus)
+>  - [carbInput](#carbinput)
+>  - [insulinCarbRatio](#insulincarbratio)
+>  - [insulinOnBoard](#insulinonboard)
+>  - [insulinSensitivity](#insulinsensitivity)
+>  - [recommended](#recommended)
+>  - [units](#units)
 
 **NB:** All fields are *required* unless otherwise noted.
 

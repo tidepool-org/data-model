@@ -103,8 +103,17 @@ module.insulinCarbRatio = function() {
   return chance.natural({min: 5, max: 25});
 };
 
-module.insulinSensitivity = function() {
-  return chance.natural({min: 5, max: 100});
+module.insulinSensitivity = function(units, ingestion) {
+  var value = chance.natural({min: 5, max: 100});
+  if (units === 'mg/dL') {
+    return value;
+  }
+  else if (units === 'mmol/L' && ingestion) {
+    return module.transformToMmolLInput(value);
+  }
+  else {
+    return module.transformToMmolLStorage(value);
+  }
 };
 
 module.transformToMmolLInput = function(value) {
@@ -245,6 +254,9 @@ module.propTypes = {
     var elsewhere = '[storage, client] Blood glucose value in mmol/L (float, potentially unrounded), with appropriately matching `units` field.';
     return ingestion + elsewhere;
   },
+  boolean: function() {
+    return '[ingestion, storage, client] A Boolean value: `true` or `false`.';
+  },
   deviceTime: function() {
     return '[ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `' + new Date().toISOString().slice(0, -5) + '`.';
   },
@@ -262,6 +274,9 @@ module.propTypes = {
   },
   insulinUnits: function() {
     return '[ingestion, storage, client] A floating point value representing units of insulin.';
+  },
+  maybeEmptyString: function() {
+    return 'Must be a string value, and **may** be an empty string.';
   },
   stringValue: function(str) {
     return format('[ingestion, storage, client] The string `%s`.', str);
@@ -387,10 +402,14 @@ module.startSummary = {
 };
 
 module.timeConstants = {
-  MIN_DEVICE_TIME: '2007-01-01T00:00:00'
+  MIN_DEVICE_TIME: '2007-01-01T00:00:00',
+  MS_IN_24_HOURS: 864e5
 };
 
 module.PUMP_MANUFACTURERS = ['animas', 'insulet', 'medtronic', 'tandem'];
 module.SCHEDULE_NAMES = ['Weekday', 'Weekend', 'Vacation', 'Stress', 'Very Active'];
+
+// we don't upload 'medtronic' CGM settings yet
+module.CGM_MANUFACTURERS = ['dexcom'];
 
 module.exports = module;

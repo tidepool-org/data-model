@@ -2,6 +2,16 @@
 
 ## Basal deliveryType: `suspend`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [deliveryType](#deliverytype)
+>  - [duration](#duration)
+>  - [expectedDuration](#expectedduration)
+>  - [previous](#previous)
+>  - [suppressed](#suppressed)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

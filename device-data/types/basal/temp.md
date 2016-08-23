@@ -2,6 +2,18 @@
 
 ## Basal deliveryType: `temp`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [deliveryType](#deliverytype)
+>  - [duration](#duration)
+>  - [expectedDuration](#expectedduration)
+>  - [percent](#percent)
+>  - [previous](#previous)
+>  - [rate](#rate)
+>  - [suppressed](#suppressed)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

@@ -2,6 +2,18 @@
 
 ## Bolus subType: `dual/square`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [subType](#subtype)
+>  - [normal](#normal)
+>  - [expectedNormal](#expectednormal)
+>  - [extended](#extended)
+>  - [expectedExtended](#expectedextended)
+>  - [duration](#duration)
+>  - [expectedDuration](#expectedduration)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

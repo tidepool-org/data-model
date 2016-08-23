@@ -65,6 +65,13 @@ module.exports = {
     type: 'cbg'
   },
   cgmSettings: {
+    generator: cgmSettings.generate,
+    summary: cgmSettings.summary,
+    changeLog: cgmSettings.changeLog,
+    title: 'Continuous Glucose Monitor Settings',
+    subtitle: 'Manufacturer',
+    subTypes: common.CGM_MANUFACTURERS,
+    type: 'cgmSettings'
   },
   common: {
     generator: require('./device-data/common').generate.bind(null, {}),
@@ -96,6 +103,11 @@ module.exports = {
     type: 'smbg'
   },
   upload: {
+    generator: upload.generate,
+    summary: upload.summary,
+    changeLog: upload.changeLog,
+    title: 'Upload Metadata',
+    type: 'upload'
   },
   wizard: {
     generator: wizard.generate,

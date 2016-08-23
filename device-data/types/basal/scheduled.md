@@ -2,6 +2,17 @@
 
 ## Basal deliveryType: `scheduled`
 
+
+> Jump to...(notable fields on this type)
+
+>  - [type](#type)
+>  - [deliveryType](#deliverytype)
+>  - [duration](#duration)
+>  - [expectedDuration](#expectedduration)
+>  - [rate](#rate)
+>  - [previous](#previous)
+>  - [scheduleName](#schedulename)
+
 **NB:** All fields are *required* unless otherwise noted.
 
 

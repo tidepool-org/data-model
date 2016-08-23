@@ -1,4 +1,4 @@
-## Basal Insulin
+## Basal Insulin (`basal`)
 
 This is the Tidepool data type for background insulin dosing—the "constant drip" of background insulin programmable in all insulin pumps and providing a replacement for a daily injection of long-acting insulin such as Lantus or Levemir. Different insulin pump manufacturers use different terminology for this insulin dosing, although all provide a similar interface for programming the set(s) of rates (in units of insulin per hour) to be delivered at different times of each day. We have standardized on calling one set of such rates covering a twenty-four hour period a basal "schedule."
 

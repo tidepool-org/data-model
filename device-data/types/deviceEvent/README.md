@@ -1,4 +1,4 @@
-## Device Events
+## Device Events (`deviceEvent`)
 
 This is the Tidepool data type for a variety of events that can occur on diabetes devices, including both insulin pumps and continuous glucose monitors. As a type it is essentially a "grab bag" of miscellaneous sub-types, where each sub-type has its own data model that often differs widely from sub-type to sub-type.
 
