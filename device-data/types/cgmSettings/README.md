@@ -8,4 +8,3 @@ There are currently only two manufacturers of CGMs available to consumers in the
 <!-- end intro -->
 
 - [dexcom](./dexcom.md)
-- medtronic (Coming soon!)
