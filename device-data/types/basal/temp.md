@@ -193,6 +193,54 @@ Also note that when ingesting data through the legacy jellyfish ingestion API, p
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
+May contain—only!—the following properties:
+
+ * type
+ * deliveryType
+ * rate
+ * scheduleName
+
+#### type
+
+[ingestion, storage, client] The string `basal`.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: yes
+
+#### deliveryType
+
+[ingestion, storage, client] The string `scheduled`.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: yes
+
+#### rate
+
+[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
+	Range:
+		min: 0.0
+		max: 20.0
+
+#### scheduleName
+
+> This field is **optional**.
+
+[ingestion, storage, client] A string: the name of the basal schedule.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
 
 <!-- start editable commentary on suppressed -->
 
@@ -205,6 +253,8 @@ This object need only contain the bare minimum of information:
 - the suppressed [`rate`](./scheduled.md#rate) if relevant and available
 
 In particular, note that *no time-related fields such as `time`, `deviceTime`, or `duration` are expected to appear on a `suppressed` embedded basal rate event*. By definition, any values for time-related fields are identical to the parent `temp` basal object, and so it is redundant to include them.
+
+Properly tracking the `suppressed` basal information for a `temp` basal that crosses one or more basal schedule boundaries is a complex topic that requires [a longer explanation](./suppressed.md).
 
 <!-- end editable commentary on suppressed -->
 
