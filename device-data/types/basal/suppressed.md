@@ -14,9 +14,160 @@ If the currently active basal is a `suspend` and the `suppressed` is a `temp`, t
 - the `percent` of the scheduled basal rate
 - another(!) nested `suppressed` object representing the originally `scheduled` basal interval
 
+(More details of the precise allowed shape of a nested `suppressed` are available in the [`temp` basal documentation](./temp.md#suppressed)) and the [`suspend` basal documentation](./suspend.md#suppressed).)
+
 ### `suppressed` across schedule boundaries
 
 When a `temp` or `suspend` basal crosses a basal schedule boundary, the basal rate that would have been in effect had the `temp` or `suspend` not been programmed *changes* in accordance with the schedule change, necessitating a splitting of the `temp` or `suspend` into multiple segments, each of type `basal`, with the sum of all segments' `duration`s adding up to the total duration of the temp or suspend reported by the insulin pump.
+
+#### example
+
+Assume this basal schedule is active:
+
+```json
+[{
+  "start": 0, // midnight
+  "rate": 0.25
+},
+{
+  "start": 3600000, // 1 a.m.
+  "rate": 0.2
+},
+{
+  "start": 10800000, // 3 a.m.
+  "rate": 0.25
+},
+{
+  "start": 21600000, // 6 a.m.
+  "rate": 0.6
+},
+{
+  "start": 43200000, // 12 p.m.
+  "rate": 0.35
+}]
+```
+
+A `scheduled` basal event on a particular day at midnight according to this schedule would look like:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 3600000,
+  "rate": 0.25,
+  "scheduleName": "Standard",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-10-07T00:00:00",
+  "time": "2016-10-07T07:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+Now let's say a user programs a `temp` basal at 12:25 a.m. to run for three hours, until 3:25 a.m. Then the `scheduled` basal will look almost the same, except the `duration` will be different since the scheduled segment will have only run for the twenty-five minutes from midnight to 12:25 a.m.:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "scheduled",
+  "duration": 1500000, // 25 minutes from 12:00 a.m. to 12:25 a.m.
+  "rate": 0.25,
+  "scheduleName": "Standard",
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-10-07T00:00:00",
+  "time": "2016-10-07T07:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+The three-hour `temp` basal will cross schedule boundaries at 1 a.m. and 3 a.m., and so it will end up being divided into three segment intervals with a `suppressed` to match the segment of the schedule that would have been in effect at that time if the `temp` had not been programmed.
+
+First `temp` interval:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "temp",
+  "duration": 2100000, // 35 minutes from 12:25 a.m. to 1:00 a.m.
+  "percent": 0.5,
+  "rate": 0.125, // == percent * suppressed.rate
+  "suppressed": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "rate": "0.25",
+    "scheduleName": "Standard"
+  },
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-10-07T00:25:00",
+  "time": "2016-10-07T07:25:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+Second `temp` interval:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "temp",
+  "duration": 7200000, // 2 hours from 1:00 a.m. to 3:00 a.m.
+  "percent": 0.5,
+  "rate": 0.1, // == percent * suppressed.rate
+  "suppressed": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "rate": "0.2",
+    "scheduleName": "Standard"
+  },
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-10-07T01:00:00",
+  "time": "2016-10-07T01:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+Third `temp` interval:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "temp",
+  "duration": 1500000, // 25 minutes from 3:00 a.m. to 3:25 a.m.
+  "percent": 0.5,
+  "rate": 0.125, // == percent * suppressed.rate
+  "suppressed": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "rate": "0.25",
+    "scheduleName": "Standard"
+  },
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-10-07T03:00:00",
+  "time": "2016-10-07T10:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+The `duration`s of all three `temp` intervals here adds up to the programmed `temp` duration: `2100000 + 7200000 + 1500000 = 10800000` (three hours).
+
+For a `suspend` that crosses `scheduled` boundaries, the examples would be very similar, except with no `rate` on the "parent" `suspend` basal.
+
+<!-- TODO: DISCUSS WITH GERRIT AND DARIN!!! -->
+**NB:** A *known* issue with this data model is that when a `temp` or `suspend` basal is programmed for a certain `duration` and crosses more than one schedule boundary but then is *canceled* early within one of the "middle" (not edge) segments, we have no good way to represent the original `expectedDuration` of the *entire* programmed `temp` or `suspend`. Rather, the `expectedDuration` on a middle segment of a three-or-more segment `temp` or `suspend` basal should be the expected `duration` of *that* segment from the basal schedule.
 
 ### `suppressed` when a `temp` or `suspend` is edited
 
