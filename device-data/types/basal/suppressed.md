@@ -171,6 +171,70 @@ For a `suspend` that crosses `scheduled` boundaries, the examples would be very 
 
 ### `suppressed` when a `temp` or `suspend` is edited
 
+To date, we know of one insulin pump manufacturer (Medtronic) that allows for *editing* a `temp` basal while it is in effect, and in principle the same could apply to a `suspend` programmed with a `duration` (as allowed in the interface for OmniPods, for example). For the purposes of our `temp` basal model, we treat the editing of a `temp` basal as a cancellation followed by the immediate scheduling of a second `temp`. In other words, we do **not** consider the first `temp` basal to be `suppressed` by the edited `temp`. For example, consider a user running a "flat rate" basal schedule:
+
+```json
+[{
+  "start": 0,
+  "rate": 1.95
+}]
+```
+
+At 8:00 a.m., this user schedule an 85% `temp` basal to run for four hours, but edits it after three hours and thirty-six minutes to change the percentage to 90%. The first `temp` basal event will look like this:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "temp",
+  "duration": 12960000,
+  "expectedDuration": 14400000,
+  "percent": 0.85,
+  "rate": 1.6575,
+  "suppressed": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "scheduleName": "Weekend",
+    "rate": 1.95
+  },
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-10-07T08:00:00",
+  "guid": "634b43c7-9d0d-47ed-afec-3aac2db99a6a",
+  "id": "9759417fa35c45839d0400240a13523c",
+  "time": "2016-10-07T15:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+And the second will follow immediately in time but carries no indication that it is a "edited" `temp` (other than perhaps additional information in the `payload`); rather, it is indistinguishable from a "fresh" `temp` basal scheduled for the given time. Note in particular that its `suppressed` is the `scheduled` flat-rate basal, **not** the prior `temp` basal.
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "temp",
+  "duration": 1440000,
+  "percent": 0.90,
+  "rate": 1.755,
+  "suppressed": {
+    "type": "basal",
+    "deliveryType": "scheduled",
+    "scheduleName": "Weekend",
+    "rate": 1.95
+  },
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-10-07T11:36:00",
+  "guid": "634b43c7-9d0d-47ed-afec-3aac2db99a6a",
+  "id": "9759417fa35c45839d0400240a13523c",
+  "time": "2016-10-07T18:36:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
 ### nested `suppressed` in a partially automated insulin-delivery system
 
 [^a]: Or inferable from other data, such as the history of the pump's settings.
