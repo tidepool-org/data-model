@@ -131,7 +131,7 @@ Second `temp` interval:
   "conversionOffset": 0,
   "deviceId": "DevId0987654321",
   "deviceTime": "2016-10-07T01:00:00",
-  "time": "2016-10-07T01:00:00.000Z",
+  "time": "2016-10-07T08:00:00.000Z",
   "timezoneOffset": -420,
   "uploadId": "SampleUploadId"
 }
