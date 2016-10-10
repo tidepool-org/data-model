@@ -53,7 +53,7 @@
         data-chapter-title="alarm"
         data-filepath="device-data/types/deviceEvent/alarm.md"
         data-basepath="../../.."
-        data-revision="Mon Aug 22 2016 17:15:22 GMT-0700 (PDT)"
+        data-revision="Mon Oct 10 2016 00:53:18 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -760,12 +760,13 @@ Range: Must be one of:
 <li><code>low_power</code> for low battery or alerts and alarms</li>
 <li><code>no_power</code> for dead battery alarms</li>
 <li><code>occlusion</code> for alarms regarding the blockage of insulin infusion lines or sites</li>
-<li><code>no_delivery</code> for alarms signaling any other stoppage of insulin delivery not due to empty reservoir, dead battery, or occlusion</li>
+<li><code>no_delivery</code> for alarms signaling any other stoppage of insulin delivery when a more precise cause (such as an occlusion or empty reservoir) is not indicated by the pump</li>
 <li><code>auto_off</code> for when an insulin pump stops all insulin delivery due to inactivity for a duration over the user&apos;s programmed threshold, if any</li>
 <li><code>over_limit</code> for when insulin delivery has surpassed any of a user&apos;s programmed maximum bolus, basal, or hourly delivery thresholds</li>
 </ul>
 <p>Many if not all <code>alarm</code> events will include <code>payload</code> object with more information about the alarm that is device-specific. For example, a <code>low_insulin</code> alarm may have a <code>units_left</code> field in its <code>payload</code> to record the number of units of insulin that were remaining in the insulin pump&apos;s reservoir at the time of the alarm.</p>
 <p>In addition, a <code>payload</code> object is <em>required</em> when <code>alarmType</code> is <code>other</code>, which is the <code>alarmType</code> value used to capture all alarms that are device-specific. For example, a pod expiration alarm is specific to the Insulet OmniPod insulin delivery system. The <code>payload</code> object should include all information that could be relevant to anyone wishing to audit the history and performance of the insulin pump in question.</p>
+<p>On some pumps <code>no_delivery</code> may include all stoppages of delivery. That is, it may not always be possible to distinguish between empty reservoirs and occlusions.</p>
 <p>For some devices, an alarm event (e.g., an occlusion alarm) is the <strong>only</strong> indication of a suspension of insulin delivery. In such a case, a <a href="status.html"><code>status</code></a> event should also be uploaded to the platform and should be included (in its entirety) in the <code>status</code> field of the <code>alarm</code> event.</p>
 <!-- end editable commentary on alarmType -->
 <hr>
