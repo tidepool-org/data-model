@@ -1,6 +1,6 @@
 <!-- non-generated document! all areas editable -->
 
-## the `suppressed` field on `temp` and `suspend` basal intervals
+## the `suppressed` field on `temp`s and `suspend`s
 
 Some insulin pump data protocols provide enough information for us to track various aspects (e.g., `rate`, `scheduleName`) of the basal that *would have been in effect* had the currently active `temp` or `suspend` basal **not** been programmed (or triggered). Where this information is available, we provide it in as much detail as possible as an embedded object in the `suppressed` field on a `temp` or `suspend` basal interval.
 
@@ -12,9 +12,13 @@ In general, this `suppressed` object need and **must** only contain the bare min
 
 If the currently active basal is a `suspend` and the `suppressed` is a `temp`, then the following `temp` fields may also be present on the `suppressed` object:
 - the `percent` of the scheduled basal rate
-- another(!) nested `suppressed` object representing the originally `scheduled` basal interval
+- another(!) nested `suppressed` object representing the originally `scheduled` basal interval (see [below](#the-possibility-of-nested-suppressed-in-suspend-basals) for details)
 
 (More details of the precise allowed shape of a nested `suppressed` are available in the [`temp` basal documentation](./temp.md#suppressed)) and the [`suspend` basal documentation](./suspend.md#suppressed).)
+
+Note in particular that we do **not** include any timestamp or duration information in the `suppressed`: by definition, these values are always equal to those of the *active* basal interval's, and so it is not necessary to specify them.
+
+The legacy jellyfish data ingestion service does and did *not* validate the contents of the `suppressed` field beyond requiring it to be an object, so also note that these restrictions on allowed fields in `suppressed` do not hold for legacy data in any of Tidepool's database environments, including production. In particular, timestamp and duration information often appears—with misleading values that do not match the active basal's—on `suppressed` objects on `basal`s ingested through jellyfish.
 
 ### `suppressed` across schedule boundaries
 
@@ -164,14 +168,14 @@ Third `temp` interval:
 
 The `duration`s of all three `temp` intervals here adds up to the programmed `temp` duration: `2100000 + 7200000 + 1500000 = 10800000` (three hours).
 
-For a `suspend` that crosses `scheduled` boundaries, the examples would be very similar, except with no `rate` on the "parent" `suspend` basal.
+For a `suspend` that crosses `scheduled` boundaries, the examples would be very similar, except with no `rate` on the top-level (active) `suspend` basal.
 
 <!-- TODO: DISCUSS WITH GERRIT AND DARIN!!! -->
 **NB:** A *known* issue with this data model is that when a `temp` or `suspend` basal is programmed for a certain `duration` and crosses more than one schedule boundary but then is *canceled* early within one of the "middle" (not edge) segments, we have no good way to represent the original `expectedDuration` of the *entire* programmed `temp` or `suspend`. Rather, the `expectedDuration` on a middle segment of a three-or-more segment `temp` or `suspend` basal should be the expected `duration` of *that* segment from the basal schedule.
 
 ### `suppressed` when a `temp` or `suspend` is edited
 
-To date, we know of one insulin pump manufacturer (Medtronic) that allows for *editing* a `temp` basal while it is in effect, and in principle the same could apply to a `suspend` programmed with a `duration` (as allowed in the interface for OmniPods, for example). For the purposes of our `temp` basal model, we treat the editing of a `temp` basal as a cancellation followed by the immediate scheduling of a second `temp`. In other words, we do **not** consider the first `temp` basal to be `suppressed` by the edited `temp`. For example, consider a user running a "flat rate" basal schedule:
+To date, we know of one insulin pump manufacturer (Medtronic) that allows for *editing* a `temp` basal while it is in effect, and in principle the same could apply to a `suspend` programmed with a `duration` (as is required in the interface for the Insulet OmniPod, for example). For the purposes of our `temp` basal model, we treat the editing of a `temp` basal as a cancellation followed by the immediate scheduling of a second `temp`. In other words, we do **not** consider the first `temp` basal to be `suppressed` by the second, edited `temp`. For example, consider a user running a "flat rate" basal schedule:
 
 ```json
 [{
@@ -235,6 +239,41 @@ And the second will follow immediately in time but carries no indication that it
 }
 ```
 
-### nested `suppressed` in a partially automated insulin-delivery system
+### the possibility of nested `suppressed` in `suspend` basals
+
+Because a `suspend` can occur when a `temp` is in effect, there is the possibility of *nested* `suppressed` in a `suspend` basal. The `suppressed` on the `suspend` basal contains the information about the `temp` that was in effect before the `suspend` was programmed or triggered (e.g., by a partially-automated insulin delivery system like the low-glucose suspend (LGS) feature configurable on the Medtronic 530G insulin pump and continuous glucose monitoring system). In addition to the `suppressed` on the top-level (active) `suspend`, the suppressed `temp` one level down can *also* have a `suppressed` containing information about the `scheduled` basal that would have been in effect had the `temp` basal not been programmed.
+
+For example:
+
+```json
+{
+  "type": "basal",
+  "deliveryType": "suspend",
+  "duration": 41400000,
+  "suppressed": {
+    "type": "basal",
+    "deliveryType": "temp",
+    "percent": 0.5,
+    "rate": 0.6,
+    "suppressed": {
+      "type": "basal",
+      "deliveryType": "scheduled",
+      "scheduleName": "Very Active",
+      "rate": 1.2
+    }
+  },
+  "clockDriftOffset": 0,
+  "conversionOffset": 0,
+  "deviceId": "DevId0987654321",
+  "deviceTime": "2016-10-09T23:00:00",
+  "guid": "58812f26-e734-4b9a-9162-02bfee2a1dce",
+  "id": "a428262a0f7245a792db5712dc11d6eb",
+  "time": "2016-10-10T06:00:00.000Z",
+  "timezoneOffset": -420,
+  "uploadId": "SampleUploadId"
+}
+```
+
+Just as with a single level of `suppressed`, nested `suppressed` should be adjusted whenever the basal crosses a schedule boundary.
 
 [^a]: Or inferable from other data, such as the history of the pump's settings.
