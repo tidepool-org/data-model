@@ -80,13 +80,15 @@ The `alarmType`s built into the data model are all and only those alarms that ar
 - `low_power` for low battery or alerts and alarms
 - `no_power` for dead battery alarms
 - `occlusion` for alarms regarding the blockage of insulin infusion lines or sites
-- `no_delivery` for alarms signaling any other stoppage of insulin delivery not due to empty reservoir, dead battery, or occlusion
+- `no_delivery` for alarms signaling any other stoppage of insulin delivery when a more precise cause (such as an occlusion or empty reservoir) is not indicated by the pump
 - `auto_off` for when an insulin pump stops all insulin delivery due to inactivity for a duration over the user's programmed threshold, if any
 - `over_limit` for when insulin delivery has surpassed any of a user's programmed maximum bolus, basal, or hourly delivery thresholds
 
 Many if not all `alarm` events will include `payload` object with more information about the alarm that is device-specific. For example, a `low_insulin` alarm may have a `units_left` field in its `payload` to record the number of units of insulin that were remaining in the insulin pump's reservoir at the time of the alarm.
 
 In addition, a `payload` object is *required* when `alarmType` is `other`, which is the `alarmType` value used to capture all alarms that are device-specific. For example, a pod expiration alarm is specific to the Insulet OmniPod insulin delivery system. The `payload` object should include all information that could be relevant to anyone wishing to audit the history and performance of the insulin pump in question.
+
+On some pumps `no_delivery` may include all stoppages of delivery. That is, it may not always be possible to distinguish between empty reservoirs and occlusions.
 
 For some devices, an alarm event (e.g., an occlusion alarm) is the **only** indication of a suspension of insulin delivery. In such a case, a [`status`](./status.md) event should also be uploaded to the platform and should be included (in its entirety) in the `status` field of the `alarm` event.
 
