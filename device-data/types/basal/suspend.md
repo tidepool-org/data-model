@@ -150,7 +150,7 @@ May contain—only!—the following properties:
  * scheduleName
  * suppressed
 
-#### type
+#### suppressed.type
 
 [ingestion, storage, client] The string `basal`.
 
@@ -159,7 +159,7 @@ May contain—only!—the following properties:
 		jellyfish: no (optional)
 		platform: yes
 
-#### deliveryType
+#### suppressed.deliveryType
 
 [ingestion, storage, client] A string—either `scheduled` or `temp`—encoding the `deliveryType` of the currently suppressed basal event.
 
@@ -171,7 +171,7 @@ May contain—only!—the following properties:
 		`scheduled`
 		`temp`
 
-#### percent
+#### suppressed.percent
 
 > This field is **optional**.
 
@@ -186,7 +186,7 @@ May contain—only!—the following properties:
 		min: 0.0
 		max: 10.0
 
-#### rate
+#### suppressed.rate
 
 [ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
 
@@ -199,7 +199,7 @@ May contain—only!—the following properties:
 		min: 0.0
 		max: 20.0
 
-#### scheduleName
+#### suppressed.scheduleName
 
 > This field is **optional**.
 
@@ -210,7 +210,7 @@ May contain—only!—the following properties:
 		jellyfish: no (optional)
 		platform: no (optional)
 
-#### suppressed
+#### suppressed.suppressed
 
 > This field is **optional**.
 

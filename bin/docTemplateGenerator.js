@@ -303,7 +303,7 @@ function sectionForField(field, summary, changeLog, fieldSection) {
 
         fieldSection.push(summary.nestedPropertiesIntro + ':\n\n * ' + Object.keys(summary.keys).join('\n * ') + '\n');
         _.forOwn(summary.keys, function(innerSummary, key) {
-          sectionForField(key, innerSummary.summary, null, fieldSection);
+          sectionForField(util.format("%s.%s", field, key), innerSummary.summary, null, fieldSection);
         });
       }
       else {
