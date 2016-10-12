@@ -160,10 +160,18 @@ Contains a subset of the following properties:
 
 [ingestion, storage, client] An integer encoding the allowed deviation above or below the PWD's target blood glucose.
 
-	Numerical type: An integer value representing an allowed range +/- an associated target.
+	Numerical type:
+		mg/dL: Integer value representing a `mg/dL` value.
+		mmol/L: Floating point value representing a `mmol/L` value.
 	Range:
-		min: 0
-		max: 50
+		mg/dL:
+			min: `target` - this value > 0
+			max: `target` + this value <= 1000
+		mmol/L:
+			min: `target` - this value > 0.0
+			max: `target` + this value <= 55.0
+
+
 
 #### Changelog for `bgTarget`
 
