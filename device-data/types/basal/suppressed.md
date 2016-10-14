@@ -1,5 +1,9 @@
 <!-- non-generated document! all areas editable -->
 
+**NB:** This document is a proposal for a revised specification of the `suppressed` field on `temp` and `suspend` basal intervals that will *only* be implemented in the new platform data ingestion service, currently (as of October, 2016) only used in production for the ingestion of Animas data.
+
+If your concern is working with all of Tidepool's production data—both that ingested through the legacy "jellyfish" service and the data ingested through the platform— in a client application, then you will want to familiarize yourself with [the details of the legacy `suppressed` field](./legacy-suppressed.md).
+
 ## the `suppressed` field on `temp`s and `suspend`s
 
 Some insulin pump data protocols provide enough information for us to track various aspects (e.g., `rate`, `scheduleName`) of the basal that *would have been in effect* had the currently active `temp` or `suspend` basal **not** been programmed (or triggered). Where this information is available, we provide it in as much detail as possible as an embedded object in the `suppressed` field on a `temp` or `suspend` basal interval.
@@ -17,8 +21,6 @@ If the currently active basal is a `suspend` and the `suppressed` is a `temp`, t
 (More details of the precise allowed shape of a nested `suppressed` are available in the [`temp` basal documentation](./temp.md#suppressed)) and the [`suspend` basal documentation](./suspend.md#suppressed).)
 
 Note in particular that we do **not** include any timestamp or duration information in the `suppressed`: by definition, these values are always equal to those of the *active* basal interval's, and so it is not necessary to specify them.
-
-The legacy jellyfish data ingestion service does and did *not* validate the contents of the `suppressed` field beyond requiring it to be an object, so also note that these restrictions on allowed fields in `suppressed` do not hold for legacy data in any of Tidepool's database environments, including production. In particular, timestamp and duration information often appears—with misleading values that do not match the active basal's—on `suppressed` objects on `basal`s ingested through jellyfish.
 
 ### `suppressed` across schedule boundaries
 
@@ -170,7 +172,6 @@ The `duration`s of all three `temp` intervals here adds up to the programmed `te
 
 For a `suspend` that crosses `scheduled` boundaries, the examples would be very similar, except with no `rate` on the top-level (active) `suspend` basal.
 
-<!-- TODO: DISCUSS WITH GERRIT AND DARIN!!! -->
 **NB:** A *known* issue with this data model is that when a `temp` or `suspend` basal is programmed for a certain `duration` and crosses more than one schedule boundary but then is *canceled* early within one of the "middle" (not edge) segments, we have no good way to represent the original `expectedDuration` of the *entire* programmed `temp` or `suspend`. Rather, the `expectedDuration` on a middle segment of a three-or-more segment `temp` or `suspend` basal should be the expected `duration` of *that* segment from the basal schedule.
 
 ### `suppressed` when a `temp` or `suspend` is edited
