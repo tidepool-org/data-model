@@ -2,7 +2,7 @@
 
 **NB:** This document is a proposal for a revised specification of the `suppressed` field on `temp` and `suspend` basal intervals that will *only* be implemented in the new platform data ingestion service, currently (as of October, 2016) only used in production for the ingestion of Animas data.
 
-If your concern is working with all of Tidepool's production data—both that ingested through the legacy "jellyfish" service and the data ingested through the platform— in a client application, then you will want to familiarize yourself with [the details of the legacy `suppressed` field](./legacy-suppressed.md).
+If your concern is working with all of Tidepool's production data—both that ingested through the legacy "jellyfish" service and the data ingested through the platform—in a client application, then you will want to familiarize yourself with [the details of the legacy `suppressed` field](./legacy-suppressed.md).
 
 ## the `suppressed` field on `temp`s and `suspend`s
 

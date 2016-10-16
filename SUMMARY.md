@@ -13,6 +13,7 @@
       * [suspend](device-data/types/basal/suspend.md)
       * [the "previous" field](device-data/types/basal/previous.md)
       * [the "suppressed" field](device-data/types/basal/suppressed.md)
+      * [the legacy "suppressed" field](device-data/types/basal/legacy-suppressed.md)
     * [bloodKetone](device-data/types/bloodKetone.md)
     * [bolus](device-data/types/bolus/README.md)
       * [normal](device-data/types/bolus/normal.md)
