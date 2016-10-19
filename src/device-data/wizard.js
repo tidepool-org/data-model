@@ -1,15 +1,15 @@
 /*
  * == BSD2 LICENSE ==
  * Copyright (c) 2016, Tidepool Project
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the associated License, which is identical to the BSD 2-Clause
  * License as published by the Open Source Initiative at opensource.org.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the License for more details.
- * 
+ *
  * You should have received a copy of the License along with this program; if
  * not, you can obtain one from Tidepool Project at tidepool.org.
  * == BSD2 LICENSE ==
@@ -94,11 +94,11 @@ var schema = {
             numericalType: common.bgValueSummary.numericalType,
             range: {
               'mg/dL': {
-                min: '> `low` or `target`, whichever present',
+                min: '>= `low` or `target`, whichever present',
                 max: 1000
               },
               'mmol/L': {
-                min: '> `low` or `target`, whichever present',
+                min: '>= `low` or `target`, whichever present',
                 max: '55.0'
               }
             }
@@ -117,12 +117,12 @@ var schema = {
             numericalType: common.bgValueSummary.numericalType,
             range: {
               'mg/dL': {
-                min: '`target` - this value > 0',
-                max: '`target` + this value <= 1000'
+                min: '0',
+                max: 'min(`target`, 1000 - `target`) such that `target`-`range` >= 0 and `target`+`range` <= 1000'
               },
               'mmol/L': {
-                min: '`target` - this value > 0.0',
-                max: '`target` + this value <= 55.0'
+                min: '0.0',
+                max: 'min(`target`, 55.0 - `target`) such that `target`-`range` >= 0.0 and `target`+`range` <= 55.0'
               }
             }
           }
