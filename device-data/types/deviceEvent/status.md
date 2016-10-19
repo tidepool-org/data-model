@@ -124,7 +124,7 @@ There is no upper bound on the value of the `duration` for suspensions of insuli
 		platform: no (optional)
 	Numerical type: Integer value representing milliseconds.
 	Range:
-		min: > `duration`
+		min: >= `duration`
 		max: < ∞
 
 <!-- start editable commentary on expectedDuration -->
