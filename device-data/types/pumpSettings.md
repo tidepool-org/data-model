@@ -153,10 +153,10 @@ Each blood glucose target segment object in the array contains a subset of the f
 		mmol/L: Floating point value representing a `mmol/L` value.
 	Range:
 		mg/dL:
-			min: > `low` or `target`, whichever present
+			min: >= `low` or `target`, whichever present
 			max: 1000
 		mmol/L:
-			min: > `low` or `target`, whichever present
+			min: >= `low` or `target`, whichever present
 			max: 55.0
 
 
@@ -187,11 +187,11 @@ Each blood glucose target segment object in the array contains a subset of the f
 		mmol/L: Floating point value representing a `mmol/L` value.
 	Range:
 		mg/dL:
-			min: `target` - this value > 0
-			max: `target` + this value <= 1000
+			min: 0
+			max: min(`target`, 1000 - `target`) such that `target`-`range` >= 0 and `target`+`range` <= 1000
 		mmol/L:
-			min: `target` - this value > 0.0
-			max: `target` + this value <= 55.0
+			min: 0.0
+			max: min(`target`, 55.0 - `target`) such that `target`-`range` >= 0.0 and `target`+`range` <= 55.0
 
 
 
