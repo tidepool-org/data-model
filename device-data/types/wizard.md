@@ -105,7 +105,7 @@ Contains a subset of the following properties:
  * target
  * range
 
-#### low
+#### bgTarget.low
 
 [ingestion, storage, client] An integer encoding the lower bound of a PWD's blood glucose target.
 
@@ -122,7 +122,7 @@ Contains a subset of the following properties:
 
 
 
-#### high
+#### bgTarget.high
 
 [ingestion, storage, client] An integer encoding the upper bound of a PWD's blood glucose target.
 
@@ -139,7 +139,7 @@ Contains a subset of the following properties:
 
 
 
-#### target
+#### bgTarget.target
 
 [ingestion, storage, client] An integer encoding the PWD's target blood glucose as a single value.
 
@@ -156,7 +156,7 @@ Contains a subset of the following properties:
 
 
 
-#### range
+#### bgTarget.range
 
 [ingestion, storage, client] An integer encoding the allowed deviation above or below the PWD's target blood glucose.
 
@@ -349,7 +349,7 @@ May contain the following properties:
  * correction
  * net
 
-#### carb
+#### recommended.carb
 
 > This field is **optional**.
 
@@ -364,7 +364,7 @@ May contain the following properties:
 		min: >= 0.0
 		max: 100.0
 
-#### correction
+#### recommended.correction
 
 > This field is **optional**.
 
@@ -379,7 +379,7 @@ May contain the following properties:
 		min: -100.0
 		max: 100.0
 
-#### net
+#### recommended.net
 
 > This field is **optional**.
 

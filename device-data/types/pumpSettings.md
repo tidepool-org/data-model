@@ -75,7 +75,7 @@ Each basal schedule segment object within each array value contains the followin
  * rate
  * start
 
-#### rate
+#### basalSchedules.rate
 
 [ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
 
@@ -88,7 +88,7 @@ Each basal schedule segment object within each array value contains the followin
 		min: 0.0
 		max: 20.0
 
-#### start
+#### basalSchedules.start
 
 [ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.
 
@@ -127,7 +127,7 @@ Each blood glucose target segment object in the array contains a subset of the f
  * range
  * start
 
-#### low
+#### bgTarget.low
 
 [ingestion, storage, client] An integer encoding the lower bound of a PWD's blood glucose target.
 
@@ -144,7 +144,7 @@ Each blood glucose target segment object in the array contains a subset of the f
 
 
 
-#### high
+#### bgTarget.high
 
 [ingestion, storage, client] An integer encoding the upper bound of a PWD's blood glucose target.
 
@@ -161,7 +161,7 @@ Each blood glucose target segment object in the array contains a subset of the f
 
 
 
-#### target
+#### bgTarget.target
 
 [ingestion, storage, client] An integer encoding the PWD's target blood glucose as a single value.
 
@@ -178,7 +178,7 @@ Each blood glucose target segment object in the array contains a subset of the f
 
 
 
-#### range
+#### bgTarget.range
 
 [ingestion, storage, client] An integer encoding the allowed deviation above or below the PWD's target blood glucose.
 
@@ -195,7 +195,7 @@ Each blood glucose target segment object in the array contains a subset of the f
 
 
 
-#### start
+#### bgTarget.start
 
 [ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.
 
@@ -252,7 +252,7 @@ Each carb ratio segment object in the array contains the following properties:
  * amount
  * start
 
-#### amount
+#### carbRatio.amount
 
 [ingestion, storage, client] An integer encoding the grams of carbohydrate "covered" by one unit of insulin for the PWD.
 
@@ -265,7 +265,7 @@ Each carb ratio segment object in the array contains the following properties:
 		min: 0
 		max: 250
 
-#### start
+#### carbRatio.start
 
 [ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.
 
@@ -316,7 +316,7 @@ Each insulin sensitivity segment object in the array contains the following prop
  * amount
  * start
 
-#### amount
+#### insulinSensitivity.amount
 
 [ingestion] A numerical representation of the estimation of blood glucose value drop per unit of insulin delivered in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.
 
@@ -339,7 +339,7 @@ Each insulin sensitivity segment object in the array contains the following prop
 
 
 
-#### start
+#### insulinSensitivity.start
 
 [ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.
 
@@ -392,7 +392,7 @@ Contains the following properties:
  * carbs
  * bg
 
-#### carbs
+#### units.carbs
 
 > This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.
 
@@ -404,7 +404,7 @@ Contains the following properties:
 		platform: yes
 	Range: The string `grams`.
 
-#### bg
+#### units.bg
 
 > This field is **optional** when ingesting data through the jellyfish service but **required** when ingesting data through the new platform APIs.
 

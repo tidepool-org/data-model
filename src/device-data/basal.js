@@ -35,6 +35,24 @@ var getSuppressedDesc = function(type) {
   return  common.propTypes.OPTIONAL + format('[ingestion, storage, client] An object representing another `basal` event - namely, the event that is currently suppressed (inactive) because this %s basal is in effect.', type);
 };
 
+function percentInstance() {
+  // yield float rounded to nearest 0.05
+  return Math.round(chance.floating({min:0, max:1})*20)/20;
+}
+
+var percentSummary = {
+  description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.',
+  required: {
+    jellyfish: false,
+    platform: false
+  },
+  numericalType: 'Floating point value representing a percentage, where 1.0 represents 100%.',
+  range: {
+    min: '0.0',
+    max: '10.0'
+  }
+};
+
 var schemas = {
   base: {
     type: {
@@ -158,22 +176,8 @@ var schemas = {
       changelog: [common.changeLog.plannedImplementation('expectedDuration')]
     },
     percent: {
-      instance: function() {
-        // yield float rounded to nearest 0.05
-        return Math.round(chance.floating({min:0, max:1})*20)/20;
-      },
-      summary: {
-        description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.',
-        required: {
-          jellyfish: false,
-          platform: false
-        },
-        numericalType: 'Floating point value representing a percentage, where 1.0 represents 100%.',
-        range: {
-          min: '0.0',
-          max: '10.0'
-        }
-      }
+      instance: percentInstance,
+      summary: percentSummary,
     },
     previous: {
       instance: {},
@@ -207,6 +211,44 @@ var schemas = {
         required: {
           jellyfish: false,
           platform: false
+        },
+        nested: true,
+        nestedPropertiesIntro: 'May contain—only!—the following properties',
+        keys: {
+          type: {
+            instance: TYPE,
+            summary: {
+              description: common.propTypes.stringValue(TYPE),
+              required: {
+                jellyfish: false,
+                platform: true
+              }
+            }
+          },
+          deliveryType: {
+            instance: DELIVERY_TYPES.scheduled,
+            summary: {
+              description: common.propTypes.stringValue(DELIVERY_TYPES.scheduled),
+              required: {
+                jellyfish: false,
+                platform: true
+              }
+            }
+          },
+          rate: {
+            instance: common.basalRateValue,
+            summary: common.basalRateSummary
+          },
+          scheduleName: {
+            instance: common.SCHEDULE_NAMES,
+            summary: {
+              description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A string: the name of the basal schedule.',
+              required: {
+                jellyfish: false,
+                platform: false
+              }
+            }
+          }
         }
       }
     }
@@ -270,6 +312,59 @@ var schemas = {
         required: {
           jellyfish: false,
           platform: false
+        },
+        nested: true,
+        nestedPropertiesIntro: 'May contain—only!—the following properties',
+        keys: {
+          type: {
+            instance: TYPE,
+            summary: {
+              description: common.propTypes.stringValue(TYPE),
+              required: {
+                jellyfish: false,
+                platform: true
+              }
+            }
+          },
+          deliveryType: {
+            instance: [DELIVERY_TYPES.temp, DELIVERY_TYPES.suspend],
+            summary: {
+              description: '[ingestion, storage, client] A string—either `scheduled` or `temp`—encoding the `deliveryType` of the currently suppressed basal event.',
+              required: {
+                jellyfish: false,
+                platform: true
+              },
+              range: common.propTypes.oneOfStringOptions([DELIVERY_TYPES.scheduled, DELIVERY_TYPES.temp])
+            }
+          },
+          percent: {
+            instance: percentInstance,
+            summary: percentSummary
+          },
+          rate: {
+            instance: common.basalRateValue,
+            summary: common.basalRateSummary
+          },
+          scheduleName: {
+            instance: common.SCHEDULE_NAMES,
+            summary: {
+              description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A string: the name of the basal schedule.',
+              required: {
+                jellyfish: false,
+                platform: false
+              }
+            }
+          },
+          suppressed: {
+            instance: {},
+            summary: {
+              description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A nested object representing another `basal` event suppressed by the also-suppressed current `basal` event.',
+              required: {
+                jellyfish: false,
+                platform: false
+              }
+            }
+          }
         }
       }
     }

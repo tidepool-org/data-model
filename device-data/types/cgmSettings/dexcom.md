@@ -56,7 +56,7 @@ Contains the following properties:
  * level
  * snooze
 
-#### enabled
+#### highAlerts.enabled
 
 [ingestion, storage, client] A Boolean value: `true` or `false`.
 
@@ -66,7 +66,7 @@ Contains the following properties:
 		platform: yes
 	Range: `true`, `false`
 
-#### level
+#### highAlerts.level
 
 [ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.
 
@@ -89,7 +89,7 @@ Contains the following properties:
 
 
 
-#### snooze
+#### highAlerts.snooze
 
 [ingestion, storage, client] An integer value representing minimum time between alerts in milliseconds.
 
@@ -126,7 +126,7 @@ Contains the following properties:
  * level
  * snooze
 
-#### enabled
+#### lowAlerts.enabled
 
 [ingestion, storage, client] A Boolean value: `true` or `false`.
 
@@ -136,7 +136,7 @@ Contains the following properties:
 		platform: yes
 	Range: `true`, `false`
 
-#### level
+#### lowAlerts.level
 
 [ingestion] Blood glucose value in either mg/dL (integer) or mmol/L (float), with appropriately matching `units` field.
 
@@ -159,7 +159,7 @@ Contains the following properties:
 
 
 
-#### snooze
+#### lowAlerts.snooze
 
 [ingestion, storage, client] An integer value representing minimum time between alerts in milliseconds.
 
@@ -192,7 +192,7 @@ Contains the following properties:
  * enabled
  * snooze
 
-#### enabled
+#### outOfRangeAlerts.enabled
 
 [ingestion, storage, client] A Boolean value: `true` or `false`.
 
@@ -202,7 +202,7 @@ Contains the following properties:
 		platform: yes
 	Range: `true`, `false`
 
-#### snooze
+#### outOfRangeAlerts.snooze
 
 [ingestion, storage, client] An integer value representing a minimum threshold of time (in milliseconds) the user's transmitter must be out-of-range of the receiving device before alerting.
 
@@ -242,7 +242,7 @@ Each of two embedded objects—`fallRate` and `riseRate`—contains the followin
  * enabled
  * rate
 
-#### enabled
+#### rateOfChangeAlerts.enabled
 
 [ingestion, storage, client] A Boolean value: `true` or `false`.
 
@@ -252,7 +252,7 @@ Each of two embedded objects—`fallRate` and `riseRate`—contains the followin
 		platform: yes
 	Range: `true`, `false`
 
-#### rate
+#### rateOfChangeAlerts.rate
 
 [ingestion] A rate of blood glucose value change in either mg/dL/min (integer) or mmol/L/min (float), with appropriately matching `units` field.
 

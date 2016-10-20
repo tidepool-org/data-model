@@ -141,6 +141,85 @@ See [`previous`](./previous.md) for detailed documentation on this deprecated fi
 	Required:
 		jellyfish: no (optional)
 		platform: no (optional)
+May contain—only!—the following properties:
+
+ * type
+ * deliveryType
+ * percent
+ * rate
+ * scheduleName
+ * suppressed
+
+#### suppressed.type
+
+[ingestion, storage, client] The string `basal`.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: yes
+
+#### suppressed.deliveryType
+
+[ingestion, storage, client] A string—either `scheduled` or `temp`—encoding the `deliveryType` of the currently suppressed basal event.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: yes
+	Range: Must be one of:
+		`scheduled`
+		`temp`
+
+#### suppressed.percent
+
+> This field is **optional**.
+
+[ingestion, storage, client] A floating point number >= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
+	Numerical type: Floating point value representing a percentage, where 1.0 represents 100%.
+	Range:
+		min: 0.0
+		max: 10.0
+
+#### suppressed.rate
+
+[ingestion, storage, client] A floating point number >= 0 representing the amount of insulin delivered in units per hour.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: yes
+		platform: yes
+	Numerical type: Floating point value rounded to the appropriate significant figures for the device's precision.
+	Range:
+		min: 0.0
+		max: 20.0
+
+#### suppressed.scheduleName
+
+> This field is **optional**.
+
+[ingestion, storage, client] A string: the name of the basal schedule.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
+
+#### suppressed.suppressed
+
+> This field is **optional**.
+
+[ingestion, storage, client] A nested object representing another `basal` event suppressed by the also-suppressed current `basal` event.
+
+	QUICK SUMMARY
+	Required:
+		jellyfish: no (optional)
+		platform: no (optional)
 
 <!-- start editable commentary on suppressed -->
 
@@ -149,6 +228,8 @@ See the discussion of the [`suppressed`](./temp.md#suppressed) field on `temp` b
 The only differences for `suspend` basals are that:
 - The `deliveryType` of the embedded `suppressed` basal may be either `temp` or `scheduled`.
 - The embedded `suppressed` basal may *itself* have an embedded `suppressed` basal event. This can happen in particular with insulin pumps integrated with continuous glucose monitors such that the following may happen: (a) the PWD blood glucose is falling, and he or she (or a caregiver) programs a `temp` basal (which embeds a `suppressed` scheduled basal) in an attempt to prevent hypoglycemia but (b) the PWD's blood glucose continues to fall, and the automatic low glucose suspend feature of the insulin pump suspends insulin delivery, creating a `suspend` basal that embeds the `temp` basal as *its* `suppressed`.
+
+Also see [the full explanation of `suppressed`](./suppressed.md) (including the tracking of `suppressed` for `temp` and `suspend` basals that cross one or more basal schedule boundaries) for further information, explanations, and examples.
 
 <!-- end editable commentary on suppressed -->
 

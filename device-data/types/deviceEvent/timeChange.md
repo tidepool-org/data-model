@@ -67,7 +67,7 @@ Contains the following properties:
  * to
  * agent
 
-#### from
+#### change.from
 
 [ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-06-14T02:05:45`.
 
@@ -79,7 +79,7 @@ Contains the following properties:
 		min: 2007-01-01T00:00:00
 		max: none
 
-#### to
+#### change.to
 
 [ingestion, storage, client] An ISO 8601 formatted timestamp *without* any timezone offset information—e.g., `2016-06-14T02:05:45`.
 
@@ -91,7 +91,7 @@ Contains the following properties:
 		min: 2007-01-01T00:00:00
 		max: none
 
-#### agent
+#### change.agent
 
 [ingestion, storage, client] A string encoding the agent of the diabetes device display time change event.
 
