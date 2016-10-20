@@ -53,7 +53,7 @@
         data-chapter-title="suspend"
         data-filepath="device-data/types/basal/suspend.md"
         data-basepath="../../.."
-        data-revision="Wed Oct 12 2016 21:57:36 GMT+0200 (CEST)"
+        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -275,6 +275,21 @@
                             <b>1.6.1.5.</b>
                         
                         the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.6" data-path="device-data/types/basal/legacy-suppressed.html">
+            
+                
+                    <a href="../../../device-data/types/basal/legacy-suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.6.1.6.</b>
+                        
+                        the legacy &quot;suppressed&quot; field
                     </a>
             
             
@@ -800,6 +815,71 @@ Required:
 Required:
     jellyfish: no (optional)
     platform: no (optional)
+</code></pre><p>May contain&#x2014;only!&#x2014;the following properties:</p>
+<ul>
+<li>type</li>
+<li>deliveryType</li>
+<li>percent</li>
+<li>rate</li>
+<li>scheduleName</li>
+<li>suppressed</li>
+</ul>
+<h4 id="suppressedtype">suppressed.type</h4>
+<p>[ingestion, storage, client] The string <code>basal</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+</code></pre><h4 id="suppresseddeliverytype">suppressed.deliveryType</h4>
+<p>[ingestion, storage, client] A string&#x2014;either <code>scheduled</code> or <code>temp</code>&#x2014;encoding the <code>deliveryType</code> of the currently suppressed basal event.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+Range: Must be one of:
+    `scheduled`
+    `temp`
+</code></pre><h4 id="suppressedpercent">suppressed.percent</h4>
+<blockquote>
+<p>This field is <strong>optional</strong>.</p>
+</blockquote>
+<p>[ingestion, storage, client] A floating point number &gt;= 0 representing a percentage multiplier of the current basal rate to obtain the temp rate in units per hour.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+Numerical type: Floating point value representing a percentage, where 1.0 represents 100%.
+Range:
+    min: 0.0
+    max: 10.0
+</code></pre><h4 id="suppressedrate">suppressed.rate</h4>
+<p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Floating point value rounded to the appropriate significant figures for the device&apos;s precision.
+Range:
+    min: 0.0
+    max: 20.0
+</code></pre><h4 id="suppressedschedulename">suppressed.scheduleName</h4>
+<blockquote>
+<p>This field is <strong>optional</strong>.</p>
+</blockquote>
+<p>[ingestion, storage, client] A string: the name of the basal schedule.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
+</code></pre><h4 id="suppressedsuppressed">suppressed.suppressed</h4>
+<blockquote>
+<p>This field is <strong>optional</strong>.</p>
+</blockquote>
+<p>[ingestion, storage, client] A nested object representing another <code>basal</code> event suppressed by the also-suppressed current <code>basal</code> event.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
 </code></pre><!-- start editable commentary on suppressed -->
 <p>See the discussion of the <a href="temp.html#suppressed"><code>suppressed</code></a> field on <code>temp</code> basals.</p>
 <p>The only differences for <code>suspend</code> basals are that:</p>
@@ -807,6 +887,7 @@ Required:
 <li>The <code>deliveryType</code> of the embedded <code>suppressed</code> basal may be either <code>temp</code> or <code>scheduled</code>.</li>
 <li>The embedded <code>suppressed</code> basal may <em>itself</em> have an embedded <code>suppressed</code> basal event. This can happen in particular with insulin pumps integrated with continuous glucose monitors such that the following may happen: (a) the PWD blood glucose is falling, and he or she (or a caregiver) programs a <code>temp</code> basal (which embeds a <code>suppressed</code> scheduled basal) in an attempt to prevent hypoglycemia but (b) the PWD&apos;s blood glucose continues to fall, and the automatic low glucose suspend feature of the insulin pump suspends insulin delivery, creating a <code>suspend</code> basal that embeds the <code>temp</code> basal as <em>its</em> <code>suppressed</code>.</li>
 </ul>
+<p>Also see <a href="suppressed.html">the full explanation of <code>suppressed</code></a> (including the tracking of <code>suppressed</code> for <code>temp</code> and <code>suspend</code> basals that cross one or more basal schedule boundaries) for further information, explanations, and examples.</p>
 <!-- end editable commentary on suppressed -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>

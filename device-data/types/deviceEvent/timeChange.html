@@ -53,7 +53,7 @@
         data-chapter-title="timeChange"
         data-filepath="device-data/types/deviceEvent/timeChange.md"
         data-basepath="../../.."
-        data-revision="Wed Oct 12 2016 21:57:36 GMT+0200 (CEST)"
+        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -275,6 +275,21 @@
                             <b>1.6.1.5.</b>
                         
                         the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.6" data-path="device-data/types/basal/legacy-suppressed.html">
+            
+                
+                    <a href="../../../device-data/types/basal/legacy-suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.6.1.6.</b>
+                        
+                        the legacy &quot;suppressed&quot; field
                     </a>
             
             
@@ -748,7 +763,7 @@ Required:
 <li>to</li>
 <li>agent</li>
 </ul>
-<h4 id="from">from</h4>
+<h4 id="changefrom">change.from</h4>
 <p>[ingestion, storage, client] An ISO 8601 formatted timestamp <em>without</em> any timezone offset information&#x2014;e.g., <code>2016-06-14T02:05:45</code>.</p>
 <pre><code>QUICK SUMMARY
 Required:
@@ -757,7 +772,7 @@ Required:
 Range:
     min: 2007-01-01T00:00:00
     max: none
-</code></pre><h4 id="to">to</h4>
+</code></pre><h4 id="changeto">change.to</h4>
 <p>[ingestion, storage, client] An ISO 8601 formatted timestamp <em>without</em> any timezone offset information&#x2014;e.g., <code>2016-06-14T02:05:45</code>.</p>
 <pre><code>QUICK SUMMARY
 Required:
@@ -766,7 +781,7 @@ Required:
 Range:
     min: 2007-01-01T00:00:00
     max: none
-</code></pre><h4 id="agent">agent</h4>
+</code></pre><h4 id="changeagent">change.agent</h4>
 <p>[ingestion, storage, client] A string encoding the agent of the diabetes device display time change event.</p>
 <pre><code>QUICK SUMMARY
 Required:

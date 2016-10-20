@@ -37,7 +37,7 @@
         
     
     
-    <link rel="next" href="../../../device-data/types/bloodKetone.html" />
+    <link rel="next" href="../../../device-data/types/basal/legacy-suppressed.html" />
     
     
     <link rel="prev" href="../../../device-data/types/basal/previous.html" />
@@ -53,7 +53,7 @@
         data-chapter-title="the &quot;suppressed&quot; field"
         data-filepath="device-data/types/basal/suppressed.md"
         data-basepath="../../.."
-        data-revision="Wed Oct 12 2016 21:57:36 GMT+0200 (CEST)"
+        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -275,6 +275,21 @@
                             <b>1.6.1.5.</b>
                         
                         the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.6" data-path="device-data/types/basal/legacy-suppressed.html">
+            
+                
+                    <a href="../../../device-data/types/basal/legacy-suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.6.1.6.</b>
+                        
+                        the legacy &quot;suppressed&quot; field
                     </a>
             
             
@@ -698,8 +713,242 @@
                     <section class="normal" id="section-">
                     
                         <!-- non-generated document! all areas editable -->
-<p>Coming soon!</p>
-<!-- TODO: document how `suppressed` works when a `temp` or `suspend` basal crosses > 1 segment of a basal schedule -->
+<p><strong>NB:</strong> This document is a proposal for a revised specification of the <code>suppressed</code> field on <code>temp</code> and <code>suspend</code> basal intervals that will <em>only</em> be implemented in the new platform data ingestion service, currently (as of October, 2016) only used in production for the ingestion of Animas data.</p>
+<p>If your concern is working with all of Tidepool&apos;s production data&#x2014;both that ingested through the legacy &quot;jellyfish&quot; service and the data ingested through the platform&#x2014;in a client application, then you will want to familiarize yourself with <a href="legacy-suppressed.html">the details of the legacy <code>suppressed</code> field</a>.</p>
+<h2 id="the-suppressed-field-on-temps-and-suspends">the <code>suppressed</code> field on <code>temp</code>s and <code>suspend</code>s</h2>
+<p>Some insulin pump data protocols provide enough information for us to track various aspects (e.g., <code>rate</code>, <code>scheduleName</code>) of the basal that <em>would have been in effect</em> had the currently active <code>temp</code> or <code>suspend</code> basal <strong>not</strong> been programmed (or triggered). Where this information is available, we provide it in as much detail as possible as an embedded object in the <code>suppressed</code> field on a <code>temp</code> or <code>suspend</code> basal interval.</p>
+<p>In general, this <code>suppressed</code> object need and <strong>must</strong> only contain the bare minimum of information:</p>
+<ul>
+<li>the <code>type</code> (= <code>basal</code>)</li>
+<li>the <code>deliveryType</code> (only <code>scheduled</code> if the currently active basal is a <code>temp</code>; otherwise (i.e., if the currently active basal is a <code>suspend</code>), may be <code>scheduled</code> <em>or</em> <code>temp</code>)</li>
+<li>the <code>rate</code> of insulin delivery</li>
+<li>(optionally) the <code>scheduleName</code> if the suppressed interval is a <code>scheduled</code> basal and the name of the basal schedule is available through the insulin pump&apos;s data protocol<sup><a href="#fn_a" id="reffn_a">a</a></sup></li>
+</ul>
+<p>If the currently active basal is a <code>suspend</code> and the <code>suppressed</code> is a <code>temp</code>, then the following <code>temp</code> fields may also be present on the <code>suppressed</code> object:</p>
+<ul>
+<li>the <code>percent</code> of the scheduled basal rate</li>
+<li>another(!) nested <code>suppressed</code> object representing the originally <code>scheduled</code> basal interval (see <a href="#the-possibility-of-nested-suppressed-in-suspend-basals">below</a> for details)</li>
+</ul>
+<p>(More details of the precise allowed shape of a nested <code>suppressed</code> are available in the <a href="temp.html#suppressed"><code>temp</code> basal documentation</a>) and the <a href="suspend.html#suppressed"><code>suspend</code> basal documentation</a>.)</p>
+<p>Note in particular that we do <strong>not</strong> include any timestamp or duration information in the <code>suppressed</code>: by definition, these values are always equal to those of the <em>active</em> basal interval&apos;s, and so it is not necessary to specify them.</p>
+<h3 id="suppressed-across-schedule-boundaries"><code>suppressed</code> across schedule boundaries</h3>
+<p>When a <code>temp</code> or <code>suspend</code> basal crosses a basal schedule boundary, the basal rate that would have been in effect had the <code>temp</code> or <code>suspend</code> not been programmed <em>changes</em> in accordance with the schedule change, necessitating a splitting of the <code>temp</code> or <code>suspend</code> into multiple segments, each of type <code>basal</code>, with the sum of all segments&apos; <code>duration</code>s adding up to the total duration of the temp or suspend reported by the insulin pump.</p>
+<h4 id="example">example</h4>
+<p>Assume this basal schedule is active:</p>
+<pre><code class="lang-json">[{
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-comment">// midnight</span>
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.25</span>
+},
+{
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">3600000</span>, <span class="hljs-comment">// 1 a.m.</span>
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.2</span>
+},
+{
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">10800000</span>, <span class="hljs-comment">// 3 a.m.</span>
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.25</span>
+},
+{
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">21600000</span>, <span class="hljs-comment">// 6 a.m.</span>
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.6</span>
+},
+{
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">43200000</span>, <span class="hljs-comment">// 12 p.m.</span>
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.35</span>
+}]
+</code></pre>
+<p>A <code>scheduled</code> basal event on a particular day at midnight according to this schedule would look like:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">3600000</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.25</span>,
+  <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Standard&quot;</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-10-07T00:00:00&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-10-07T07:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>Now let&apos;s say a user programs a <code>temp</code> basal at 12:25 a.m. to run for three hours, until 3:25 a.m. Then the <code>scheduled</code> basal will look almost the same, except the <code>duration</code> will be different since the scheduled segment will have only run for the twenty-five minutes from midnight to 12:25 a.m.:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">1500000</span>, <span class="hljs-comment">// 25 minutes from 12:00 a.m. to 12:25 a.m.</span>
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.25</span>,
+  <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Standard&quot;</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-10-07T00:00:00&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-10-07T07:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>The three-hour <code>temp</code> basal will cross schedule boundaries at 1 a.m. and 3 a.m., and so it will end up being divided into three segment intervals with a <code>suppressed</code> to match the segment of the schedule that would have been in effect at that time if the <code>temp</code> had not been programmed.</p>
+<p>First <code>temp</code> interval:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">2100000</span>, <span class="hljs-comment">// 35 minutes from 12:25 a.m. to 1:00 a.m.</span>
+  <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.5</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.125</span>, <span class="hljs-comment">// == percent * suppressed.rate</span>
+  <span class="hljs-string">&quot;suppressed&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-string">&quot;0.25&quot;</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Standard&quot;</span>
+  },
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-10-07T00:25:00&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-10-07T07:25:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>Second <code>temp</code> interval:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">7200000</span>, <span class="hljs-comment">// 2 hours from 1:00 a.m. to 3:00 a.m.</span>
+  <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.5</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.1</span>, <span class="hljs-comment">// == percent * suppressed.rate</span>
+  <span class="hljs-string">&quot;suppressed&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-string">&quot;0.2&quot;</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Standard&quot;</span>
+  },
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-10-07T01:00:00&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-10-07T08:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>Third <code>temp</code> interval:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">1500000</span>, <span class="hljs-comment">// 25 minutes from 3:00 a.m. to 3:25 a.m.</span>
+  <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.5</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.125</span>, <span class="hljs-comment">// == percent * suppressed.rate</span>
+  <span class="hljs-string">&quot;suppressed&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-string">&quot;0.25&quot;</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Standard&quot;</span>
+  },
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-10-07T03:00:00&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-10-07T10:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>The <code>duration</code>s of all three <code>temp</code> intervals here adds up to the programmed <code>temp</code> duration: <code>2100000 + 7200000 + 1500000 = 10800000</code> (three hours).</p>
+<p>For a <code>suspend</code> that crosses <code>scheduled</code> boundaries, the examples would be very similar, except with no <code>rate</code> on the top-level (active) <code>suspend</code> basal.</p>
+<p><strong>NB:</strong> A <em>known</em> issue with this data model is that when a <code>temp</code> or <code>suspend</code> basal is programmed for a certain <code>duration</code> and crosses more than one schedule boundary but then is <em>canceled</em> early within one of the &quot;middle&quot; (not edge) segments, we have no good way to represent the original <code>expectedDuration</code> of the <em>entire</em> programmed <code>temp</code> or <code>suspend</code>. Rather, the <code>expectedDuration</code> on a middle segment of a three-or-more segment <code>temp</code> or <code>suspend</code> basal should be the expected <code>duration</code> of <em>that</em> segment from the basal schedule.</p>
+<h3 id="suppressed-when-a-temp-or-suspend-is-edited"><code>suppressed</code> when a <code>temp</code> or <code>suspend</code> is edited</h3>
+<p>To date, we know of one insulin pump manufacturer (Medtronic) that allows for <em>editing</em> a <code>temp</code> basal while it is in effect, and in principle the same could apply to a <code>suspend</code> programmed with a <code>duration</code> (as is required in the interface for the Insulet OmniPod, for example). For the purposes of our <code>temp</code> basal model, we treat the editing of a <code>temp</code> basal as a cancellation followed by the immediate scheduling of a second <code>temp</code>. In other words, we do <strong>not</strong> consider the first <code>temp</code> basal to be <code>suppressed</code> by the second, edited <code>temp</code>. For example, consider a user running a &quot;flat rate&quot; basal schedule:</p>
+<pre><code class="lang-json">[{
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.95</span>
+}]
+</code></pre>
+<p>At 8:00 a.m., this user schedule an 85% <code>temp</code> basal to run for four hours, but edits it after three hours and thirty-six minutes to change the percentage to 90%. The first <code>temp</code> basal event will look like this:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">12960000</span>,
+  <span class="hljs-string">&quot;expectedDuration&quot;</span>: <span class="hljs-number">14400000</span>,
+  <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.85</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.6575</span>,
+  <span class="hljs-string">&quot;suppressed&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.95</span>
+  },
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-10-07T08:00:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;634b43c7-9d0d-47ed-afec-3aac2db99a6a&quot;</span>,
+  <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;9759417fa35c45839d0400240a13523c&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-10-07T15:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>And the second will follow immediately in time but carries no indication that it is a &quot;edited&quot; <code>temp</code> (other than perhaps additional information in the <code>payload</code>); rather, it is indistinguishable from a &quot;fresh&quot; <code>temp</code> basal scheduled for the given time. Note in particular that its <code>suppressed</code> is the <code>scheduled</code> flat-rate basal, <strong>not</strong> the prior <code>temp</code> basal.</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">1440000</span>,
+  <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.90</span>,
+  <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.755</span>,
+  <span class="hljs-string">&quot;suppressed&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+    <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Weekend&quot;</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.95</span>
+  },
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-10-07T11:36:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;634b43c7-9d0d-47ed-afec-3aac2db99a6a&quot;</span>,
+  <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;9759417fa35c45839d0400240a13523c&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-10-07T18:36:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="the-possibility-of-nested-suppressed-in-suspend-basals">the possibility of nested <code>suppressed</code> in <code>suspend</code> basals</h3>
+<p>Because a <code>suspend</code> can occur when a <code>temp</code> is in effect, there is the possibility of <em>nested</em> <code>suppressed</code> in a <code>suspend</code> basal. The <code>suppressed</code> on the <code>suspend</code> basal contains the information about the <code>temp</code> that was in effect before the <code>suspend</code> was programmed or triggered (e.g., by a partially-automated insulin delivery system like the low-glucose suspend (LGS) feature configurable on the Medtronic 530G insulin pump and continuous glucose monitoring system). In addition to the <code>suppressed</code> on the top-level (active) <code>suspend</code>, the suppressed <code>temp</code> one level down can <em>also</em> have a <code>suppressed</code> containing information about the <code>scheduled</code> basal that would have been in effect had the <code>temp</code> basal not been programmed.</p>
+<p>For example:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+  <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;suspend&quot;</span>,
+  <span class="hljs-string">&quot;duration&quot;</span>: <span class="hljs-number">41400000</span>,
+  <span class="hljs-string">&quot;suppressed&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+    <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;temp&quot;</span>,
+    <span class="hljs-string">&quot;percent&quot;</span>: <span class="hljs-number">0.5</span>,
+    <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.6</span>,
+    <span class="hljs-string">&quot;suppressed&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;basal&quot;</span>,
+      <span class="hljs-string">&quot;deliveryType&quot;</span>: <span class="hljs-string">&quot;scheduled&quot;</span>,
+      <span class="hljs-string">&quot;scheduleName&quot;</span>: <span class="hljs-string">&quot;Very Active&quot;</span>,
+      <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1.2</span>
+    }
+  },
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-10-09T23:00:00&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;58812f26-e734-4b9a-9162-02bfee2a1dce&quot;</span>,
+  <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;a428262a0f7245a792db5712dc11d6eb&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-10-10T06:00:00.000Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<p>Just as with a single level of <code>suppressed</code>, nested <code>suppressed</code> should be adjusted whenever the basal crosses a schedule boundary.</p>
+<blockquote id="fn_a">
+<sup>a</sup>. Or inferable from other data, such as the history of the pump&apos;s settings.<a href="#reffn_a" title="Jump back to footnote [a] in the text."> &#x21A9;</a>
+</blockquote>
+
                     
                     </section>
                 
@@ -712,7 +961,7 @@
         <a href="../../../device-data/types/basal/previous.html" class="navigation navigation-prev " aria-label="Previous page: the &quot;previous&quot; field"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../../device-data/types/bloodKetone.html" class="navigation navigation-next " aria-label="Next page: bloodKetone"><i class="fa fa-angle-right"></i></a>
+        <a href="../../../device-data/types/basal/legacy-suppressed.html" class="navigation navigation-next " aria-label="Next page: the legacy &quot;suppressed&quot; field"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

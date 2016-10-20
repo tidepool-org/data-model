@@ -53,7 +53,7 @@
         data-chapter-title="pumpSettings"
         data-filepath="device-data/types/pumpSettings.md"
         data-basepath="../.."
-        data-revision="Wed Oct 12 2016 21:57:36 GMT+0200 (CEST)"
+        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -275,6 +275,21 @@
                             <b>1.6.1.5.</b>
                         
                         the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.6" data-path="device-data/types/basal/legacy-suppressed.html">
+            
+                
+                    <a href="../../device-data/types/basal/legacy-suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.6.1.6.</b>
+                        
+                        the legacy &quot;suppressed&quot; field
                     </a>
             
             
@@ -755,7 +770,7 @@ Required:
 <li>rate</li>
 <li>start</li>
 </ul>
-<h4 id="rate">rate</h4>
+<h4 id="basalschedulesrate">basalSchedules.rate</h4>
 <p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
 <pre><code>QUICK SUMMARY
 Required:
@@ -765,7 +780,7 @@ Numerical type: Floating point value rounded to the appropriate significant figu
 Range:
     min: 0.0
     max: 20.0
-</code></pre><h4 id="start">start</h4>
+</code></pre><h4 id="basalschedulesstart">basalSchedules.start</h4>
 <p>[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.</p>
 <pre><code>QUICK SUMMARY
 Required:
@@ -792,7 +807,7 @@ Range:
 <li>range</li>
 <li>start</li>
 </ul>
-<h4 id="low">low</h4>
+<h4 id="bgtargetlow">bgTarget.low</h4>
 <p>[ingestion, storage, client] An integer encoding the lower bound of a PWD&apos;s blood glucose target.</p>
 <pre><code>Numerical type:
     mg/dL: Integer value representing a `mg/dL` value.
@@ -804,7 +819,7 @@ Range:
     mmol/L:
         min: 0.0
         max: 55.0
-</code></pre><h4 id="high">high</h4>
+</code></pre><h4 id="bgtargethigh">bgTarget.high</h4>
 <p>[ingestion, storage, client] An integer encoding the upper bound of a PWD&apos;s blood glucose target.</p>
 <pre><code>Numerical type:
     mg/dL: Integer value representing a `mg/dL` value.
@@ -816,7 +831,7 @@ Range:
     mmol/L:
         min: &gt; `low` or `target`, whichever present
         max: 55.0
-</code></pre><h4 id="target">target</h4>
+</code></pre><h4 id="bgtargettarget">bgTarget.target</h4>
 <p>[ingestion, storage, client] An integer encoding the PWD&apos;s target blood glucose as a single value.</p>
 <pre><code>Numerical type:
     mg/dL: Integer value representing a `mg/dL` value.
@@ -828,7 +843,7 @@ Range:
     mmol/L:
         min: 0.0
         max: 55.0
-</code></pre><h4 id="range">range</h4>
+</code></pre><h4 id="bgtargetrange">bgTarget.range</h4>
 <p>[ingestion, storage, client] An integer encoding the allowed deviation above or below the PWD&apos;s target blood glucose.</p>
 <pre><code>Numerical type:
     mg/dL: Integer value representing a `mg/dL` value.
@@ -840,7 +855,7 @@ Range:
     mmol/L:
         min: `target` - this value &gt; 0.0
         max: `target` + this value &lt;= 55.0
-</code></pre><h4 id="start">start</h4>
+</code></pre><h4 id="bgtargetstart">bgTarget.start</h4>
 <p>[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.</p>
 <pre><code>QUICK SUMMARY
 Required:
@@ -875,7 +890,7 @@ Range:
 <li>amount</li>
 <li>start</li>
 </ul>
-<h4 id="amount">amount</h4>
+<h4 id="carbratioamount">carbRatio.amount</h4>
 <p>[ingestion, storage, client] An integer encoding the grams of carbohydrate &quot;covered&quot; by one unit of insulin for the PWD.</p>
 <pre><code>QUICK SUMMARY
 Required:
@@ -885,7 +900,7 @@ Numerical type: Integer value representing grams of carbohydrate per unit of ins
 Range:
     min: 0
     max: 250
-</code></pre><h4 id="start">start</h4>
+</code></pre><h4 id="carbratiostart">carbRatio.start</h4>
 <p>[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.</p>
 <pre><code>QUICK SUMMARY
 Required:
@@ -917,7 +932,7 @@ Range:
 <li>amount</li>
 <li>start</li>
 </ul>
-<h4 id="amount">amount</h4>
+<h4 id="insulinsensitivityamount">insulinSensitivity.amount</h4>
 <p>[ingestion] A numerical representation of the estimation of blood glucose value drop per unit of insulin delivered in either mg/dL (integer) or mmol/L (float), with appropriately matching <code>units</code> field.</p>
 <p>[storage, client] A numerical representation of the estimation of blood glucose value drop in mmol/L (float, potentially unrounded), with appropriately matching <code>units</code> field.</p>
 <pre><code>QUICK SUMMARY
@@ -934,7 +949,7 @@ Range:
     mmol/L:
         min: 0.0
         max: 55.0
-</code></pre><h4 id="start">start</h4>
+</code></pre><h4 id="insulinsensitivitystart">insulinSensitivity.start</h4>
 <p>[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.</p>
 <pre><code>QUICK SUMMARY
 Required:
@@ -969,7 +984,7 @@ Required:
 <li>carbs</li>
 <li>bg</li>
 </ul>
-<h4 id="carbs">carbs</h4>
+<h4 id="unitscarbs">units.carbs</h4>
 <blockquote>
 <p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
 </blockquote>
@@ -979,7 +994,7 @@ Required:
     jellyfish: no (optional)
     platform: yes
 Range: The string `grams`.
-</code></pre><h4 id="bg">bg</h4>
+</code></pre><h4 id="unitsbg">units.bg</h4>
 <blockquote>
 <p>This field is <strong>optional</strong> when ingesting data through the jellyfish service but <strong>required</strong> when ingesting data through the new platform APIs.</p>
 </blockquote>

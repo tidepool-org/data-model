@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>basal | data-model</title>
+        <title>the legacy &quot;suppressed&quot; field | data-model</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="../../../device-data/types/basal/scheduled.html" />
+    <link rel="next" href="../../../device-data/types/bloodKetone.html" />
     
     
-    <link rel="prev" href="../../../device-data/types/index.html" />
+    <link rel="prev" href="../../../device-data/types/basal/suppressed.html" />
     
 
         
@@ -49,9 +49,9 @@
         
         
     <div class="book"
-        data-level="1.6.1"
-        data-chapter-title="basal"
-        data-filepath="device-data/types/basal/README.md"
+        data-level="1.6.1.6"
+        data-chapter-title="the legacy &quot;suppressed&quot; field"
+        data-filepath="device-data/types/basal/legacy-suppressed.md"
         data-basepath="../../.."
         data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
         data-innerlanguage="">
@@ -189,7 +189,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.6.1" data-path="device-data/types/basal/index.html">
+        <li class="chapter " data-level="1.6.1" data-path="device-data/types/basal/index.html">
             
                 
                     <a href="../../../device-data/types/basal/index.html">
@@ -280,7 +280,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.1.6" data-path="device-data/types/basal/legacy-suppressed.html">
+        <li class="chapter active" data-level="1.6.1.6" data-path="device-data/types/basal/legacy-suppressed.html">
             
                 
                     <a href="../../../device-data/types/basal/legacy-suppressed.html">
@@ -712,16 +712,16 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h2 id="basal-insulin-basal">Basal Insulin (<code>basal</code>)</h2>
-<p>This is the Tidepool data type for background insulin dosing&#x2014;the &quot;constant drip&quot; of background insulin programmable in all insulin pumps and providing a replacement for a daily injection of long-acting insulin such as Lantus or Levemir. Different insulin pump manufacturers use different terminology for this insulin dosing, although all provide a similar interface for programming the set(s) of rates (in units of insulin per hour) to be delivered at different times of each day. We have standardized on calling one set of such rates covering a twenty-four hour period a basal &quot;schedule.&quot;</p>
-<p>The data model for the basal schedule(s) is part of the Tidepool <a href="../pumpSettings.html"><code>pumpSettings</code></a> type. In contrast, the <code>basal</code> data type described in the following three documents represents each actual interval of basal insulin delivery, whether that matches the active programmed basal schedule or not. In brief summary&#x2014;and ignoring for the moment some differences that are explained in detail in the linked three documents for the <code>scheduled</code>, <code>temp</code>, and <code>suspend</code> delivery sub-types&#x2014;each <code>basal</code> event contains a <code>time</code> field representing the start of the delivery of the <code>rate</code> (in units of insulin per hour). The <code>duration</code> encodes the length of time (in milliseconds) that this <code>rate</code> was delivered in actuality (and it may or may not match the duration encoded in the basal schedule, depending on other pump events like global suspensions of insulin delivery or temporary basal rates). In order to calculate the total insulin delivery resulting from a particular <code>basal</code> event, all that is needed is conversion of the <code>duration</code> from milliseconds to hours and multiplication of the result by the <code>rate</code>.</p>
-<p>Each of the three <code>deliveryType</code>s that fall under the larger <code>basal</code> type are documented in the following pages:
-<!-- end intro --></p>
-<ul>
-<li><a href="scheduled.html">scheduled</a></li>
-<li><a href="temp.html">temp</a></li>
-<li><a href="suspend.html">suspend</a></li>
-</ul>
+                        <p><strong>NB:</strong> This document only describes the <code>suppressed</code> field on <code>temp</code> and <code>suspend</code> basal intervals ingested through the legacy &quot;jellyfish&quot; data ingestion service. If your concern is working with all of Tidepool&apos;s production data&#x2014;both that ingested through the legacy &quot;jellyfish&quot; service and the data ingested through the new platform data ingestion service&#x2014;in a client application, then you will also want to familiarize yourself with <a href="suppressed.html">the new <code>suppressed</code> specification</a>.</p>
+<p>Note that there is presently no dedicated marker to indicate which service a datum was ingested through, the new platform service or the legacy jellyfish service. However, it is possible to determine this for some data by the make of device: no Animas data has ever been ingested through the jellfish service, and to date the data from all other makes of insulin pump (Insulet, Medtronic via CareLink integration, Tandem) have and do <em>only</em> get ingested through the legacy jellyfish service.</p>
+<p>In the near future, after we release support for data ingestion through Medtronic&apos;s device communications protocols (instead of via CareLink), it may no longer be possible to conclusively determine the service a datum was ingested through via the device make. When this comes to pass, we recommend that client software attempt to treat all data as if it were ingested through the new platform service and simply drop or ignore fields (such as <code>suppressed</code>) and/or sub-fields (such as some of those inside <code>suppressed</code>) that do not match the current data model specification as found in this documentation.</p>
+<h2 id="the-legacy-suppressed-field">the legacy <code>suppressed</code> field</h2>
+<p>The most important thing to be aware of when looking at the <code>suppressed</code> field on <code>temp</code> and/or <code>suspend</code> basals ingested via the legacy jellyfish service is that jellyfish did <strong>not</strong> (and does not) validate this field <em>at all</em> other than to require that if this optional field is present, it must <a href="https://github.com/tidepool-org/jellyfish/blob/master/lib/schema/basal.js#L162" target="_blank">be an object</a>.</p>
+<p>Due to this very lax &quot;validation,&quot; you can expect to see some variation with respect to what <code>suppressed</code> looks like on jellyfish-ingested <code>basal</code>s. What follows are descriptions of <strong>two</strong> known variations from <a href="suppressed.html">the new <code>suppressed</code> specification</a>, but there may be many more.</p>
+<h3 id="additional-fields-present-within-suppressed">additional fields present within <code>suppressed</code></h3>
+<p>The new specification for <code>suppressed</code> allows only a small number of the fields found on a top-level <code>basal</code> object to appear on the <code>suppressed</code> embedded basal object, with all of those not specified on the embedded object&#x2014;such as <code>time</code> and <code>duration</code>, among many others&#x2014;omitted due to equivalence with the parent <code>basal</code>. In contrast, a <code>suppressed</code> on a <code>basal</code> ingested through the jellyfish service can be expected to have <em>all</em> (or almost all) of the fields a normal <code>basal</code> has, and when the time-related fields such as <code>time</code> and <code>duration</code> are present they often do not match the parent <code>basal</code>&apos;s, although they should. This occurs with the greatest regularity when a <code>temp</code> basal crosses one or more basal schedule boundaries; often the code clones the original <code>scheduled</code> basal as the <code>suppressed</code> for each <code>temp</code> segment, preserving a <code>time</code>, <code>duration</code>, etc. on the <code>suppressed</code> from the <code>scheduled</code> that are no longer accurate. (Instead of adding in code to update these fields in the <code>suppressed</code>, we made the choice in the new specification to simply avoid doubly specifying shared fields.)</p>
+<h3 id="many-levels-of-nested-suppressed">many levels of nested <code>suppressed</code></h3>
+<p>In contrast to the new specification, in which an edited <code>temp</code> basal is considered a cancellation of the previous followed by the programming of a new <code>temp</code>, the data ingestion code that targets the jellyfish ingestion service allows a <code>temp</code> to suppress another <code>temp</code>. Hence there are cases of <code>temp</code>s with many <em>many</em> layers of nesting inside the <code>suppressed</code> field either due to a bug in the code that splits <code>temp</code>s crossing basal schedule boundaries into segments or due to the actual presence of many closely sequential or edited <code>temp</code>s (such as may be scheduled by an open-source closed loop system). A rather extreme example of one of these can be observed in <a href="https://gist.github.com/darinkrauss/7a91115d0d3475e4b11e559bf6dcdcaf" target="_blank">this gist</a>. We advise to ignore anything in such a case that does not match the revised specification&#x2014;all but the top <code>suppressed</code> in the case of a <code>temp</code>, or two layers deep (potentially) with a <code>suspend</code> that suppresses a <code>temp</code>, which in turn suppresses a <code>scheduled</code>.</p>
 
                     
                     </section>
@@ -732,10 +732,10 @@
         </div>
 
         
-        <a href="../../../device-data/types/index.html" class="navigation navigation-prev " aria-label="Previous page: types"><i class="fa fa-angle-left"></i></a>
+        <a href="../../../device-data/types/basal/suppressed.html" class="navigation navigation-prev " aria-label="Previous page: the &quot;suppressed&quot; field"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../../device-data/types/basal/scheduled.html" class="navigation navigation-next " aria-label="Next page: scheduled"><i class="fa fa-angle-right"></i></a>
+        <a href="../../../device-data/types/bloodKetone.html" class="navigation navigation-next " aria-label="Next page: bloodKetone"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

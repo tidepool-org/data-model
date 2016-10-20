@@ -53,7 +53,7 @@
         data-chapter-title="temp"
         data-filepath="device-data/types/basal/temp.md"
         data-basepath="../../.."
-        data-revision="Wed Oct 12 2016 21:57:36 GMT+0200 (CEST)"
+        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
         data-innerlanguage="">
     
 
@@ -275,6 +275,21 @@
                             <b>1.6.1.5.</b>
                         
                         the &quot;suppressed&quot; field
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.6" data-path="device-data/types/basal/legacy-suppressed.html">
+            
+                
+                    <a href="../../../device-data/types/basal/legacy-suppressed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.6.1.6.</b>
+                        
+                        the legacy &quot;suppressed&quot; field
                     </a>
             
             
@@ -836,6 +851,44 @@ Range:
 Required:
     jellyfish: no (optional)
     platform: no (optional)
+</code></pre><p>May contain&#x2014;only!&#x2014;the following properties:</p>
+<ul>
+<li>type</li>
+<li>deliveryType</li>
+<li>rate</li>
+<li>scheduleName</li>
+</ul>
+<h4 id="suppressedtype">suppressed.type</h4>
+<p>[ingestion, storage, client] The string <code>basal</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+</code></pre><h4 id="suppresseddeliverytype">suppressed.deliveryType</h4>
+<p>[ingestion, storage, client] The string <code>scheduled</code>.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: yes
+</code></pre><h4 id="suppressedrate">suppressed.rate</h4>
+<p>[ingestion, storage, client] A floating point number &gt;= 0 representing the amount of insulin delivered in units per hour.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: yes
+    platform: yes
+Numerical type: Floating point value rounded to the appropriate significant figures for the device&apos;s precision.
+Range:
+    min: 0.0
+    max: 20.0
+</code></pre><h4 id="suppressedschedulename">suppressed.scheduleName</h4>
+<blockquote>
+<p>This field is <strong>optional</strong>.</p>
+</blockquote>
+<p>[ingestion, storage, client] A string: the name of the basal schedule.</p>
+<pre><code>QUICK SUMMARY
+Required:
+    jellyfish: no (optional)
+    platform: no (optional)
 </code></pre><!-- start editable commentary on suppressed -->
 <p>Depending on the data protocol, it is not always possible to keep track of what basal rate would have been in effect had a <code>temp</code> basal not been programmed by the user, but where this information is available, it should be provided in as much detail as possible as an embedded <code>basal</code> object as the value for the <code>suppressed</code> key on a <code>temp</code> basal.</p>
 <p>This object need only contain the bare minimum of information:</p>
@@ -846,6 +899,7 @@ Required:
 <li>the suppressed <a href="scheduled.html#rate"><code>rate</code></a> if relevant and available</li>
 </ul>
 <p>In particular, note that <em>no time-related fields such as <code>time</code>, <code>deviceTime</code>, or <code>duration</code> are expected to appear on a <code>suppressed</code> embedded basal rate event</em>. By definition, any values for time-related fields are identical to the parent <code>temp</code> basal object, and so it is redundant to include them.</p>
+<p>Properly tracking the <code>suppressed</code> basal information for a <code>temp</code> basal that crosses one or more basal schedule boundaries is a complex topic that requires <a href="suppressed.html">a longer explanation</a>.</p>
 <!-- end editable commentary on suppressed -->
 <hr>
 <h3 id="clockdriftoffset">clockDriftOffset</h3>
