@@ -53,7 +53,7 @@
         data-chapter-title="status"
         data-filepath="device-data/types/deviceEvent/status.md"
         data-basepath="../../.."
-        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
+        data-revision="Thu Oct 20 2016 06:16:49 GMT-0500 (CDT)"
         data-innerlanguage="">
     
 
@@ -803,7 +803,7 @@ Required:
     platform: no (optional)
 Numerical type: Integer value representing milliseconds.
 Range:
-    min: &gt; `duration`
+    min: &gt;= `duration`
     max: &lt; &#x221E;
 </code></pre><!-- start editable commentary on expectedDuration -->
 <p>The majority of insulin delivery devices do <em>not</em> provide an interface for scheduling suspensions of insulin delivery such that the insulin pump will automatically resume at the conclusion of the scheduled time period. However, the Insulet OmniPod insulin delivery system does provide an interface of this kind. It is thus only for an OmniPod system that it is possible - though still optional - for an <code>expectedDuration</code> field to appear. When this field is present, the value of <code>expectedDuration</code> is the original user-programmed duration for the suspension of insulin delivery, and the <code>duration</code> of the event will have a smaller value representing the <em>actual</em> elapsed time of the suspension, which must have been canceled by the user prior to its scheduled conclusion.</p>

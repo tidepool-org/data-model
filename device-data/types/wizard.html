@@ -53,7 +53,7 @@
         data-chapter-title="wizard"
         data-filepath="device-data/types/wizard.md"
         data-basepath="../.."
-        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
+        data-revision="Thu Oct 20 2016 06:16:49 GMT-0500 (CDT)"
         data-innerlanguage="">
     
 
@@ -816,10 +816,10 @@ Range:
     mmol/L: Floating point value representing a `mmol/L` value.
 Range:
     mg/dL:
-        min: &gt; `low` or `target`, whichever present
+        min: &gt;= `low` or `target`, whichever present
         max: 1000
     mmol/L:
-        min: &gt; `low` or `target`, whichever present
+        min: &gt;= `low` or `target`, whichever present
         max: 55.0
 </code></pre><h4 id="bgtargettarget">bgTarget.target</h4>
 <p>[ingestion, storage, client] An integer encoding the PWD&apos;s target blood glucose as a single value.</p>
@@ -840,11 +840,11 @@ Range:
     mmol/L: Floating point value representing a `mmol/L` value.
 Range:
     mg/dL:
-        min: `target` - this value &gt; 0
-        max: `target` + this value &lt;= 1000
+        min: 0
+        max: min(`target`, 1000 - `target`) such that `target`-`range` &gt;= 0 and `target`+`range` &lt;= 1000
     mmol/L:
-        min: `target` - this value &gt; 0.0
-        max: `target` + this value &lt;= 55.0
+        min: 0.0
+        max: min(`target`, 55.0 - `target`) such that `target`-`range` &gt;= 0.0 and `target`+`range` &lt;= 55.0
 </code></pre><h4 id="changelog-for-bgtarget">Changelog for <code>bgTarget</code></h4>
 <p><code>_schemaVersion</code> 2: The minimal <code>{target: [val]}</code> schema was added as valid to handle Tandem&apos;s <code>bgTarget</code> data.</p>
 <p><code>_schemaVersion</code> 2: The nonexistent (in currently handled devices) <code>{low: [val], target: [val], high: [val]}</code> schema was <em>removed</em>.</p>

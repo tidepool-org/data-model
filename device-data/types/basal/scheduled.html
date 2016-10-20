@@ -53,7 +53,7 @@
         data-chapter-title="scheduled"
         data-filepath="device-data/types/basal/scheduled.md"
         data-basepath="../../.."
-        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
+        data-revision="Thu Oct 20 2016 06:16:49 GMT-0500 (CDT)"
         data-innerlanguage="">
     
 
@@ -785,7 +785,7 @@ Required:
     platform: no (optional)
 Numerical type: Integer value representing milliseconds.
 Range:
-    min: &gt; `duration`
+    min: &gt;= `duration`
     max: 432000000
 </code></pre><!-- start editable commentary on expectedDuration -->
 <p>On a scheduled basal ingested through the legacy jellyfish ingestion service, <code>expectedDuration</code> should <em>never</em> be included on a <code>scheduled</code> basal event, but it may be added by jellyfish under circumstances where a new basal event results in truncation of the duration of the original <code>scheduled</code> basal; most commonly this new event is a <code>temp</code> or <code>suspend</code>, but it could be a <code>scheduled</code> if a user is, for example, switching from one to another schedule as the active basal schedule. See the examples in <a href="previous.html"><code>previous</code></a>.</p>

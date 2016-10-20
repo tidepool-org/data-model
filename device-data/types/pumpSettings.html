@@ -53,7 +53,7 @@
         data-chapter-title="pumpSettings"
         data-filepath="device-data/types/pumpSettings.md"
         data-basepath="../.."
-        data-revision="Wed Oct 19 2016 20:53:23 GMT-0700 (PDT)"
+        data-revision="Thu Oct 20 2016 06:16:49 GMT-0500 (CDT)"
         data-innerlanguage="">
     
 
@@ -826,10 +826,10 @@ Range:
     mmol/L: Floating point value representing a `mmol/L` value.
 Range:
     mg/dL:
-        min: &gt; `low` or `target`, whichever present
+        min: &gt;= `low` or `target`, whichever present
         max: 1000
     mmol/L:
-        min: &gt; `low` or `target`, whichever present
+        min: &gt;= `low` or `target`, whichever present
         max: 55.0
 </code></pre><h4 id="bgtargettarget">bgTarget.target</h4>
 <p>[ingestion, storage, client] An integer encoding the PWD&apos;s target blood glucose as a single value.</p>
@@ -850,11 +850,11 @@ Range:
     mmol/L: Floating point value representing a `mmol/L` value.
 Range:
     mg/dL:
-        min: `target` - this value &gt; 0
-        max: `target` + this value &lt;= 1000
+        min: 0
+        max: min(`target`, 1000 - `target`) such that `target`-`range` &gt;= 0 and `target`+`range` &lt;= 1000
     mmol/L:
-        min: `target` - this value &gt; 0.0
-        max: `target` + this value &lt;= 55.0
+        min: 0.0
+        max: min(`target`, 55.0 - `target`) such that `target`-`range` &gt;= 0.0 and `target`+`range` &lt;= 55.0
 </code></pre><h4 id="bgtargetstart">bgTarget.start</h4>
 <p>[ingestion, storage, client] An integer encoding a start time as milliseconds from the start of a twenty-four hour day.</p>
 <pre><code>QUICK SUMMARY
