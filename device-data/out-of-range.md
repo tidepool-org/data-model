@@ -1,6 +1,6 @@
 <!-- non-generated document! all areas editable -->
 
- ## Out of Range Value
+ ## Out of Range Values
  Blood glucose meters, ketone meters and Continuous Glucose Monitors have a range within which they
  can measure levels. When a reading falls outside of this range, we need a mechanism to show that we
  have received a reading, but that it is out of range.
