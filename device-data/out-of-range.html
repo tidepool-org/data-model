@@ -53,7 +53,7 @@
         data-chapter-title="out of range values"
         data-filepath="device-data/out-of-range.md"
         data-basepath=".."
-        data-revision="Thu Oct 20 2016 06:16:49 GMT-0500 (CDT)"
+        data-revision="Tue Feb 14 2017 11:06:08 GMT+1100 (AEDT)"
         data-innerlanguage="">
     
 
@@ -713,8 +713,92 @@
                     <section class="normal" id="section-">
                     
                         <!-- non-generated document! all areas editable -->
-<p>Coming soon!</p>
-<!-- TODO: document on out-of-range values, relevant especially to cbg, smbg, and bloodKetone records -->
+<h2 id="out-of-range-value">Out of Range Value</h2>
+<p> Blood glucose meters, ketone meters and Continuous Glucose Monitors have a range within which they
+ can measure levels. When a reading falls outside of this range, we need a mechanism to show that we
+ have received a reading, but that it is out of range.</p>
+<p> This is done by creating a <code>cbg</code>, <code>smbg</code> or <code>bloodKetone</code> reading with a <code>value</code> that is 1 unit
+ over (for a high reading) or 1 unit below (for a low reading) the range threshold, and then annotating
+ the reading.</p>
+<p>For example, for a low CGM reading for a device that displays in mg/dL with a low threshold of 40 mg/dL:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cbg&quot;</span>,
+  <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
+  <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">39</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-13T19:05:43&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;cf64b6f6-54af-4e8b-a432-08d53c2484d4&quot;</span>,
+  <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;da34f6f278984ae385c91cac6b91eff7&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-14T02:05:43.959Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>,
+  <span class="hljs-string">&quot;annotations&quot;</span>: [{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;bg/out-of-range&quot;</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;low&quot;</span>,
+    <span class="hljs-string">&quot;threshold&quot;</span>: <span class="hljs-number">40</span>,
+  }]
+}
+</code></pre>
+<p>Unlike all of the other data model types, the <code>out-of-range</code> annotation does not currently include a field for <code>units</code>.
+Because of this, when annotating <code>cbg</code> or <code>smbg</code> readings, the <code>threshold</code> should <strong>always</strong> be in <code>mg/dL</code>,
+even when the device displays readings in <code>mmol/L</code>.
+Although this an unfortunate oversight, the reason for this is that many devices store readings in mg/dL, even
+if they display readings in mmol/L. Even the example below is contrived, as we have not actually come across
+a device that does this.</p>
+<p>For <code>bloodKetone</code> readings, the <code>threshold</code> should be a value measured in <code>mmol/L</code>.<br>We acknowledge that this is inconvenient and inconsistent with the rest of our data model,
+and we hope to address it at some stage in the future.
+We intend to address this by adding a <code>units</code> field, similar to the field used in the <code>cbg</code>, <code>smbg</code> and <code>bloodKetone</code> data types.</p>
+<p>For example, for a high CGM reading for a device that displays in mmol/L with a high threshold of 23.0 mmol/L:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cbg&quot;</span>,
+  <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+  <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">23.035604162838963</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-13T19:05:43&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;cf64b6f6-54af-4e8b-a432-08d53c2484d4&quot;</span>,
+  <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;da34f6f278984ae385c91cac6b91eff7&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-14T02:05:43.959Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>,
+  <span class="hljs-string">&quot;annotations&quot;</span>: [{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;bg/out-of-range&quot;</span>,
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;high&quot;</span>,
+    <span class="hljs-string">&quot;threshold&quot;</span>: <span class="hljs-number">414</span>,
+  }]
+}
+</code></pre>
+<p>If the device (or the manufacturer) does not provide the exact threshold levels, then the <code>threshold</code>
+field should not be provided at all, and an additional <code>[datatype]/unknown-value</code> annotation should be
+provided.
+This is the case in our current Abbott Precision Xtra driver for ketone readings:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bloodKetone&quot;</span>,
+  <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+  <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">10.0</span>,
+  <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+  <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-13T19:05:43&quot;</span>,
+  <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;ae40651d-b8e7-428e-840f-bbb3e1132569&quot;</span>,
+  <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;55346384504b4b76b24c60a236448012&quot;</span>,
+  <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-14T02:05:43.500Z&quot;</span>,
+  <span class="hljs-string">&quot;timezoneOffset&quot;</span>: -<span class="hljs-number">420</span>,
+  <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>,
+  <span class="hljs-string">&quot;annotations&quot;</span>: [{
+      <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;ketone/out-of-range&quot;</span>,
+      <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;high&quot;</span>
+    },
+    {
+      <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;ketone/unknown-value&quot;</span>
+    }
+  ]
+}
+</code></pre>
+<p>In this instance, because the threshold was not known, we used a <code>value</code> that we knew was out of the meter&apos;s range.</p>
 
                     
                     </section>
