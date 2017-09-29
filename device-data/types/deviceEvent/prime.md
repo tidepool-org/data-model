@@ -87,7 +87,7 @@ Most commonly, `tubing` and `cannula` prime events will occur as a pair separate
 	Range:
 		cannula:
 			min: 0.0
-			max: 3.0
+			max: 10.0
 		tubing:
 			min: 0.0
 			max: 100.0

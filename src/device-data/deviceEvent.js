@@ -175,7 +175,7 @@ var schemas = {
         range: {
           cannula: {
             min: '0.0',
-            max: '3.0'
+            max: '10.0'
           },
           tubing: {
             min: '0.0',
