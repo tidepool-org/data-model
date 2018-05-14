@@ -466,102 +466,18 @@ See [common fields](../../common.md).
 {
 	"type": "cgmSettings",
 	"highAlerts": {
-		"enabled": false,
-		"level": 12.489182979852451,
+		"enabled": true,
+		"level": 10.82395858253879,
 		"snooze": 4500000
 	},
 	"lowAlerts": {
 		"enabled": true,
-		"level": 4.440598392836427,
-		"snooze": 3600000
-	},
-	"outOfRangeAlerts": {
-		"enabled": false,
-		"snooze": 1800000
-	},
-	"rateOfChangeAlerts": {
-		"fallRate": {
-			"enabled": false,
-			"rate": -0.055507479910455335
-		},
-		"riseRate": {
-			"enabled": false,
-			"rate": 0.11101495982091067
-		}
-	},
-	"transmitterId": "6C8A7",
-	"units": "mmol/L",
-	"clockDriftOffset": 0,
-	"conversionOffset": 0,
-	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-16T11:53:19",
-	"guid": "6590a33c-7fbe-4341-8b65-15742409a4bd",
-	"id": "ffb4e03b854b432aa7464822efd2ec84",
-	"time": "2016-06-16T18:53:19.226Z",
-	"timezoneOffset": -420,
-	"uploadId": "SampleUploadId"
-}
-```
-
-### example (ingestion)
-
-```json
-{
-	"type": "cgmSettings",
-	"highAlerts": {
-		"enabled": true,
-		"level": 235,
-		"snooze": 3600000
-	},
-	"lowAlerts": {
-		"enabled": true,
-		"level": 75,
-		"snooze": 1800000
-	},
-	"outOfRangeAlerts": {
-		"enabled": true,
-		"snooze": 1800000
-	},
-	"rateOfChangeAlerts": {
-		"fallRate": {
-			"enabled": true,
-			"rate": -1
-		},
-		"riseRate": {
-			"enabled": true,
-			"rate": 1
-		}
-	},
-	"transmitterId": "1596D",
-	"units": "mg/dL",
-	"clockDriftOffset": 0,
-	"conversionOffset": 0,
-	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-16T11:53:19",
-	"time": "2016-06-16T18:53:19.227Z",
-	"timezoneOffset": -420,
-	"uploadId": "SampleUploadId"
-}
-```
-
-### example (storage)
-
-```json
-{
-	"type": "cgmSettings",
-	"highAlerts": {
-		"enabled": false,
-		"level": 10.82395858253879,
-		"snooze": 5400000
-	},
-	"lowAlerts": {
-		"enabled": false,
-		"level": 4.440598392836427,
+		"level": 3.33044879462732,
 		"snooze": 1800000
 	},
 	"outOfRangeAlerts": {
 		"enabled": false,
-		"snooze": 3600000
+		"snooze": 1800000
 	},
 	"rateOfChangeAlerts": {
 		"fallRate": {
@@ -573,7 +489,91 @@ See [common fields](../../common.md).
 			"rate": 0.055507479910455335
 		}
 	},
-	"transmitterId": "8A46E",
+	"transmitterId": "C8E65",
+	"units": "mmol/L",
+	"clockDriftOffset": 0,
+	"conversionOffset": 0,
+	"deviceId": "DevId0987654321",
+	"deviceTime": "2018-05-14T18:17:07",
+	"guid": "6d15f48c-3734-4ad1-8f39-9b374f1d127f",
+	"id": "02ccebd2affc472d9b296d4f1f800dfd",
+	"time": "2018-05-14T08:17:07.560Z",
+	"timezoneOffset": 600,
+	"uploadId": "SampleUploadId"
+}
+```
+
+### example (ingestion)
+
+```json
+{
+	"type": "cgmSettings",
+	"highAlerts": {
+		"enabled": true,
+		"level": 185,
+		"snooze": 2700000
+	},
+	"lowAlerts": {
+		"enabled": true,
+		"level": 85,
+		"snooze": 900000
+	},
+	"outOfRangeAlerts": {
+		"enabled": false,
+		"snooze": 3600000
+	},
+	"rateOfChangeAlerts": {
+		"fallRate": {
+			"enabled": true,
+			"rate": -2
+		},
+		"riseRate": {
+			"enabled": false,
+			"rate": 2
+		}
+	},
+	"transmitterId": "BE61A",
+	"units": "mg/dL",
+	"clockDriftOffset": 0,
+	"conversionOffset": 0,
+	"deviceId": "DevId0987654321",
+	"deviceTime": "2018-05-14T18:17:07",
+	"time": "2018-05-14T08:17:07.561Z",
+	"timezoneOffset": 600,
+	"uploadId": "SampleUploadId"
+}
+```
+
+### example (storage)
+
+```json
+{
+	"type": "cgmSettings",
+	"highAlerts": {
+		"enabled": true,
+		"level": 10.268883783434237,
+		"snooze": 4500000
+	},
+	"lowAlerts": {
+		"enabled": true,
+		"level": 3.8855235937318735,
+		"snooze": 1800000
+	},
+	"outOfRangeAlerts": {
+		"enabled": false,
+		"snooze": 3600000
+	},
+	"rateOfChangeAlerts": {
+		"fallRate": {
+			"enabled": false,
+			"rate": -0.11101495982091067
+		},
+		"riseRate": {
+			"enabled": false,
+			"rate": 0.16652243973136602
+		}
+	},
+	"transmitterId": "E3250",
 	"units": "mmol/L",
 	"_active": true,
 	"_groupId": "abcdef",
@@ -581,13 +581,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-16T18:53:24.228Z",
+	"createdTime": "2018-05-14T08:17:12.561Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-16T11:53:19",
-	"guid": "473c3768-3b3a-40dc-acea-84bcede94bba",
-	"id": "854ba9ffbcfc4c759c32b40f01dec3f4",
-	"time": "2016-06-16T18:53:19.228Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:07",
+	"guid": "393c9563-705a-4832-b935-cbf23d759f77",
+	"id": "7cb8be46bb9447de8b4f5f90d1bd5486",
+	"time": "2018-05-14T08:17:07.561Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```

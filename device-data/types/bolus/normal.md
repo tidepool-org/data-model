@@ -248,16 +248,16 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 1.5,
-	"expectedNormal": 1.8,
+	"normal": 7.75,
+	"expectedNormal": 9.3,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:42",
-	"guid": "6082c713-15b9-4e42-99b8-84d8e7f18077",
-	"id": "bc29346b184d4d26aaf6d2c113430214",
-	"time": "2016-06-14T02:05:42.696Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:06",
+	"guid": "3645b635-e97a-410b-b866-5ccc8cb98cbf",
+	"id": "622cc9f88a61475f8a1290909ec56e5c",
+	"time": "2018-05-14T08:17:06.676Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -268,14 +268,14 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 3,
-	"expectedNormal": 3.6,
+	"normal": 4.5,
+	"expectedNormal": 5.4,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:42",
-	"time": "2016-06-14T02:05:42.697Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:06",
+	"time": "2018-05-14T08:17:06.676Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -286,21 +286,21 @@ See [common fields](../../common.md).
 {
 	"type": "bolus",
 	"subType": "normal",
-	"normal": 2.25,
-	"expectedNormal": 2.7,
+	"normal": 8.25,
+	"expectedNormal": 9.9,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:47.697Z",
+	"createdTime": "2018-05-14T08:17:11.676Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:42",
-	"guid": "3b6caef1-40f9-4e97-b360-d6459d2a35c4",
-	"id": "f0c0b6b37f0743da99278a49abcde303",
-	"time": "2016-06-14T02:05:42.697Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:06",
+	"guid": "5f7a9c48-ec16-449c-9597-2cef1f679096",
+	"id": "8480f23a08484c91a7436475ee40c0c6",
+	"time": "2018-05-14T08:17:06.676Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```

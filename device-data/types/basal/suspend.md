@@ -381,22 +381,22 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "suspend",
-	"duration": 50400000,
-	"expectedDuration": 60480000,
+	"duration": 10800000,
+	"expectedDuration": 12960000,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
 		"scheduleName": "Stress",
-		"rate": 1.5
+		"rate": 1.05
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"guid": "a2eae436-70d8-41d2-99ff-6fe8b15c8324",
-	"id": "638b66037aa94ef38605a0b87ac797e5",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"guid": "f9623fae-217c-47e1-a49c-85b7a9bca8ac",
+	"id": "ba1027905672484babe56579f9291204",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -407,20 +407,20 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "suspend",
-	"duration": 7200000,
-	"expectedDuration": 8640000,
+	"duration": 86400000,
+	"expectedDuration": 103680000,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Stress",
-		"rate": 1.45
+		"scheduleName": "Very Active",
+		"rate": 1.55
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -431,13 +431,13 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "suspend",
-	"duration": 64800000,
-	"expectedDuration": 77760000,
+	"duration": 34200000,
+	"expectedDuration": 41040000,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Weekend",
-		"rate": 1.1
+		"scheduleName": "Weekday",
+		"rate": 1.525
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -445,13 +445,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:00:05.000Z",
+	"createdTime": "2018-05-14T08:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"guid": "9f7839c5-c7f6-4a36-8faa-6e075dbf6be1",
-	"id": "8a39708a69a14bb9a9b5b684b30ad807",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"guid": "f96df9f8-40f4-4f05-a4d4-c27af663ec2e",
+	"id": "76b597d3d2354902b6dcd924d58fbd37",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```

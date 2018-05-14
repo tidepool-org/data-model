@@ -259,17 +259,17 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "smbg",
-	"subType": "linked",
+	"subType": "manual",
 	"units": "mmol/L",
-	"value": 13.044257778957004,
+	"value": 2.331314156239124,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"guid": "e98c9666-83eb-44d7-84f2-b974fe8710cb",
-	"id": "44d0336b10b54a4eb23f8bf82a9f391b",
-	"time": "2016-06-14T02:05:45.958Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:09",
+	"guid": "2e0f1338-1537-414b-baf7-3827b6185f23",
+	"id": "d333e9c6af694b63bb2c2cf3595acc65",
+	"time": "2018-05-14T08:17:09.177Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -281,13 +281,13 @@ See [common fields](../common.md).
 	"type": "smbg",
 	"subType": "manual",
 	"units": "mg/dL",
-	"value": 226,
+	"value": 214,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"time": "2016-06-14T02:05:45.959Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:09",
+	"time": "2018-05-14T08:17:09.177Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -299,20 +299,20 @@ See [common fields](../common.md).
 	"type": "smbg",
 	"subType": "linked",
 	"units": "mmol/L",
-	"value": 3.0529113950750433,
+	"value": 14.0433924173452,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:50.959Z",
+	"createdTime": "2018-05-14T08:17:14.177Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"guid": "86638a5e-3e92-4442-b9f9-2e18ea1114de",
-	"id": "7ce31ed344524075ab28a671e5e1d7a9",
-	"time": "2016-06-14T02:05:45.959Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:09",
+	"guid": "2bb717e7-af53-49b1-94b0-1d93c527d9bf",
+	"id": "a4f3f4bce5724070bb1bd9a99ed88d35",
+	"time": "2018-05-14T08:17:09.177Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```

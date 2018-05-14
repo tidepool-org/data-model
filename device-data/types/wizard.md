@@ -573,29 +573,30 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 2.442329116060035,
+	"bgInput": 2.109284236597303,
 	"bgTarget": {
-		"target": 5.550747991045533
+		"target": 5.82828539059781,
+		"range": 1.3876869977613833
 	},
-	"bolus": "6b58fe5558c54e86aea17eba01e52271",
-	"carbInput": 100,
-	"insulinCarbRatio": 24,
-	"insulinOnBoard": 19.156,
-	"insulinSensitivity": 45,
+	"bolus": "2eda6697f3ed430bb2d8b7c7a124fb13",
+	"carbInput": 17,
+	"insulinCarbRatio": 19,
+	"insulinOnBoard": 21.949,
+	"insulinSensitivity": 1.831746837045026,
 	"recommended": {
-		"carb": 4.25,
-		"correction": 0,
+		"carb": 1,
+		"correction": -2.75,
 		"net": 0
 	},
 	"units": "mmol/L",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:46",
-	"guid": "a2225d0d-d81b-4a2b-8bfb-5a079ffdf3ef",
-	"id": "10d8f3811d3b4835b4bacbdc92ca951c",
-	"time": "2016-06-14T02:05:46.171Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:09",
+	"guid": "757cdf1d-516d-47a3-87d3-3d4e8b71504f",
+	"id": "09eb73043377472f82b2baf7adfdbc50",
+	"time": "2018-05-14T08:17:09.353Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -605,43 +606,40 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 376,
+	"bgInput": 392,
 	"bgTarget": {
 		"target": 95,
-		"range": 25
+		"range": 15
 	},
 	"bolus": {
 		"type": "bolus",
-		"subType": "dual/square",
-		"normal": 4,
-		"extended": 5.5,
-		"expectedExtended": 8.25,
-		"duration": 68400000,
-		"expectedDuration": 102600000,
+		"subType": "normal",
+		"normal": 8,
+		"expectedNormal": 9.6,
 		"clockDriftOffset": 0,
 		"conversionOffset": 0,
 		"deviceId": "DevId0987654321",
-		"deviceTime": "2016-06-13T19:05:46",
-		"time": "2016-06-14T02:05:46.173Z",
-		"timezoneOffset": -420,
+		"deviceTime": "2018-05-14T18:17:09",
+		"time": "2018-05-14T08:17:09.353Z",
+		"timezoneOffset": 600,
 		"uploadId": "SampleUploadId"
 	},
-	"carbInput": 46,
-	"insulinCarbRatio": 15,
-	"insulinOnBoard": 22.525,
-	"insulinSensitivity": 61,
+	"carbInput": 137,
+	"insulinCarbRatio": 13,
+	"insulinOnBoard": 24.254,
+	"insulinSensitivity": 52,
 	"recommended": {
-		"carb": 3,
-		"correction": 4.25,
+		"carb": 10.5,
+		"correction": 5.5,
 		"net": 0
 	},
 	"units": "mg/dL",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:46",
-	"time": "2016-06-14T02:05:46.173Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:09",
+	"time": "2018-05-14T08:17:09.353Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -651,19 +649,20 @@ See [common fields](../common.md).
 ```json
 {
 	"type": "wizard",
-	"bgInput": 11.157003462001523,
+	"bgInput": 16.152676653942503,
 	"bgTarget": {
-		"target": 6.383360189702364
+		"low": 3.6079861941795968,
+		"high": 6.938434988806917
 	},
-	"bolus": "37b840b5f2f64a34bfd2e94140cf1709",
-	"carbInput": 115,
-	"insulinCarbRatio": 22,
-	"insulinOnBoard": 4.952,
-	"insulinSensitivity": 40,
+	"bolus": "22239d4d592b48ae920b28971cceb48b",
+	"carbInput": 57,
+	"insulinCarbRatio": 24,
+	"insulinOnBoard": 24.265,
+	"insulinSensitivity": 4.329583433015516,
 	"recommended": {
-		"carb": 5.25,
-		"correction": 0.25,
-		"net": 0.5
+		"carb": 2.5,
+		"correction": 2.25,
+		"net": 0
 	},
 	"units": "mmol/L",
 	"_active": true,
@@ -672,15 +671,13 @@ See [common fields](../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:51.174Z",
+	"createdTime": "2018-05-14T08:17:14.353Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:46",
-	"guid": "26798a81-12db-4878-8bb2-274bcc7576f1",
-	"id": "2586a20c573f4f7eb71c5a6ecda9f740",
-	"time": "2016-06-14T02:05:46.174Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:09",
+	"guid": "18d90ea0-5915-4e95-a8b2-cb22819ce696",
+	"id": "087c94ccdae84eb5a76b8205a244ec6b",
+	"time": "2018-05-14T08:17:09.353Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
-
-[^a]: If one wishes to be pedantic, the units for `insulinSensitivity` are technically `md/dL/u` or `mmol/L/u` since ISF is a ratio of "points" of blood glucose *per unit* of insulin.

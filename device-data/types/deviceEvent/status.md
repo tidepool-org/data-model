@@ -352,20 +352,20 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 3600000,
-	"expectedDuration": 4320000,
+	"duration": 64800000,
+	"expectedDuration": 77760000,
 	"reason": {
 		"suspended": "automatic",
-		"resumed": "automatic"
+		"resumed": "manual"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"guid": "08aa9d8f-d9df-4263-a178-68fbcdd066ef",
-	"id": "0380cf9a82ea4fe2b044e71a9f086382",
-	"time": "2016-06-14T02:05:45.320Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:08",
+	"guid": "9f38f6b2-42b0-4194-958c-84efaeb18f3f",
+	"id": "eb9ed08320f645c787d892bb75eb7bfd",
+	"time": "2018-05-14T08:17:08.634Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -377,8 +377,8 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 48600000,
-	"expectedDuration": 58320000,
+	"duration": 77400000,
+	"expectedDuration": 92880000,
 	"reason": {
 		"suspended": "manual",
 		"resumed": "manual"
@@ -386,9 +386,9 @@ See [common fields](../../common.md).
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"time": "2016-06-14T02:05:45.321Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:08",
+	"time": "2018-05-14T08:17:08.635Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -400,8 +400,8 @@ See [common fields](../../common.md).
 	"type": "deviceEvent",
 	"subType": "status",
 	"status": "suspended",
-	"duration": 32400000,
-	"expectedDuration": 38880000,
+	"duration": 23400000,
+	"expectedDuration": 28080000,
 	"reason": {
 		"suspended": "automatic",
 		"resumed": "manual"
@@ -412,15 +412,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:50.321Z",
+	"createdTime": "2018-05-14T08:17:13.635Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:45",
-	"guid": "ec271750-46cc-429d-85c3-0488304945ad",
-	"id": "71845a4f9f1a4cb188552836286238c1",
-	"time": "2016-06-14T02:05:45.321Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:08",
+	"guid": "a0e4a309-e845-4912-a112-5c71e23da76b",
+	"id": "344abda0c652428a8fab0b5fe3153e54",
+	"time": "2018-05-14T08:17:08.635Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
-
-[^a]: Specifically determining whether or not a temp basal that was in effect before the automatic suspension is resumed or not (assuming it's programmed duration would have it still be in effect). If the user did not interact with any of the alerts during the automatic suspension, the temp basal is *not* resumed. If the user did acknowledge the automatic suspension, however, a temp basal that would still be in effect *is* resumed at the conclusion of two hours of suspension. This is explained on pages 124-125 of [the Medtronic 530G user manual](http://www.accessdata.fda.gov/cdrh_docs/pdf12/p120010c.pdf 'Medtronic 530G user manual').

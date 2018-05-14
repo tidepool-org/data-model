@@ -406,24 +406,24 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 55800000,
-	"expectedDuration": 66960000,
-	"percent": 0.3,
-	"rate": 0.5025,
+	"duration": 28800000,
+	"expectedDuration": 34560000,
+	"percent": 0.75,
+	"rate": 0.1875,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
 		"scheduleName": "Weekend",
-		"rate": 1.675
+		"rate": 0.25
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"guid": "1e43fec0-dc78-4424-b131-76ad6e3b2c00",
-	"id": "a11fbc04aabf49ec8dfc5a9e9704fbda",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"guid": "a58d9efb-3f0d-41d3-a711-edf890a3062e",
+	"id": "e52976685fc94f7a9d0272fdd5c63fa0",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -434,22 +434,22 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 45000000,
-	"expectedDuration": 54000000,
-	"percent": 0.4,
-	"rate": 0.76,
+	"duration": 50400000,
+	"expectedDuration": 60480000,
+	"percent": 0.65,
+	"rate": 1.2025000000000001,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Weekend",
-		"rate": 1.9
+		"scheduleName": "Stress",
+		"rate": 1.85
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -460,15 +460,15 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "temp",
-	"duration": 43200000,
-	"expectedDuration": 51840000,
-	"percent": 0.85,
-	"rate": 0.8075,
+	"duration": 82800000,
+	"expectedDuration": 99360000,
+	"percent": 0.75,
+	"rate": 0.07500000000000001,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
-		"scheduleName": "Stress",
-		"rate": 0.95
+		"scheduleName": "Very Active",
+		"rate": 0.1
 	},
 	"_active": true,
 	"_groupId": "abcdef",
@@ -476,13 +476,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:00:05.000Z",
+	"createdTime": "2018-05-14T08:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"guid": "94109d1a-349b-4da7-b6c2-1b0540110884",
-	"id": "e2bc519b852841fb890a034909bee9ee",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"guid": "7a504ee3-17a5-4ec8-b157-c1a985731192",
+	"id": "e3b4654d90664fca9a30c20ff19c93fd",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```

@@ -224,15 +224,15 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "921bab64eb1a492ca8af11ab4f24a832",
+	"status": "e0c1998c36d643d49d09047833064314",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:22:56",
-	"guid": "14ac812f-96f2-45e6-9a20-aa5d6d8acd26",
-	"id": "d14ed2262335498193154dbebf3ed0a7",
-	"time": "2016-06-14T02:22:56.459Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:08",
+	"guid": "075b8a5e-4404-4987-8df8-54d2fed20c09",
+	"id": "8ce74bae4d294f058bbf96102b6b44f9",
+	"time": "2018-05-14T08:17:08.453Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -247,26 +247,26 @@ See [common fields](../../common.md).
 		"type": "deviceEvent",
 		"subType": "status",
 		"status": "suspended",
-		"duration": 30600000,
-		"expectedDuration": 36720000,
+		"duration": 64800000,
+		"expectedDuration": 77760000,
 		"reason": {
-			"suspended": "automatic",
-			"resumed": "automatic"
+			"suspended": "manual",
+			"resumed": "manual"
 		},
 		"clockDriftOffset": 0,
 		"conversionOffset": 0,
 		"deviceId": "DevId0987654321",
-		"deviceTime": "2016-06-13T19:22:56",
-		"time": "2016-06-14T02:22:56.461Z",
-		"timezoneOffset": -420,
+		"deviceTime": "2018-05-14T18:17:08",
+		"time": "2018-05-14T08:17:08.453Z",
+		"timezoneOffset": 600,
 		"uploadId": "SampleUploadId"
 	},
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:22:56",
-	"time": "2016-06-14T02:22:56.460Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:08",
+	"time": "2018-05-14T08:17:08.453Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -277,20 +277,20 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "reservoirChange",
-	"status": "fe26e772de0b4472919349c12820fda4",
+	"status": "e50c3da3a35e47f2a8ef769406a0805d",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:23:01.461Z",
+	"createdTime": "2018-05-14T08:17:13.453Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:22:56",
-	"guid": "fa849fa5-6ece-43a0-a7b1-2aadbfab469a",
-	"id": "4b8be50c2d5d441399c7495128231f97",
-	"time": "2016-06-14T02:22:56.461Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:08",
+	"guid": "96013c51-c2f5-4557-ad0b-479151cf0512",
+	"id": "6e3ea4734056463f84f6be47621d21d7",
+	"time": "2018-05-14T08:17:08.453Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```

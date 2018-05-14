@@ -332,17 +332,17 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 61200000,
-	"rate": 0.95,
-	"scheduleName": "Weekend",
+	"duration": 84600000,
+	"rate": 1.45,
+	"scheduleName": "Very Active",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"guid": "3483ef73-2eb1-40d0-accd-0fae2d812ebf",
-	"id": "dafca36d61394a5b93e5975ac6e6ba29",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"guid": "9d161801-2607-4cb6-b4f8-457159c7786c",
+	"id": "30f76219248d474fa7025b12f0e4b136",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -353,15 +353,15 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 61200000,
-	"rate": 0.45,
-	"scheduleName": "Stress",
+	"duration": 82800000,
+	"rate": 0.025,
+	"scheduleName": "Weekend",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -372,8 +372,8 @@ See [common fields](../../common.md).
 {
 	"type": "basal",
 	"deliveryType": "scheduled",
-	"duration": 7200000,
-	"rate": 1.8,
+	"duration": 79200000,
+	"rate": 1.175,
 	"scheduleName": "Vacation",
 	"_active": true,
 	"_groupId": "abcdef",
@@ -381,15 +381,13 @@ See [common fields](../../common.md).
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:00:05.000Z",
+	"createdTime": "2018-05-14T08:00:05.000Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:00:00",
-	"guid": "d829dab2-46e8-4977-bca3-de2a28269f2c",
-	"id": "e499052181d94f3c9353822453be0d1f",
-	"time": "2016-06-14T02:00:00.000Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:00:00",
+	"guid": "05d3bdbd-3ad3-4762-9a7b-2e8e27a601c3",
+	"id": "33f00679ddf440ec95055114162d4821",
+	"time": "2018-05-14T08:00:00.000Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
-
-[^a]: See, for example, [this chrome-uploader commit](https://github.com/tidepool-org/chrome-uploader/pull/95/commits/2c2bcf2db3e609c703a65967399784dcd47e49af 'GitHub: chrome-uploader').
