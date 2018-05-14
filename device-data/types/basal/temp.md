@@ -437,7 +437,7 @@ See [common fields](../../common.md).
 	"duration": 50400000,
 	"expectedDuration": 60480000,
 	"percent": 0.65,
-	"rate": 1.2025000000000001,
+	"rate": 1.2025,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
@@ -463,7 +463,7 @@ See [common fields](../../common.md).
 	"duration": 82800000,
 	"expectedDuration": 99360000,
 	"percent": 0.75,
-	"rate": 0.07500000000000001,
+	"rate": 0.075,
 	"suppressed": {
 		"type": "basal",
 		"deliveryType": "scheduled",
