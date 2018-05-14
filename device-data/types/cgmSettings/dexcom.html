@@ -222,7 +222,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6.1.2" data-path="../basal/temp.html">
+        <li class="chapter " data-level="1.2.6.1.2" data-path="../basal/automated.html">
+            
+                <a href="../basal/automated.html">
+            
+                    
+                    automated
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.1.3" data-path="../basal/temp.html">
             
                 <a href="../basal/temp.html">
             
@@ -235,7 +248,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6.1.3" data-path="../basal/suspend.html">
+        <li class="chapter " data-level="1.2.6.1.4" data-path="../basal/suspend.html">
             
                 <a href="../basal/suspend.html">
             
@@ -248,7 +261,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6.1.4" data-path="../basal/previous.html">
+        <li class="chapter " data-level="1.2.6.1.5" data-path="../basal/previous.html">
             
                 <a href="../basal/previous.html">
             
@@ -261,7 +274,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6.1.5" data-path="../basal/suppressed.html">
+        <li class="chapter " data-level="1.2.6.1.6" data-path="../basal/suppressed.html">
             
                 <a href="../basal/suppressed.html">
             
@@ -274,7 +287,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6.1.6" data-path="../basal/legacy-suppressed.html">
+        <li class="chapter " data-level="1.2.6.1.7" data-path="../basal/legacy-suppressed.html">
             
                 <a href="../basal/legacy-suppressed.html">
             
@@ -989,96 +1002,18 @@ Range: Must be one of:
 <pre><code class="lang-json">{
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cgmSettings&quot;</span>,
     <span class="hljs-string">&quot;highAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
-        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">12.489182979852451</span>,
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">10.82395858253879</span>,
         <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">4500000</span>
     },
     <span class="hljs-string">&quot;lowAlerts&quot;</span>: {
         <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">4.440598392836427</span>,
-        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">3600000</span>
-    },
-    <span class="hljs-string">&quot;outOfRangeAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
-        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
-    },
-    <span class="hljs-string">&quot;rateOfChangeAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;fallRate&quot;</span>: {
-            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
-            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">-0.055507479910455335</span>
-        },
-        <span class="hljs-string">&quot;riseRate&quot;</span>: {
-            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
-            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.11101495982091067</span>
-        }
-    },
-    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;6C8A7&quot;</span>,
-    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
-    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-16T11:53:19&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;6590a33c-7fbe-4341-8b65-15742409a4bd&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;ffb4e03b854b432aa7464822efd2ec84&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-16T18:53:19.226Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: <span class="hljs-number">-420</span>,
-    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
-}
-</code></pre>
-<h3 id="example-ingestion">example (ingestion)</h3>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cgmSettings&quot;</span>,
-    <span class="hljs-string">&quot;highAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">235</span>,
-        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">3600000</span>
-    },
-    <span class="hljs-string">&quot;lowAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">75</span>,
-        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
-    },
-    <span class="hljs-string">&quot;outOfRangeAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
-    },
-    <span class="hljs-string">&quot;rateOfChangeAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;fallRate&quot;</span>: {
-            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
-            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">-1</span>
-        },
-        <span class="hljs-string">&quot;riseRate&quot;</span>: {
-            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
-            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">1</span>
-        }
-    },
-    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;1596D&quot;</span>,
-    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
-    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-16T11:53:19&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-16T18:53:19.227Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: <span class="hljs-number">-420</span>,
-    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
-}
-</code></pre>
-<h3 id="example-storage">example (storage)</h3>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cgmSettings&quot;</span>,
-    <span class="hljs-string">&quot;highAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
-        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">10.82395858253879</span>,
-        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">5400000</span>
-    },
-    <span class="hljs-string">&quot;lowAlerts&quot;</span>: {
-        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
-        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">4.440598392836427</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">3.33044879462732</span>,
         <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
     },
     <span class="hljs-string">&quot;outOfRangeAlerts&quot;</span>: {
         <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
-        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">3600000</span>
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
     },
     <span class="hljs-string">&quot;rateOfChangeAlerts&quot;</span>: {
         <span class="hljs-string">&quot;fallRate&quot;</span>: {
@@ -1090,7 +1025,85 @@ Range: Must be one of:
             <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.055507479910455335</span>
         }
     },
-    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;8A46E&quot;</span>,
+    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;C8E65&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2018-05-14T18:17:07&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;6d15f48c-3734-4ad1-8f39-9b374f1d127f&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;02ccebd2affc472d9b296d4f1f800dfd&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2018-05-14T08:17:07.560Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: <span class="hljs-number">600</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="example-ingestion">example (ingestion)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cgmSettings&quot;</span>,
+    <span class="hljs-string">&quot;highAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">185</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">2700000</span>
+    },
+    <span class="hljs-string">&quot;lowAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">85</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">900000</span>
+    },
+    <span class="hljs-string">&quot;outOfRangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">3600000</span>
+    },
+    <span class="hljs-string">&quot;rateOfChangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;fallRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">-2</span>
+        },
+        <span class="hljs-string">&quot;riseRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">2</span>
+        }
+    },
+    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;BE61A&quot;</span>,
+    <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mg/dL&quot;</span>,
+    <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2018-05-14T18:17:07&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2018-05-14T08:17:07.561Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: <span class="hljs-number">600</span>,
+    <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
+}
+</code></pre>
+<h3 id="example-storage">example (storage)</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cgmSettings&quot;</span>,
+    <span class="hljs-string">&quot;highAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">10.268883783434237</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">4500000</span>
+    },
+    <span class="hljs-string">&quot;lowAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;level&quot;</span>: <span class="hljs-number">3.8855235937318735</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">1800000</span>
+    },
+    <span class="hljs-string">&quot;outOfRangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-string">&quot;snooze&quot;</span>: <span class="hljs-number">3600000</span>
+    },
+    <span class="hljs-string">&quot;rateOfChangeAlerts&quot;</span>: {
+        <span class="hljs-string">&quot;fallRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">-0.11101495982091067</span>
+        },
+        <span class="hljs-string">&quot;riseRate&quot;</span>: {
+            <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;rate&quot;</span>: <span class="hljs-number">0.16652243973136602</span>
+        }
+    },
+    <span class="hljs-string">&quot;transmitterId&quot;</span>: <span class="hljs-string">&quot;E3250&quot;</span>,
     <span class="hljs-string">&quot;units&quot;</span>: <span class="hljs-string">&quot;mmol/L&quot;</span>,
     <span class="hljs-string">&quot;_active&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">&quot;_groupId&quot;</span>: <span class="hljs-string">&quot;abcdef&quot;</span>,
@@ -1098,13 +1111,13 @@ Range: Must be one of:
     <span class="hljs-string">&quot;_version&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;clockDriftOffset&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;conversionOffset&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2016-06-16T18:53:24.228Z&quot;</span>,
+    <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2018-05-14T08:17:12.561Z&quot;</span>,
     <span class="hljs-string">&quot;deviceId&quot;</span>: <span class="hljs-string">&quot;DevId0987654321&quot;</span>,
-    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2016-06-16T11:53:19&quot;</span>,
-    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;473c3768-3b3a-40dc-acea-84bcede94bba&quot;</span>,
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;854ba9ffbcfc4c759c32b40f01dec3f4&quot;</span>,
-    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2016-06-16T18:53:19.228Z&quot;</span>,
-    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: <span class="hljs-number">-420</span>,
+    <span class="hljs-string">&quot;deviceTime&quot;</span>: <span class="hljs-string">&quot;2018-05-14T18:17:07&quot;</span>,
+    <span class="hljs-string">&quot;guid&quot;</span>: <span class="hljs-string">&quot;393c9563-705a-4832-b935-cbf23d759f77&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;7cb8be46bb9447de8b4f5f90d1bd5486&quot;</span>,
+    <span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2018-05-14T08:17:07.561Z&quot;</span>,
+    <span class="hljs-string">&quot;timezoneOffset&quot;</span>: <span class="hljs-number">600</span>,
     <span class="hljs-string">&quot;uploadId&quot;</span>: <span class="hljs-string">&quot;SampleUploadId&quot;</span>
 }
 </code></pre>
@@ -1151,7 +1164,7 @@ Range: Must be one of:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Dexcom","level":"1.2.6.5.1","depth":4,"next":{"title":"deviceEvent","level":"1.2.6.6","depth":3,"path":"device-data/types/deviceEvent/README.md","ref":"device-data/types/deviceEvent/README.md","articles":[{"title":"alarm","level":"1.2.6.6.1","depth":4,"path":"device-data/types/deviceEvent/alarm.md","ref":"device-data/types/deviceEvent/alarm.md","articles":[]},{"title":"calibration","level":"1.2.6.6.2","depth":4,"path":"device-data/types/deviceEvent/calibration.md","ref":"device-data/types/deviceEvent/calibration.md","articles":[]},{"title":"prime","level":"1.2.6.6.3","depth":4,"path":"device-data/types/deviceEvent/prime.md","ref":"device-data/types/deviceEvent/prime.md","articles":[]},{"title":"reservoirChange","level":"1.2.6.6.4","depth":4,"path":"device-data/types/deviceEvent/reservoirChange.md","ref":"device-data/types/deviceEvent/reservoirChange.md","articles":[]},{"title":"status","level":"1.2.6.6.5","depth":4,"path":"device-data/types/deviceEvent/status.md","ref":"device-data/types/deviceEvent/status.md","articles":[]},{"title":"timeChange","level":"1.2.6.6.6","depth":4,"path":"device-data/types/deviceEvent/timeChange.md","ref":"device-data/types/deviceEvent/timeChange.md","articles":[]},{"title":"the \"previous\" field","level":"1.2.6.6.7","depth":4,"path":"device-data/types/deviceEvent/previous.md","ref":"device-data/types/deviceEvent/previous.md","articles":[]}]},"previous":{"title":"cgmSettings","level":"1.2.6.5","depth":3,"path":"device-data/types/cgmSettings/README.md","ref":"device-data/types/cgmSettings/README.md","articles":[{"title":"Dexcom","level":"1.2.6.5.1","depth":4,"path":"device-data/types/cgmSettings/dexcom.md","ref":"device-data/types/cgmSettings/dexcom.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"device-data/types/cgmSettings/dexcom.md","mtime":"2017-07-10T07:48:57.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-10T10:30:55.128Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Dexcom","level":"1.2.6.5.1","depth":4,"next":{"title":"deviceEvent","level":"1.2.6.6","depth":3,"path":"device-data/types/deviceEvent/README.md","ref":"device-data/types/deviceEvent/README.md","articles":[{"title":"alarm","level":"1.2.6.6.1","depth":4,"path":"device-data/types/deviceEvent/alarm.md","ref":"device-data/types/deviceEvent/alarm.md","articles":[]},{"title":"calibration","level":"1.2.6.6.2","depth":4,"path":"device-data/types/deviceEvent/calibration.md","ref":"device-data/types/deviceEvent/calibration.md","articles":[]},{"title":"prime","level":"1.2.6.6.3","depth":4,"path":"device-data/types/deviceEvent/prime.md","ref":"device-data/types/deviceEvent/prime.md","articles":[]},{"title":"reservoirChange","level":"1.2.6.6.4","depth":4,"path":"device-data/types/deviceEvent/reservoirChange.md","ref":"device-data/types/deviceEvent/reservoirChange.md","articles":[]},{"title":"status","level":"1.2.6.6.5","depth":4,"path":"device-data/types/deviceEvent/status.md","ref":"device-data/types/deviceEvent/status.md","articles":[]},{"title":"timeChange","level":"1.2.6.6.6","depth":4,"path":"device-data/types/deviceEvent/timeChange.md","ref":"device-data/types/deviceEvent/timeChange.md","articles":[]},{"title":"the \"previous\" field","level":"1.2.6.6.7","depth":4,"path":"device-data/types/deviceEvent/previous.md","ref":"device-data/types/deviceEvent/previous.md","articles":[]}]},"previous":{"title":"cgmSettings","level":"1.2.6.5","depth":3,"path":"device-data/types/cgmSettings/README.md","ref":"device-data/types/cgmSettings/README.md","articles":[{"title":"Dexcom","level":"1.2.6.5.1","depth":4,"path":"device-data/types/cgmSettings/dexcom.md","ref":"device-data/types/cgmSettings/dexcom.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"device-data/types/cgmSettings/dexcom.md","mtime":"2018-05-14T09:52:17.951Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-05-14T09:52:36.178Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
