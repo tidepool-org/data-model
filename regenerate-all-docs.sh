@@ -3,6 +3,7 @@
 cd bin/
 
 ./docTemplateGenerator.js basal --subType scheduled
+./docTemplateGenerator.js basal --subType automated
 ./docTemplateGenerator.js basal --subType temp
 ./docTemplateGenerator.js basal --subType suspend
 

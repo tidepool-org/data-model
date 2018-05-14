@@ -25,6 +25,7 @@ var common = require('./common');
 
 var DELIVERY_TYPES = {
   scheduled: 'scheduled',
+  automated: 'automated',
   temp: 'temp',
   suspend: 'suspend'
 };
@@ -131,6 +132,63 @@ var schemas = {
         }
       },
       changelog: [common.changeLog.madeOptional('scheduleName', 2)]
+    }
+  },
+  automated: {
+    deliveryType: {
+      instance: DELIVERY_TYPES.automated,
+      summary: {
+        description: common.propTypes.stringValue(DELIVERY_TYPES.automated),
+        required: {
+          jellyfish: null,
+          platform: true
+        }
+      }
+    },
+    duration: {
+      instance: common.duration,
+      summary: {
+        description: common.propTypes.OPTIONAL_JELLYFISH_REQUIRED + common.propTypes.duration(),
+        required: {
+          jellyfish: null,
+          platform: true
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: 0,
+          max: 432000000
+        }
+      }
+    },
+    expectedDuration: {
+      instance: 0,
+      summary: {
+        description: common.propTypes.OPTIONAL + common.propTypes.expectedDurationBasal(),
+        required: {
+          jellyfish: null,
+          platform: false
+        },
+        numericalType: common.numericalTypes.INTEGER_MS,
+        range: {
+          min: '>= `duration`',
+          max: 86400000
+        }
+      },
+      changelog: [common.changeLog.plannedImplementation('expectedDuration')]
+    },
+    rate: {
+      instance: common.basalRateValue,
+      summary: common.basalRateSummary
+    },
+    scheduleName: {
+      instance: common.SCHEDULE_NAMES,
+      summary: {
+        description: common.propTypes.OPTIONAL + '[ingestion, storage, client] A string: the name of the basal schedule.',
+        required: {
+          jellyfish: null,
+          platform: false
+        }
+      }
     }
   },
   temp: {
