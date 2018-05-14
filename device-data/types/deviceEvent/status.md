@@ -422,3 +422,11 @@ See [common fields](../../common.md).
 	"uploadId": "SampleUploadId"
 }
 ```
+
+* * * * *
+
+### footnotes
+
+<!-- start editable commentary on footnotes -->
+[^a]: Specifically determining whether or not a temp basal that was in effect before the automatic suspension is resumed or not (assuming it's programmed duration would have it still be in effect). If the user did not interact with any of the alerts during the automatic suspension, the temp basal is *not* resumed. If the user did acknowledge the automatic suspension, however, a temp basal that would still be in effect *is* resumed at the conclusion of two hours of suspension. This is explained on pages 124-125 of [the Medtronic 530G user manual](http://www.accessdata.fda.gov/cdrh_docs/pdf12/p120010c.pdf 'Medtronic 530G user manual').
+<!-- end editable commentary on footnotes -->

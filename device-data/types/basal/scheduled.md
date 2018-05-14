@@ -391,3 +391,11 @@ See [common fields](../../common.md).
 	"uploadId": "SampleUploadId"
 }
 ```
+
+* * * * *
+
+### footnotes
+
+<!-- start editable commentary on footnotes -->
+[^a]: See, for example, [this chrome-uploader commit](https://github.com/tidepool-org/chrome-uploader/pull/95/commits/2c2bcf2db3e609c703a65967399784dcd47e49af 'GitHub: chrome-uploader').
+<!-- end editable commentary on footnotes -->

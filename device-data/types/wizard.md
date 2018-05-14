@@ -681,3 +681,11 @@ See [common fields](../common.md).
 	"uploadId": "SampleUploadId"
 }
 ```
+
+* * * * *
+
+### footnotes
+
+<!-- start editable commentary on footnotes -->
+[^a]: If one wishes to be pedantic, the units for `insulinSensitivity` are technically `md/dL/u` or `mmol/L/u` since ISF is a ratio of "points" of blood glucose *per unit* of insulin.
+<!-- end editable commentary on footnotes -->
