@@ -273,16 +273,16 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "alarm",
-	"alarmType": "no_insulin",
-	"status": "72a1d78fcfaf42e2bd9acf6b7f6a9d5e",
+	"alarmType": "occlusion",
+	"status": "4907943557f440dfbc12bdef4f85e01c",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:22:53",
-	"guid": "8de2f14e-3c7e-4383-b340-1b03611176aa",
-	"id": "b99f679a41b446cb96f42ba464f38fa1",
-	"time": "2016-06-14T02:22:53.389Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:07",
+	"guid": "e3c82e3d-23ba-4048-9056-7b1b3c5aa4cc",
+	"id": "d5ed640dd8f74e6cb1a6bff796de3ba2",
+	"time": "2018-05-14T08:17:07.920Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -293,31 +293,13 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "alarm",
-	"alarmType": "no_power",
-	"status": {
-		"type": "deviceEvent",
-		"subType": "status",
-		"status": "suspended",
-		"duration": 36000000,
-		"expectedDuration": 43200000,
-		"reason": {
-			"suspended": "automatic",
-			"resumed": "automatic"
-		},
-		"clockDriftOffset": 0,
-		"conversionOffset": 0,
-		"deviceId": "DevId0987654321",
-		"deviceTime": "2016-06-13T19:22:53",
-		"time": "2016-06-14T02:22:53.390Z",
-		"timezoneOffset": -420,
-		"uploadId": "SampleUploadId"
-	},
+	"alarmType": "low_insulin",
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:22:53",
-	"time": "2016-06-14T02:22:53.390Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:07",
+	"time": "2018-05-14T08:17:07.920Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -328,20 +310,20 @@ See [common fields](../../common.md).
 {
 	"type": "deviceEvent",
 	"subType": "alarm",
-	"alarmType": "low_insulin",
+	"alarmType": "low_power",
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:22:58.390Z",
+	"createdTime": "2018-05-14T08:17:12.920Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:22:53",
-	"guid": "1d38f044-d55d-4eee-ba75-1a205e0b0b1b",
-	"id": "5f8976330df5477cafabfce0a397992b",
-	"time": "2016-06-14T02:22:53.390Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:07",
+	"guid": "d19fe993-f26e-49d9-ac22-48be650a8e97",
+	"id": "a74b59b21581466b9d9f60811d327df2",
+	"time": "2018-05-14T08:17:07.920Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```

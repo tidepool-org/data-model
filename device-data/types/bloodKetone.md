@@ -218,15 +218,15 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 0.8,
+	"value": 4.2,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:43",
-	"guid": "ae40651d-b8e7-428e-840f-bbb3e1132569",
-	"id": "55346384504b4b76b24c60a236448012",
-	"time": "2016-06-14T02:05:43.500Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:07",
+	"guid": "14e3eca2-3e38-41f9-83ce-76ec01300b85",
+	"id": "7f856a61e20045d1a8b6e0c4ada4ce69",
+	"time": "2018-05-14T08:17:07.211Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -237,13 +237,13 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 0.3,
+	"value": 4.6,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:43",
-	"time": "2016-06-14T02:05:43.501Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:07",
+	"time": "2018-05-14T08:17:07.212Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
@@ -254,20 +254,20 @@ See [common fields](../common.md).
 {
 	"type": "bloodKetone",
 	"units": "mmol/L",
-	"value": 3.2,
+	"value": 0.5,
 	"_active": true,
 	"_groupId": "abcdef",
 	"_schemaVersion": 0,
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:48.502Z",
+	"createdTime": "2018-05-14T08:17:12.212Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:43",
-	"guid": "6d1ab0af-b3c5-4d3c-a491-b85fcd70b101",
-	"id": "4642d3bb62cc46ad825564f28d2f2c26",
-	"time": "2016-06-14T02:05:43.502Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:07",
+	"guid": "602c5ebf-fd85-4972-b874-3d6f13d88166",
+	"id": "38f80bd338e54522870c9ff8cf5f375d",
+	"time": "2018-05-14T08:17:07.212Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```

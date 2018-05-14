@@ -9,6 +9,7 @@
   * [types](device-data/types/README.md)
     * [basal](device-data/types/basal/README.md)
       * [scheduled](device-data/types/basal/scheduled.md)
+      * [automated](device-data/types/basal/automated.md)
       * [temp](device-data/types/basal/temp.md)
       * [suspend](device-data/types/basal/suspend.md)
       * [the "previous" field](device-data/types/basal/previous.md)

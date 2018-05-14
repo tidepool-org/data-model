@@ -207,13 +207,13 @@ Note that `uploadId` does not figure in the calculations of an event record's `i
 	"_version": 0,
 	"clockDriftOffset": 0,
 	"conversionOffset": 0,
-	"createdTime": "2016-06-14T02:05:49.239Z",
+	"createdTime": "2018-05-14T08:17:12.734Z",
 	"deviceId": "DevId0987654321",
-	"deviceTime": "2016-06-13T19:05:44",
-	"guid": "0f3f13b1-be2c-41b3-87b4-edc7e0a2fd36",
-	"id": "272383b5fe274fd3b66eb31b536555c9",
-	"time": "2016-06-14T02:05:44.239Z",
-	"timezoneOffset": -420,
+	"deviceTime": "2018-05-14T18:17:07",
+	"guid": "33b8f139-50e4-49d6-b9eb-44d70cc05abc",
+	"id": "47a2c4c1435a41bc83aba48797ed5cb3",
+	"time": "2018-05-14T08:17:07.734Z",
+	"timezoneOffset": 600,
 	"uploadId": "SampleUploadId"
 }
 ```
