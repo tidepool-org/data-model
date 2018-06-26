@@ -33,6 +33,8 @@
 
 <!-- start editable commentary on type -->
 
+<!-- Added by Eden: TODO -->
+
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -48,7 +50,7 @@
 
 <!-- start editable commentary on deliveryType -->
 
-This is the sub-type of `basal` event that represents the total suspension of insulin delivery on an insulin pump within the stream of `basal` events, which should in the vast majority of cases be contiguous—that is, without gaps or overlaps. The user's inputs to suspend (and, later, resume) insulin delivery are part of Tidepool's `deviceEvent` data type, as the sub-type [`status`](../deviceEvent/status.md). Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is *also* represented as a `suspend` basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.
+This is the sub-type of `basal` event that represents the total suspension of insulin delivery on an insulin pump 'within the stream' - <!-- Note by Eden: clarify -->of `basal` events, which should in the vast majority of cases be contiguous—that is, without gaps or overlaps. The user's inputs to suspend (and, later, resume) insulin delivery are part of Tidepool's `deviceEvent` data type, as the sub-type [`status`](../deviceEvent/status.md). Every interval that starts with a suspension of insulin delivery and ends with the resumption of insulin delivery is *also* represented as a `suspend` basal, documented here. This makes the calculation of statistics like total basal dose per day far easier.
 
 Note, however, that no `rate` field appears on `suspend` basal events. The `rate` is always zero, and so this redundant information is not specified.
 
@@ -227,7 +229,7 @@ See the discussion of the [`suppressed`](./temp.md#suppressed) field on `temp` b
 
 The only differences for `suspend` basals are that:
 - The `deliveryType` of the embedded `suppressed` basal may be either `temp` or `scheduled`.
-- The embedded `suppressed` basal may *itself* have an embedded `suppressed` basal event. This can happen in particular with insulin pumps integrated with continuous glucose monitors such that the following may happen: (a) the PWD blood glucose is falling, and he or she (or a caregiver) programs a `temp` basal (which embeds a `suppressed` scheduled basal) in an attempt to prevent hypoglycemia but (b) the PWD's blood glucose continues to fall, and the automatic low glucose suspend feature of the insulin pump suspends insulin delivery, creating a `suspend` basal that embeds the `temp` basal as *its* `suppressed`.
+- The embedded `suppressed` basal may *itself* have an embedded `suppressed` basal event. This can happen in particular with insulin pumps integrated with continuous glucose monitors such that the following may happen: (a) the person with diabetes' blood glucose is falling, and he or she (or a caregiver) programs a `temp` basal (which embeds a `suppressed` scheduled basal) in an attempt to prevent hypoglycemia but (b) the person with diabetes' blood glucose continues to fall, and the automatic low glucose suspend feature of the insulin pump suspends insulin delivery, creating a `suspend` basal that embeds the `temp` basal as *its* `suppressed`.
 
 Also see [the full explanation of `suppressed`](./suppressed.md) (including the tracking of `suppressed` for `temp` and `suspend` basals that cross one or more basal schedule boundaries) for further information, explanations, and examples.
 

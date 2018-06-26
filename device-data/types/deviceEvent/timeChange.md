@@ -29,7 +29,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-
+<!-- Added by Eden: TODO -->
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -45,7 +45,7 @@
 
 <!-- start editable commentary on subType -->
 
-A `timeChange` event represents an instance when a diabetes device user changed the display date and/or time settings on the device. Having an accurate history of `timeChange` events is crucial to Tidepool's "bootstrapping to UTC" (BtUTC) procedure which, to summarize *very* briefly, uses the set of `timeChange` events from a device in combination with the raw log indices of the device's records and the user's selection (from an interface in the Tidepool uploader) of the timezone that aligns with the most recent data on the device to translate the *relative* (local time) timestamps of the device records into UTC timestamps so that all device records from many different diabetes devices can be aligned on the same timeline. For further information, please see [the technical documentation for BtUTC](http://developer.tidepool.io/chrome-uploader/docs/BootstrappingToUTC.html 'Tidepool Docs: BtUTC').
+A `timeChange` event represents an instance when a diabetes device user changed the display date and/or time settings on the device. <!-- Note by Eden: Really hard to follow the following sentence gramatically (just because its so long and has so many branch offs) -->Having an accurate history of `timeChange` events is crucial to Tidepool's "bootstrapping to UTC" (BtUTC) procedure which, to summarize *very* briefly, uses the set of `timeChange` events from a device, in combination with the raw log indices of the device's records and the user's selection (from an interface in the Tidepool uploader) of the timezone that aligns with the most recent data on the device, to translate the *relative* (local time) timestamps of the device records into UTC timestamps, so that all device records from many different diabetes devices can be aligned on the same timeline. For further information, please see [the technical documentation for BtUTC](http://developer.tidepool.io/chrome-uploader/docs/BootstrappingToUTC.html 'Tidepool Docs: BtUTC').
 
 All the relevant data from the `timeChange` event is stored in various fields on an embedded `change` object, documented in the next section.
 

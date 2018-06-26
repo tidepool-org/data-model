@@ -55,7 +55,7 @@ See [units](../units.md) for further explanation of blood glucose units.
 		`mmol/L`
 
 <!-- start editable commentary on units -->
-
+<!-- TODO -->
 <!-- end editable commentary on units -->
 
 * * * * *
@@ -84,7 +84,7 @@ See [units](../units.md) for further explanation of blood glucose units.
 
 
 <!-- start editable commentary on value -->
-
+<!-- TODO -->
 <!-- end editable commentary on value -->
 
 * * * * *

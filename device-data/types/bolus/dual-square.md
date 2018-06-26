@@ -34,7 +34,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-
+<!-- Added by Eden: TODO -->
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -54,11 +54,11 @@
 
 <!-- start editable commentary on subType -->
 
-This is the sub-type of `bolus` event that represents a bolus insulin dose programmed to deliver part of the dose using the immediate delivery strategy (a `normal` bolus) and the remainder using the delivery spread evenly over a `duration` strategy (a `square` bolus). The data model is essentially just a combination of the models for [`normal`](normal.md) and [`square`](square.md) boluses.
+This is the sub-type of `bolus` event that represents a bolus insulin dose which is programmed to deliver part of the dose using the immediate delivery strategy (a `normal` bolus) and the remainder using a delivery strategy spread evenly over a `duration` (a `square` bolus). The data model is essentially just a combination of the models for [`normal`](normal.md) and [`square`](square.md) boluses.
 
 Most (and perhaps all) insulin pumps ask the user to divide the `normal` and `square` portions of a `dual/square` bolus by *percentage* of the total insulin dose. We do **not** encode this programmed percentage directly, but it is recoverable (for surfacing in a client application's UI) through computation using the appropriate combination of values from the `normal`, `extended`, `expectedNormal`, and `expectedExtended` fields and/or the appropriate sum of these.
 
-We plan to migrate all Tidepool data to use `combo` as the value of this sub-type rather than `dual/square` in order to improve the transparency of the data model and avoid `/` in a `subType` string.
+We plan to migrate all Tidepool data to use `combo` as the value of this sub-type rather than `dual/square`, in order to improve the transparency of the data model and avoid `/` in a `subType` string.
 
 <!-- end editable commentary on subType -->
 
@@ -81,7 +81,7 @@ We plan to migrate all Tidepool data to use `combo` as the value of this sub-typ
 
 See the explanation of this field in the documentation for [`normal`](normal.md) boluses.
 
-Note that a 0 for `normal` is allowable in more circumstances for a combo bolus than for a simple `normal` bolus: as long as the `extended` is non-zero for the combo bolus, `normal` may have a value of 0 *without* the requirement that a non-zero `expectedNormal` also be present.
+Note that a 0 for `normal` is allowable in more circumstances for a combo bolus than for a simple `normal` bolus: as long as the `extended` is non-zero for the combo bolus, `normal` may have a value of 0 *without* the requirement that `expectedNormal` be non-zero.
 
 <!-- end editable commentary on normal -->
 

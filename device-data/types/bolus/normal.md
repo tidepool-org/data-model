@@ -30,7 +30,7 @@
 		platform: yes
 
 <!-- start editable commentary on type -->
-
+<!-- Edit by Eden: TODO -->
 <!-- end editable commentary on type -->
 
 * * * * *
@@ -67,11 +67,11 @@ This is the sub-type of `bolus` event that represents a bolus insulin dose deliv
 
 <!-- start editable commentary on normal -->
 
-The `normal` field encodes the numerical value of the dose of insulin delivered by an insulin pump. To avoid noise in the data (especially as some insulin pumps make it very easy to deliver "doses" of 0 units when no additional dose is recommended given the PWD's current blood glucose and insulin on board), we have chosen in most cases _not_ to allow the upload of boluses with a total delivered dose of 0 units; the value must be greater than 0.
+The `normal` field encodes the numerical value of the dose of insulin delivered by an insulin pump. To avoid noise in the data (especially as some insulin pumps make it very easy to deliver "doses" of 0 units when no additional dose is recommended given the <!-- Edit by Eden: person with diabetes' --> current blood glucose and insulin on board), we have chosen in most cases _not_ to allow the upload of boluses with a total delivered dose of 0 units; the value must be greater than 0.
 
-The *only* exception to this is when a user programs a bolus of greater than 0 units of insulin but cancels the delivery of this bolus before *any* of the insulin has been successfully delivered, resulting in a `normal` of 0 units but an [`expectedNormal`](#expectednormal) reflecting the value of the original programmed dose. In other words: a bolus of with a `normal` of 0 units may only be uploaded through the new platform APIs if the `expectedNormal` field is also present with a value greater than 0.
+The *only* exception to this is when a user programs a bolus of greater than 0 units of insulin but cancels the delivery of this bolus before *any* of the insulin has been successfully delivered, resulting in a `normal` of 0 units but an [`expectedNormal`](#expectednormal) reflecting the value of the original programmed dose. In other words: a bolus with a `normal` of 0 units may only be uploaded through the new platform APIs if the `expectedNormal` field is also present with a value greater than 0.
 
-Most, if not all, insulin pumps include a maximum bolus setting that a PWD can customize to his or her typical dosing in order to prevent accidental delivery of very large doses of insulin. However, we could not find any indication that insulin pumps typically set a default maximum dose; hence we have chosen 100 units as an arbitrarily large maximum dose that we can imagine someone with type 1 diabetes programming.
+Most, if not all, insulin pumps include a maximum bolus setting that a <!-- Edit by Eden: person with diabetes --> can customize to his or her typical dosing in order to prevent accidental delivery of very large doses of insulin. However, we could not find any indication that insulin pumps typically set a default maximum dose; hence we have chosen 100 units as an arbitrarily large maximum dose that we can imagine someone with type 1 diabetes programming.
 
 <!-- end editable commentary on normal -->
 

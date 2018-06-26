@@ -30,7 +30,7 @@
 
 <!-- start editable commentary on type -->
 
-Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. Tidepool does not yet provide a data model for urine ketones, which are measured qualitatively, not quantitatively.
+Blood ketones represent ketone concentration values (specifically beta-ketones, primarily beta-hydroxy butyric acid) obtained from a fingerstick meter capable of reading specialized blood ketone testing strips. <!-- Edit by Eden: Description of ketones?, e.g. 'Ketones are... ' -->Tidepool does not yet provide a data model for urine ketones, which are measured qualitatively, not quantitatively.
 
 <!-- end editable commentary on type -->
 
